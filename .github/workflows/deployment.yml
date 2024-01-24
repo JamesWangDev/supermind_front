@@ -19,8 +19,9 @@ jobs:
 
          script: |
            cd ../var/www/supermind/supermind-frontend
-           git pull origin master
+           git pull
            echo 'pull successful'
+           git checkout master
            npm install
            echo 'Installing dependencies successful'
            npm run build

@@ -1,0 +1,30 @@
+name: Build & Deploy
+on:
+  push:
+    branches: [master]
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node-version: [18.x]
+    steps:
+      - name: Supermind Front-end Deployment
+        uses: appleboy/ssh-action@v0.1.2
+        with:
+         host: ${{secrets.SSH_HOST}}
+         key: ${{secrets.SSH_KEY}}
+         username: ${{secrets.SSH_USERNAME}}
+
+         script: |
+           cd ../var/www/supermind/supermind-frontend
+           git pull origin master
+           echo 'pull successful'
+           npm install
+           echo 'Installing dependencies successful'
+           npm run build
+           echo 'Build successful'
+           systemctl daemon-reload
+           systemctl restart frontend.service
+           echo 'Deployment successful'

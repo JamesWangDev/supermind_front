@@ -1,0 +1,33 @@
+:root {
+    --theme-color: #0da487;
+}
+
+$white: #2a2d2d;
+$black: #ffffff;
+$title-color: #ffffff;
+$content-color: #dddddd;
+$light-gray: #1d1d22;
+$danger-color: #ff4f4f;
+$rating-color: #ffb321;
+$border-color: rgba(119, 119, 119, 0.44);
+
+/* font family */
+$public-sans: 'Public Sans',
+sans-serif;
+
+/* Breakepoints */
+$min-breakpoints: (lg: 992px,
+    xl: 1200px,
+    2xl: 1366px,
+);
+
+$max-breakpoints: (2xs: 360px,
+    xs: 480px,
+    sm: 575px,
+    md: 767px,
+    lg: 991px,
+    xl: 1199px,
+    2xl: 1366px,
+    3xl: 1460px,
+    4xl: 1660px,
+);

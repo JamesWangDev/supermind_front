@@ -1,0 +1,19 @@
+// Bootstrap
+@import './vendors/bootstrap.scss';
+
+// React Slick
+@import 'slick-carousel/slick/slick.css';
+@import 'slick-carousel/slick/slick-theme.css';
+
+// React-Toastify
+@import 'react-toastify/dist/ReactToastify.css';
+
+// Remix Icon
+@import 'remixicon/fonts/remixicon.css';
+
+@import "utils/variables";
+@import 'style.scss';
+
+.dark {
+    @import 'dark.scss';
+}

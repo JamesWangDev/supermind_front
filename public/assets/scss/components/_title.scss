@@ -1,0 +1,276 @@
+/**=====================
+     Title scss
+==========================**/
+.title-leaf {
+  width: 140px;
+  text-align: center;
+  margin-top: 7px;
+  position: relative;
+  z-index: 0;
+
+  &::before {
+    @include pos;
+    @include center(vertical);
+    @include pseudowh($width: 100%, $height: 1px);
+    left: 0;
+    background-color: var(--theme-color);
+    z-index: -1;
+  }
+
+  svg {
+    background-color: $white;
+    width: 45px;
+    z-index: 1;
+    fill: var(--theme-color);
+
+    &.bg-gray {
+      background-color: $light-gray;
+    }
+  }
+}
+
+.title {
+  margin-bottom: calc(16px + (30 - 16) * ((100vw - 320px) / (1920 - 320)));
+  display: inline-block;
+  position: relative;
+
+  h2 {
+    font-weight: 700;
+    color: $title-color;
+    position: relative;
+  }
+
+  p {
+    line-height: 1.5;
+    margin: calc(5px + (10 - 5) * ((100vw - 320px) / (1920 - 320))) 0 0;
+    font-size: calc(14px + (16 - 14) * ((100vw - 320px) / (1920 - 320)));
+    color: $content-color;
+  }
+
+  &-flex {
+    @include flex_common($dis: flex, $align: center, $justify: space-between);
+
+    @media (max-width: 1265px) {
+      display: block;
+    }
+
+    .timing-box {
+      display: inline-block;
+
+      .timing {
+        @include flex_common;
+        background-color: $danger-color;
+        color: $white;
+        padding: calc(8px + (12 - 8) * ((100vw - 320px) / (1920 - 320))) calc(9px + (11 - 9) * ((100vw - 320px) / (1920 - 320)));
+        border-radius: 5px;
+
+        @media (max-width: 1265px) {
+          margin-top: calc(14px + (20 - 14) * ((100vw - 320px) / (1920 - 320)));
+        }
+
+        i {
+          -webkit-text-stroke: 1px $white;
+          color: transparent;
+          margin-right: 9px;
+        }
+
+        svg {
+          font-size: 17px;
+          margin-right: 9px;
+        }
+
+        .name {
+          font-weight: 600;
+          margin-right: 8px;
+          line-height: 1;
+        }
+
+        .time {
+          ul {
+            display: flex;
+            align-items: center;
+
+            li {
+              @include flex_common;
+              position: relative;
+              line-height: 1;
+
+              +li {
+                margin-left: 15px;
+
+                &::after {
+                  @include pos($pos: absolute, $content: ':');
+                  @include center(vertical);
+                  font-weight: bolder;
+                  left: -10px;
+                }
+              }
+
+              .counter {
+                h6 {
+                  font-weight: 600;
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+
+  .product-tabs {
+    border: none;
+    position: absolute;
+    top: 0;
+    right: 0;
+
+    .nav-item {
+      position: relative;
+
+      .nav-link {
+        border: none;
+        border-radius: unset;
+        color: $content-color;
+        position: relative;
+        font-weight: 400;
+        font-size: 16px;
+
+        &.active {
+          font-weight: 500;
+          color: var(--theme-color);
+
+          &::before {
+            @include pos;
+            @include pseudowh($width: 50px, $height: 2px);
+            bottom: 0;
+            left: 17px;
+            border-radius: 50px;
+            background-color: var(--theme-color);
+          }
+
+          &::after {
+            @include pos;
+            @include pseudowh($width: 4px, $height: 2px);
+            bottom: 0;
+            left: 75px;
+            border-radius: 50px;
+            background-color: var(--theme-color);
+          }
+        }
+      }
+
+      +.nav-item {
+        margin-left: 10px;
+
+        &::before {
+          @include pos;
+          @include pseudowh($width: 13px, $height: 13px);
+          top: 9px;
+          left: -11px;
+          background-image: url(../../svg/1/bag.svg);
+          background-repeat: no-repeat;
+          background-size: cover;
+          background-position: center;
+        }
+      }
+    }
+  }
+
+  &-border {
+    border-bottom: 1px solid $border-color;
+    padding-bottom: calc(14px + (20 - 14) * ((100vw - 320px) / (1920 - 320)));
+    margin-bottom: calc(5px + (10 - 5) * ((100vw - 320px) / (1920 - 320)));
+  }
+}
+
+.vendor-title {
+  h5 {
+    font-weight: 700;
+    font-size: calc(18px + .005*(100vw - 320px));
+    margin-bottom: 10px;
+    letter-spacing: 0.5px;
+  }
+
+  p {
+    margin-bottom: 0;
+    font-size: 15px;
+    color: $content-color;
+    line-height: 1.6;
+  }
+}
+
+.seller-title {
+  h2 {
+    font-weight: 700;
+    font-size: calc(24px + (37 - 24) * ((100vw - 320px) / (1920 - 320)));
+    margin-bottom: calc(10px + (23 - 10) * ((100vw - 320px) / (1920 - 320)));
+    letter-spacing: 0.5px;
+    line-height: 1.3;
+  }
+
+  p {
+    margin-bottom: 0;
+    font-size: calc(14px + (16 - 14) * ((100vw - 320px) / (1920 - 320)));
+    color: $content-color;
+    line-height: 1.6;
+  }
+}
+
+.title-flex-2 {
+  @include flex_common($dis: flex, $align: center, $justify: space-between);
+
+  @media (max-width: 850px) {
+    display: block;
+  }
+
+  .timing-box {
+    display: inline-block;
+
+    .timing {
+      @include flex_common;
+      background-color: $danger-color;
+      color: $white;
+      padding: calc(8px + (12 - 8) * ((100vw - 320px) / (1920 - 320))) calc(9px + (11 - 9) * ((100vw - 320px) / (1920 - 320)));
+      border-radius: 5px;
+
+      @media (max-width: 850px) {
+        margin-top: calc(14px + (20 - 14) * ((100vw - 320px) / (1920 - 320)));
+      }
+
+      i {
+        -webkit-text-stroke: 1px $white;
+        color: transparent;
+        margin-right: 9px;
+      }
+
+      .svg {
+        font-size: 17px;
+        margin-right: 9px;
+      }
+
+      .name {
+        font-weight: 600;
+        margin-right: 8px;
+        line-height: 1;
+      }
+    }
+  }
+}
+
+.user-dashboard-title {
+  position: relative;
+
+  &::after {
+    @include pos;
+    bottom: 0;
+    left: -20px;
+    width: 3px;
+    height: 26px;
+    background-color: var(--theme-color);
+
+    body[dir="rtl"] & {
+      left: unset;
+      right: -20px;
+    }
+  }
+}

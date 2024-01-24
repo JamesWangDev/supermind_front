@@ -1,0 +1,65 @@
+/**=====================
+     Accordion scss
+==========================**/
+.accordion-box {
+    display: grid;
+    gap: 24px;
+
+    .accordion-item {
+        border: 1px solid $border-color;
+        border-radius: 6px;
+        overflow: hidden;
+
+        .accordion-header {
+            &.collapsed {
+                .accordion-button {
+                    border-bottom: unset;
+                }
+            }
+
+            .accordion-button {
+                @include flex_common ($dis: flex, $align: center, $justify: space-between);
+                color: $title-color;
+                transition: all 0.3s ease-in-out;
+                background-color: $light-gray;
+                box-shadow: unset;
+                font-size: 18px;
+                font-weight: 600;
+                border-bottom: 1px solid $border-color;
+                z-index: 0;
+
+                &::after {
+                    @include pos($pos: relative, $content: "\ea4e");
+                    @include remixicon;
+                    @include pseudowh($width: auto, $height: auto);
+                    background: unset;
+                    font-size: 23px;
+                    line-height: 1;
+                    font-weight: normal;
+                    margin: 0;
+                    color: #777;
+                }
+
+                &:focus {
+                    border-color: transparent;
+                    outline: 0;
+                    box-shadow: unset;
+                    border-bottom: 1px solid $border-color;
+                }
+
+                &.collapsed {
+                    border-color: transparent;
+                }
+            }
+        }
+
+        .accordion-body {
+            p {
+                font-size: 15px;
+                color: $content-color;
+                line-height: 1.7;
+                margin: 0;
+            }
+        }
+    }
+}

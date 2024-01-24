@@ -1,0 +1,246 @@
+/**=====================
+     Banner scss
+==========================**/
+.banner-contain {
+    border-radius: 5px;
+    overflow: hidden;
+    position: relative;
+    height: 100%;
+
+    img {
+        @include pseudowh;
+    }
+}
+
+.offer-banner {
+    border-radius: 15px;
+    overflow: hidden;
+    position: relative;
+
+    .offer-box {
+        img {
+            @include pseudowh;
+            object-fit: contain;
+        }
+    }
+}
+
+.bank-box {
+    .slick-track {
+        .slick-slide {
+            &:nth-child(even) {
+                .bank-offer {
+                    &:hover {
+                        .bank-footer {
+                            .bank-coupon {
+                                &::after {
+                                    top: 0;
+                                    height: 100%;
+                                }
+                            }
+                        }
+                    }
+
+                    .bank-footer {
+                        background: linear-gradient(90deg, #2395e8 15.92%, #4eb5ff 49.57%);
+
+                        .bank-coupon {
+                            background: linear-gradient(90deg, #2395e8 15.92%, #4eb5ff 49.57%);
+
+                            &::after {
+                                @include pos;
+                                @include pseudowh($width: 100%, $height: 0);
+                                bottom: 0;
+                                left: 0;
+                                z-index: -1;
+                                border-radius: 5px;
+                                transition: all 0.3s ease;
+                                background: #4eb5ff;
+                                background: linear-gradient(90deg, #4eb5ff 15.92%, #2395e8 49.57%);
+                            }
+                        }
+                    }
+                }
+            }
+
+            &:nth-child(3n+1) {
+                .bank-offer {
+                    &:hover {
+                        .bank-footer {
+                            .bank-coupon {
+                                &::after {
+                                    top: 0;
+                                    height: 100%;
+                                }
+                            }
+                        }
+                    }
+
+                    .bank-footer {
+                        background: linear-gradient(85.8deg, #ffb321 -4.64%, #ff584d 109.73%, #ff8c75 131.73%);
+
+                        .bank-coupon {
+                            background: linear-gradient(85.8deg, #ffb321 -4.64%, #ff584d 109.73%, #ff8c75 131.73%);
+
+                            &::after {
+                                @include pos;
+                                @include pseudowh($width: 100%, $height: 0);
+                                bottom: 0;
+                                left: 0;
+                                z-index: -1;
+                                border-radius: 5px;
+                                transition: all 0.3s ease;
+                                background: #ffb321;
+                                background: linear-gradient(-90deg,
+                                        rgba(255, 140, 117, 0) -4.64%,
+                                        rgba(255, 88, 77, 0.1) 109.73,
+                                        #ffb321 131.73%);
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+.bank-section {
+    .bank-offer {
+        border-radius: calc(9px + (20 - 9) * ((100vw - 320px) / (1920 - 320)));
+        overflow: hidden;
+
+        .bank-header {
+            background: linear-gradient(76.68deg, #e6e6e6 -9.39%, #fafafa 78.76%, #f0f0f0 101.45%, #ffffff 112.78%);
+            padding: calc(21px + (35 - 21) * ((100vw - 320px) / (1920 - 320)));
+            display: flex;
+            align-items: center;
+
+            .bank-left {
+                .bank-image {
+                    @include pseudowh($width: 120px, $height: auto);
+                    margin-bottom: 12px;
+                }
+
+                .bank-name {
+                    h2 {
+                        color: #bb0032;
+                        font-weight: 700;
+                        margin-bottom: 7px;
+                        font-size: calc(22px + (31 - 22) * ((100vw - 320px) / (1920 - 320)));
+
+                        &.bank-offer-2 {
+                            color: #239bf0;
+                        }
+
+                        &.bank-offer-3 {
+                            color: #e73718;
+                        }
+                    }
+
+                    h5 {
+                        font-size: calc(14px + (16 - 14) * ((100vw - 320px) / (1920 - 320)));
+
+                        &.valid {
+                            margin-top: calc(22px + (69 - 22) * ((100vw - 320px) / (1920 - 320)));
+                        }
+                    }
+                }
+            }
+        }
+
+        .bank-footer {
+            padding: calc(7px + (17 - 7) * ((100vw - 320px) / (1920 - 320))) calc(13px + (26 - 13) * ((100vw - 320px) / (1920 - 320)));
+            color: $white;
+            display: flex;
+            align-items: center;
+            background: linear-gradient(85.8deg, #bb0032 -4.64%, #ff584d 109.73%, #ff8c75 131.73%);
+
+            h4 {
+                font-weight: 500;
+                font-size: calc(15px + (18 - 15) * ((100vw - 320px) / (1920 - 320)));
+                display: flex;
+                align-items: center;
+                gap: 7px;
+                width: calc(100% - 128px);
+                white-space: nowrap;
+
+                input {
+                    pointer-events: none;
+                    background-color: transparent;
+                    color: $white;
+                    border: none;
+                    font-weight: 600;
+                    padding: 0;
+                    display: inline-block;
+                    width: auto;
+                    font-size: calc(15px + (18 - 15) * ((100vw - 320px) / (1920 - 320)));
+                }
+            }
+
+            .bank-coupon {
+                margin-left: auto;
+                color: $white;
+                font-weight: 600;
+                padding: 6px 21px;
+                position: relative;
+                overflow: hidden;
+                transition: all 0.3s ease;
+                z-index: 0;
+                background: linear-gradient(85.8deg, #ff584d -4.64%, rgba(187, 0, 50, 0.1) 131.73%);
+
+                &::after {
+                    @include pos;
+                    @include pseudowh($width: 100%, $height: 0);
+                    bottom: 0;
+                    left: 0;
+                    z-index: -1;
+                    border-radius: 5px;
+                    transition: all 0.3s ease;
+                    background: #ff584d;
+                    background: linear-gradient(85.8deg, rgba(187, 0, 50, 0.1) 131.73%, #ff584d -4.64%);
+                }
+
+                html.dark & {
+                    color: #fff;
+                }
+            }
+        }
+    }
+}
+
+.banner-small {
+    &.ratio_65 {
+        .bg-size {
+            &:before {
+                @include mq-max(sm) {
+                    padding-top: 53%;
+                }
+            }
+        }
+    }
+}
+
+.banner-furniture {
+    >.row {
+        direction: ltr;
+
+        >div {
+            @media (min-width: 1400px) {
+                margin-left: 16.6666666667%;
+            }
+
+            @media (min-width: 1400px) {
+                margin-left: 8.3333333333%;
+            }
+        }
+    }
+}
+
+.sale-banner {
+    img {
+        height: calc(74px + (136 - 74) * ((100vw - 320px) / (1920 - 320)));
+        object-position: center;
+        object-fit: cover;
+        border-radius: 5px;
+    }
+}

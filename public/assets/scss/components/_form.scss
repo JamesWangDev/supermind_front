@@ -1,0 +1,523 @@
+/**=====================
+     Form scss
+  ==========================**/
+input[type='number'] {
+
+  &::-webkit-inner-spin-button,
+  &::-webkit-outer-spin-button {
+    appearance: none;
+  }
+}
+
+.newsletter-form {
+  display: flex;
+  align-items: center;
+  flex-wrap: nowrap;
+  gap: 11px;
+
+  .form-control {
+    background-color: transparent;
+    padding: calc(8px + (12 - 8) * ((100vw - 320px) / (1920 - 320)));
+
+    &::placeholder {
+      color: $white;
+      font-size: calc(14px + (18 - 14) * ((100vw - 320px) / (1920 - 320)));
+    }
+  }
+}
+
+.normal-form {
+  .form-control {
+    border: none;
+
+    &:focus {
+      background-color: $white;
+    }
+  }
+}
+
+.theme-form-check {
+  cursor: pointer;
+  transition: background 0.2s ease;
+
+  input {
+    @include pseudowh($width: 20px, $height: 20px);
+    vertical-align: middle;
+    border-radius: 10px;
+    background: none;
+    border: 0;
+    box-shadow: inset 0 0 0 1.5px #9f9f9f;
+    appearance: none;
+    padding: 0;
+    margin: 0;
+    transition: box-shadow 150ms cubic-bezier(0.95, 0.15, 0.5, 1.25);
+    pointer-events: none;
+
+    &:focus {
+      outline: none;
+    }
+
+    &:checked {
+      box-shadow: inset 0 0 0 6px #6743ee;
+    }
+
+    label {
+      vertical-align: middle;
+      display: inline-block;
+      line-height: 20px;
+      padding: 0 8px;
+    }
+  }
+}
+
+.theme-form-floating {
+
+  >.form-control:focus,
+  >.form-control:not(:placeholder-shown),
+  >.form-select {
+    ~label {
+      @include flex_common;
+      font-size: calc(14px + (18 - 14) * ((100vw - 320px) / (1920 - 320)));
+      opacity: 0.95;
+      top: -5px;
+      left: 5px;
+      height: 31px;
+      background-color: $white;
+      white-space: nowrap;
+      opacity: 1;
+    }
+  }
+
+  .form-control,
+  .form-select {
+    height: calc(51px + (54 - 51) * ((100vw - 320px) / (1920 - 320)));
+    line-height: normal;
+  }
+
+  >.form-control {
+
+    &:focus,
+    &:not(:placeholder-shown) {
+      padding-top: 17px;
+      padding-bottom: 10px;
+      font-size: calc(15px + (17 - 15) * ((100vw - 320px) / (1920 - 320)));
+      font-weight: 500;
+    }
+  }
+
+  >.form-select {
+    padding-top: 12px;
+    padding-bottom: 10px;
+    font-size: calc(14px + (15 - 14) * ((100vw - 320px) / (1920 - 320)));
+    font-weight: 500;
+
+    &:focus {
+      border-color: var(--theme-color);
+      outline: 0;
+      box-shadow: 0 0 0 4px transparent;
+    }
+  }
+
+  .form-control {
+    &:focus {
+      background-color: $white;
+      border: 1px solid #ced4da;
+    }
+  }
+
+  label {
+    font-size: calc(13px + (16 - 13) * ((100vw - 320px) / (1920 - 320)));
+    color: $content-color;
+    border: none;
+  }
+}
+
+.theme-form-floating-2 {
+
+  >.form-control:focus,
+  >.form-control:not(:placeholder-shown),
+  >.form-select {
+    ~label {
+      @include flex_common;
+      font-size: calc(14px + (18 - 14) * ((100vw - 320px) / (1920 - 320)));
+      opacity: 0.95;
+      top: -5px;
+      left: 10px;
+      height: 31px;
+      background-color: $white;
+      padding: 0 10px;
+      opacity: 1;
+    }
+  }
+
+  >.form-control {
+
+    &:focus,
+    &:not(:placeholder-shown) {
+      padding-top: 12px;
+      padding-bottom: 10px;
+      font-size: 15px;
+      font-weight: 500;
+    }
+  }
+
+  >.form-select {
+    padding-top: 12px;
+    padding-bottom: 10px;
+    font-size: calc(14px + (15 - 14) * ((100vw - 320px) / (1920 - 320)));
+    font-weight: 500;
+
+    &:focus {
+      border-color: var(--theme-color);
+      outline: 0;
+      box-shadow: 0 0 0 4px transparent;
+    }
+  }
+
+  .form-control {
+    &:focus {
+      background-color: $white;
+      border: 1px solid #ced4da;
+    }
+  }
+
+  >.form-control,
+  >.form-select {
+    height: 46px;
+  }
+
+  >label {
+    @include center(vertical);
+    left: 9px;
+    padding: 0;
+    border: none;
+    height: auto;
+  }
+
+  >.form-control {
+    padding: 14px 10px;
+  }
+
+  label {
+    font-size: calc(13px + (16 - 13) * ((100vw - 320px) / (1920 - 320)));
+    color: $content-color;
+  }
+}
+
+.checkbox_animated {
+  cursor: pointer;
+  position: relative;
+  margin-right: 16px;
+  height: 100%;
+  z-index: 0;
+  border: unset;
+
+  &:before {
+    @include pos;
+    @include pseudowh($width: 12px, $height: 6px);
+    transition: transform 0.4s cubic-bezier(0.45, 1.8, 0.5, 0.75);
+    transform: rotate(-45deg) scale(0, 0);
+    left: 4px;
+    top: 4px;
+    z-index: 1;
+    border: 2px solid var(--theme-color);
+    border-top-style: none;
+    border-right-style: none;
+  }
+
+  &:after {
+    @include pos;
+    @include pseudowh($width: 21px, $height: 21px);
+    top: -2px;
+    left: 0;
+    background-color: $white;
+    border: 2px solid $border-color;
+    cursor: pointer;
+
+    html.dark & {
+      background-color: #1d1d22;
+      border-color: #1d1d22;
+    }
+  }
+
+  &:checked {
+    &:before {
+      transform: rotate(-45deg) scale(1, 1);
+    }
+  }
+}
+
+.custom-form-check {
+  &-2 {
+    min-height: auto;
+    margin-bottom: 0;
+  }
+
+  .form-check-input {
+    @include pseudowh($width: calc(15px + (17 - 15) * ((100vw - 320px) / (1920 - 320))), $height: calc(15px + (17 - 15) * ((100vw - 320px) / (1920 - 320))));
+    margin-top: 0;
+
+    &:checked {
+      background-color: var(--theme-color);
+      border-color: var(--theme-color);
+    }
+
+    &:focus {
+      box-shadow: none;
+    }
+  }
+}
+
+.form-control {
+  font-size: 14px;
+  padding: calc(8px + (14 - 8) * ((100vw - 320px) / (1920 - 320))) calc(12px + (15 - 12) * ((100vw - 320px) / (1920 - 320)));
+
+  &::placeholder {
+    color: rgba($content-color, 0.3215686275);
+  }
+
+  &.subscribe-input {
+    border: none;
+    border-radius: 0;
+  }
+
+  &:focus {
+    box-shadow: none;
+    color: $black;
+  }
+}
+
+.form-select {
+  font-size: 14px;
+
+  &.theme-form-select {
+    &:focus {
+      background-color: $white;
+      box-shadow: none;
+      color: $black;
+    }
+  }
+}
+
+.input-group {
+  .btn {
+    z-index: 1;
+  }
+}
+
+.outer-otp {
+  width: 235px;
+  overflow: hidden;
+
+  .inner-otp {
+    left: 0;
+    position: sticky;
+
+    input {
+      padding-left: 15px;
+      letter-spacing: 41px;
+      border: 0;
+      background-image: linear-gradient(to left, rgb(189, 189, 189) 70%, rgba(255, 255, 255, 0) 0%);
+      background-position: bottom;
+      background-size: 50px 1px;
+      background-repeat: repeat-x;
+      background-position-x: 35px;
+      width: 300px;
+      min-width: 300px;
+    }
+
+    .no-background {
+      background-color: transparent;
+    }
+  }
+}
+
+.form-select {
+  body[dir='rtl'] & {
+    background-position: left 0.75rem center;
+  }
+}
+
+select {
+  html.dark & {
+    background-size: 12px;
+    --bs-form-select-bg-img: url("../../images/light-down-arrow.svg");
+  }
+}
+
+.custom-select-box {
+  position: relative;
+  cursor: pointer;
+
+  .box-content {
+    position: absolute;
+    z-index: 2;
+    width: 100%;
+    background-color: $white;
+    padding: calc(5px + (10 - 5) * ((100vw - 320px) / (1920 - 320)));
+    top: 60px;
+    border: 1px solid $light-semi-gray;
+    border-radius: 5px;
+    box-shadow: 0 0 8px #ededed;
+    transform: translateY(-15px);
+    transition: all 0.5s ease;
+    opacity: 0;
+    visibility: hidden;
+
+    html.dark & {
+      border-color: rgba(119, 119, 119, 0.44);
+      box-shadow: 0 0 8px rgba(255, 255, 255, 0.12);
+    }
+
+    input {
+      padding: 7px 10px !important;
+    }
+
+    &.open {
+      visibility: visible;
+      opacity: 1;
+      transform: none;
+    }
+
+    ul {
+      margin-top: 10px;
+      padding-left: 0;
+      max-height: 160px;
+      overflow: auto;
+
+      li {
+        color: $title-color !important;
+        padding-block: 4px;
+        display: flex;
+        justify-content: start;
+        align-items: center;
+
+        &:hover {
+          p {
+            color: var(--theme-color);
+          }
+        }
+
+        &:last-child {
+          padding-bottom: 0;
+        }
+
+        +li {
+          margin-top: 3px;
+          border-top: 1px solid rgba(221, 221, 221, 0.3215686275);
+        }
+
+        a {
+          display: block;
+          color: #898989;
+          text-transform: capitalize;
+        }
+
+        p {
+          font-size: 15px;
+          text-transform: capitalize;
+          letter-spacing: 0.05em;
+          margin-bottom: 0;
+          transition: all 0.5s ease;
+        }
+
+        .selected {
+          color: var(--theme-color);
+        }
+      }
+    }
+  }
+
+  .close-icon {
+    @include center(vertical);
+    position: absolute;
+    right: 40px;
+    line-height: 1;
+    cursor: pointer;
+  }
+}
+
+.category-select-box {
+  position: relative;
+
+  .bootstrap-tagsinput {
+    border: 1px solid $light-semi-gray;
+    background-color: #f9f9f6 !important;
+    font-size: calc(14px + (16 - 14) * ((100vw - 320px) / (1920 - 320)));
+    color: #898989;
+    padding: 10px;
+    border-radius: 0.375rem;
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 10px;
+
+    input {
+      border: none;
+      padding: 0 !important;
+      line-height: 2;
+    }
+  }
+
+  .select-category-box {
+    position: absolute;
+    z-index: 1;
+    top: 60px;
+    width: 100%;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.2s ease;
+    transform: translateY(-20px);
+
+    &.show {
+      opacity: 1;
+      transform: none;
+      visibility: visible;
+    }
+  }
+}
+
+.outer-otp {
+  width: 235px;
+  overflow: hidden;
+
+  .inner-otp {
+    left: 0;
+    position: sticky;
+
+    input {
+      padding-left: 15px;
+      letter-spacing: 41px;
+      border: 0;
+      background-image: linear-gradient(to left, rgb(189, 189, 189) 70%, rgba(255, 255, 255, 0) 0%);
+      background-position: bottom;
+      background-size: 50px 1px;
+      background-repeat: repeat-x;
+      background-position-x: 35px;
+      width: 300px;
+      min-width: 300px;
+    }
+  }
+}
+
+.input-error {
+  position: relative;
+
+  .invalid-feedback {
+    position: relative;
+  }
+}
+
+textarea {
+  &.form-control {
+
+    &:valid,
+    &.is-valid {
+      body[dir="rtl"] & {
+        padding-left: calc(1.5em + 0.75rem);
+        padding-right: calc(12px + (15 - 12) * ((100vw - 320px) / (1920 - 320)));
+        background-position: top calc(0.375em + 0.1875rem) left calc(0.375em + 0.1875rem);
+      }
+    }
+  }
+}

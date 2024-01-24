@@ -1,0 +1,207 @@
+/**=====================
+     Offer scss
+==========================**/
+.coupon-box {
+  position: relative;
+  padding: calc(15px + (27 - 15) * ((100vw - 320px) / (1920 - 320)));
+  background: #f8f8f8;
+  border-radius: 6px;
+  width: 100%;
+  overflow: hidden;
+  height: 100%;
+
+  html.dark & {
+    background-color: #1d1d22;
+  }
+
+  .coupon-img {
+    @include pseudowh($width: 55px, $height: 55px);
+    @include flex_common;
+    padding: 10px;
+    background-color: #f8f8f8;
+    border-radius: 2px;
+    border: 1px solid $light-semi-gray;
+
+    .img {
+      width: 33px;
+      height: 33px;
+      object-fit: contain;
+    }
+  }
+
+  .card-name {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .coupon-name {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+
+    img {
+      border-radius: 6px;
+    }
+
+    h5 {
+      overflow: hidden;
+      text-overflow: ellipsis;
+      font-size: calc(16px + (20 - 16) * ((100vw - 320px) / (1920 - 320)));
+
+      &::after {
+        @include pos;
+        left: 0;
+        height: 23px;
+        background-color: var(--theme-color);
+        width: 2px;
+
+        body[dir="rtl"] & {
+          left: unset;
+          right: 0;
+        }
+      }
+    }
+
+    h6 {
+      overflow: hidden;
+      white-space: nowrap;
+      text-overflow: ellipsis;
+      margin-top: 3px;
+      color: $content-color;
+    }
+  }
+
+  .coupon-content {
+    margin-top: 15px;
+
+    &.bank-offer-content {
+      margin-top: calc(10px + (20 - 10) * ((100vw - 320px) / (1920 - 320)));
+
+      p {
+        overflow: hidden;
+        text-overflow: ellipsis;
+        display: -webkit-box;
+        -webkit-line-clamp: 2;
+        -webkit-box-orient: vertical;
+        font-size: calc(14px + (16 - 14) * ((100vw - 320px) / (1920 - 320)));
+      }
+
+      h6 {
+        margin-top: calc(10px + (20 - 10) * ((100vw - 320px) / (1920 - 320)));
+      }
+    }
+
+    .coupon-apply {
+      @include flex_common($dis: flex, $align: center, $justify: space-between);
+      padding-top: calc(10px + (20 - 10) * ((100vw - 320px) / (1920 - 320)));
+      border-top: 1px dashed rgba($black, 0.12);
+
+      .copy-btn {
+        padding: calc(8px + (10 - 8) * ((100vw - 320px) / (1920 - 320)));
+        line-height: 1;
+        font-size: 14px;
+        position: relative;
+        overflow: hidden;
+        color: var(--theme-color) !important;
+        background-color: transparent !important;
+        font-weight: 600;
+
+        &.expired-btn {
+          color: #999;
+          cursor: not-allowed;
+
+          &::before {
+            background-color: rgb(227, 227, 227);
+            opacity: 0.6;
+          }
+        }
+
+        @media screen and (max-width: 1336px) and (min-width: 1399px) {
+          padding: 7px;
+        }
+
+        &:before {
+          @include pos;
+          top: 0;
+          left: 0;
+          @include pseudowh;
+          background-color: var(--theme-color);
+          opacity: 0.1;
+          z-index: -1;
+        }
+      }
+    }
+
+    p {
+      color: $content-color;
+      line-height: 1.5;
+      height: 42px;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+    }
+  }
+
+  .coupon-bottom {
+    position: absolute;
+    width: 95%;
+    left: 10px;
+    bottom: -1px;
+  }
+
+  .coupon-right {
+    position: absolute;
+    right: -1px;
+    top: 50%;
+    transform: translateY(-50%);
+    height: 90%;
+  }
+}
+
+/**=====================
+     Offer scss
+==========================**/
+.offer-box {
+  position: relative;
+  z-index: 0;
+
+  img {
+    @include pseudowh;
+    object-fit: contain
+  }
+}
+
+.offer-section {
+  .offer-box {
+    @include flex_common;
+    background-repeat: no-repeat;
+    background-size: cover;
+    padding: calc(20px + (35 - 20) * ((100vw - 320px) / (1920 - 320)));
+    border-radius: 6px;
+
+    @include mq-max(sm) {
+      display: block;
+      text-align: center;
+    }
+
+    h2 {
+      color: $white;
+      font-weight: 700;
+      font-size: calc(24px + (40 - 24) * ((100vw - 320px) / (1920 - 320)));
+      margin-top: -4px;
+      margin-bottom: -5px;
+
+
+      @include mq-max(sm) {
+        line-height: 1.3;
+      }
+
+      span {
+        font-weight: 500;
+        font-size: calc(18px + (26 - 18) * ((100vw - 320px) / (1920 - 320)));
+      }
+    }
+  }
+}

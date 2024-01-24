@@ -1,0 +1,249 @@
+/* =====================
+    Newsletter scss 
+ ========================== */
+.newsletter-section {
+    .newsletter-box {
+        border-radius: 10px;
+        position: relative;
+        overflow: hidden;
+
+        &-3 {
+            &:after {
+                @include pos;
+                @include pseudowh;
+                top: 0;
+                left: 0;
+                background-image: url("../../images/vegetable/newsletter/2.jpg");
+                background-size: cover;
+                background-position: center center;
+                background-repeat: no-repeat;
+                display: block;
+                z-index: -1;
+            }
+        }
+
+        .newsletter-contain {
+            .newsletter-detail {
+                h2 {
+                    font-weight: 700;
+                    color: $white;
+                    margin-bottom: 10px;
+                }
+
+                h5 {
+                    font-weight: 600;
+                    color: #ffbc5d;
+                    margin-bottom: calc(14px + (20 - 14) * ((100vw - 320px) / (1920 - 320)));
+                    font-size: calc(16px + (18 - 16) * ((100vw - 320px) / (1920 - 320)));
+                }
+
+                .input-box {
+                    position: relative;
+
+                    ::placeholder {
+                        font-size: 14px;
+                        color: $content-color;
+
+                        @include mq-max(2xs) {
+                            padding-left: 0;
+                        }
+                    }
+
+                    input {
+                        height: calc(41px + (52 - 41) * ((100vw - 320px) / (1920 - 320)));
+                        border-radius: 5px;
+                        border: none;
+                        padding-left: 53px;
+                        padding-right: 147px;
+
+                        body[dir="rtl"] & {
+                            padding-left: 147px;
+                            padding-right: 53px;
+                        }
+
+                        @include mq-max(sm) {
+                            padding-right: 42px;
+                            padding-left: calc(12px + 3 * (100vw - 320px) / 1600);
+
+                            body[dir="rtl"] & {
+                                padding-right: calc(12px + 3 * (100vw - 320px) / 1600);
+                                padding-left: 42px;
+                            }
+                        }
+
+                        @include mq-max(2xs) {
+                            padding-left: 12px;
+
+                            body[dir="rtl"] & {
+                                padding-left: calc(12px + 3 * (100vw - 320px) / 1600);
+                                padding-right: 12px;
+                            }
+                        }
+                    }
+
+                    .mail-icon {
+                        @include center(vertical);
+                        @include flex_common;
+                        position: absolute;
+                        left: 8px;
+                        width: 37px;
+                        height: calc(100% - 14px);
+
+                        body[dir="rtl"] & {
+                            left: unset;
+                            right: 8px;
+                        }
+
+                        @include mq-max(xs) {
+                            display: none;
+                        }
+
+                        &::before {
+                            @include pos;
+                            @include pseudowh;
+                            opacity: 0.1;
+                            top: 0;
+                            left: 0;
+                            z-index: -1;
+                            background-color: var(--theme-color);
+
+                            body[dir="rtl"] & {
+                                left: unset;
+                                right: 0;
+                            }
+                        }
+
+                        svg {
+                            font-size: 19px;
+                            color: var(--theme-color);
+                        }
+                    }
+
+                    .sub-btn {
+                        @include center(vertical);
+                        background-color: $danger-color;
+                        position: absolute;
+                        right: 3px;
+                        border-radius: 3px;
+                        border: none;
+                        padding: calc(10px + (12 - 10) * ((100vw - 320px) / (1920 - 320))) calc(8px + (21 - 8) * ((100vw - 320px) / (1920 - 320)));
+                        font-size: calc(14px + (15 - 14) * ((100vw - 320px) / (1920 - 320)));
+                        color: $white;
+                        font-weight: 500;
+                        display: flex;
+                        align-items: center;
+
+                        body[dir="rtl"] & {
+                            right: unset;
+                            left: 3px;
+                        }
+
+                        svg {
+                            color: #fff;
+                            margin-left: 6px;
+                            position: relative;
+                            inset: unset;
+                            transform: unset;
+                            background-color: transparent;
+                            font-size: 18px;
+                            line-height: 1;
+
+                            body[dir="rtl"] & {
+                                margin-left: unset;
+                                margin-right: 6px;
+                            }
+
+                            @include mq-max(sm) {
+                                margin-left: 0;
+
+                                body[dir="rtl"] & {
+                                    margin-left: unset;
+                                    margin-right: 0;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+.newsletter-section-2 {
+    .newsletter-box {
+        border-radius: 10px;
+        overflow: hidden;
+        background-position: center;
+        background-repeat: no-repeat;
+        background-size: cover;
+        position: relative;
+
+        .newsletter-detail {
+            @include pseudowh;
+            padding: calc(20px + (130 - 20) * ((100vw - 320px) / (1920 - 320)));
+            z-index: 1;
+
+            h2 {
+                font-size: calc(18px + (36 - 18) * ((100vw - 320px) / (1920 - 320)));
+                margin-bottom: 10px;
+            }
+
+            h4 {
+                margin-bottom: 8px;
+                font-size: calc(15px + (20 - 15) * ((100vw - 320px) / (1920 - 320)));
+                line-height: 1.3;
+                font-weight: 300;
+            }
+
+            .download-app {
+                display: flex;
+                align-items: center;
+                flex-wrap: wrap;
+
+                @include mq-max(md) {
+                    display: block;
+                }
+
+                h3 {
+                    margin-right: 15px;
+                    font-weight: 400;
+
+                    @include mq-max(md) {
+                        margin-bottom: 10px;
+                    }
+                }
+
+                .download-app-image {
+                    margin: 0 -3px;
+                    display: flex;
+
+                    li {
+                        margin: 0 3px;
+                        display: flex;
+                    }
+                }
+            }
+        }
+
+        .shape-box {
+            @include pseudowh;
+            @include flex_common;
+            position: relative;
+            z-index: 1;
+            text-align: center;
+
+            &:after {
+                @include pos;
+                @include pseudowh;
+                background-image: url(../../images/veg-3/shape/circle.png);
+                background-repeat: no-repeat;
+                background-size: contain;
+                background-position: center;
+                animation: rounded infinite 30s linear;
+                right: 0;
+                top: 0;
+                z-index: -1;
+            }
+        }
+    }
+}

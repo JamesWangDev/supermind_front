@@ -1,0 +1,132 @@
+/**=====================
+    RTL scss
+==========================**/
+body[dir="rtl"] {
+    direction: rtl;
+
+    .newsletter-section {
+        .newsletter-box {
+            .newsletter-contain {
+                .row {
+                    justify-content: flex-end;
+                }
+            }
+        }
+    }
+
+    .text-end {
+        text-align: left !important;
+    }
+
+    .ms-3 {
+        margin-left: unset !important;
+        margin-right: 1rem !important;
+    }
+
+    .ms-auto {
+        margin-right: auto !important;
+        margin-left: unset !important;
+    }
+
+    .slick-slider {
+        direction: ltr;
+
+        .product-box {
+            text-align: right;
+
+            .sold {
+                del {
+                    margin-left: 6px;
+                    margin-right: unset;
+                }
+            }
+
+            .product-image {
+                .product-option {
+                    li {
+                        +li {
+                            &::after {
+                                left: 0;
+                                right: unset;
+                            }
+                        }
+                    }
+                }
+            }
+
+            .product-detail {
+                .product-rating {
+                    justify-content: flex-end;
+                }
+            }
+        }
+
+        .reviewer-box {
+            direction: rtl;
+
+            .icon {
+                svg {
+                    transform: rotateY(196deg);
+                    right: unset;
+                    left: calc(-13px + (-11 - -13) * ((100vw - 320px) / (1920 - 320)));
+                }
+            }
+        }
+
+        .clint-contain {
+            direction: rtl;
+
+            &:hover {
+                h2 {
+                    margin-right: unset;
+                    margin-left: 9px;
+                }
+            }
+
+            h2 {
+                right: unset;
+                left: calc(24px + (34 - 24) * ((100vw - 320px) / (1920 - 320)));
+            }
+        }
+
+        .ms-auto {
+            margin-right: unset !important;
+            margin-left: auto !important;
+        }
+
+        .timer {
+            ul {
+                li {
+                    +li {
+                        margin-left: 15px;
+                        margin-right: unset;
+
+                        &::after {
+                            left: -10px;
+                            right: unset;
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    ul {
+        padding-right: 0;
+    }
+
+    .me-1 {
+        margin-right: unset;
+        margin-left: 0.25rem !important;
+    }
+
+    .ms-2 {
+        margin-left: unset !important;
+        margin-right: 0.5rem !important;
+    }
+
+    .me-2 {
+        margin-right: unset !important;
+        margin-left: 0.5rem !important;
+    }
+}

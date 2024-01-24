@@ -1,0 +1,447 @@
+/**=====================
+     Breadcrumb scss
+==========================**/
+.breadscrumb-section {
+  background-color: $light-gray;
+  position: relative;
+  overflow: hidden;
+
+  .breadscrumb-contain {
+    padding: calc(26px + (40 - 26) * ((100vw - 320px) / (1920 - 320))) 0;
+    text-align: center;
+    color: $title-color;
+    display: flex;
+    align-items: center;
+
+    @include mq-max(md) {
+      display: grid;
+    }
+
+    h2 {
+      @include line;
+      max-width: 40%;
+      text-align: left;
+      font-weight: 700;
+      font-size: calc(16px + (22 - 16) * ((100vw - 320px) / (1920 - 320)));
+      margin-bottom: 0;
+
+      @include mq-max(md) {
+        text-align: center;
+        max-width: 90%;
+        margin: 0 auto 8px;
+      }
+    }
+
+    .search-box-breadscrumb {
+      position: relative;
+      width: 70%;
+      margin: 0 auto;
+
+      @include mq-max(sm) {
+        width: 90%;
+      }
+
+      @include mq-max(2xs) {
+        width: 100%;
+      }
+
+      input {
+        width: 100%;
+        border: none;
+        border-radius: 6px;
+        font-size: 15px;
+      }
+
+      i {
+        @include center(vertical);
+        position: absolute;
+        right: calc(14px + (20 - 14) * ((100vw - 320px) / (1920 - 320)));
+        color: $content-color;
+        font-size: calc(15px + (18 - 15) * ((100vw - 320px) / (1920 - 320)));
+      }
+    }
+
+    nav {
+      margin-left: auto;
+
+      body[dir='rtl'] & {
+        margin-left: unset;
+        margin-right: auto;
+      }
+
+      @include mq-max(md) {
+        margin-inline: auto;
+
+        body[dir='rtl'] & {
+          margin-inline: auto;
+        }
+      }
+
+      .breadcrumb {
+        @include flex_common;
+
+        .breadcrumb-item {
+          font-weight: 500;
+
+          svg {
+            color: $content-color;
+            font-size: 20px;
+          }
+
+          &.active {
+            color: $black;
+            line-height: 1;
+            margin-top: 2px;
+            display: flex;
+            align-items: center;
+          }
+
+          +.breadcrumb-item {
+            position: relative;
+            padding-left: 8px;
+
+            body[dir="rtl"] & {
+              padding-left: unset;
+              padding-right: 8px;
+            }
+
+            &::before {
+              @include remixicon;
+              content: "\ea6e";
+              color: $content-color;
+              float: unset;
+              font-size: 18px;
+              padding-right: 8px;
+
+              body[dir='rtl'] & {
+                padding-right: unset;
+                padding-left: 8px;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+
+  .breadscrumb-order {
+    display: block;
+
+    .order-box {
+      .order-image {
+        @include pseudowh($width: calc(170px + (250 - 170) * ((100vw - 320px) / (1920 - 320))), $height: auto);
+        margin: 0 auto calc(16px + (28 - 16) * ((100vw - 320px) / (1920 - 320)));
+
+        .checkmark {
+          position: relative;
+          padding: 30px;
+          animation: checkmark 5m cubic-bezier(0.42, 0, 0.275, 1.155) both;
+          display: inline-block;
+          transform: scale(0.8);
+          margin: -20px;
+
+          &__check {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            z-index: 10;
+            transform: translate3d(-50%, -50%, 0);
+            fill: white;
+          }
+
+          &__background {
+            fill: var(--theme-color);
+            animation: rotate 35s linear both infinite;
+          }
+        }
+
+        .star {
+          position: absolute;
+          animation: grow 3s infinite;
+          fill: var(--theme-color);
+          opacity: 0;
+
+          &:nth-child(1) {
+            width: 12px;
+            height: 12px;
+            left: 12px;
+            top: 16px;
+          }
+
+          &:nth-child(2) {
+            width: 18px;
+            height: 18px;
+            left: 168px;
+            top: 84px;
+          }
+
+          &:nth-child(3) {
+            width: 10px;
+            height: 10px;
+            left: 32px;
+            top: 162px;
+          }
+
+          &:nth-child(4) {
+            height: 20px;
+            width: 20px;
+            left: 82px;
+            top: -12px;
+          }
+
+          &:nth-child(5) {
+            width: 14px;
+            height: 14px;
+            left: 125px;
+            top: 162px;
+          }
+
+          &:nth-child(6) {
+            width: 10px;
+            height: 10px;
+            left: 16px;
+            top: 16px;
+          }
+
+          @for $i from 1 through 6 {
+            &:nth-child(#{$i}) {
+              animation-delay: $i * (3s/2);
+            }
+          }
+        }
+
+        .checkmark {
+          position: relative;
+          padding: 30px;
+          animation: checkmark 5m cubic-bezier(0.42, 0, 0.275, 1.155) both;
+          display: inline-block;
+          transform: scale(0.8);
+          margin: -20px;
+
+          &__check {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            z-index: 10;
+            transform: translate3d(-50%, -50%, 0);
+            fill: white;
+          }
+
+          &__background {
+            fill: var(--theme-color);
+            animation: rotate 35s linear both infinite;
+          }
+        }
+
+        i {
+          font-size: 50px;
+          color: #4ead4e;
+        }
+
+        h2 {
+          margin-top: 10px;
+          margin-bottom: 15px;
+        }
+
+        p {
+          font-size: 18px;
+          text-transform: capitalize;
+        }
+
+        &.order-fail {
+          i {
+            color: var(--theme-color);
+          }
+        }
+      }
+
+      .order-contain {
+        h3 {
+          font-size: calc(21px + (24 - 21) * ((100vw - 320px) / (1920 - 320)));
+          font-weight: 700;
+          margin-bottom: 6px;
+        }
+
+        h5 {
+          margin-bottom: 8px;
+          line-height: 1.4;
+        }
+      }
+    }
+  }
+}
+
+.faq-breadscrumb {
+  background-color: $light-gray;
+  position: relative;
+  overflow: hidden;
+
+  .breadscrumb-contain {
+    padding: calc(26px + (60 - 26) * ((100vw - 320px) / (1920 - 320))) 0;
+    text-align: center;
+    color: $title-color;
+    display: block;
+
+    h2 {
+      font-size: calc(22px + (48 - 22) * ((100vw - 320px) / (1920 - 320)));
+      font-weight: 700;
+      margin-top: -6px;
+    }
+
+    p {
+      margin: calc(11px + (16 - 11) * ((100vw - 320px) / (1920 - 320))) auto 0;
+      color: $content-color;
+      width: 50%;
+      line-height: 1.7;
+      font-size: calc(14px + (16 - 14) * ((100vw - 320px) / (1920 - 320)));
+
+      @include mq-max(4xl) {
+        width: 60%;
+      }
+
+      @include mq-max(2xl) {
+        width: 70%;
+      }
+
+      @include mq-max(lg) {
+        width: 90%;
+      }
+
+      @include mq-max(md) {
+        width: 100%;
+      }
+
+      span {
+        display: inline;
+      }
+    }
+
+    .faq-form-tag {
+      position: relative;
+      margin: calc(18px + (35 - 18) * ((100vw - 320px) / (1920 - 320))) auto 0;
+      width: 50%;
+
+      @include mq-max(4xl) {
+        width: 60%;
+      }
+
+      @include mq-max(2xl) {
+        width: 70%;
+      }
+
+      @include mq-max(lg) {
+        width: 90%;
+      }
+
+      @include mq-max(md) {
+        width: 100%;
+      }
+
+      .input-group {
+        background-color: $white;
+
+        i {
+          display: flex;
+          align-items: center;
+          padding: 0 calc(12px + (20 - 12) * ((100vw - 320px) / (1920 - 320)));
+          color: var(--theme-color);
+          font-size: calc(14px + (16 - 14) * ((100vw - 320px) / (1920 - 320)));
+        }
+
+        .form-control {
+          padding-left: 0;
+          border: none;
+
+          &:focus {
+            background-color: transparent;
+          }
+        }
+
+        .faq-dropdown-menu {
+          li {
+            display: block;
+          }
+        }
+
+        .faq-dropdown-button {
+          font-size: calc(14px + (16 - 14) * ((100vw - 320px) / (1920 - 320)));
+          font-weight: 600;
+          color: var(--theme-color);
+          z-index: 0;
+
+          &::after {
+            content: unset;
+          }
+
+          i {
+            position: relative;
+            padding: 0;
+            margin-left: 5px;
+            font-size: calc(13px + (14 - 13) * ((100vw - 320px) / (1920 - 320)));
+          }
+        }
+      }
+    }
+  }
+}
+
+.vendore-breadscrumb-section {
+  background-image: url('../../images/vendor-page/breadcrumb.png');
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  padding: calc(52px + (100 - 52) * ((100vw - 320px) / (1920 - 320))) 0px;
+
+  .breadscrumb-contain {
+    width: 50%;
+    margin: 0 auto;
+
+    @include mq-max(2xl) {
+      width: 63%;
+    }
+
+    @include mq-max(lg) {
+      width: 85%;
+    }
+
+    @include mq-max(md) {
+      width: 100%;
+    }
+
+    h2 {
+      font-size: calc(27px + (54 - 27) * ((100vw - 320px) / (1920 - 320)));
+      text-align: center;
+      margin-bottom: calc(14px + (18 - 14) * ((100vw - 320px) / (1920 - 320)));
+    }
+
+    form {
+      position: relative;
+
+      span {
+        position: absolute;
+        @include center(vertical);
+        left: 16px;
+
+        i {
+          font-size: calc(21px + (27 - 21) * ((100vw - 320px) / (1920 - 320)));
+          color: var(--theme-color);
+        }
+      }
+
+      .form-control {
+        padding: calc(8px + (14 - 8) * ((100vw - 320px) / (1920 - 320))) calc(95px + (122 - 95) * ((100vw - 320px) / (1920 - 320))) calc(8px + (14 - 8) * ((100vw - 320px) / (1920 - 320))) calc(48px + (59 - 48) * ((100vw - 320px) / (1920 - 320)));
+        border: none;
+      }
+
+      button {
+        position: absolute;
+        @include center(vertical);
+        right: calc(3px + (6 - 3) * ((100vw - 320px) / (1920 - 320)));
+        padding: 0;
+        font-size: calc(14px + (17 - 14) * ((100vw - 320px) / (1920 - 320)));
+        width: calc(77px + (108 - 77) * ((100vw - 320px) / (1920 - 320)));
+        height: calc(33px + (42 - 33) * ((100vw - 320px) / (1920 - 320)));
+      }
+    }
+  }
+}

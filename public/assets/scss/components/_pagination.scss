@@ -1,0 +1,73 @@
+/**=====================
+     Pagination scss
+==========================**/
+.custome-pagination {
+    margin-top: calc(22px + (35 - 22) * ((100vw - 320px) / (1920 - 320)));
+    z-index: 0;
+    position: relative;
+
+    .pagination {
+        flex-wrap: wrap;
+        gap: calc(6px + (13 - 6) * ((100vw - 320px) / (1920 - 320)));
+
+        .page-item {
+            border-radius: 5px;
+            overflow: hidden;
+
+            &:not(:first-child) {
+                .page-link {
+                    margin: 0;
+                }
+            }
+
+            &.disabled {
+                .page-link {
+                    background-color: transparent;
+                    cursor: not-allowed;
+                    opacity: 0.3;
+                }
+
+            }
+
+            .page-link {
+                border-radius: 5px;
+                color: $content-color;
+                border: 1px solid transparent;
+                width: 32px;
+                height: 32px;
+                padding: 0;
+                @include flex_common;
+
+                &:hover {
+                    border-radius: 5px;
+                    border: 1px solid var(--theme-color);
+                    background-color: unset;
+                }
+
+                &:focus {
+                    color: var(--theme-color);
+                    background-color: #fff;
+                    box-shadow: none;
+                    border-color: var(--theme-color);
+                }
+
+                &.active {
+                    background-color: var(--theme-color);
+                    border-color: var(--theme-color);
+                    color: #fff;
+                }
+
+                &.disabled {
+                    background-color: transparent;
+                    cursor: not-allowed;
+                }
+
+                svg {
+                    body[dir="rtl"] & {
+                        transform: rotateY(180deg);
+                    }
+                }
+            }
+        }
+    }
+}

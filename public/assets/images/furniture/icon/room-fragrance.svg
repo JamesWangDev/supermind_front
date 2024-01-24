@@ -1,0 +1,14 @@
+<svg version="1.2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="555" height="555">
+	<title>New Project</title>
+	<style>
+		.s0 { fill: #000000 } 
+	</style>
+	<g id="Layer">
+		<path id="Layer" fill-rule="evenodd" class="s0" d="m409.8 275.5l86 236.5h-479.6l86-236.5-89.4-111.9h486.4zm-299-6.2h290.5l76-95h-442.5zm289.3 10.5h-288.1l-80.7 221.7h449.4z"/>
+		<path id="Layer" class="s0" d="m187.4 63.3h10.5v63.4h-10.5z"/>
+		<path id="Layer" class="s0" d="m250.7 0h10.6v126.7h-10.6z"/>
+		<path id="Layer" class="s0" d="m314.1 63.3h10.5v63.4h-10.5z"/>
+		<path id="Layer" fill-rule="evenodd" class="s0" d="m229.6 380c0-12.6 18.4-39.9 22.1-45.2l4.3-6.3 4.3 6.3c3.7 5.3 22.1 32.6 22.1 45.2 0 14.6-11.8 26.4-26.4 26.4-14.5 0-26.4-11.8-26.4-26.4zm10.6 0c0 8.8 7.1 15.9 15.8 15.9 8.7 0 15.8-7.1 15.8-15.9 0-5.7-8.2-20.8-15.8-32.6-7.6 11.8-15.8 26.9-15.8 32.6z"/>
+		<path id="Layer" fill-rule="evenodd" class="s0" d="m208.5 417h95v52.8h-95zm10.5 42.2h73.9v-31.7h-73.9z"/>
+	</g>
+</svg>

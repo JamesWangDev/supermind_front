@@ -1,0 +1,234 @@
+/**=====================
+     Ratio scss
+==========================**/
+.ratio_30 {
+    .bg-size {
+        &:before {
+            content: "";
+            padding-top: 30%;
+            display: block;
+        }
+    }
+}
+
+.ratio_35 {
+    .bg-size {
+        &:before {
+            content: "";
+            padding-top: 35%;
+            display: block;
+        }
+    }
+}
+
+.ratio_42 {
+    .bg-size {
+        &:before {
+            content: "";
+            padding-top: 42%;
+            display: block;
+        }
+    }
+}
+
+.ratio_45 {
+    .bg-size {
+        &:before {
+            content: "";
+            padding-top: 45.4%;
+            display: block;
+        }
+    }
+}
+
+.ratio_50 {
+    .bg-size {
+        &:before {
+            content: "";
+            padding-top: 50%;
+            display: block;
+        }
+    }
+}
+
+.ratio_50_1 {
+    .bg-size {
+        &:before {
+            content: "";
+            padding-top: 50%;
+            display: block;
+
+            @include mq-max(4xl) {
+                padding-top: 57%;
+            }
+
+            @include mq-max(xl) {
+                padding-top: 80%;
+            }
+
+            @include mq-max(lg) {
+                padding-top: 59%;
+            }
+
+            @include mq-max(md) {
+                padding-top: 68%;
+            }
+
+            @include mq-max(sm) {
+                padding-top: 77%;
+            }
+
+            @include mq-max(xs) {
+                padding-top: 84%;
+            }
+        }
+    }
+}
+
+.ratio_58 {
+    .bg-size {
+        &:before {
+            content: "";
+            padding-top: 58%;
+            display: block;
+        }
+    }
+}
+
+.ratio_60 {
+    .bg-size {
+        &:before {
+            content: "";
+            padding-top: 60%;
+            display: block;
+        }
+    }
+}
+
+.ratio_65 {
+    .bg-size {
+        &:before {
+            content: "";
+            padding-top: 65%;
+            display: block;
+        }
+    }
+}
+
+.ratio_87 {
+    .bg-size {
+        &:before {
+            content: "";
+            padding-top: 87%;
+            display: block;
+        }
+    }
+}
+
+.ratio_square {
+    .bg-size {
+        &:before {
+            padding-top: 100%;
+            content: "";
+            display: block;
+        }
+    }
+}
+
+.ratio_110 {
+    .bg-size {
+        &:before {
+            padding-top: 110%;
+            content: "";
+            display: block;
+        }
+    }
+}
+
+.ratio_125 {
+    .bg-size {
+        &::before {
+            content: "";
+            padding-top: 125%;
+            display: block;
+        }
+    }
+}
+
+.ratio_148 {
+    .bg-size {
+        &::before {
+            content: "";
+            padding-top: 148%;
+            display: block;
+        }
+    }
+}
+
+.ratio_156 {
+    .bg-size {
+        &:before {
+            content: "";
+            padding-top: 156%;
+            display: block;
+        }
+    }
+}
+
+.ratio_medium {
+    .bg-size {
+        &:before {
+            content: "";
+            padding-top: 134%;
+            display: block;
+        }
+    }
+}
+
+.ratio_180 {
+    .bg-size {
+        &:before {
+            content: "";
+            padding-top: 180%;
+            display: block;
+        }
+    }
+}
+
+.ratio_209 {
+    .bg-size {
+        &:before {
+            content: "";
+            padding-top: 209%;
+            display: block;
+        }
+    }
+}
+
+.ratio_148_1 {
+    .bg-size {
+        content: "";
+        padding-top: 148%;
+        display: block;
+
+        @include mq-max(xl) {
+            padding-top: 88%;
+        }
+    }
+}
+
+.b-bottom {
+    background-position: bottom !important;
+}
+
+.b-top {
+    background-position: top !important;
+}
+
+.b-left {
+    background-position: left !important;
+}
+
+.b-right {
+    background-position: right !important;
+}

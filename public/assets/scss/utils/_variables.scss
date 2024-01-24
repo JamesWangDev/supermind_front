@@ -1,0 +1,65 @@
+:root {
+  --theme-color: #0da487;
+}
+
+$white: #ffffff;
+$black: #000000;
+$title-color: #222222;
+$content-color: #4a5568;
+$light-gray: #f8f8f8;
+$danger-color: #ff4f4f;
+$rating-color: #ffb321;
+$border-color: #ececec;
+$light-semi-gray: #efefef;
+$grey-3: #333333;
+
+/* For Card */
+$info-color: #a927f9;
+$black1: #232323;
+$grey-13: #9a9a9a;
+$theme-font-color: #222222;
+$dark-card-background: #1c2128;
+$theme-body-font-color: #4a5568;
+$dark-color: #2c323f;
+$card-header-font-transform: capitalize;
+$theme-body-sub-title-color: rgba($theme-body-font-color, 0.7);
+$transparent-color: transparent;
+
+/* Card settings */
+$card-padding: 30px 40px;
+$card-margin-bottom: 30px;
+$card-border-color: 1px solid $light-gray;
+$card-border-radious: 15px;
+$common-shadow-color: rgba($info-color, 0.08);
+$card-box-shadow: 0 0 20px rgba(8, 21, 66, 0.05);
+$card-header-bg-color: $white;
+$card-header-font-transform: capitalize;
+$card-header-span-size: 12px;
+$card-header-span-color: $theme-body-sub-title-color;
+$card-body-bg-color: $transparent-color;
+$card-footer-bg-color: $white;
+$card-hover-box-shadow: 0 0 40px rgba(8, 21, 66, 0.05);
+
+/* font family */
+$public-sans: 'Public Sans',
+sans-serif;
+
+/* Font Awesome Font Family */
+$fontawesome: 'Font Awesome 6 Free';
+
+/* Breakepoints */
+$min-breakpoints: (lg: 992px,
+  xl: 1200px,
+  2xl: 1366px,
+);
+
+$max-breakpoints: (2xs: 360px,
+  xs: 480px,
+  sm: 575px,
+  md: 767px,
+  lg: 991px,
+  xl: 1199px,
+  2xl: 1366px,
+  3xl: 1460px,
+  4xl: 1660px,
+);

@@ -62,6 +62,10 @@ const BattleArea = () => {
     }
 
     const handleSubmitPrompt = useCallback(async () => {
+        if(!prompt) {
+            alert("Please enter your prompt!");
+            return;
+        }
         try {
         const apiUrl = 'https://api.openai.com/v1/chat/completions'; // Endpoint for GPT-3 completions
         const requestBody = {

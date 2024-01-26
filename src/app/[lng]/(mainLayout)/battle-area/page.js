@@ -1,16 +1,15 @@
 'use client'
 
 import Btn from "@/Elements/Buttons/Btn"
-import { useCallback, useMemo, useState } from "react"
+import { useCallback, useState, useContext } from "react"
 import { Dropdown, DropdownToggle, DropdownMenu, DropdownItem } from "reactstrap"
 import axios from "axios"
-import { ProductAPI } from "@/Utils/AxiosUtils/API"
-import { useQuery } from "@tanstack/react-query"
-import request from '@/Utils/AxiosUtils';
+import CartContext from "@/Helper/CartContext"
 
 const API_KEY = "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";
 
 const BattleArea = () => {
+    const { cartProducts } = useContext(CartContext);
     const [dropdown1, setDropdown1] = useState(false);
     const [dropdown2, setDropdown2] = useState(false);
     const [dropdown3, setDropdown3] = useState(false);
@@ -30,32 +29,6 @@ const BattleArea = () => {
         dropdown2: {name: "", api: ""},
         dropdown3: {name: "", api: ""}
     })
-
-    const { data, fetchStatus } = useQuery(
-        [""],
-        () =>
-          request({
-            url: ProductAPI,
-            params: {
-              page: 1,
-              status: 1,
-              paginate: 40,
-              field: '',
-              price: '',
-              category: '',
-              sort: '',
-              sortBy: '',
-              rating: '',
-              attribute: '',
-              store_slug: null,
-            },
-          }),
-        {
-          enabled: true,
-          refetchOnWindowFocus: false,
-          select: (data) => data.data,
-        },
-    );
 
     const handleChangePrompt = (e) => {
         setPrompt(e.target.value)
@@ -124,11 +97,7 @@ const BattleArea = () => {
         // const apiUrl = 'https://api.openai.com/v1/chat/completions'; // Endpoint for GPT-3 completions
     }, [prompt, selectedSupermind])
 
-    const pruducts = useMemo(() => {
-        if(data) {
-            return data.data
-        }
-    }, [data])
+    console.log(cartProducts, "lskdflksdjfjlskdfjlk")
 
     const handleOnSelectSupermind = (name, api, dropdownId) => () => {
         setSelectedSupermind(prev => {
@@ -164,9 +133,9 @@ const BattleArea = () => {
                             {selectedSupermind.dropdown1.name ? selectedSupermind.dropdown1.name : "Select Supermind...."}
                         </DropdownToggle>
                         {<DropdownMenu className='dropdown-menu-end sm-dropdown-menu'>
-                            {pruducts && pruducts.length >0 && pruducts.map((product, index) => (
-                                <DropdownItem id={`${product.name}${index}-1`} key={`${product.name}${index}-1`} onClick={handleOnSelectSupermind(product.name, product.api_url, "dropdown1")}>
-                                    {product.name}
+                            {cartProducts && cartProducts.length >0 && cartProducts.map((item, index) => (
+                                <DropdownItem id={`${item.product.name}${index}-1`} key={`${item.product.name}${index}-1`} onClick={handleOnSelectSupermind(item.product.name, item.product.api_url, "dropdown1")}>
+                                    {item.product.name}
                                 </DropdownItem>
                             ))}
                         </DropdownMenu>}
@@ -181,9 +150,9 @@ const BattleArea = () => {
                             {selectedSupermind.dropdown2.name ? selectedSupermind.dropdown2.name : "Select Supermind...."}
                         </DropdownToggle>
                         <DropdownMenu className='dropdown-menu-end sm-dropdown-menu'>
-                            {pruducts && pruducts.length >0 && pruducts.map((product, index) => (
-                                <DropdownItem id={`${product.name}${index}-2`} key={`${product.name}${index}-2`} onClick={handleOnSelectSupermind(product.name, product.api_url, "dropdown2")}>
-                                    {product.name}
+                            {cartProducts && cartProducts.length >0 && cartProducts.map((item, index) => (
+                                <DropdownItem id={`${item.product.name}${index}-2`} key={`${item.product.name}${index}-2`} onClick={handleOnSelectSupermind(item.product.name, item.product.api_url, "dropdown2")}>
+                                    {item.product.name}
                                 </DropdownItem>
                             ))}
                         </DropdownMenu>
@@ -198,9 +167,9 @@ const BattleArea = () => {
                             {selectedSupermind.dropdown3.name ? selectedSupermind.dropdown3.name : "Select Supermind...."}
                         </DropdownToggle>
                         <DropdownMenu className='dropdown-menu-end sm-dropdown-menu'>
-                            {pruducts && pruducts.length >0 && pruducts.map((product, index) => (
-                                <DropdownItem id={`${product.name}${index}-3`} key={`${product.name}${index}-3`} onClick={handleOnSelectSupermind(product.name, product.api_url, "dropdown3")}>
-                                    {product.name}
+                            {cartProducts && cartProducts.length >0 && cartProducts.map((item, index) => (
+                                <DropdownItem id={`${item.product.name}${index}-3`} key={`${item.product.name}${index}-3`} onClick={handleOnSelectSupermind(item.product.name, item.product.api_url, "dropdown3")}>
+                                    {item.product.name}
                                 </DropdownItem>
                             ))}
                         </DropdownMenu>

@@ -695,6 +695,11 @@ export const headerMenu = [
         type: 'link',
         path: '/404',
       },
+      {
+        title: 'Battle Arena',
+        type: 'link',
+        path: '/battle-area',
+      },
     ],
   },
   {

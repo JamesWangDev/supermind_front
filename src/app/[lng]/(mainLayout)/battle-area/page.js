@@ -1,11 +1,12 @@
 'use client'
 
 import Btn from "@/Elements/Buttons/Btn"
-import { useCallback, useState } from "react"
+import { useCallback, useMemo, useState } from "react"
 import { Dropdown, DropdownToggle, DropdownMenu, DropdownItem } from "reactstrap"
 import axios from "axios"
 import { ProductAPI } from "@/Utils/AxiosUtils/API"
 import { useQuery } from "@tanstack/react-query"
+import request from '@/Utils/AxiosUtils';
 
 const API_KEY = "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";
 
@@ -14,14 +15,24 @@ const BattleArea = () => {
     const [dropdown2, setDropdown2] = useState(false);
     const [dropdown3, setDropdown3] = useState(false);
     const [prompt, setPrompt] = useState("");
-    const [answer, setAnswer] = useState("");
+    const [answer, setAnswer] = useState({
+        dropdown1: "",
+        dropdown2: "",
+        dropdown3: ""
+    });
 
     const toggle1 = () => setDropdown1((prevState) => !prevState);
     const toggle2 = () => setDropdown2((prevState) => !prevState);
     const toggle3 = () => setDropdown3((prevState) => !prevState);
 
-    const { products, fetchStatus } = useQuery(
-        [],
+    const [selectedSupermind, setSelectedSupermind] = useState({
+        dropdown1: {name: "", api: ""},
+        dropdown2: {name: "", api: ""},
+        dropdown3: {name: "", api: ""}
+    })
+
+    const { data, fetchStatus } = useQuery(
+        [""],
         () =>
           request({
             url: ProductAPI,
@@ -52,7 +63,11 @@ const BattleArea = () => {
 
     const handleClearPrompt = useCallback(() => {
         setPrompt("")
-        setAnswer("")
+        setAnswer({
+            dropdown1: "",
+            dropdown2: "",
+            dropdown3: ""
+        })
     }, [setPrompt])
 
     const handleOnEnterPress = (e) => {
@@ -66,31 +81,63 @@ const BattleArea = () => {
             alert("Please enter your prompt!");
             return;
         }
-        try {
-        const apiUrl = 'https://api.openai.com/v1/chat/completions'; // Endpoint for GPT-3 completions
-        const requestBody = {
-            model: 'gpt-3.5-turbo',
-            messages: [
-                {
-                  role: 'user',
-                  content: prompt
-                }
-            ]
-        };
-
-        const response = await axios.post(apiUrl, requestBody, {
-            headers: {
-            'Content-Type': 'application/json',
-            'Authorization': `Bearer ${API_KEY}`
-            }
-        });
-
-            setAnswer(response.data.choices[0].message.content.trim());
-        } catch (error) {
-            console.error('Error fetching response:', error);
-            setAnswer('Error fetching response. Please try again.');
+        if(selectedSupermind.dropdown1.api === "" && selectedSupermind.dropdown2.api === "" && selectedSupermind.dropdown3.api === "") {
+            alert("Please select at least one supermind.")
+            return;
         }
-    }, [prompt])
+        const superminds = [
+            {api: selectedSupermind.dropdown1.api, dropdown: "dropdown1"},
+            {api: selectedSupermind.dropdown2.api, dropdown: "dropdown2"},
+            {api: selectedSupermind.dropdown3.api, dropdown: "dropdown3"}
+        ]
+        await Promise.all(superminds.map(async (supermind) => {
+            // try {
+            const requestBody = {
+                model: 'gpt-3.5-turbo',
+                messages: [
+                    {
+                    role: 'user',
+                    content: prompt
+                    }
+                ]
+            };
+
+            if(supermind.api.includes("http")) {
+                axios.post(supermind.api, requestBody, {
+                    headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${API_KEY}`
+                    }
+                }).then(response => {
+                    setAnswer(prev => ({...prev, [supermind.dropdown]: response.data.choices[0].message.content.trim()}));
+                }).catch(error => {
+                    setAnswer(prev => ({...prev, [supermind.dropdown]: 'Error fetching response. Please try again.'}));
+                });
+            } else {
+                if (supermind.name) {
+                    setAnswer(prev => ({...prev, [supermind.dropdown]: 'Api url is invalid now. Please try again.'}));
+                } else {
+                    setAnswer(prev => ({...prev, [supermind.dropdown]: 'Please select supermind that you want to test.'}));
+                }
+            }
+        }))
+        // const apiUrl = 'https://api.openai.com/v1/chat/completions'; // Endpoint for GPT-3 completions
+    }, [prompt, selectedSupermind])
+
+    const pruducts = useMemo(() => {
+        if(data) {
+            return data.data
+        }
+    }, [data])
+
+    const handleOnSelectSupermind = (name, api, dropdownId) => () => {
+        setSelectedSupermind(prev => {
+            return {
+                ...prev,
+                [dropdownId]: {name, api}
+            }
+        })
+    }
 
     return (
         <div className="m-auto p-3 w-50 d-flex border " style={{height: '650px'}}>
@@ -114,46 +161,52 @@ const BattleArea = () => {
                 <div style={{height: "33%"}}>
                     <Dropdown isOpen={dropdown1} toggle={toggle1}>
                         <DropdownToggle caret className='select-dropdown' type='button' size="sm">
-                            Select Supermind....
+                            {selectedSupermind.dropdown1.name ? selectedSupermind.dropdown1.name : "Select Supermind...."}
                         </DropdownToggle>
-                        <DropdownMenu className='dropdown-menu-end sm-dropdown-menu'>
-                            <DropdownItem id={1} key={1} onClick={() => {}}>
-                                sdfsdsad
-                            </DropdownItem>
-                        </DropdownMenu>
+                        {<DropdownMenu className='dropdown-menu-end sm-dropdown-menu'>
+                            {pruducts && pruducts.length >0 && pruducts.map((product, index) => (
+                                <DropdownItem id={`${product.name}${index}-1`} key={`${product.name}${index}-1`} onClick={handleOnSelectSupermind(product.name, product.api_url, "dropdown1")}>
+                                    {product.name}
+                                </DropdownItem>
+                            ))}
+                        </DropdownMenu>}
                     </Dropdown>
                     <div className="border p-2" style={{height: "calc(100% - 37px)", overflowY: "auto", overflowWrap: "anywhere"}}>
-                        {answer}
+                        {answer.dropdown1}
                     </div>
                 </div>
                 <div style={{height: "33%"}}>
                     <Dropdown isOpen={dropdown2} toggle={toggle2}>
                         <DropdownToggle caret className='select-dropdown' type='button' size="sm">
-                            Select Supermind....
+                            {selectedSupermind.dropdown2.name ? selectedSupermind.dropdown2.name : "Select Supermind...."}
                         </DropdownToggle>
                         <DropdownMenu className='dropdown-menu-end sm-dropdown-menu'>
-                            <DropdownItem id={1} key={1} onClick={() => {}}>
-                                sdfsdsad
-                            </DropdownItem>
+                            {pruducts && pruducts.length >0 && pruducts.map((product, index) => (
+                                <DropdownItem id={`${product.name}${index}-2`} key={`${product.name}${index}-2`} onClick={handleOnSelectSupermind(product.name, product.api_url, "dropdown2")}>
+                                    {product.name}
+                                </DropdownItem>
+                            ))}
                         </DropdownMenu>
                     </Dropdown>
                     <div className="border p-2" style={{height: "calc(100% - 37px)", overflowY: "auto", overflowWrap: "anywhere"}}>
-                        {answer}
+                        {answer.dropdown2}
                     </div>
                 </div>
                 <div style={{height: "33%"}}>
                     <Dropdown isOpen={dropdown3} toggle={toggle3}>
                         <DropdownToggle caret className='select-dropdown' type='button' size="sm">
-                            Select Supermind....
+                            {selectedSupermind.dropdown3.name ? selectedSupermind.dropdown3.name : "Select Supermind...."}
                         </DropdownToggle>
                         <DropdownMenu className='dropdown-menu-end sm-dropdown-menu'>
-                            <DropdownItem id={1} key={1} onClick={() => {}}>
-                                sdfsdsad
-                            </DropdownItem>
+                            {pruducts && pruducts.length >0 && pruducts.map((product, index) => (
+                                <DropdownItem id={`${product.name}${index}-3`} key={`${product.name}${index}-3`} onClick={handleOnSelectSupermind(product.name, product.api_url, "dropdown3")}>
+                                    {product.name}
+                                </DropdownItem>
+                            ))}
                         </DropdownMenu>
                     </Dropdown>
                     <div className="border p-2" style={{height: "calc(100% - 37px)", overflowY: "auto", overflowWrap: "anywhere"}}>
-                        {answer}
+                        {answer.dropdown3}
                     </div>
                 </div>
             </div>

@@ -22,15 +22,6 @@ const texttypes = [
   }
 ]
 
-const placeHolderText = [
-  "Enter Prompt Text...",
-  [
-    "Enter Data Source Address...",
-    "Enter Data Source OutPut...",
-  ],
-  "Enter Query Text...",
-]
-
 const LLMTool = () => {
   const [dropdown1, setDropdown1] = useState(false);
   const toggle1 = () => setDropdown1((prevState) => !prevState);
@@ -42,7 +33,7 @@ const LLMTool = () => {
     separatorProps: fileDragBarProps,
   } = useResizable({
     axis: "x",
-    initial: 500,
+    initial: 550,
     min: 50,
   });
 
@@ -105,8 +96,9 @@ const LLMTool = () => {
               <div className="overflow-auto">
                 {textBoxes.map((box, index) => (
                   <div style={{position: "relative"}} className="border border-black rounded p-1">
-                    <textarea style={{resize: "none", width: "100%", height: box !==1 ? "100px" : "65px", padding: "8px", border: "none"}} placeholder={box !== 1 ? placeHolderText[box] : placeHolderText[box][0]} />
-                    {box === 1 && <textarea style={{resize: "none", width: "100%", height: "100px", padding: "8px", border: "none", borderTop: "solid 1px grey"}} placeholder={placeHolderText[box][1]} />}
+                    {box === 0 && <PromptTextBox />}
+                    {box === 1 && <DataSourceTextBox />}
+                    {box === 2 && <QueryTextBox />}
                     <span style={{position: "absolute", top: "0px", right: "6px", width: "10px", height: "10px", cursor: "pointer"}} onClick={() => handleRemoveTextBox(index)}>x</span>
                   </div>
                 ))}
@@ -142,5 +134,30 @@ const SampleSplitter = ({ id = "drag-bar", dir, isDragging, ...props }) => {
     />
   );
 };
+
+const PromptTextBox = () => {
+  return (
+    <textarea style={{resize: "none", width: "100%", height: "100px", padding: "8px", border: "none"}} placeholder={"Enter Prompt Text..."} />
+  )
+}
+
+const DataSourceTextBox = () => {
+  return (
+    <div>
+      <textarea style={{resize: "none", width: "100%", height: "65px", padding: "8px", border: "none"}} placeholder={"Enter Data Source Address..."} />
+      <textarea style={{resize: "none", width: "100%", height: "100px", padding: "8px", border: "none", borderTop: "solid 1px grey"}} placeholder={"Enter Data Source OutPut..."} />
+    </div>
+  )
+}
+
+const QueryTextBox = () => {
+  return (
+    <div>
+      <textarea style={{resize: "none", width: "100%", height: "65px", padding: "8px", border: "none"}} placeholder={"Enter Query Text..."} />
+      <textarea style={{resize: "none", width: "100%", height: "80", padding: "8px", border: "none", borderTop: "solid 1px grey"}} placeholder={"Enter Data Source Address..."} />
+      <textarea style={{resize: "none", width: "100%", height: "80px", padding: "8px", border: "none", borderTop: "solid 1px grey"}} placeholder={"Enter Data Source OutPut..."} />
+    </div>
+  )
+}
 
 export default LLMTool;

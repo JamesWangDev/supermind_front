@@ -24,7 +24,10 @@ const texttypes = [
 
 const placeHolderText = [
   "Enter Prompt Text...",
-  "Enter Data Source...",
+  [
+    "Enter Data Source Address...",
+    "Enter Data Source OutPut...",
+  ],
   "Enter Query Text...",
 ]
 
@@ -101,9 +104,10 @@ const LLMTool = () => {
               </Btn>
               <div className="overflow-auto">
                 {textBoxes.map((box, index) => (
-                  <div style={{position: "relative"}}>
-                    <textarea style={{resize: "none", width: "100%", height: "100px", padding: "8px", marginTop: index !==0 && "-7px"}} placeholder={placeHolderText[box]} />
-                    <span style={{position: "absolute", top: index !==0 ? "-8px": "0px", right: "6px", width: "10px", height: "10px", cursor: "pointer"}} onClick={() => handleRemoveTextBox(index)}>x</span>
+                  <div style={{position: "relative"}} className="border border-black rounded p-1">
+                    <textarea style={{resize: "none", width: "100%", height: box !==1 ? "100px" : "65px", padding: "8px", border: "none"}} placeholder={box !== 1 ? placeHolderText[box] : placeHolderText[box][0]} />
+                    {box === 1 && <textarea style={{resize: "none", width: "100%", height: "100px", padding: "8px", border: "none", borderTop: "solid 1px grey"}} placeholder={placeHolderText[box][1]} />}
+                    <span style={{position: "absolute", top: "0px", right: "6px", width: "10px", height: "10px", cursor: "pointer"}} onClick={() => handleRemoveTextBox(index)}>x</span>
                   </div>
                 ))}
               </div>

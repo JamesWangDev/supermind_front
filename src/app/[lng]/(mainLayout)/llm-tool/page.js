@@ -49,7 +49,7 @@ const LLMTool = () => {
             <div className={"flex flex-column w-100"} style={{height: "700px",  width: fileW - 240 }}>
               <div
                 className={"shrink-0 contents w-100"}
-                style={{ height: terminalH - 220 }}
+                style={{ height: terminalH - 280 }}
               >
                   <textarea style={{width: "100%", height: "100%", padding: "8px", border: "none", resize: "none"}} placeholder="Prompt Text" />
               </div>

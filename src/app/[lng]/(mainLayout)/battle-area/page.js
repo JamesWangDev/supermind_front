@@ -97,8 +97,6 @@ const BattleArea = () => {
         // const apiUrl = 'https://api.openai.com/v1/chat/completions'; // Endpoint for GPT-3 completions
     }, [prompt, selectedSupermind])
 
-    console.log(cartProducts, "lskdflksdjfjlskdfjlk")
-
     const handleOnSelectSupermind = (name, api, dropdownId) => () => {
         setSelectedSupermind(prev => {
             return {

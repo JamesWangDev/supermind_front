@@ -107,7 +107,10 @@ const LLMTool = () => {
           </div>
           <SampleSplitter isDragging={isFileDragging} {...fileDragBarProps} />
           <div className={"flex grow"}>
-            <div className={"grow contents"}>Right Panel</div>
+            <div className={"grow contents p-3"}>
+                  <div className="border-bottom border-black h-100 w-100">Inter Milan</div>
+                  <div className="pt-2 h-100 w-100">Manchester United</div>
+            </div>
           </div>
         </div>
       </div>

@@ -225,10 +225,10 @@ const LLMTool = () => {
                 <span className="m-auto text-center">How many rows to inject?</span>
               </div>
               <div className="h-50 flex">
-                <div className={rowInject === 2 ? "w-75" : "w-100"}>
+                <div className={rowInject === 2 ? "w-60" : "w-100"}>
                   <CustomDropDown items={rowsInject} value={rowInject} handleSelectChange={setRowInject} placeholder={"Set rows to inject..."} toggleStyle={{height: "30px"}} toggleClassName={"w-100 select-dropdown border-none rounded-0"} />
                 </div>
-                {rowInject === 2 && <div className="w-25">
+                {rowInject === 2 && <div className="w-50">
                   <Input type='number' value={tokenMax} onChange={(e) => setTokenMax(e.target.value)} style={{height: "29px", border: "none"}} className="border-start border-black rounded-0 text-center" />
                 </div>}
               </div>

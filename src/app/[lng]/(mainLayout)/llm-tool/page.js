@@ -27,6 +27,7 @@ const LLMTool = () => {
   const toggle1 = () => setDropdown1((prevState) => !prevState);
   const [selectedTextType, setSelectedTextType] = useState("");
   const [textBoxes, setTextBoxes] = useState([0, 1, 2])
+  const [isRunning, setIsRunning] = useState(false)
   const {
     isDragging: isFileDragging,
     position: fileW,
@@ -52,11 +53,65 @@ const LLMTool = () => {
     setTextBoxes(update)
   }
 
+  const handleRunStop = useCallback(() => {
+    setIsRunning(!isRunning)
+  }, [setIsRunning, isRunning])
+
   return (
     <div className="d-flex justify-content-center">
       <div
         className={"flex flex-column w-75 overflow-hidden border border-black"}
       >
+        <div className="w-100 border-bottom border-black d-flex" style={{height: "70px"}}>
+          <div className="w-25 border-end border-black d-flex text-center"><span className="m-auto">Set UP File name</span></div>
+          <div className="w-25 border-end border-black d-flex text-center"><span className="m-auto">Save/Load Set Up</span></div>
+          <div className="w-25 border-end border-black d-flex text-center"><span className="m-auto">Data File Name</span></div>
+          <div className="w-25 text-center d-flex"><span className="m-auto">Export Data</span></div>
+        </div>
+        <div className="w-100 border-bottom border-black d-flex" style={{height: "60px"}}>
+          <div className="border-end border-black d-flex text-center" style={{width: "14%"}}><span className="m-auto">Model Choice</span></div>
+          <div className="border-end border-black d-flex text-center" style={{width: "14%"}}>
+            <div className="d-block m-auto">
+              <div>Iteration Max</div>
+              <div>Rows Max</div>
+            </div>
+          </div>
+          <div className="border-end border-black d-flex text-center" style={{width: "14%"}}>
+            <div className="d-block m-auto">
+              <div>Iteration Max</div>
+              <div>Time Max</div>
+            </div>
+          </div>
+          <div className="border-end border-black d-flex text-center" style={{width: "15%"}}>
+            <div className="d-block m-auto">
+              <div>Iteration Max</div>
+              <div>rows max</div>
+            </div>
+          </div>
+          <div className="border-end border-black d-flex text-center" style={{width: "14%"}}>
+            <div className="d-block m-auto">
+              <div>Enable GPT</div>
+              <div>complete Flag</div>
+            </div>
+          </div>
+          <div className="border-end border-black d-flex text-center" style={{width: "15%"}}>
+            <div className="d-block m-auto">
+              <div>Remove</div>
+              <div>Duplicated</div>
+            </div>
+          </div>
+          <div className="text-center d-flex" style={{width: "15%"}}>
+            <div className="d-block m-auto">
+              <div>How many</div>
+              <div>rows to inject</div>
+            </div>
+          </div>
+        </div>
+        <Btn
+            className='btn-sm w-100 border border-black mt-1 mb-1'
+            title={isRunning ? 'Stop' : 'Run'}
+            onClick={handleRunStop}>
+        </Btn>
         <div className={"flex grow"}>
           <div className={"shrink-0 contents"} style={{ width: fileW - 240 }}>
             <div

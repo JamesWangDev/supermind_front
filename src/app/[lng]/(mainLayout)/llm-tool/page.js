@@ -1,12 +1,12 @@
 "use client";
 
 import styles from "./llm-tool.module.scss";
-import { useCallback, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import { useResizable } from "react-resizable-layout";
 import { cn } from "./cn";
 import Btn from "@/Elements/Buttons/Btn";
 import CustomDropDown from "@/Components/Common/CustomDropDown/CustomDropDown";
-import {Input, InputGroup} from "reactstrap";
+import {Input} from "reactstrap";
 
 const texttypes = [
   {
@@ -60,7 +60,7 @@ const duplicatedRemove = [
   },
 ]
 
-const rowsInject = [
+const rowsInjectItem = [
   {
     name: "All",
     value: 0,
@@ -76,6 +76,7 @@ const rowsInject = [
 ]
 
 const LLMTool = () => {
+  const fileInputRef = useRef(null);
   const [selectedTextType, setSelectedTextType] = useState("");
   const [modelChoice, setModelChoice] = useState("")
   const [maxRow, setMaxRow] = useState(10);
@@ -84,7 +85,25 @@ const LLMTool = () => {
   const [isEnableGPT, setIsEnableGPT] = useState(0);
   const [isRemoveDuplicated, setIsRemoveDuplicated] = useState(0);
   const [rowInject, setRowInject] = useState("");
+  const [customRowsInject, setCustomRowsInject] = useState(10)
   const [textBoxes, setTextBoxes] = useState([0, 1, 2]);
+  const [textBoxesData, setTextBoxesData]= useState([
+    {
+      type: 0,
+      text: ""
+    },
+    {
+      type: 1,
+      dataSource: "",
+      output: ""
+    },
+    {
+      type: 2,
+      text: "",
+      dataSource: "",
+      output: ""
+    },
+  ]);
   const [isRunning, setIsRunning] = useState(false);
   const {
     isDragging: isFileDragging,
@@ -108,17 +127,140 @@ const LLMTool = () => {
 
   const handleRemoveTextBox = (index) => {
     const update = textBoxes.filter((_, i) => i !== index);
-    setTextBoxes(update);
+    const updatedTextBoxData = textBoxesData.filter((_, i) => i !== index);
+    setTextBoxes(update)
+    setTextBoxesData(updatedTextBoxData)
   };
 
   const handleRunStop = useCallback(() => {
     setIsRunning(!isRunning);
   }, [setIsRunning, isRunning]);
 
+  const handleChangeTextBoxData = useCallback((boxIndex, data) => {
+    setTextBoxesData(prev => {
+      const newArray = [...prev];
+      newArray[boxIndex] = data;
+      return newArray
+    })
+  }, [setTextBoxesData])
+
+  const handleSaveData = useCallback(() => {
+    const data = {
+      textBoxes,
+      textBoxesData,
+      modelChoice,
+      maxRow,
+      timeMax,
+      tokenMax,
+      isEnableGPT,
+      isRemoveDuplicated,
+      rowInject,
+      customRowsInject
+    }
+
+    const blob = new Blob([JSON.stringify(data)], {type: 'text/plain'});
+    const url = URL.createObjectURL(blob);
+    const link = document.createElement('a');
+    link.href = url;
+    link.download = 'data.txt';
+    link.click();
+    URL.revokeObjectURL(url);
+  }, [textBoxes, textBoxesData, modelChoice, maxRow, timeMax, tokenMax, isEnableGPT, isRemoveDuplicated, rowInject, customRowsInject])
+
+  const handleLoadData = (event) => {
+    const file = event.target.files[0];
+    if (file) {
+      const reader = new FileReader();
+
+      reader.onload = (e) => {
+        try {
+          const contents = e.target.result;
+          const jsonData = JSON.parse(contents);
+          const keyArray = ["textBoxesData", "textBoxes", "modelChoice", "maxRow", "timeMax", "tokenMax", "isEnableGPT", "isRemoveDuplicated", "rowInject", "customRowsInject"]
+          if (keyArray.every(key => jsonData.hasOwnProperty(key))) {
+            setTextBoxes(jsonData.textBoxes)
+            setTextBoxesData(jsonData.textBoxesData)
+            setModelChoice(jsonData.modelChoice)
+            setMaxRow(jsonData.maxRow)
+            setTimeMax(jsonData.timeMax)
+            setTokenMax(jsonData.tokenMax)
+            setIsEnableGPT(jsonData.isEnableGPT)
+            setIsRemoveDuplicated(jsonData.isRemoveDuplicated)
+            setRowInject(jsonData.rowInject)
+            setCustomRowsInject(jsonData.customRowsInject)
+          } else {
+            alert("File Data is unacceptable format.");
+            return;
+          }
+        } catch (error) {
+          alert("Cannot parse this file content to JSON data. Please check your file content.....")
+          console.error('Error parsing JSON:', error.message);
+        }
+      };
+
+      reader.readAsText(file);
+    }
+  }
+
+  const handleLoadBtnClick = useCallback(() => {
+    fileInputRef.current.click();
+  }, [fileInputRef])
+
+  const handleClearData = useCallback(() => {
+    setTextBoxes([0,1,2])
+    setTextBoxesData([
+      {
+        type: 0,
+        text: ""
+      },
+      {
+        type: 1,
+        dataSource: "",
+        output: ""
+      },
+      {
+        type: 2,
+        text: "",
+        dataSource: "",
+        output: ""
+      },
+    ])
+    setIsEnableGPT(0)
+    setIsRemoveDuplicated(0)
+    setMaxRow(10)
+    setTimeMax(100)
+    setTokenMax(10)
+    setRowInject("")
+
+  }, [setTextBoxesData, setIsEnableGPT, setIsRemoveDuplicated, setMaxRow, setModelChoice, setRowInject, setTokenMax, setTimeMax, setTextBoxes])
+
   return (
-    <div className="d-flex justify-content-center">
+    <div>
+      <div className="flex w-75 mx-auto mb-2">
+        <Btn
+          className="btn-sm border border-black me-2"
+          title={"Load Data"}
+          onClick={handleLoadBtnClick}
+        ></Btn>
+        <Btn
+          className="btn-sm border border-black me-2"
+          title={"Save Data"}
+          onClick={handleSaveData}
+        ></Btn>
+        <Btn
+          className="btn-sm border border-black"
+          title={"Clear Data"}
+          onClick={handleClearData}
+        ></Btn>
+        <input
+          type="file"
+          ref={fileInputRef}
+          style={{ display: 'none' }}
+          onChange={handleLoadData}
+        />
+      </div>
       <div
-        className={"flex flex-column w-75 overflow-hidden border border-black"}
+        className={"flex flex-column w-75 m-auto overflow-hidden border border-black"}
       >
         <div
           className="w-100 border-bottom border-black d-flex"
@@ -226,10 +368,10 @@ const LLMTool = () => {
               </div>
               <div className="h-50 flex">
                 <div className={rowInject === 2 ? "w-60" : "w-100"}>
-                  <CustomDropDown items={rowsInject} value={rowInject} handleSelectChange={setRowInject} placeholder={"Set rows to inject..."} toggleStyle={{height: "30px"}} toggleClassName={"w-100 select-dropdown border-none rounded-0"} />
+                  <CustomDropDown items={rowsInjectItem} value={rowInject} handleSelectChange={setRowInject} placeholder={"Set rows to inject..."} toggleStyle={{height: "30px"}} toggleClassName={"w-100 select-dropdown border-none rounded-0"} />
                 </div>
                 {rowInject === 2 && <div className="w-50">
-                  <Input type='number' value={tokenMax} onChange={(e) => setTokenMax(e.target.value)} style={{height: "29px", border: "none"}} className="border-start border-black rounded-0 text-center" />
+                  <Input type='number' value={customRowsInject} onChange={(e) => setCustomRowsInject(e.target.value)} style={{height: "29px", border: "none"}} className="border-start border-black rounded-0 text-center" />
                 </div>}
               </div>
             </div>
@@ -258,9 +400,9 @@ const LLMTool = () => {
                     style={{ position: "relative" }}
                     className="border border-black rounded p-1"
                   >
-                    {box === 0 && <PromptTextBox />}
-                    {box === 1 && <DataSourceTextBox />}
-                    {box === 2 && <QueryTextBox />}
+                    {box === 0 && <PromptTextBox boxIndex={index} data={textBoxesData[index]} handleChangeTextBoxData={handleChangeTextBoxData} />}
+                    {box === 1 && <DataSourceTextBox boxIndex={index} data={textBoxesData[index]} handleChangeTextBoxData={handleChangeTextBoxData} />}
+                    {box === 2 && <QueryTextBox boxIndex={index} data={textBoxesData[index]} handleChangeTextBoxData={handleChangeTextBoxData} />}
                     <span
                       style={{
                         position: "absolute",
@@ -314,7 +456,13 @@ const SampleSplitter = ({ id = "drag-bar", dir, isDragging, ...props }) => {
   );
 };
 
-const PromptTextBox = () => {
+const PromptTextBox = ({boxIndex, data, handleChangeTextBoxData}) => {
+  const [text, setText] = useState();
+
+  useEffect(() => {
+    handleChangeTextBoxData(boxIndex, {type:0, text})
+  }, [text])
+
   return (
     <textarea
       style={{
@@ -324,12 +472,21 @@ const PromptTextBox = () => {
         padding: "8px",
         border: "none",
       }}
+      value={data && Object.keys(data).includes("text") ? data.text : ""}
+      onChange={(e) => setText(e.target.value)}
       placeholder={"Enter Prompt Text..."}
     />
   );
 };
 
-const DataSourceTextBox = () => {
+const DataSourceTextBox = ({boxIndex, data, handleChangeTextBoxData}) => {
+  const [dataSource, setDataSource] = useState()
+  const [output, setOutput] = useState()
+
+  useEffect(() => {
+    handleChangeTextBoxData(boxIndex, {type:1, dataSource, output})
+  }, [dataSource, output])
+
   return (
     <div>
       <textarea
@@ -340,6 +497,8 @@ const DataSourceTextBox = () => {
           padding: "8px",
           border: "none",
         }}
+        value={data && Object.keys(data).includes("dataSource") ? data.dataSource : ""}
+        onChange={(e) => setDataSource(e.target.value)}
         placeholder={"Enter Data Source Address..."}
       />
       <textarea
@@ -351,13 +510,23 @@ const DataSourceTextBox = () => {
           border: "none",
           borderTop: "solid 1px grey",
         }}
+        value={data && Object.keys(data).includes("output") ? data.output : ""}
+        onChange={(e) => setOutput(e.target.value)}
         placeholder={"Enter Data Source OutPut..."}
       />
     </div>
   );
 };
 
-const QueryTextBox = () => {
+const QueryTextBox = ({boxIndex, data, handleChangeTextBoxData}) => {
+  const [text, setText] = useState();
+  const [dataSource, setDataSource] = useState()
+  const [output, setOutput] = useState()
+
+  useEffect(() => {
+    handleChangeTextBoxData(boxIndex, {type:2, text, dataSource, output})
+  }, [dataSource, output, text])
+
   return (
     <div>
       <textarea
@@ -368,6 +537,8 @@ const QueryTextBox = () => {
           padding: "8px",
           border: "none",
         }}
+        value={data && Object.keys(data).includes("text") ? data.text : ""}
+        onChange={(e) => setText(e.target.value)}
         placeholder={"Enter Query Text..."}
       />
       <textarea
@@ -379,6 +550,8 @@ const QueryTextBox = () => {
           border: "none",
           borderTop: "solid 1px grey",
         }}
+        value={data && Object.keys(data).includes("dataSource") ? data.dataSource : ""}
+        onChange={(e) => setDataSource(e.target.value)}
         placeholder={"Enter Data Source Address..."}
       />
       <textarea
@@ -390,6 +563,8 @@ const QueryTextBox = () => {
           border: "none",
           borderTop: "solid 1px grey",
         }}
+        value={data && Object.keys(data).includes("output") ? data.output : ""}
+        onChange={(e) => setOutput(e.target.value)}
         placeholder={"Enter Data Source OutPut..."}
       />
     </div>

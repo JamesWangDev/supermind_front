@@ -77,6 +77,7 @@ const rowsInjectItem = [
 
 const LLMTool = () => {
   const fileInputRef = useRef(null);
+  const outputfileInputRef = useRef(null);
   const [selectedTextType, setSelectedTextType] = useState("");
   const [modelChoice, setModelChoice] = useState("")
   const [maxRow, setMaxRow] = useState(10);
@@ -105,6 +106,7 @@ const LLMTool = () => {
     },
   ]);
   const [isRunning, setIsRunning] = useState(false);
+  const [outputData, setOutputdata] = useState([])
   const {
     isDragging: isFileDragging,
     position: fileW,
@@ -206,6 +208,10 @@ const LLMTool = () => {
     fileInputRef.current.click();
   }, [fileInputRef])
 
+  const handleLoadOutputDataBtnClick = useCallback(() => {
+    outputfileInputRef.current.click();
+  }, [outputfileInputRef])
+
   const handleClearData = useCallback(() => {
     setTextBoxes([0,1,2])
     setTextBoxesData([
@@ -231,52 +237,105 @@ const LLMTool = () => {
     setTimeMax(100)
     setTokenMax(10)
     setRowInject("")
+    setOutputdata([])
+    fileInputRef.current.value = null;
+    outputfileInputRef.current.value = null;
+  }, [setTextBoxesData, setIsEnableGPT, setIsRemoveDuplicated, setMaxRow, setModelChoice, setRowInject, setTokenMax, setTimeMax, setTextBoxes, setOutputdata, fileInputRef, outputfileInputRef])
 
-  }, [setTextBoxesData, setIsEnableGPT, setIsRemoveDuplicated, setMaxRow, setModelChoice, setRowInject, setTokenMax, setTimeMax, setTextBoxes])
+  const handleSaveOutputData = useCallback(() => {
+    const data = {
+      output: outputData
+    }
+
+    const blob = new Blob([JSON.stringify(data)], {type: 'text/plain'});
+    const url = URL.createObjectURL(blob);
+    const link = document.createElement('a');
+    link.href = url;
+    link.download = 'outputData.txt';
+    link.click();
+    URL.revokeObjectURL(url);
+  }, [outputData])
+
+  const handleLoadOutputData = (event) => {
+    const file = event.target.files[0];
+    if (file) {
+      const reader = new FileReader();
+
+      reader.onload = (e) => {
+        try {
+          const contents = e.target.result;
+          const jsonData = JSON.parse(contents);
+          if (jsonData.hasOwnProperty("output")) {
+          setOutputdata(jsonData.output)
+          } else {
+            alert("File Data is unacceptable format.");
+            return;
+          }
+        } catch (error) {
+          alert("Cannot parse this file content to JSON data. Please check your file content.....")
+          console.error('Error parsing JSON:', error.message);
+        }
+      };
+
+      reader.readAsText(file);
+    }
+  }
 
   return (
     <div>
-      <div className="flex w-75 mx-auto mb-2">
-        <Btn
-          className="btn-sm border border-black me-2"
-          title={"Load Data"}
-          onClick={handleLoadBtnClick}
-        ></Btn>
-        <Btn
-          className="btn-sm border border-black me-2"
-          title={"Save Data"}
-          onClick={handleSaveData}
-        ></Btn>
-        <Btn
-          className="btn-sm border border-black"
-          title={"Clear Data"}
-          onClick={handleClearData}
-        ></Btn>
-        <input
-          type="file"
-          ref={fileInputRef}
-          style={{ display: 'none' }}
-          onChange={handleLoadData}
-        />
-      </div>
+      <input
+        type="file"
+        ref={fileInputRef}
+        style={{ display: 'none' }}
+        onChange={handleLoadData}
+      />
+      <input
+        type="file"
+        ref={outputfileInputRef}
+        style={{ display: 'none' }}
+        onChange={handleLoadOutputData}
+      />
       <div
         className={"flex flex-column w-75 m-auto overflow-hidden border border-black"}
       >
         <div
           className="w-100 border-bottom border-black d-flex"
-          style={{ height: "50px" }}
+          style={{ height: "40px" }}
         >
-          <div className="w-25 border-end border-black d-flex text-center">
-            <span className="m-auto">Set UP File name</span>
+          <div className="d-flex text-center" style={{width: "25%"}}>
+            <Btn
+              className="btn-sm border border-black w-100"
+              title={"Load Setup Data"}
+              onClick={handleLoadBtnClick}
+            ></Btn>
           </div>
-          <div className="w-25 border-end border-black d-flex text-center">
-            <span className="m-auto">Save/Load Set Up</span>
+          <div className="d-flex text-center" style={{width: "25%"}}>
+            <Btn
+              className="btn-sm border border-black w-100"
+              title={"Export Setup Data"}
+              onClick={handleSaveData}
+            ></Btn>
           </div>
-          <div className="w-25 border-end border-black d-flex text-center">
-            <span className="m-auto">Data File Name</span>
+          <div className="d-flex text-center" style={{width: "25%"}}>
+            <Btn
+              className="btn-sm border border-black w-100"
+              title={"Clear Setup Data"}
+              onClick={handleClearData}
+            ></Btn>
           </div>
-          <div className="w-25 text-center d-flex">
-            <span className="m-auto">Export Data</span>
+          <div className="d-flex text-center" style={{width: "25%"}}>
+            <Btn
+              className="btn-sm border border-black w-100"
+              title={"Load Output Data"}
+              onClick={handleLoadOutputDataBtnClick}
+            ></Btn>
+          </div>
+          <div className="d-flex text-center" style={{width: "25%"}}>
+            <Btn
+              className="btn-sm border border-black w-100"
+              title={"Save Output Data"}
+              onClick={handleSaveOutputData}
+            ></Btn>
           </div>
         </div>
         <div
@@ -422,13 +481,19 @@ const LLMTool = () => {
             </div>
           </div>
           <SampleSplitter isDragging={isFileDragging} {...fileDragBarProps} />
-          <div className={"flex grow border-top border-start border-black"}>
-            <div className={"grow contents p-3"}>
-              <div className="border-bottom border-black h-100 w-100">
-                Inter Milan
+          <div className={"w-100 border-top border-start border-black p-1"} style={{height: "700px", width: "200", fontSize: 16}}>
+            {outputData.length > 0 ? outputData.map((data, index) => (
+              <div className={`${index < outputData.length - 1 && "border-bottom border-black"} w-100 p-2 d-flex flex-column`} style={{height: `${100 / outputData.length}%` }}>
+                <div className="fw-bold">{data.label}</div>
+                <hr className="mt-2 mb-1"/>
+                <div className="text-wrap overflow-auto ps-1 pe-1" style={{fontSize: 15}}>
+                  {data.text}
+                </div>
               </div>
-              <div className="pt-2 h-100 w-100">Manchester United</div>
-            </div>
+            )) : 
+            <div className="w-100 h-100 d-flex">
+              <span className="m-auto">No OutPut Data</span>
+            </div>}
           </div>
         </div>
       </div>

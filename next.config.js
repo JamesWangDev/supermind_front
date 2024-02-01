@@ -17,6 +17,8 @@ const nextConfig = {
     PAYMENT_CANCEL_URL: "http://localhost:3000/",
   },
   images: {
+    loader: "custom",
+    loaderFile: "./src/Utils/ImageLoader/imageloader.js",
     remotePatterns: [
       {
         protocol: "https",

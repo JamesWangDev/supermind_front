@@ -190,13 +190,16 @@ const LLMTool = () => {
             setIsRemoveDuplicated(jsonData.isRemoveDuplicated)
             setRowInject(jsonData.rowInject)
             setCustomRowsInject(jsonData.customRowsInject)
+            fileInputRef.current.value = null;
           } else {
             alert("File Data is unacceptable format.");
+            fileInputRef.current.value = null;
             return;
           }
         } catch (error) {
           alert("Cannot parse this file content to JSON data. Please check your file content.....")
           console.error('Error parsing JSON:', error.message);
+          fileInputRef.current.value = null;
         }
       };
 
@@ -266,14 +269,17 @@ const LLMTool = () => {
           const contents = e.target.result;
           const jsonData = JSON.parse(contents);
           if (jsonData.hasOwnProperty("output")) {
-          setOutputdata(jsonData.output)
+            setOutputdata(jsonData.output)
+            outputfileInputRef.current.value = null;
           } else {
             alert("File Data is unacceptable format.");
+            outputfileInputRef.current.value = null;
             return;
           }
         } catch (error) {
           alert("Cannot parse this file content to JSON data. Please check your file content.....")
           console.error('Error parsing JSON:', error.message);
+          outputfileInputRef.current.value = null;
         }
       };
 
@@ -522,29 +528,100 @@ const SampleSplitter = ({ id = "drag-bar", dir, isDragging, ...props }) => {
 };
 
 const PromptTextBox = ({boxIndex, data, handleChangeTextBoxData}) => {
+  const fileInputRef = useRef(null);
   const [text, setText] = useState();
 
   useEffect(() => {
     handleChangeTextBoxData(boxIndex, {type:0, text})
   }, [text])
 
+  const handleLoadData = (event) => {
+    const file = event.target.files[0];
+    if (file) {
+      const reader = new FileReader();
+
+      reader.onload = (e) => {
+        try {
+          const contents = e.target.result;
+          const jsonData = JSON.parse(contents);
+          if (jsonData.hasOwnProperty("promptText")) {
+            setText(jsonData.promptText)
+            fileInputRef.current.value = null;
+          } else {
+            alert("File Data is unacceptable format.");
+            fileInputRef.current.value = null;
+            return;
+          }
+        } catch (error) {
+          alert("Cannot parse this file content to JSON data. Please check your file content.....")
+          console.error('Error parsing JSON:', error.message);
+          fileInputRef.current.value = null;
+        }
+      };
+
+      reader.readAsText(file);
+    }
+  }
+
+  const handleSaveData = useCallback(() => {
+    if(!text) {
+      alert("Cannot save empty data.")
+      return;
+    }
+    const data = {
+      promptText: text
+    }
+
+    const blob = new Blob([JSON.stringify(data)], {type: 'text/plain'});
+    const url = URL.createObjectURL(blob);
+    const link = document.createElement('a');
+    link.href = url;
+    link.download = `prompt_text_box_id_${boxIndex}.txt`;
+    link.click();
+    URL.revokeObjectURL(url);
+  }, [text])
+
+  const handleOnclickLoadBtn = useCallback(() => {
+    fileInputRef.current.click();
+  }, [fileInputRef])
+
+  const handleClearData = useCallback(() => {
+    setText("");
+    fileInputRef.current.value = null;
+  }, [setText])
+
   return (
-    <textarea
-      style={{
-        resize: "none",
-        width: "100%",
-        height: "100px",
-        padding: "8px",
-        border: "none",
-      }}
-      value={data && Object.keys(data).includes("text") ? data.text : ""}
-      onChange={(e) => setText(e.target.value)}
-      placeholder={"Enter Prompt Text..."}
-    />
+    <div>
+      <input
+        type="file"
+        ref={fileInputRef}
+        style={{ display: 'none' }}
+        onChange={handleLoadData}
+      />
+      <div className="d-flex mt-1 mb-1">
+        <Btn className="me-1 fw-bold border border-black rounded-0" onClick={handleOnclickLoadBtn} style={{fontSize: 13, height: "20px", width: "80px", padding: "8px"}}>Load file</Btn>
+        <Btn className="me-1 fw-bold border border-black rounded-0" onClick={handleSaveData} style={{fontSize: 13, height: "20px", width: "80px", padding: "8px"}}>Save file</Btn>
+        <Btn className="fw-bold border border-black rounded-0" onClick={handleClearData} style={{fontSize: 13, height: "20px", width: "80px", padding: "8px"}}>Clear</Btn>
+      </div>
+      <textarea
+        style={{
+          resize: "none",
+          width: "100%",
+          height: "100px",
+          padding: "8px",
+          border: "none",
+          borderTop: "solid 1px grey"
+        }}
+        value={data && Object.keys(data).includes("text") ? data.text : ""}
+        onChange={(e) => setText(e.target.value)}
+        placeholder={"Enter Prompt Text..."}
+      />
+    </div>
   );
 };
 
 const DataSourceTextBox = ({boxIndex, data, handleChangeTextBoxData}) => {
+  const fileInputRef = useRef(null);
   const [dataSource, setDataSource] = useState()
   const [output, setOutput] = useState()
 
@@ -552,8 +629,79 @@ const DataSourceTextBox = ({boxIndex, data, handleChangeTextBoxData}) => {
     handleChangeTextBoxData(boxIndex, {type:1, dataSource, output})
   }, [dataSource, output])
 
+  const handleLoadData = (event) => {
+    const file = event.target.files[0];
+    if (file) {
+      const reader = new FileReader();
+
+      reader.onload = (e) => {
+        try {
+          const contents = e.target.result;
+          const jsonData = JSON.parse(contents);
+          const keyArray = ["dataSource", "output"]
+          if (keyArray.every(key => jsonData.hasOwnProperty(key))) {
+            setDataSource(jsonData.dataSource);
+            setOutput(jsonData.output);
+            fileInputRef.current.value = null;
+          } else {
+            alert("File Data is unacceptable format.");
+            fileInputRef.current.value = null;
+            return;
+          }
+        } catch (error) {
+          alert("Cannot parse this file content to JSON data. Please check your file content.....")
+          console.error('Error parsing JSON:', error.message);
+          fileInputRef.current.value = null;
+        }
+      };
+
+      reader.readAsText(file);
+    }
+  }
+
+  const handleSaveData = useCallback(() => {
+    if(!dataSource && !output) {
+      alert("Cannot save empty data.")
+      return;
+    }
+
+    const data = {
+      dataSource: dataSource ? dataSource : "",
+      output: output ? output : ""
+    }
+
+    const blob = new Blob([JSON.stringify(data)], {type: 'text/plain'});
+    const url = URL.createObjectURL(blob);
+    const link = document.createElement('a');
+    link.href = url;
+    link.download = `data_source_box_id_${boxIndex}.txt`;
+    link.click();
+    URL.revokeObjectURL(url);
+  }, [dataSource, output])
+
+  const handleOnclickLoadBtn = useCallback(() => {
+    fileInputRef.current.click();
+  }, [fileInputRef])
+
+  const handleClearData = useCallback(() => {
+    setDataSource("");
+    setOutput("");
+    fileInputRef.current.value = null;
+  }, [setDataSource, setOutput])
+
   return (
     <div>
+      <input
+        type="file"
+        ref={fileInputRef}
+        style={{ display: 'none' }}
+        onChange={handleLoadData}
+      />
+      <div className="d-flex mt-1 mb-1">
+        <Btn className="me-1 fw-bold border border-black rounded-0" onClick={handleOnclickLoadBtn} style={{fontSize: 13, height: "20px", width: "80px", padding: "8px"}}>Load file</Btn>
+        <Btn className="me-1 fw-bold border border-black rounded-0" onClick={handleSaveData} style={{fontSize: 13, height: "20px", width: "80px", padding: "8px"}}>Save file</Btn>
+        <Btn className="fw-bold border border-black rounded-0" onClick={handleClearData} style={{fontSize: 13, height: "20px", width: "80px", padding: "8px"}}>Clear</Btn>
+      </div>
       <textarea
         style={{
           resize: "none",
@@ -561,6 +709,7 @@ const DataSourceTextBox = ({boxIndex, data, handleChangeTextBoxData}) => {
           height: "65px",
           padding: "8px",
           border: "none",
+          borderTop: "solid 1px grey"
         }}
         value={data && Object.keys(data).includes("dataSource") ? data.dataSource : ""}
         onChange={(e) => setDataSource(e.target.value)}
@@ -584,6 +733,7 @@ const DataSourceTextBox = ({boxIndex, data, handleChangeTextBoxData}) => {
 };
 
 const QueryTextBox = ({boxIndex, data, handleChangeTextBoxData}) => {
+  const fileInputRef = useRef(null);
   const [text, setText] = useState();
   const [dataSource, setDataSource] = useState()
   const [output, setOutput] = useState()
@@ -592,8 +742,82 @@ const QueryTextBox = ({boxIndex, data, handleChangeTextBoxData}) => {
     handleChangeTextBoxData(boxIndex, {type:2, text, dataSource, output})
   }, [dataSource, output, text])
 
+  const handleLoadData = (event) => {
+    const file = event.target.files[0];
+    if (file) {
+      const reader = new FileReader();
+
+      reader.onload = (e) => {
+        try {
+          const contents = e.target.result;
+          const jsonData = JSON.parse(contents);
+          const keyArray = ["dataSource", "output", "text"]
+          if (keyArray.every(key => jsonData.hasOwnProperty(key))) {
+            setDataSource(jsonData.dataSource);
+            setOutput(jsonData.output);
+            setText(jsonData.text);
+            fileInputRef.current.value = null;
+          } else {
+            alert("File Data is unacceptable format.");
+            fileInputRef.current.value = null;
+            return;
+          }
+        } catch (error) {
+          alert("Cannot parse this file content to JSON data. Please check your file content.....")
+          console.error('Error parsing JSON:', error.message);
+          fileInputRef.current.value = null;
+        }
+      };
+
+      reader.readAsText(file);
+    }
+  }
+
+  const handleSaveData = useCallback(() => {
+    if(!dataSource && !output && !text) {
+      alert("Cannot save empty data.")
+      return;
+    }
+
+    const data = {
+      dataSource: dataSource ? dataSource : "",
+      output: output ? output : "",
+      text: text ? text : ""
+    }
+
+    const blob = new Blob([JSON.stringify(data)], {type: 'text/plain'});
+    const url = URL.createObjectURL(blob);
+    const link = document.createElement('a');
+    link.href = url;
+    link.download = `query_text_box_id_${boxIndex}.txt`;
+    link.click();
+    URL.revokeObjectURL(url);
+  }, [dataSource, output, text])
+
+  const handleOnclickLoadBtn = useCallback(() => {
+    fileInputRef.current.click();
+  }, [fileInputRef])
+
+  const handleClearData = useCallback(() => {
+    setDataSource("");
+    setOutput("");
+    setText("");
+    fileInputRef.current.value = null;
+  }, [setDataSource, setOutput, setText])
+
   return (
     <div>
+      <input
+        type="file"
+        ref={fileInputRef}
+        style={{ display: 'none' }}
+        onChange={handleLoadData}
+      />
+      <div className="d-flex mt-1 mb-1">
+        <Btn className="me-1 fw-bold border border-black rounded-0" onClick={handleOnclickLoadBtn} style={{fontSize: 13, height: "20px", width: "80px", padding: "8px"}}>Load file</Btn>
+        <Btn className="me-1 fw-bold border border-black rounded-0" onClick={handleSaveData} style={{fontSize: 13, height: "20px", width: "80px", padding: "8px"}}>Save file</Btn>
+        <Btn className="fw-bold border border-black rounded-0" onClick={handleClearData} style={{fontSize: 13, height: "20px", width: "80px", padding: "8px"}}>Clear</Btn>
+      </div>
       <textarea
         style={{
           resize: "none",
@@ -601,6 +825,7 @@ const QueryTextBox = ({boxIndex, data, handleChangeTextBoxData}) => {
           height: "65px",
           padding: "8px",
           border: "none",
+          borderTop: "solid 1px grey"
         }}
         value={data && Object.keys(data).includes("text") ? data.text : ""}
         onChange={(e) => setText(e.target.value)}

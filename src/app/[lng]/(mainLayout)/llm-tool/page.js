@@ -443,7 +443,7 @@ const LLMTool = () => {
             </div>
           </div>
         </div>
-        <div className="w-100 flex" style={{height: 72, fontSize: 17}}>
+        <div className="w-100 flex" style={{height: 56, fontSize: 16}}>
           <div className="d-flex justify-content-center" style={{width: "25%"}}>
             {<span className="m-auto">Model: <span style={{color: "red", fontWeight: "bold"}}>{modelChoice !== "" ? modelChoiceItems[modelChoice].name : "Not selected"}</span></span>}
           </div>

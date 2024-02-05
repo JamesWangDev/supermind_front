@@ -443,20 +443,20 @@ const LLMTool = () => {
             </div>
           </div>
         </div>
-        <div className="w-100 flex" style={{height: 72}}>
-          <div className="d-flex justify-content-center" style={{width: "14%"}}>
+        <div className="w-100 flex" style={{height: 72, fontSize: 17}}>
+          <div className="d-flex justify-content-center" style={{width: "25%"}}>
             {<span className="m-auto">Model: <span style={{color: "red", fontWeight: "bold"}}>{modelChoice !== "" ? modelChoiceItems[modelChoice].name : "Not selected"}</span></span>}
           </div>
-          <div className="d-flex justify-content-center" style={{width: "14%"}}>
+          <div className="d-flex justify-content-center" style={{width: "25%"}}>
             <span className="m-auto">Max Row: <span style={{color: "red", fontWeight: "bold"}}>{maxRow}</span></span>
           </div>
-          <div className="d-flex justify-content-center" style={{width: "14%"}}>
+          <div className="d-flex justify-content-center" style={{width: "25%"}}>
             <span className="m-auto">Max Time: <span style={{color: "red", fontWeight: "bold"}}>{timeMax}</span></span>
           </div>
-          <div className="d-flex justify-content-center" style={{width: "14%"}}>
+          <div className="d-flex justify-content-center" style={{width: "25%"}}>
             <span className="m-auto">Max Token: <span style={{color: "red", fontWeight: "bold"}}>{tokenMax}</span></span>
           </div>
-          <div className="d-flex justify-content-center" style={{width: "15%"}}>
+          {/* <div className="d-flex justify-content-center" style={{width: "15%"}}>
             <span className="m-auto">Is GPT Enabled?: <span style={{color: "red", fontWeight: "bold"}}>{isEnableGPT ? "Yes" : "No"}</span></span>
           </div>
           <div className="d-flex justify-content-center" style={{width: "14%"}}>
@@ -464,7 +464,7 @@ const LLMTool = () => {
           </div>
           <div className="d-flex justify-content-center" style={{width: "15%"}}>
             {<span className="m-auto">Rows to inject: <span style={{color: "red", fontWeight: "bold"}}>{rowInject !== "" ? (rowInject == 2 ? customRowsInject : rowsInjectItem[rowInject].name) : "Not Selected"}</span></span>}
-          </div>
+          </div> */}
         </div>
         <Btn
           className="btn-sm w-100 border border-black mb-1"

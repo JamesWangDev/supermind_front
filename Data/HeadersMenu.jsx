@@ -700,6 +700,11 @@ export const headerMenu = [
         type: 'link',
         path: '/battle-area',
       },
+      {
+        title: 'LLM Tool',
+        type: 'link',
+        path: '/llm-tool',
+      },
     ],
   },
   {

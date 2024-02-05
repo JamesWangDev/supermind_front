@@ -7,6 +7,7 @@ import { cn } from "./cn";
 import Btn from "@/Elements/Buttons/Btn";
 import CustomDropDown from "@/Components/Common/CustomDropDown/CustomDropDown";
 import {Input} from "reactstrap";
+import Switch from "@/Components/Common/Switch/Switch";
 
 const texttypes = [
   {
@@ -603,19 +604,54 @@ const PromptTextBox = ({boxIndex, data, handleChangeTextBoxData}) => {
         <Btn className="me-1 fw-bold border border-black rounded-0" onClick={handleSaveData} style={{fontSize: 13, height: "20px", width: "80px", padding: "8px"}}>Save file</Btn>
         <Btn className="fw-bold border border-black rounded-0" onClick={handleClearData} style={{fontSize: 13, height: "20px", width: "80px", padding: "8px"}}>Clear</Btn>
       </div>
-      <textarea
+      <div
         style={{
-          resize: "none",
           width: "100%",
           height: "100px",
-          padding: "8px",
+          padding: "1px",
           border: "none",
-          borderTop: "solid 1px grey"
+          borderTop: "solid 1px grey",
+          display: "flex"
         }}
-        value={data && Object.keys(data).includes("text") ? data.text : ""}
-        onChange={(e) => setText(e.target.value)}
-        placeholder={"Enter Prompt Text..."}
-      />
+      >
+        <textarea
+          style={{
+            resize: "none",
+            width: "75%",
+            height: "100px",
+            padding: "4px",
+            border: "none",
+            borderRight: "solid 1px grey",
+          }}
+          value={data && Object.keys(data).includes("text") ? data.text : ""}
+          onChange={(e) => setText(e.target.value)}
+          placeholder={"Enter Prompt Text..."}
+        />
+        <div
+          style={{
+            width: "25%",
+            height: "100px",
+            padding: "2px",
+            border: "none",
+            display: "flex",
+            alignItems: "center"
+          }}
+        >
+          <div
+            style={{
+              display: "flex",
+              flexDirection: "column",
+              justifyContent: "space-between",
+              height: "70%",
+              margin: "auto"
+            }}
+          >
+            <Switch label={"Required"} checked={true} onChange={() => {}} />
+            <Switch label={"AutoRun"} checked={true} onChange={() => {}} />
+            <Switch label={"Loop"} checked={true} onChange={() => {}} />
+          </div>
+        </div>
+      </div>
     </div>
   );
 };
@@ -702,32 +738,67 @@ const DataSourceTextBox = ({boxIndex, data, handleChangeTextBoxData}) => {
         <Btn className="me-1 fw-bold border border-black rounded-0" onClick={handleSaveData} style={{fontSize: 13, height: "20px", width: "80px", padding: "8px"}}>Save file</Btn>
         <Btn className="fw-bold border border-black rounded-0" onClick={handleClearData} style={{fontSize: 13, height: "20px", width: "80px", padding: "8px"}}>Clear</Btn>
       </div>
-      <textarea
+      <div
         style={{
-          resize: "none",
           width: "100%",
-          height: "65px",
-          padding: "8px",
-          border: "none",
-          borderTop: "solid 1px grey"
-        }}
-        value={data && Object.keys(data).includes("dataSource") ? data.dataSource : ""}
-        onChange={(e) => setDataSource(e.target.value)}
-        placeholder={"Enter Data Source Address..."}
-      />
-      <textarea
-        style={{
-          resize: "none",
-          width: "100%",
-          height: "100px",
-          padding: "8px",
+          padding: "2px",
           border: "none",
           borderTop: "solid 1px grey",
+          display: "flex"
         }}
-        value={data && Object.keys(data).includes("output") ? data.output : ""}
-        onChange={(e) => setOutput(e.target.value)}
-        placeholder={"Enter Data Source OutPut..."}
-      />
+      >
+        <div style={{width: "75%", borderRight: "solid 1px grey"}}>
+          <textarea
+            style={{
+              resize: "none",
+              width: "100%",
+              height: "65px",
+              padding: "4px",
+              border: "none"
+            }}
+            value={data && Object.keys(data).includes("dataSource") ? data.dataSource : ""}
+            onChange={(e) => setDataSource(e.target.value)}
+            placeholder={"Enter Data Source Address..."}
+          />
+          <textarea
+            style={{
+              resize: "none",
+              width: "100%",
+              height: "100px",
+              padding: "4px",
+              border: "none",
+              borderTop: "solid 1px grey",
+            }}
+            value={data && Object.keys(data).includes("output") ? data.output : ""}
+            onChange={(e) => setOutput(e.target.value)}
+            placeholder={"Enter Data Source OutPut..."}
+          />
+        </div>
+        <div
+          style={{
+            width: "25%",
+            height: "165px",
+            padding: "2px",
+            border: "none",
+            display: "flex",
+            alignItems: "center"
+          }}
+        >
+          <div
+            style={{
+              display: "flex",
+              flexDirection: "column",
+              justifyContent: "space-between",
+              height: "42%",
+              margin: "auto"
+            }}
+          >
+            <Switch label={"Required"} checked={true} onChange={() => {}} />
+            <Switch label={"AutoRun"} checked={true} onChange={() => {}} />
+            <Switch label={"Loop"} checked={true} onChange={() => {}} />
+          </div>
+        </div>
+      </div>
     </div>
   );
 };
@@ -818,45 +889,81 @@ const QueryTextBox = ({boxIndex, data, handleChangeTextBoxData}) => {
         <Btn className="me-1 fw-bold border border-black rounded-0" onClick={handleSaveData} style={{fontSize: 13, height: "20px", width: "80px", padding: "8px"}}>Save file</Btn>
         <Btn className="fw-bold border border-black rounded-0" onClick={handleClearData} style={{fontSize: 13, height: "20px", width: "80px", padding: "8px"}}>Clear</Btn>
       </div>
-      <textarea
+      <div
         style={{
-          resize: "none",
           width: "100%",
-          height: "65px",
-          padding: "8px",
-          border: "none",
-          borderTop: "solid 1px grey"
-        }}
-        value={data && Object.keys(data).includes("text") ? data.text : ""}
-        onChange={(e) => setText(e.target.value)}
-        placeholder={"Enter Query Text..."}
-      />
-      <textarea
-        style={{
-          resize: "none",
-          width: "100%",
-          height: "80",
-          padding: "8px",
+          padding: "2px",
           border: "none",
           borderTop: "solid 1px grey",
+          display: "flex"
         }}
-        value={data && Object.keys(data).includes("dataSource") ? data.dataSource : ""}
-        onChange={(e) => setDataSource(e.target.value)}
-        placeholder={"Enter Data Source Address..."}
-      />
-      <textarea
-        style={{
-          resize: "none",
-          width: "100%",
-          height: "80px",
-          padding: "8px",
-          border: "none",
-          borderTop: "solid 1px grey",
-        }}
-        value={data && Object.keys(data).includes("output") ? data.output : ""}
-        onChange={(e) => setOutput(e.target.value)}
-        placeholder={"Enter Data Source OutPut..."}
-      />
+      >
+        <div style={{width: "75%", borderRight: "solid 1px grey"}}>
+          <textarea
+            style={{
+              resize: "none",
+              width: "100%",
+              height: "65px",
+              padding: "4px",
+              border: "none",
+            }}
+            value={data && Object.keys(data).includes("text") ? data.text : ""}
+            onChange={(e) => setText(e.target.value)}
+            placeholder={"Enter Query Text..."}
+          />
+          <textarea
+            style={{
+              resize: "none",
+              width: "100%",
+              height: "80px",
+              padding: "4px",
+              border: "none",
+              borderTop: "solid 1px grey",
+            }}
+            value={data && Object.keys(data).includes("dataSource") ? data.dataSource : ""}
+            onChange={(e) => setDataSource(e.target.value)}
+            placeholder={"Enter Data Source Address..."}
+          />
+          <textarea
+            style={{
+              resize: "none",
+              width: "100%",
+              height: "80px",
+              padding: "4px",
+              border: "none",
+              borderTop: "solid 1px grey",
+            }}
+            value={data && Object.keys(data).includes("output") ? data.output : ""}
+            onChange={(e) => setOutput(e.target.value)}
+            placeholder={"Enter Data Source OutPut..."}
+          />
+        </div>
+        <div
+          style={{
+            width: "25%",
+            height: "225px",
+            padding: "2px",
+            border: "none",
+            display: "flex",
+            alignItems: "center"
+          }}
+        >
+          <div
+            style={{
+              display: "flex",
+              flexDirection: "column",
+              justifyContent: "space-between",
+              height: "30%",
+              margin: "auto"
+            }}
+          >
+            <Switch label={"Required"} checked={true} onChange={() => {}} />
+            <Switch label={"AutoRun"} checked={true} onChange={() => {}} />
+            <Switch label={"Loop"} checked={true} onChange={() => {}} />
+          </div>
+        </div>
+      </div>
+      
     </div>
   );
 };

@@ -287,6 +287,29 @@ const LLMTool = () => {
       reader.readAsText(file);
     }
   }
+  
+  const exportPromptText = useCallback(() => {
+    let longText = "";
+
+    textBoxesData.map(box => {
+      if(box.type === 0) {
+        longText += box.text;
+      }
+    })
+
+    if(!longText) {
+      alert("Please enter the prompt text...")
+      return;
+    }
+
+    const blob = new Blob([longText], {type: 'text/plain'});
+    const url = URL.createObjectURL(blob);
+    const link = document.createElement('a');
+    link.href = url;
+    link.download = 'prompt_text.txt';
+    link.click();
+    URL.revokeObjectURL(url);
+  }, [textBoxesData])
 
   return (
     <div>
@@ -469,7 +492,7 @@ const LLMTool = () => {
         <Btn
           className="btn-sm w-100 border border-black mb-1"
           title={isRunning ? "Stop" : "Run"}
-          onClick={handleRunStop}
+          onClick={exportPromptText}
         ></Btn>
         <div className={"flex grow"}>
           <div className={"shrink-0 contents"} style={{ width: fileW - 240 }}>

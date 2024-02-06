@@ -293,7 +293,7 @@ const LLMTool = () => {
 
     textBoxesData.map(box => {
       if(box.type === 0) {
-        longText += box.text;
+        longText += `"${box.text}"\n`;
       }
     })
 

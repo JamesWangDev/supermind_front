@@ -376,7 +376,19 @@ const LLMTool = () => {
 
     setGptAnswers([]);
 
-    const prePrompt = `\n Prompt Text: \n Give me detailed information of this each item ordered by ID as JSON Array format to "data" field of each object.\n The filed name should be exactly "data".\n The answer format should be common and constant for every different queries.`
+    const prePrompt = `\n Prompt Text: \n Give me detailed information of this each item ordered by ID as JSON Array format in the following structure:\n [
+      {
+        "id": number,
+        "label": string,
+        "data": string,
+      },
+      {
+        "id": number,
+        "label": string,
+        "data": string,
+      },
+      ...
+    ] \n The data field will be answer of each items`
 
     try {
       setIsRunning(true)
@@ -640,7 +652,7 @@ const LLMTool = () => {
                   {data.text}
                 </div>
                 <div className="text-wrap overflow-auto ps-1 pe-1" style={{fontSize: 15}}>
-                  {gptAnswers.length > 0 && gptAnswers[index].data}
+                  {gptAnswers.length > 0 && (gptAnswers[index].data ? gptAnswers[index].data : "Answer type is mismatch.")}
                 </div>
               </div>
             )) : 

@@ -297,7 +297,7 @@ const LLMTool = () => {
       }
     })
 
-    if(!longText) {
+    if(longText === "undefined") {
       alert("Please enter the prompt text...")
       return;
     }

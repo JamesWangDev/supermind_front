@@ -289,27 +289,50 @@ const LLMTool = () => {
   }
   
   const exportPromptText = useCallback(() => {
-    let longText = "";
+    let promptText = "";
+    let dataString = "";
+    let isPromtAdded = false;
+    let isDataAdded = false;
+
+    if(outputData.length > 0) {
+      outputData.map((data, index) => {
+        if(data.label || data.text) {
+          if(!isDataAdded) {
+            dataString +=  `Data:\n`;
+            isDataAdded = true;
+          }
+          dataString += `${(index + 1) * 2 - 1}: Label: ${data.label}\n`;
+          dataString += `${(index + 1) * 2}: Data: ${data.text}\n`;
+          if(index === outputData.length - 1) {
+            dataString += `\n\n`;
+          }
+        }
+      })
+    }
 
     textBoxesData.map(box => {
-      if(box.type === 0) {
-        longText += `"${box.text}"\n`;
+      if(box.type === 0 && box.text) {
+        if(!isPromtAdded) {
+          promptText +=  `Prompt Text:\n`;
+          isPromtAdded = true;
+        }
+        promptText += `${box.text}\n`;
       }
     })
 
-    if(longText === "undefined") {
+    if(!promptText) {
       alert("Please enter the prompt text...")
       return;
     }
 
-    const blob = new Blob([longText], {type: 'text/plain'});
+    const blob = new Blob([dataString + promptText], {type: 'text/plain'});
     const url = URL.createObjectURL(blob);
     const link = document.createElement('a');
     link.href = url;
     link.download = 'prompt_text.txt';
     link.click();
     URL.revokeObjectURL(url);
-  }, [textBoxesData])
+  }, [textBoxesData, outputData])
 
   return (
     <div>

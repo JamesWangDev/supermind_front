@@ -8,6 +8,7 @@ import Btn from "@/Elements/Buttons/Btn";
 import CustomDropDown from "@/Components/Common/CustomDropDown/CustomDropDown";
 import {Input} from "reactstrap";
 import Switch from "@/Components/Common/Switch/Switch";
+import axios from "axios";
 
 const texttypes = [
   {
@@ -26,17 +27,25 @@ const texttypes = [
 
 const modelChoiceItems = [
   {
-    name: "Model Choice Item1",
+    name: "gpt-3.5-turbo",
     value: 0,
   },
   {
-    name: "Model Choice Item2",
+    name: "gpt-3.5-turbo-0125",
     value: 1,
   },
   {
-    name: "Model Choice Item3",
+    name: "gpt-3.5-turbo-1106",
     value: 2,
   },
+  {
+    name: "gpt-3.5-turbo-instruct",
+    value: 3,
+  },
+  {
+    name: "gpt-3.5-turbo-16k-0613",
+    value: 4,
+  }
 ];
 
 const gptFlag = [
@@ -117,6 +126,51 @@ const LLMTool = () => {
     initial: 550,
     min: 50,
   });
+  const [promptText, setPromptText] = useState("");
+  const [dataString, setDataString] = useState("");
+  const [gptAnswers, setGptAnswers] = useState([]);
+
+  useEffect(() => {
+    if(textBoxesData.length === 0) return;
+    let promptText = "";
+    let isPromtAdded = false;
+
+    textBoxesData.map(box => {
+      if(box.type === 0 && box.text) {
+        if(!isPromtAdded) {
+          promptText +=  `Prompt Text:\n`;
+          isPromtAdded = true;
+        }
+        promptText += `${box.text}\n`;
+      }
+    })
+
+    setPromptText(promptText)
+  }, [textBoxesData])
+
+  useEffect(() => {
+    if(outputData.length == 0) return;
+    let dataString = "";
+    let isDataAdded = false;
+
+    if(outputData.length > 0) {
+      outputData.map((data, index) => {
+        if(data.label || data.text) {
+          if(!isDataAdded) {
+            dataString +=  `Data:\n`;
+            isDataAdded = true;
+          }
+          dataString += `${(index + 1)}: Label: ${data.label}\n`;
+          dataString += `${(index + 1)}: Data: ${data.text}\n`;
+          if(index === outputData.length - 1) {
+            dataString += `\n\n`;
+          }
+        }
+      })
+    }
+    setDataString(dataString)
+
+  }, [outputData])
 
   const handleAddTextBox = useCallback(() => {
     if (selectedTextType === "") {
@@ -134,10 +188,6 @@ const LLMTool = () => {
     setTextBoxes(update)
     setTextBoxesData(updatedTextBoxData)
   };
-
-  const handleRunStop = useCallback(() => {
-    setIsRunning(!isRunning);
-  }, [setIsRunning, isRunning]);
 
   const handleChangeTextBoxData = useCallback((boxIndex, data) => {
     setTextBoxesData(prev => {
@@ -289,40 +339,14 @@ const LLMTool = () => {
   }
   
   const exportPromptText = useCallback(() => {
-    let promptText = "";
-    let dataString = "";
-    let isPromtAdded = false;
-    let isDataAdded = false;
-
-    if(outputData.length > 0) {
-      outputData.map((data, index) => {
-        if(data.label || data.text) {
-          if(!isDataAdded) {
-            dataString +=  `Data:\n`;
-            isDataAdded = true;
-          }
-          dataString += `${(index + 1) * 2 - 1}: Label: ${data.label}\n`;
-          dataString += `${(index + 1) * 2}: Data: ${data.text}\n`;
-          if(index === outputData.length - 1) {
-            dataString += `\n\n`;
-          }
-        }
-      })
-    }
-
-    textBoxesData.map(box => {
-      if(box.type === 0 && box.text) {
-        if(!isPromtAdded) {
-          promptText +=  `Prompt Text:\n`;
-          isPromtAdded = true;
-        }
-        promptText += `${box.text}\n`;
-      }
-    })
-
     if(!promptText) {
       alert("Please enter the prompt text...")
       return;
+    }
+
+    if(!dataString) {
+      alert("Load output data first....")
+      return
     }
 
     const blob = new Blob([dataString + promptText], {type: 'text/plain'});
@@ -332,7 +356,59 @@ const LLMTool = () => {
     link.download = 'prompt_text.txt';
     link.click();
     URL.revokeObjectURL(url);
-  }, [textBoxesData, outputData])
+  }, [promptText, dataString]) 
+
+  const handleCallGPT = useCallback(async () => {
+    if(modelChoice === "") {
+      alert("Please select Model Choice you want...");
+      return;
+    }
+
+    if(!promptText) {
+      alert("Please enter the prompt text...")
+      return;
+    }
+
+    if(!dataString) {
+      alert("Load output data first....")
+      return
+    }
+
+    setGptAnswers([]);
+
+    const prePrompt = `\n Prompt Text: \n Give me detailed information of this each item ordered by ID as JSON Array format to "data" field of each object.\n The filed name should be exactly "data".\n The answer format should be common and constant for every different queries.`
+
+    try {
+      setIsRunning(true)
+      const apiKey = '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'; // Replace with your ChatGPT 4.0 API key
+      const apiUrl = 'https://api.openai.com/v1/chat/completions'; // Endpoint for ChatGPT 4.0 completions
+
+      const requestBody = {
+        model: modelChoiceItems[modelChoice].name,
+        messages: [
+          {
+            role: 'user',
+            content: `${dataString}${promptText}${prePrompt}`
+          }
+        ]
+      };
+
+      const response = await axios.post(apiUrl, requestBody, {
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${apiKey}`
+        }
+      });
+
+      const responseData = JSON.parse(response.data.choices[0].message.content.trim());
+      setGptAnswers(responseData)
+      setIsRunning(false);
+    } catch (error) {
+      console.error('Error fetching response:', error);
+      alert('Error fetching response. Please try again.');
+      setIsRunning(false);
+    }
+  }, [promptText, dataString, modelChoice])
 
   return (
     <div>
@@ -355,39 +431,46 @@ const LLMTool = () => {
           className="w-100 border-bottom border-black d-flex"
           style={{ height: "40px" }}
         >
-          <div className="d-flex text-center" style={{width: "25%"}}>
+          <div className="d-flex text-center" style={{width: "21%"}}>
             <Btn
               className="btn-sm border border-black w-100"
               title={"Load Setup Data"}
               onClick={handleLoadBtnClick}
             ></Btn>
           </div>
-          <div className="d-flex text-center" style={{width: "25%"}}>
+          <div className="d-flex text-center" style={{width: "21%"}}>
             <Btn
               className="btn-sm border border-black w-100"
               title={"Export Setup Data"}
               onClick={handleSaveData}
             ></Btn>
           </div>
-          <div className="d-flex text-center" style={{width: "25%"}}>
+          <div className="d-flex text-center" style={{width: "21%"}}>
             <Btn
               className="btn-sm border border-black w-100"
               title={"Clear Setup Data"}
               onClick={handleClearData}
             ></Btn>
           </div>
-          <div className="d-flex text-center" style={{width: "25%"}}>
+          <div className="d-flex text-center" style={{width: "21%"}}>
             <Btn
               className="btn-sm border border-black w-100"
               title={"Load Output Data"}
               onClick={handleLoadOutputDataBtnClick}
             ></Btn>
           </div>
-          <div className="d-flex text-center" style={{width: "25%"}}>
+          <div className="d-flex text-center" style={{width: "21%"}}>
             <Btn
               className="btn-sm border border-black w-100"
               title={"Save Output Data"}
               onClick={handleSaveOutputData}
+            ></Btn>
+          </div>
+          <div className="d-flex text-center" style={{width: "20%"}}>
+            <Btn
+              className="btn-sm border border-black w-100"
+              title={"Export Prompt Data"}
+              onClick={exportPromptText}
             ></Btn>
           </div>
         </div>
@@ -502,20 +585,11 @@ const LLMTool = () => {
           <div className="d-flex justify-content-center" style={{width: "25%"}}>
             <span className="m-auto">Max Token: <span style={{color: "red", fontWeight: "bold"}}>{tokenMax}</span></span>
           </div>
-          {/* <div className="d-flex justify-content-center" style={{width: "15%"}}>
-            <span className="m-auto">Is GPT Enabled?: <span style={{color: "red", fontWeight: "bold"}}>{isEnableGPT ? "Yes" : "No"}</span></span>
-          </div>
-          <div className="d-flex justify-content-center" style={{width: "14%"}}>
-            <span className="m-auto">Is Remove Duplicated?: <span style={{color: "red", fontWeight: "bold"}}>{isRemoveDuplicated ? "Yes" : "No"}</span></span>
-          </div>
-          <div className="d-flex justify-content-center" style={{width: "15%"}}>
-            {<span className="m-auto">Rows to inject: <span style={{color: "red", fontWeight: "bold"}}>{rowInject !== "" ? (rowInject == 2 ? customRowsInject : rowsInjectItem[rowInject].name) : "Not Selected"}</span></span>}
-          </div> */}
         </div>
         <Btn
           className="btn-sm w-100 border border-black mb-1"
-          title={isRunning ? "Stop" : "Run"}
-          onClick={exportPromptText}
+          title={isRunning ? "Running..." : "Run"}
+          onClick={handleCallGPT}
         ></Btn>
         <div className={"flex grow"}>
           <div className={"shrink-0 contents"} style={{ width: fileW - 240 }}>
@@ -564,6 +638,9 @@ const LLMTool = () => {
                 <hr className="mt-2 mb-1"/>
                 <div className="text-wrap overflow-auto ps-1 pe-1" style={{fontSize: 15}}>
                   {data.text}
+                </div>
+                <div className="text-wrap overflow-auto ps-1 pe-1" style={{fontSize: 15}}>
+                  {gptAnswers.length > 0 && gptAnswers[index].data}
                 </div>
               </div>
             )) : 

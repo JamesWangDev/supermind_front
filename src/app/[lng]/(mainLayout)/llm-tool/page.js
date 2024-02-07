@@ -395,12 +395,22 @@ const LLMTool = () => {
       const apiKey = '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'; // Replace with your ChatGPT 4.0 API key
       const apiUrl = 'https://api.openai.com/v1/chat/completions'; // Endpoint for ChatGPT 4.0 completions
 
+      // const requestBody = {
+      //   model: modelChoiceItems[modelChoice].name,
+      //   messages: [
+      //     {
+      //       role: 'user',
+      //       content: `${dataString}${promptText}${dataString ? prePrompt : ""}`
+      //     }
+      //   ]
+      // };
+
       const requestBody = {
         model: modelChoiceItems[modelChoice].name,
         messages: [
           {
             role: 'user',
-            content: `${dataString}${promptText}${dataString ? prePrompt : ""}`
+            content: `${promptText}`
           }
         ]
       };
@@ -412,17 +422,17 @@ const LLMTool = () => {
         }
       });
 
-      if(dataString) {
-        const responseData = JSON.parse(response.data.choices[0].message.content.trim());
-        setGptAnswers(responseData)
-      } else {
+      // if(dataString) {
+      //   const responseData = JSON.parse(response.data.choices[0].message.content.trim());
+      //   setGptAnswers(responseData)
+      // } else {
         try {
           const responseData = JSON.parse(response.data.choices[0].message.content.trim());
-          setGptAnswers(responseData)
+          setOutputdata((prev) => ([...prev, ...responseData]))
         } catch (error) {
-          setGptAnswers([response.data.choices[0].message.content.trim()])
+          setOutputdata((prev) => ([...prev, {id: "none", label: "undefined", text: response.data.choices[0].message.content.trim()}]))
         }
-      }
+      // }
       setIsRunning(false);
     } catch (error) {
       console.error('Error fetching response:', error);
@@ -430,6 +440,8 @@ const LLMTool = () => {
       setIsRunning(false);
     }
   }, [promptText, dataString, modelChoice])
+
+  console.log(outputData, "dsklfjklsdjflkjksdlf")
 
   return (
     <div>
@@ -652,25 +664,40 @@ const LLMTool = () => {
             </div>
           </div>
           <SampleSplitter isDragging={isFileDragging} {...fileDragBarProps} />
-          <div className={"w-100 border-top border-start border-black p-1"} style={{height: "700px", width: "200", fontSize: 16}}>
-            {outputData.length > 0 ? outputData.map((data, index) => (
-              <div className={`${index < outputData.length - 1 && "border-bottom border-black"} w-100 p-2 d-flex flex-column`} style={{height: `${100 / outputData.length}%` }}>
+          <div className={"w-100 border-top border-start border-black p-1 overflow-auto"} style={{height: "700px", width: "200", fontSize: 16}}>
+            {outputData.length > 0 && outputData.length === 1 ? 
+              (<div className="text-wrap overflow-auto ps-1 pe-1" style={{fontSize: 15}}>
+                {outputData[0]}
+              </div>) :
+              (outputData.length > 1 ? (outputData.map((data, index) => (
+              <div style={{height: '120px'}} className={`${index < outputData.length - 1 && "border-bottom border-black"} w-100 p-2 d-flex flex-column`}>
                 <div className="fw-bold">{data.label}</div>
                 <hr className="mt-2 mb-1"/>
                 <div className="text-wrap overflow-auto ps-1 pe-1" style={{fontSize: 15}}>
                   {data.text}
                 </div>
-                <div className="text-wrap overflow-auto ps-1 pe-1" style={{fontSize: 15}}>
-                  {gptAnswers.length > 0 && (gptAnswers[index].data ? gptAnswers[index].data : "Answer type is mismatch.")}
-                </div>
+              </div>)))
+              :
+              <div className="w-100 h-100 d-flex">
+                <span className="m-auto">No OutPut Data</span>
               </div>
-            )) : 
-            <div className="w-100 h-100 d-flex">
+            )}
+            {/* {outputData ? (outputData.length > 0 ? (outputData.map((data, index) => (
+              <div style={{height: '120px'}} className={`${index < outputData.length - 1 && "border-bottom border-black"} w-100 p-2 d-flex flex-column`}>
+                <div className="fw-bold">{data.label}</div>
+                <hr className="mt-2 mb-1"/>
+                <div className="text-wrap overflow-auto ps-1 pe-1" style={{fontSize: 15}}>
+                  {data.text}
+                </div>
+              </div>))) : <div className="text-wrap overflow-auto ps-1 pe-1">{outputData}</div>) : <div className="w-100 h-100 d-flex">
+                <span className="m-auto">No OutPut Data</span>
+              </div>} */}
+            {/* <div className="w-100 h-100 d-flex">
               {gptAnswers.length > 0 && gptAnswers.length == 1 && (gptAnswers[0] ? gptAnswers[0] : "No OutPut Data")}
               <div className="w-100 h-100">
                 {gptAnswers.length > 1 && (
                   gptAnswers.map((answer, index) => (
-                    <div className={`${index < gptAnswers.length - 1 && "border-bottom border-black"} w-100 p-2 d-flex flex-column`} style={{height: `${100 / gptAnswers.length}%` }}>
+                    <div style={{height: "100px"}} className={`${index < gptAnswers.length - 1 && "border-bottom border-black"} w-100 p-2 d-flex flex-column`} style={{height: `${100 / gptAnswers.length}%` }}>
                       <div className="fw-bold">{answer.label}</div>
                       <hr className="mt-2 mb-1"/>
                       <div className="text-wrap overflow-auto ps-1 pe-1" style={{fontSize: 15}}>
@@ -680,7 +707,7 @@ const LLMTool = () => {
                   ))
                 )}
               </div>
-            </div>}
+            </div> */}
           </div>
         </div>
       </div>

@@ -412,8 +412,17 @@ const LLMTool = () => {
         }
       });
 
-      const responseData = dataString ? JSON.parse(response.data.choices[0].message.content.trim()) : [response.data.choices[0].message.content.trim()];
-      setGptAnswers(responseData)
+      if(dataString) {
+        const responseData = JSON.parse(response.data.choices[0].message.content.trim());
+        setGptAnswers(responseData)
+      } else {
+        try {
+          const responseData = JSON.parse(response.data.choices[0].message.content.trim());
+          setGptAnswers(responseData)
+        } catch (error) {
+          setGptAnswers([response.data.choices[0].message.content.trim()])
+        }
+      }
       setIsRunning(false);
     } catch (error) {
       console.error('Error fetching response:', error);
@@ -657,7 +666,20 @@ const LLMTool = () => {
               </div>
             )) : 
             <div className="w-100 h-100 d-flex">
-              {gptAnswers.length > 0 && (gptAnswers[0] ? gptAnswers[0] : "No OutPut Data")}
+              {gptAnswers.length > 0 && gptAnswers.length == 1 && (gptAnswers[0] ? gptAnswers[0] : "No OutPut Data")}
+              <div className="w-100 h-100">
+                {gptAnswers.length > 1 && (
+                  gptAnswers.map((answer, index) => (
+                    <div className={`${index < gptAnswers.length - 1 && "border-bottom border-black"} w-100 p-2 d-flex flex-column`} style={{height: `${100 / gptAnswers.length}%` }}>
+                      <div className="fw-bold">{answer.label}</div>
+                      <hr className="mt-2 mb-1"/>
+                      <div className="text-wrap overflow-auto ps-1 pe-1" style={{fontSize: 15}}>
+                        {answer.data}
+                      </div>
+                    </div>
+                  ))
+                )}
+              </div>
             </div>}
           </div>
         </div>

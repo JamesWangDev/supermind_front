@@ -671,10 +671,10 @@ const LLMTool = () => {
               </div>) :
               (outputData.length > 1 ? (outputData.map((data, index) => (
               <div style={{height: '120px'}} className={`${index < outputData.length - 1 && "border-bottom border-black"} w-100 p-2 d-flex flex-column`}>
-                <div className="fw-bold">{data.label}</div>
+                <div className="fw-bold">{data.hasOwnProperty("label") ? data.label : ""}</div>
                 <hr className="mt-2 mb-1"/>
                 <div className="text-wrap overflow-auto ps-1 pe-1" style={{fontSize: 15}}>
-                  {data.text}
+                  {data.hasOwnProperty("text") ? data.text : ""}
                 </div>
               </div>)))
               :

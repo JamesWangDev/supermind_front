@@ -344,10 +344,10 @@ const LLMTool = () => {
       return;
     }
 
-    if(!dataString) {
-      alert("Load output data first....")
-      return
-    }
+    // if(!dataString) {
+    //   alert("Load output data first....")
+    //   return
+    // }
 
     const blob = new Blob([dataString + promptText], {type: 'text/plain'});
     const url = URL.createObjectURL(blob);
@@ -369,10 +369,10 @@ const LLMTool = () => {
       return;
     }
 
-    if(!dataString) {
-      alert("Load output data first....")
-      return
-    }
+    // if(!dataString) {
+    //   alert("Load output data first....")
+    //   return
+    // }
 
     setGptAnswers([]);
 
@@ -400,7 +400,7 @@ const LLMTool = () => {
         messages: [
           {
             role: 'user',
-            content: `${dataString}${promptText}${prePrompt}`
+            content: `${dataString}${promptText}${dataString ? prePrompt : ""}`
           }
         ]
       };
@@ -412,7 +412,7 @@ const LLMTool = () => {
         }
       });
 
-      const responseData = JSON.parse(response.data.choices[0].message.content.trim());
+      const responseData = dataString ? JSON.parse(response.data.choices[0].message.content.trim()) : [response.data.choices[0].message.content.trim()];
       setGptAnswers(responseData)
       setIsRunning(false);
     } catch (error) {
@@ -657,7 +657,7 @@ const LLMTool = () => {
               </div>
             )) : 
             <div className="w-100 h-100 d-flex">
-              <span className="m-auto">No OutPut Data</span>
+              {gptAnswers.length > 0 && (gptAnswers[0] ? gptAnswers[0] : "No OutPut Data")}
             </div>}
           </div>
         </div>

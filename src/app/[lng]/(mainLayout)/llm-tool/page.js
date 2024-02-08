@@ -310,6 +310,11 @@ const LLMTool = () => {
     URL.revokeObjectURL(url);
   }, [outputData])
 
+  const clearOutputData = useCallback(() => {
+    setOutputdata([]);
+    setIndexLoop(1);
+  }, [outputData])
+
   const handleLoadOutputData = (event) => {
     const file = event.target.files[0];
     if (file) {
@@ -506,42 +511,49 @@ const LLMTool = () => {
           className="w-100 border-bottom border-black d-flex"
           style={{ height: "40px" }}
         >
-          <div className="d-flex text-center" style={{width: "21%"}}>
+          <div className="d-flex text-center" style={{width: "17%"}}>
             <Btn
               className="btn-sm border border-black w-100"
               title={"Load Setup Data"}
               onClick={handleLoadBtnClick}
             ></Btn>
           </div>
-          <div className="d-flex text-center" style={{width: "21%"}}>
+          <div className="d-flex text-center" style={{width: "16%"}}>
             <Btn
               className="btn-sm border border-black w-100"
               title={"Export Setup Data"}
               onClick={handleSaveData}
             ></Btn>
           </div>
-          <div className="d-flex text-center" style={{width: "21%"}}>
+          <div className="d-flex text-center" style={{width: "16%"}}>
             <Btn
               className="btn-sm border border-black w-100"
               title={"Clear Setup Data"}
               onClick={handleClearData}
             ></Btn>
           </div>
-          <div className="d-flex text-center" style={{width: "21%"}}>
+          <div className="d-flex text-center" style={{width: "16%"}}>
             <Btn
               className="btn-sm border border-black w-100"
               title={"Load Output Data"}
               onClick={handleLoadOutputDataBtnClick}
             ></Btn>
           </div>
-          <div className="d-flex text-center" style={{width: "21%"}}>
+          <div className="d-flex text-center" style={{width: "17%"}}>
             <Btn
               className="btn-sm border border-black w-100"
               title={"Save Output Data"}
               onClick={handleSaveOutputData}
             ></Btn>
           </div>
-          <div className="d-flex text-center" style={{width: "20%"}}>
+          <div className="d-flex text-center" style={{width: "17%"}}>
+            <Btn
+              className="btn-sm border border-black w-100"
+              title={"Clear Output Data"}
+              onClick={clearOutputData}
+            ></Btn>
+          </div>
+          <div className="d-flex text-center" style={{width: "17%"}}>
             <Btn
               className="btn-sm border border-black w-100"
               title={"Export Prompt Data"}

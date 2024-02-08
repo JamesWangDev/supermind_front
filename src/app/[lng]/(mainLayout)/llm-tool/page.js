@@ -424,7 +424,7 @@ const LLMTool = () => {
         messages: [
           {
             role: 'user',
-            content: `${promptText}`
+            content: `${dataString}${promptText}`
           }
         ]
       };
@@ -477,6 +477,8 @@ const LLMTool = () => {
       setIsRunning(false);
     }
   }, [promptText, dataString, modelChoice])
+
+  console.log(outputData, "djslkfsdjfjsdfjlsdjf")
 
   return (
     <div>
@@ -700,11 +702,13 @@ const LLMTool = () => {
           </div>
           <SampleSplitter isDragging={isFileDragging} {...fileDragBarProps} />
           <div className={"w-100 border-top border-start border-black p-1 overflow-auto"} style={{height: "700px", width: "200", fontSize: 16}}>
-            {outputData.length > 0 && outputData.length === 1 ? 
-              (<div className="text-wrap overflow-auto ps-1 pe-1" style={{fontSize: 15}}>
-                {outputData[0]}
-              </div>) :
-              (outputData.length > 1 ? (outputData.map((data, index) => (
+            {
+            // outputData.length > 0 && outputData.length === 1 ? 
+              // (<div className="text-wrap overflow-auto ps-1 pe-1" style={{fontSize: 15}}>
+              //   {outputData[0]}
+              // </div>) :
+              // (
+              outputData && outputData.length > 0 ? (outputData.map((data, index) => (
               <div style={{height: '120px'}} className={`${index < outputData.length - 1 && "border-bottom border-black"} w-100 p-2 d-flex flex-column`}>
                 <div className="fw-bold">{data.hasOwnProperty("label") ? data.label : ""}</div>
                 <hr className="mt-2 mb-1"/>
@@ -716,7 +720,8 @@ const LLMTool = () => {
               <div className="w-100 h-100 d-flex">
                 <span className="m-auto">No OutPut Data</span>
               </div>
-            )}
+            // )
+          }
             {/* {outputData ? (outputData.length > 0 ? (outputData.map((data, index) => (
               <div style={{height: '120px'}} className={`${index < outputData.length - 1 && "border-bottom border-black"} w-100 p-2 d-flex flex-column`}>
                 <div className="fw-bold">{data.label}</div>

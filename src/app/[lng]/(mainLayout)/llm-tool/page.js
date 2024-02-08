@@ -91,7 +91,7 @@ const LLMTool = () => {
   const [selectedTextType, setSelectedTextType] = useState("");
   const [modelChoice, setModelChoice] = useState("")
   const [maxRow, setMaxRow] = useState(10);
-  const [timeMax, setTimeMax] = useState(100);
+  const [timeMax, setTimeMax] = useState(10);
   const [tokenMax, setTokenMax] = useState(20);
   const [isEnableGPT, setIsEnableGPT] = useState(0);
   const [isRemoveDuplicated, setIsRemoveDuplicated] = useState(0);
@@ -128,7 +128,7 @@ const LLMTool = () => {
   });
   const [promptText, setPromptText] = useState("");
   const [dataString, setDataString] = useState("");
-  const [gptAnswers, setGptAnswers] = useState([]);
+  const [indexLoop, setIndexLoop] = useState(1);
 
   useEffect(() => {
     if(textBoxesData.length === 0) return;
@@ -418,17 +418,17 @@ const LLMTool = () => {
       //     }
       //   ]
       // };
-
       
       const finalOutputData = outputData;
+      let currentLoop = indexLoop;
       let p_dataString = ``;
       let isDataAdded = false;
 
-      if(finalOutputData.length > maxRow) {
+      if(currentLoop > timeMax - 1) {
         alert("already reached to max rows....")
       }
 
-      while (finalOutputData.length < maxRow) {
+      while (currentLoop < timeMax) {
         const requestBody = {
           model: modelChoiceItems[modelChoice].name,
           messages: [
@@ -466,6 +466,8 @@ const LLMTool = () => {
               })
             }
             setOutputdata((prev) => ([...prev, ...responseData]))
+            currentLoop += 1;
+            setIndexLoop(currentLoop);
           }
         } catch (error) {
           console.log("cannot parse to JSON")
@@ -481,7 +483,7 @@ const LLMTool = () => {
       alert('Error fetching response. Please try again.');
       setIsRunning(false);
     }
-  }, [promptText, dataString, modelChoice, maxRow])
+  }, [promptText, dataString, modelChoice, timeMax, indexLoop])
 
   return (
     <div>
@@ -583,7 +585,7 @@ const LLMTool = () => {
           >
             <div className="d-flex flex-column w-100">
               <div className="h-50 flex border-bottom border-black">
-                <span className="m-auto text-center">Time Max</span>
+                <span className="m-auto text-center">Max Loops</span>
               </div>
               <div className="h-50">
                 <Input type='number' value={timeMax} onChange={(e) => setTimeMax(e.target.value)} style={{height: "29px", border: "none"}} className="text-center" />
@@ -711,14 +713,17 @@ const LLMTool = () => {
               //   {outputData[0]}
               // </div>) :
               // (
-              outputData && outputData.length > 0 ? (outputData.map((data, index) => (
-              <div style={{height: '120px'}} className={`${index < outputData.length - 1 && "border-bottom border-black"} w-100 p-2 d-flex flex-column`}>
-                <div className="fw-bold">{data.hasOwnProperty("label") ? data.label : ""}</div>
-                <hr className="mt-2 mb-1"/>
-                <div className="text-wrap overflow-auto ps-1 pe-1" style={{fontSize: 15}}>
-                  {data.hasOwnProperty("text") ? data.text : ""}
-                </div>
-              </div>)))
+              outputData && outputData.length > 0 ? (outputData.map((data, index) => {
+                return (
+                  <div style={{height: '120px'}} className={`${index < outputData.length - 1 && "border-bottom border-black"} w-100 p-2 d-flex flex-column`}>
+                    <div className="fw-bold">{data.hasOwnProperty("label") ? data.label : ""}</div>
+                    <hr className="mt-2 mb-1"/>
+                    <div className="text-wrap overflow-auto ps-1 pe-1" style={{fontSize: 15}}>
+                      {data.hasOwnProperty("text") ? data.text : ""}
+                    </div>
+                  </div>
+                )
+              }))
               :
               <div className="w-100 h-100 d-flex">
                 <span className="m-auto">No OutPut Data</span>

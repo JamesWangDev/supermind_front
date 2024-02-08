@@ -374,19 +374,19 @@ const LLMTool = () => {
     //   return
     // }
 
-    const prePrompt = `\n Prompt Text: \n Give me detailed information of this each item ordered by ID as JSON Array format in the following structure:\n [
+    const prePrompt = `\n Just need only JSON Array output and the id, label, text properties must exist in the each array element in the following structure.\n [
       {
         "id": number,
         "label": string,
-        "data": string,
+        "text": string,
       },
       {
         "id": number,
         "label": string,
-        "data": string,
+        "text": string,
       },
       ...
-    ] \n The data field will be answer of each items`
+    ]`
 
     const secondPrompt = `\n BEGIN_DIRECTIVE
     MODE: "Iterative Data Generation and Format Correction"
@@ -419,66 +419,69 @@ const LLMTool = () => {
       //   ]
       // };
 
-      const requestBody = {
-        model: modelChoiceItems[modelChoice].name,
-        messages: [
-          {
-            role: 'user',
-            content: `${dataString}${promptText}`
+      
+      const finalOutputData = outputData;
+      let p_dataString = ``;
+      let isDataAdded = false;
+
+      if(finalOutputData.length > maxRow) {
+        alert("already reached to max rows....")
+      }
+
+      while (finalOutputData.length < maxRow) {
+        const requestBody = {
+          model: modelChoiceItems[modelChoice].name,
+          messages: [
+            {
+              role: 'user',
+              content: `${p_dataString}${promptText}`
+            }
+          ]
+        };
+  
+        const response = await axios.post(apiUrl, requestBody, {
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${apiKey}`
           }
-        ]
-      };
+        });
 
-      const response = await axios.post(apiUrl, requestBody, {
-        headers: {
-          'Content-Type': 'application/json',
-          'Authorization': `Bearer ${apiKey}`
-        }
-      });
-
-      // if(dataString) {
-      //   const responseData = JSON.parse(response.data.choices[0].message.content.trim());
-      //   setGptAnswers(responseData)
-      // } else {
         try {
           const responseData = JSON.parse(response.data.choices[0].message.content.trim());
           if(Array.isArray(responseData) && responseData.every(item => typeof item === 'object' && 'label' in item && 'text' in item)) {
+            finalOutputData.push(...responseData);
+            if(responseData.length > 0) {
+              responseData.map((data, index) => {
+                if(data.label || data.text) {
+                  if(!isDataAdded) {
+                    p_dataString +=  `Data:\n`;
+                    isDataAdded = true;
+                  }
+                  p_dataString += `${data.id}: Label: ${data.label}\n`;
+                  p_dataString += `${data.id}: Data: ${data.text}\n`;
+                  if(index === responseData.length - 1) {
+                    p_dataString += `\n\n`;
+                  }
+                }
+              })
+            }
             setOutputdata((prev) => ([...prev, ...responseData]))
-          } else {
-            handleCallGPT();
           }
         } catch (error) {
-          // const requestBody2 = {
-          //   model: modelChoiceItems[modelChoice].name,
-          //   messages: [
-          //     {
-          //       role: 'user',
-          //       content: `${promptText}${secondPrompt}`
-          //     }
-          //   ]
-          // };
-    
-          // const response2 = await axios.post(apiUrl, requestBody2, {
-          //   headers: {
-          //     'Content-Type': 'application/json',
-          //     'Authorization': `Bearer ${apiKey}`
-          //   }
-          // });
-
-          // const responseData2 = JSON.parse(response2.data.choices[0].message.content.trim());
-          // setOutputdata((prev) => ([...prev, ...responseData2]));
-          setOutputdata((prev) => ([...prev, {id: "none", label: "undefined", text: response.data.choices[0].message.content.trim()}]))
+          console.log("cannot parse to JSON")
+          finalOutputData.push({id: "none", label: "error", text: response.data.choices[0].message.content.trim()});
+          // setOutputdata((prev) => ([...prev, {id: "none", label: "undefined", text: response.data.choices[0].message.content.trim()}]))
         }
-      // }
+      }
+      // setOutputdata(finalOutputData);
+        
       setIsRunning(false);
     } catch (error) {
       console.error('Error fetching response:', error);
       alert('Error fetching response. Please try again.');
       setIsRunning(false);
     }
-  }, [promptText, dataString, modelChoice])
-
-  console.log(outputData, "djslkfsdjfjsdfjlsdjf")
+  }, [promptText, dataString, modelChoice, maxRow])
 
   return (
     <div>

@@ -374,8 +374,6 @@ const LLMTool = () => {
     //   return
     // }
 
-    setGptAnswers([]);
-
     const prePrompt = `\n Prompt Text: \n Give me detailed information of this each item ordered by ID as JSON Array format in the following structure:\n [
       {
         "id": number,
@@ -446,8 +444,9 @@ const LLMTool = () => {
           const responseData = JSON.parse(response.data.choices[0].message.content.trim());
           if(Array.isArray(responseData) && responseData.every(item => typeof item === 'object' && 'label' in item && 'text' in item)) {
             setOutputdata((prev) => ([...prev, ...responseData]))
+          } else {
+            handleCallGPT();
           }
-          
         } catch (error) {
           // const requestBody2 = {
           //   model: modelChoiceItems[modelChoice].name,

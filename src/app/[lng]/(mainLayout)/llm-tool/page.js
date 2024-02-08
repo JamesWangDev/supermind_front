@@ -390,6 +390,22 @@ const LLMTool = () => {
       ...
     ] \n The data field will be answer of each items`
 
+    const secondPrompt = `\n BEGIN_DIRECTIVE
+    MODE: "Iterative Data Generation and Format Correction"
+    INSTRUCTION: """
+    1. Review the input from the last GPT output, ensuring it matches the desired JSON format with 'id', 'label', and 'text' fields for data continuation.
+    2. Correct any JSON format errors from the previous output to align with the specified structure.
+    3. Increment the last 'id' value based on the highest 'id' found in the corrected data.
+    4. Generate new JSON objects for additional data requested, ensuring each has a unique 'id', and appropriate 'label' and 'text' fields.
+    5. Avoid duplication with existing data, maintaining a clean and unique dataset.
+    6. Output only new JSON objects, directly appending them to the corrected dataset without including explanatory text.
+    7. Ensure the output strictly consists of a JSON Array with the elements adhering to the specified properties: 'id', 'label', 'text'.
+    8. After processing, if the current dataset does not yet meet the desired quantity (e.g., 100 pet names), prepare the output for a potential next iteration by including a special 'Fix Format' directive for the next LLM process.
+    9. This directive should guide the next GPT instance to correct any format issues and continue data generation, aiming for the project goal without exceeding response length limits.
+    """
+    JUST_NEED: "Output should be a JSON Array with only the new data appended, following the defined id, label, text schema."
+    END_DIRECTIVE`
+
     try {
       setIsRunning(true)
       const apiKey = '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'; // Replace with your ChatGPT 4.0 API key
@@ -428,8 +444,30 @@ const LLMTool = () => {
       // } else {
         try {
           const responseData = JSON.parse(response.data.choices[0].message.content.trim());
-          setOutputdata((prev) => ([...prev, ...responseData]))
+          if(Array.isArray(responseData) && responseData.every(item => typeof item === 'object' && 'label' in item && 'text' in item)) {
+            setOutputdata((prev) => ([...prev, ...responseData]))
+          }
+          
         } catch (error) {
+          // const requestBody2 = {
+          //   model: modelChoiceItems[modelChoice].name,
+          //   messages: [
+          //     {
+          //       role: 'user',
+          //       content: `${promptText}${secondPrompt}`
+          //     }
+          //   ]
+          // };
+    
+          // const response2 = await axios.post(apiUrl, requestBody2, {
+          //   headers: {
+          //     'Content-Type': 'application/json',
+          //     'Authorization': `Bearer ${apiKey}`
+          //   }
+          // });
+
+          // const responseData2 = JSON.parse(response2.data.choices[0].message.content.trim());
+          // setOutputdata((prev) => ([...prev, ...responseData2]));
           setOutputdata((prev) => ([...prev, {id: "none", label: "undefined", text: response.data.choices[0].message.content.trim()}]))
         }
       // }
@@ -440,8 +478,6 @@ const LLMTool = () => {
       setIsRunning(false);
     }
   }, [promptText, dataString, modelChoice])
-
-  console.log(outputData, "dsklfjklsdjflkjksdlf")
 
   return (
     <div>

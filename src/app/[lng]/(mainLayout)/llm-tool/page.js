@@ -1,7 +1,7 @@
 "use client";
 
 import styles from "./llm-tool.module.scss";
-import { useCallback, useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { useResizable } from "react-resizable-layout";
 import { cn } from "./cn";
 import Btn from "@/Elements/Buttons/Btn";
@@ -9,6 +9,36 @@ import CustomDropDown from "@/Components/Common/CustomDropDown/CustomDropDown";
 import {Input} from "reactstrap";
 import Switch from "@/Components/Common/Switch/Switch";
 import axios from "axios";
+
+// const prePrompt = `\n Just need only JSON Array output and the id, label, text properties must exist in the each array element in the following structure.\n [
+//   {
+//     "id": number,
+//     "label": string,
+//     "text": string,
+//   },
+//   {
+//     "id": number,
+//     "label": string,
+//     "text": string,
+//   },
+//   ...
+// ]`
+
+// const secondPrompt = `\n BEGIN_DIRECTIVE
+// MODE: "Iterative Data Generation and Format Correction"
+// INSTRUCTION: """
+// 1. Review the input from the last GPT output, ensuring it matches the desired JSON format with 'id', 'label', and 'text' fields for data continuation.
+// 2. Correct any JSON format errors from the previous output to align with the specified structure.
+// 3. Increment the last 'id' value based on the highest 'id' found in the corrected data.
+// 4. Generate new JSON objects for additional data requested, ensuring each has a unique 'id', and appropriate 'label' and 'text' fields.
+// 5. Avoid duplication with existing data, maintaining a clean and unique dataset.
+// 6. Output only new JSON objects, directly appending them to the corrected dataset without including explanatory text.
+// 7. Ensure the output strictly consists of a JSON Array with the elements adhering to the specified properties: 'id', 'label', 'text'.
+// 8. After processing, if the current dataset does not yet meet the desired quantity (e.g., 100 pet names), prepare the output for a potential next iteration by including a special 'Fix Format' directive for the next LLM process.
+// 9. This directive should guide the next GPT instance to correct any format issues and continue data generation, aiming for the project goal without exceeding response length limits.
+// """
+// JUST_NEED: "Output should be a JSON Array with only the new data appended, following the defined id, label, text schema."
+// END_DIRECTIVE`
 
 const texttypes = [
   {
@@ -88,8 +118,8 @@ const rowsInjectItem = [
 const LLMTool = () => {
   const fileInputRef = useRef(null);
   const outputfileInputRef = useRef(null);
-  const [selectedTextType, setSelectedTextType] = useState("");
-  const [modelChoice, setModelChoice] = useState("")
+  const [selectedTextType, setSelectedTextType] = useState(0);
+  const [modelChoice, setModelChoice] = useState(0)
   const [maxRow, setMaxRow] = useState(10);
   const [timeMax, setTimeMax] = useState(10);
   const [tokenMax, setTokenMax] = useState(20);
@@ -97,23 +127,16 @@ const LLMTool = () => {
   const [isRemoveDuplicated, setIsRemoveDuplicated] = useState(0);
   const [rowInject, setRowInject] = useState("");
   const [customRowsInject, setCustomRowsInject] = useState(10)
-  const [textBoxes, setTextBoxes] = useState([0, 1, 2]);
+  const [textBoxes, setTextBoxes] = useState([0, 0]);
   const [textBoxesData, setTextBoxesData]= useState([
     {
       type: 0,
       text: ""
     },
     {
-      type: 1,
-      dataSource: "",
-      output: ""
-    },
-    {
-      type: 2,
-      text: "",
-      dataSource: "",
-      output: ""
-    },
+      type: 0,
+      text: ""
+    }
   ]);
   const [isRunning, setIsRunning] = useState(false);
   const [outputData, setOutputdata] = useState([])
@@ -128,7 +151,7 @@ const LLMTool = () => {
   });
   const [promptText, setPromptText] = useState("");
   const [dataString, setDataString] = useState("");
-  const [indexLoop, setIndexLoop] = useState(1);
+  const [currentLoop, setCurrentLoop] = useState(0);
 
   useEffect(() => {
     if(textBoxesData.length === 0) return;
@@ -148,7 +171,7 @@ const LLMTool = () => {
     setPromptText(promptText)
   }, [textBoxesData])
 
-  useEffect(() => {
+  const handleSetDataString = (outputData) => {
     if(outputData.length == 0) return;
     let dataString = "";
     let isDataAdded = false;
@@ -160,8 +183,8 @@ const LLMTool = () => {
             dataString +=  `Data:\n`;
             isDataAdded = true;
           }
-          dataString += `${(index + 1)}: Label: ${data.label}\n`;
-          dataString += `${(index + 1)}: Data: ${data.text}\n`;
+          dataString += `ID: ${(index + 1)}: Label: ${data.label}\n`;
+          dataString += `ID: ${(index + 1)}: Data: ${data.text}\n`;
           if(index === outputData.length - 1) {
             dataString += `\n\n`;
           }
@@ -169,8 +192,79 @@ const LLMTool = () => {
       })
     }
     setDataString(dataString)
+  }
 
-  }, [outputData])
+  useEffect(() => {
+    if(!isRunning || currentLoop > timeMax - 1) {
+      setIsRunning(false);
+      return;
+    };
+    if(modelChoice === "") {
+      alert("Please select Model Choice you want...");
+      return;
+    }
+
+    if(!promptText) {
+      alert("Please enter the prompt text...")
+      return;
+    }
+
+    callGPT();
+  }, [currentLoop, isRunning])
+
+  const callGPT = async () => {
+    try {
+      const apiKey = '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'; // Replace with your ChatGPT 4.0 API key
+      const apiUrl = 'https://api.openai.com/v1/chat/completions'; // Endpoint for ChatGPT 4.0 completions
+      const requestBody = {
+        model: modelChoiceItems[modelChoice].name,
+        messages: [
+          {
+            role: 'user',
+            content: `${dataString}${promptText}`
+          }
+        ]
+      };
+      
+      const response = await axios.post(apiUrl, requestBody, {
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${apiKey}`
+        }
+      });
+
+      try {
+        const responseData = JSON.parse(response.data.choices[0].message.content.trim());
+        if(Array.isArray(responseData) && responseData.every(item => typeof item === 'object' && 'label' in item && 'text' in item)) {
+          setOutputdata((prev) => {
+            const updatedOutPutData = [...prev, ...responseData]
+            handleSetDataString(updatedOutPutData)
+            return updatedOutPutData;
+          });
+        } else {
+          setOutputdata((prev) => {
+            const updatedOutPutData = [...prev, {id: "none", label: "wrong response form from GPT", text: response.data.choices[0].message.content.trim()}]
+            handleSetDataString(updatedOutPutData)
+            return updatedOutPutData;
+          });
+        }
+        setCurrentLoop(prev => prev + 1)
+      } catch (error) {
+        console.log("cannot parse to JSON");
+        setOutputdata((prev) => {
+          const updatedOutPutData = [...prev, {id: "none", label: "Not JSON response", text: response.data.choices[0].message.content.trim()}]
+          handleSetDataString(updatedOutPutData)
+          return updatedOutPutData;
+        });
+        setCurrentLoop(prev => prev + 1);
+      }
+    } catch (error) {
+      console.error('Error fetching response:', error);
+      alert('Error fetching response. Please try again.');
+      setIsRunning(false);
+      setCurrentLoop(0);
+    }
+  }
 
   const handleAddTextBox = useCallback(() => {
     if (selectedTextType === "") {
@@ -312,7 +406,7 @@ const LLMTool = () => {
 
   const clearOutputData = useCallback(() => {
     setOutputdata([]);
-    setIndexLoop(1);
+    setCurrentLoop(0);
   }, [outputData])
 
   const handleLoadOutputData = (event) => {
@@ -326,6 +420,7 @@ const LLMTool = () => {
           const jsonData = JSON.parse(contents);
           if (jsonData.hasOwnProperty("output")) {
             setOutputdata(jsonData.output)
+            handleSetDataString(jsonData.output)
             outputfileInputRef.current.value = null;
           } else {
             alert("File Data is unacceptable format.");
@@ -363,132 +458,19 @@ const LLMTool = () => {
     URL.revokeObjectURL(url);
   }, [promptText, dataString]) 
 
-  const handleCallGPT = useCallback(async () => {
-    if(modelChoice === "") {
-      alert("Please select Model Choice you want...");
-      return;
-    }
+  const stopCallGPT = useCallback(() => {
+    setIsRunning(false);
+  }, [])
 
-    if(!promptText) {
-      alert("Please enter the prompt text...")
-      return;
-    }
-
-    // if(!dataString) {
-    //   alert("Load output data first....")
-    //   return
-    // }
-
-    const prePrompt = `\n Just need only JSON Array output and the id, label, text properties must exist in the each array element in the following structure.\n [
-      {
-        "id": number,
-        "label": string,
-        "text": string,
-      },
-      {
-        "id": number,
-        "label": string,
-        "text": string,
-      },
-      ...
-    ]`
-
-    const secondPrompt = `\n BEGIN_DIRECTIVE
-    MODE: "Iterative Data Generation and Format Correction"
-    INSTRUCTION: """
-    1. Review the input from the last GPT output, ensuring it matches the desired JSON format with 'id', 'label', and 'text' fields for data continuation.
-    2. Correct any JSON format errors from the previous output to align with the specified structure.
-    3. Increment the last 'id' value based on the highest 'id' found in the corrected data.
-    4. Generate new JSON objects for additional data requested, ensuring each has a unique 'id', and appropriate 'label' and 'text' fields.
-    5. Avoid duplication with existing data, maintaining a clean and unique dataset.
-    6. Output only new JSON objects, directly appending them to the corrected dataset without including explanatory text.
-    7. Ensure the output strictly consists of a JSON Array with the elements adhering to the specified properties: 'id', 'label', 'text'.
-    8. After processing, if the current dataset does not yet meet the desired quantity (e.g., 100 pet names), prepare the output for a potential next iteration by including a special 'Fix Format' directive for the next LLM process.
-    9. This directive should guide the next GPT instance to correct any format issues and continue data generation, aiming for the project goal without exceeding response length limits.
-    """
-    JUST_NEED: "Output should be a JSON Array with only the new data appended, following the defined id, label, text schema."
-    END_DIRECTIVE`
-
-    try {
-      setIsRunning(true)
-      const apiKey = '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'; // Replace with your ChatGPT 4.0 API key
-      const apiUrl = 'https://api.openai.com/v1/chat/completions'; // Endpoint for ChatGPT 4.0 completions
-
-      // const requestBody = {
-      //   model: modelChoiceItems[modelChoice].name,
-      //   messages: [
-      //     {
-      //       role: 'user',
-      //       content: `${dataString}${promptText}${dataString ? prePrompt : ""}`
-      //     }
-      //   ]
-      // };
-      
-      const finalOutputData = outputData;
-      let currentLoop = indexLoop;
-      let p_dataString = ``;
-      let isDataAdded = false;
-
-      if(currentLoop > timeMax - 1) {
-        alert("already reached to max rows....")
+  const handleOnClickRun = useCallback(() => {
+    if(currentLoop > timeMax - 1) {
+      const rv = confirm("You reached to Max loop already, Do you want to clear the current loop and continue?");
+      if (rv) {
+        setCurrentLoop(0);
       }
-
-      while (currentLoop < timeMax) {
-        const requestBody = {
-          model: modelChoiceItems[modelChoice].name,
-          messages: [
-            {
-              role: 'user',
-              content: `${p_dataString}${promptText}`
-            }
-          ]
-        };
-  
-        const response = await axios.post(apiUrl, requestBody, {
-          headers: {
-            'Content-Type': 'application/json',
-            'Authorization': `Bearer ${apiKey}`
-          }
-        });
-
-        try {
-          const responseData = JSON.parse(response.data.choices[0].message.content.trim());
-          if(Array.isArray(responseData) && responseData.every(item => typeof item === 'object' && 'label' in item && 'text' in item)) {
-            finalOutputData.push(...responseData);
-            if(responseData.length > 0) {
-              responseData.map((data, index) => {
-                if(data.label || data.text) {
-                  if(!isDataAdded) {
-                    p_dataString +=  `Data:\n`;
-                    isDataAdded = true;
-                  }
-                  p_dataString += `${data.id}: Label: ${data.label}\n`;
-                  p_dataString += `${data.id}: Data: ${data.text}\n`;
-                  if(index === responseData.length - 1) {
-                    p_dataString += `\n\n`;
-                  }
-                }
-              })
-            }
-            setOutputdata((prev) => ([...prev, ...responseData]))
-            currentLoop += 1;
-            setIndexLoop(currentLoop);
-          }
-        } catch (error) {
-          console.log("cannot parse to JSON")
-          finalOutputData.push({id: "none", label: "error", text: response.data.choices[0].message.content.trim()});
-          // setOutputdata((prev) => ([...prev, {id: "none", label: "undefined", text: response.data.choices[0].message.content.trim()}]))
-        }
-      }
-      // setOutputdata(finalOutputData);
-        
-      setIsRunning(false);
-    } catch (error) {
-      console.error('Error fetching response:', error);
-      alert('Error fetching response. Please try again.');
-      setIsRunning(false);
     }
-  }, [promptText, dataString, modelChoice, timeMax, indexLoop])
+    setIsRunning(true);
+  }, [setIsRunning, currentLoop, timeMax])
 
   return (
     <div>
@@ -664,10 +646,10 @@ const LLMTool = () => {
             {<span className="m-auto">Model: <span style={{color: "red", fontWeight: "bold"}}>{modelChoice !== "" ? modelChoiceItems[modelChoice].name : "Not selected"}</span></span>}
           </div>
           <div className="d-flex justify-content-center" style={{width: "25%"}}>
-            <span className="m-auto">Max Row: <span style={{color: "red", fontWeight: "bold"}}>{maxRow}</span></span>
+            <span className="m-auto">Rows Affected: <span style={{color: "red", fontWeight: "bold"}}>{outputData.length}</span></span>
           </div>
           <div className="d-flex justify-content-center" style={{width: "25%"}}>
-            <span className="m-auto">Max Time: <span style={{color: "red", fontWeight: "bold"}}>{timeMax}</span></span>
+            <span className="m-auto">Current Loop Index: <span style={{color: "red", fontWeight: "bold"}}>{currentLoop}</span></span>
           </div>
           <div className="d-flex justify-content-center" style={{width: "25%"}}>
             <span className="m-auto">Max Token: <span style={{color: "red", fontWeight: "bold"}}>{tokenMax}</span></span>
@@ -675,8 +657,8 @@ const LLMTool = () => {
         </div>
         <Btn
           className="btn-sm w-100 border border-black mb-1"
-          title={isRunning ? "Running..." : "Run"}
-          onClick={handleCallGPT}
+          title={isRunning ? "Stop" : "Run"}
+          onClick={isRunning? stopCallGPT : handleOnClickRun}
         ></Btn>
         <div className={"flex grow"}>
           <div className={"shrink-0 contents"} style={{ width: fileW - 240 }}>
@@ -695,6 +677,7 @@ const LLMTool = () => {
                   <div
                     style={{ position: "relative" }}
                     className="border border-black rounded p-1"
+                    key={`textBoxes${index}`}
                   >
                     {box === 0 && <PromptTextBox boxIndex={index} data={textBoxesData[index]} handleChangeTextBoxData={handleChangeTextBoxData} />}
                     {box === 1 && <DataSourceTextBox boxIndex={index} data={textBoxesData[index]} handleChangeTextBoxData={handleChangeTextBoxData} />}
@@ -741,33 +724,7 @@ const LLMTool = () => {
                 <span className="m-auto">No OutPut Data</span>
               </div>
             // )
-          }
-            {/* {outputData ? (outputData.length > 0 ? (outputData.map((data, index) => (
-              <div style={{height: '120px'}} className={`${index < outputData.length - 1 && "border-bottom border-black"} w-100 p-2 d-flex flex-column`}>
-                <div className="fw-bold">{data.label}</div>
-                <hr className="mt-2 mb-1"/>
-                <div className="text-wrap overflow-auto ps-1 pe-1" style={{fontSize: 15}}>
-                  {data.text}
-                </div>
-              </div>))) : <div className="text-wrap overflow-auto ps-1 pe-1">{outputData}</div>) : <div className="w-100 h-100 d-flex">
-                <span className="m-auto">No OutPut Data</span>
-              </div>} */}
-            {/* <div className="w-100 h-100 d-flex">
-              {gptAnswers.length > 0 && gptAnswers.length == 1 && (gptAnswers[0] ? gptAnswers[0] : "No OutPut Data")}
-              <div className="w-100 h-100">
-                {gptAnswers.length > 1 && (
-                  gptAnswers.map((answer, index) => (
-                    <div style={{height: "100px"}} className={`${index < gptAnswers.length - 1 && "border-bottom border-black"} w-100 p-2 d-flex flex-column`} style={{height: `${100 / gptAnswers.length}%` }}>
-                      <div className="fw-bold">{answer.label}</div>
-                      <hr className="mt-2 mb-1"/>
-                      <div className="text-wrap overflow-auto ps-1 pe-1" style={{fontSize: 15}}>
-                        {answer.data}
-                      </div>
-                    </div>
-                  ))
-                )}
-              </div>
-            </div> */}
+            }
           </div>
         </div>
       </div>

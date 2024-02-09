@@ -75,6 +75,18 @@ const modelChoiceItems = [
   {
     name: "gpt-3.5-turbo-16k-0613",
     value: 4,
+  },
+  {
+    name: "gpt-4-0125-preview",
+    value: 5,
+  },
+  {
+    name: "gpt-4-turbo-preview",
+    value: 6,
+  },
+  {
+    name: "gpt-4-vision-preview",
+    value: 7,
   }
 ];
 

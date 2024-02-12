@@ -373,28 +373,21 @@ const LLMTool = () => {
   }, [outputfileInputRef])
 
   const handleClearData = useCallback(() => {
-    setTextBoxes([0,1,2])
+    setTextBoxes([0,0])
     setTextBoxesData([
       {
         type: 0,
         text: ""
       },
       {
-        type: 1,
-        dataSource: "",
-        output: ""
-      },
-      {
-        type: 2,
-        text: "",
-        dataSource: "",
-        output: ""
-      },
+        type: 0,
+        text: ""
+      }
     ])
     setIsEnableGPT(0)
     setIsRemoveDuplicated(0)
     setMaxRow(10)
-    setTimeMax(100)
+    setTimeMax(10)
     setTokenMax(10)
     setRowInject("")
     setOutputdata([])
@@ -766,7 +759,32 @@ const SampleSplitter = ({ id = "drag-bar", dir, isDragging, ...props }) => {
 
 const PromptTextBox = ({boxIndex, data, handleChangeTextBoxData}) => {
   const fileInputRef = useRef(null);
-  const [text, setText] = useState();
+  const [text, setText] = useState(data && data.text ? data.text : '');
+  const [selectionStart, setSelectionStart] = useState(0);
+  const [selectionEnd, setSelectionEnd] = useState(0);
+  const textareaRef = useRef(null);
+
+  useEffect(() => {
+    if (textareaRef.current) {
+      // Save current selection range
+      const { selectionStart, selectionEnd } = textareaRef.current;
+      setSelectionStart(selectionStart);
+      setSelectionEnd(selectionEnd);
+    }
+    // Update text state with new data text
+    setText(data && data.text ? data.text : '');
+  }, [data]);
+
+  useEffect(() => {
+    if (textareaRef.current) {
+      // Restore selection range after text update
+      textareaRef.current.setSelectionRange(selectionStart, selectionEnd);
+    }
+  }, [selectionStart, selectionEnd]);
+
+  const handleTextChange = (e) => {
+    setText(e.target.value);
+  };
 
   useEffect(() => {
     handleChangeTextBoxData(boxIndex, {type:0, text})
@@ -851,6 +869,7 @@ const PromptTextBox = ({boxIndex, data, handleChangeTextBoxData}) => {
         }}
       >
         <textarea
+          ref={textareaRef}
           style={{
             resize: "none",
             width: "75%",
@@ -859,8 +878,8 @@ const PromptTextBox = ({boxIndex, data, handleChangeTextBoxData}) => {
             border: "none",
             borderRight: "solid 1px grey",
           }}
-          value={data && Object.keys(data).includes("text") ? data.text : ""}
-          onChange={(e) => setText(e.target.value)}
+          value={text}
+          onChange={handleTextChange}
           placeholder={"Enter Prompt Text..."}
         />
         <div
@@ -894,8 +913,47 @@ const PromptTextBox = ({boxIndex, data, handleChangeTextBoxData}) => {
 
 const DataSourceTextBox = ({boxIndex, data, handleChangeTextBoxData}) => {
   const fileInputRef = useRef(null);
-  const [dataSource, setDataSource] = useState()
-  const [output, setOutput] = useState()
+  const [dataSource, setDataSource] = useState(data && data.dataSource ? data.dataSource : '')
+  const [output, setOutput] = useState(data && data.output ? data.output : '')
+  const [selectionStart1, setSelectionStart1] = useState(0);
+  const [selectionEnd1, setSelectionEnd1] = useState(0);
+  const textareaRef1 = useRef(null);
+  const [selectionStart2, setSelectionStart2] = useState(0);
+  const [selectionEnd2, setSelectionEnd2] = useState(0);
+  const textareaRef2 = useRef(null);
+
+  useEffect(() => {
+    if (textareaRef1.current) {
+      // Save current selection range
+      const { selectionStart1, selectionEnd1 } = textareaRef1.current;
+      setSelectionStart1(selectionStart1);
+      setSelectionEnd1(selectionEnd1);
+    }
+
+    if (textareaRef2.current) {
+      // Save current selection range
+      const { selectionStart2, selectionEnd2 } = textareaRef2.current;
+      setSelectionStart2(selectionStart2);
+      setSelectionEnd2(selectionEnd2);
+    }
+    // Update text state with new data text
+    setDataSource(data && data.dataSource ? data.dataSource : '')
+    setOutput(data && data.output ? data.output : '')
+  }, [data]);
+
+  useEffect(() => {
+    if (textareaRef1.current) {
+      // Restore selection range after text update
+      textareaRef1.current.setSelectionRange(selectionStart1, selectionEnd1);
+    }
+  }, [selectionStart1, selectionEnd1]);
+
+  useEffect(() => {
+    if (textareaRef2.current) {
+      // Restore selection range after text update
+      textareaRef2.current.setSelectionRange(selectionStart2, selectionEnd2);
+    }
+  }, [selectionStart2, selectionEnd2]);
 
   useEffect(() => {
     handleChangeTextBoxData(boxIndex, {type:1, dataSource, output})
@@ -985,6 +1043,7 @@ const DataSourceTextBox = ({boxIndex, data, handleChangeTextBoxData}) => {
       >
         <div style={{width: "75%", borderRight: "solid 1px grey"}}>
           <textarea
+            ref={textareaRef1}
             style={{
               resize: "none",
               width: "100%",
@@ -992,11 +1051,12 @@ const DataSourceTextBox = ({boxIndex, data, handleChangeTextBoxData}) => {
               padding: "4px",
               border: "none"
             }}
-            value={data && Object.keys(data).includes("dataSource") ? data.dataSource : ""}
+            value={dataSource}
             onChange={(e) => setDataSource(e.target.value)}
             placeholder={"Enter Data Source Address..."}
           />
           <textarea
+            ref={textareaRef2}
             style={{
               resize: "none",
               width: "100%",
@@ -1005,7 +1065,7 @@ const DataSourceTextBox = ({boxIndex, data, handleChangeTextBoxData}) => {
               border: "none",
               borderTop: "solid 1px grey",
             }}
-            value={data && Object.keys(data).includes("output") ? data.output : ""}
+            value={output}
             onChange={(e) => setOutput(e.target.value)}
             placeholder={"Enter Data Source OutPut..."}
           />
@@ -1041,9 +1101,66 @@ const DataSourceTextBox = ({boxIndex, data, handleChangeTextBoxData}) => {
 
 const QueryTextBox = ({boxIndex, data, handleChangeTextBoxData}) => {
   const fileInputRef = useRef(null);
-  const [text, setText] = useState();
-  const [dataSource, setDataSource] = useState()
-  const [output, setOutput] = useState()
+  const [text, setText] = useState(data && data.text ? data.text : '');
+  const [dataSource, setDataSource] = useState(data && data.dataSource ? data.dataSource : '')
+  const [output, setOutput] = useState(data && data.output ? data.output : '')
+  const [selectionStart1, setSelectionStart1] = useState(0);
+  const [selectionEnd1, setSelectionEnd1] = useState(0);
+  const textareaRef1 = useRef(null);
+  const [selectionStart2, setSelectionStart2] = useState(0);
+  const [selectionEnd2, setSelectionEnd2] = useState(0);
+  const textareaRef2 = useRef(null);
+  const [selectionStart3, setSelectionStart3] = useState(0);
+  const [selectionEnd3, setSelectionEnd3] = useState(0);
+  const textareaRef3 = useRef(null);
+
+  useEffect(() => {
+    if (textareaRef1.current) {
+      // Save current selection range
+      const { selectionStart1, selectionEnd1 } = textareaRef1.current;
+      setSelectionStart1(selectionStart1);
+      setSelectionEnd1(selectionEnd1);
+    }
+
+    if (textareaRef2.current) {
+      // Save current selection range
+      const { selectionStart2, selectionEnd2 } = textareaRef2.current;
+      setSelectionStart2(selectionStart2);
+      setSelectionEnd2(selectionEnd2);
+    }
+
+    if (textareaRef3.current) {
+      // Save current selection range
+      const { selectionStart3, selectionEnd3 } = textareaRef3.current;
+      setSelectionStart3(selectionStart3);
+      setSelectionEnd3(selectionEnd3);
+    }
+    // Update text state with new data text
+    setDataSource(data && data.dataSource ? data.dataSource : '');
+    setText(data && data.text ? data.text : '');
+    setOutput(data && data.output ? data.output : '')
+  }, [data]);
+
+  useEffect(() => {
+    if (textareaRef1.current) {
+      // Restore selection range after text update
+      textareaRef1.current.setSelectionRange(selectionStart1, selectionEnd1);
+    }
+  }, [selectionStart1, selectionEnd1]);
+
+  useEffect(() => {
+    if (textareaRef2.current) {
+      // Restore selection range after text update
+      textareaRef2.current.setSelectionRange(selectionStart2, selectionEnd2);
+    }
+  }, [selectionStart2, selectionEnd2]);
+
+  useEffect(() => {
+    if (textareaRef3.current) {
+      // Restore selection range after text update
+      textareaRef3.current.setSelectionRange(selectionStart3, selectionEnd3);
+    }
+  }, [selectionStart3, selectionEnd3]);
 
   useEffect(() => {
     handleChangeTextBoxData(boxIndex, {type:2, text, dataSource, output})
@@ -1136,6 +1253,7 @@ const QueryTextBox = ({boxIndex, data, handleChangeTextBoxData}) => {
       >
         <div style={{width: "75%", borderRight: "solid 1px grey"}}>
           <textarea
+            ref={textareaRef1}
             style={{
               resize: "none",
               width: "100%",
@@ -1143,11 +1261,12 @@ const QueryTextBox = ({boxIndex, data, handleChangeTextBoxData}) => {
               padding: "4px",
               border: "none",
             }}
-            value={data && Object.keys(data).includes("text") ? data.text : ""}
+            value={text}
             onChange={(e) => setText(e.target.value)}
             placeholder={"Enter Query Text..."}
           />
           <textarea
+            ref={textareaRef2}
             style={{
               resize: "none",
               width: "100%",
@@ -1156,11 +1275,12 @@ const QueryTextBox = ({boxIndex, data, handleChangeTextBoxData}) => {
               border: "none",
               borderTop: "solid 1px grey",
             }}
-            value={data && Object.keys(data).includes("dataSource") ? data.dataSource : ""}
+            value={dataSource}
             onChange={(e) => setDataSource(e.target.value)}
             placeholder={"Enter Data Source Address..."}
           />
           <textarea
+            ref={textareaRef3}
             style={{
               resize: "none",
               width: "100%",
@@ -1169,7 +1289,7 @@ const QueryTextBox = ({boxIndex, data, handleChangeTextBoxData}) => {
               border: "none",
               borderTop: "solid 1px grey",
             }}
-            value={data && Object.keys(data).includes("output") ? data.output : ""}
+            value={output}
             onChange={(e) => setOutput(e.target.value)}
             placeholder={"Enter Data Source OutPut..."}
           />

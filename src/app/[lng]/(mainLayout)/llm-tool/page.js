@@ -192,13 +192,13 @@ const LLMTool = () => {
       outputData.map((data, index) => {
         if(data.label || data.text) {
           if(!isDataAdded) {
-            dataString +=  `Data:\n`;
+            dataString +=  `BEGIN PDB(Previous Data Block//This is the data you produced on the last iteration of this prompt. Do not items duplicate in this response.\n`;
             isDataAdded = true;
           }
           dataString += `ID: ${(index + 1)}: Label: ${data.label}\n`;
           dataString += `ID: ${(index + 1)}: Data: ${data.text}\n`;
           if(index === outputData.length - 1) {
-            dataString += `\n\n`;
+            dataString += `\n\nEND PDB`;
           }
         }
       })
@@ -412,6 +412,7 @@ const LLMTool = () => {
   const clearOutputData = useCallback(() => {
     setOutputdata([]);
     setCurrentLoop(0);
+    setDataString("");
   }, [outputData])
 
   const handleLoadOutputData = (event) => {

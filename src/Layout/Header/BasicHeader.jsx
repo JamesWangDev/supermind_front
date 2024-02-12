@@ -30,7 +30,7 @@ const BasicHeader = () => {
         </div>
       </div>
 
-      <div className='container-fluid-lg'>
+      <div className='container-fluid-lg mt-4'>
         <Row>
           <HeaderCategory />
         </Row>

@@ -88,7 +88,7 @@ header {
       top: 0;
       left: 0;
       width: 100%;
-      background-color: $white;
+      background-color: $background;
       color: $title-color;
       box-shadow: 0 8px 10px rgba($title-color, 0.05);
       z-index: 6;
@@ -496,7 +496,8 @@ header {
   }
 
   .top-nav {
-    padding: 24px 0;
+    padding: 20px 0;
+    background-color: #28243D;
 
     @include mq-max(md) {
       padding: 14px 0;
@@ -534,13 +535,13 @@ header {
         }
 
         .location-box {
-          border-radius: 5px;
-          border: 1px solid $border-color;
+          border-radius: 10px;
+          // border: 1px solid $border-color;
           display: flex;
           align-items: center;
-          padding: 7px;
+          // padding: 7px;
           padding-right: 20px;
-          margin-right: 13px;
+          margin-right: 30px;
           position: relative;
 
           body[dir='rtl'] & {
@@ -613,7 +614,9 @@ header {
               padding-right: unset;
               background-position: right center;
               cursor: pointer;
-              background-color: $white;
+              background-color: $primary;
+              border-top-left-radius: 10px;
+              border-bottom-left-radius: 10px;
 
               body[dir='rtl'] & {
                 background-position: left center;
@@ -631,7 +634,7 @@ header {
 
             svg {
               margin-left: 17px;
-              color: $content-color;
+              color: $title-color;
 
               body[dir='rtl'] & {
                 margin-left: unset;
@@ -2015,13 +2018,14 @@ header {
 
   .location-box {
     border-radius: 5px;
-    border: 1px solid $border-color;
+    // border: 1px solid $border-color;
     display: flex;
     align-items: center;
-    padding: 7px;
-    padding-right: 20px;
+    // padding: 7px;
+    // padding-right: 20px;
     margin-right: 13px;
     position: relative;
+    background-color: $primary;
 
     @include mq-max(xl) {
       margin-right: unset;

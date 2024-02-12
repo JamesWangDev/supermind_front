@@ -25,7 +25,7 @@ const OurBlog = () => {
       ) : (
         <NoDataFound
           data={{
-            customClass: 'bg-light no-data-added',
+            customClass: 'bg-second border-10 no-data-added',
             title: 'No Blog Found',
           }}
         />

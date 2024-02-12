@@ -43,7 +43,7 @@ const TrendingProduct = ({ dataAPI }) => {
               ))}
           </ul>
         ) : (
-          <NoDataFound data={{ customClass: 'no-data-added bg-light', title: 'No Product Found' }} />
+          <NoDataFound data={{ customClass: 'no-data-added bg-second border-10', title: 'No Product Found' }} />
         )}
       </div>
     </div>

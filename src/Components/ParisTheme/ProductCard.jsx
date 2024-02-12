@@ -71,7 +71,7 @@ const ProductCard = ({ dataAPI }) => {
               classes={{ sliderClass: 'slider-3-blog ratio_65 no-arrow product-wrapper', sliderOption: featureBlogSliderOption }}
             />
           ) : (
-            <NoDataFound data={{ customClass: 'bg-light no-data-added', title: 'No Blog Found' }} />
+            <NoDataFound data={{ customClass: 'bg-second border-10 no-data-added', title: 'No Blog Found' }} />
           )}
         </>
       )}

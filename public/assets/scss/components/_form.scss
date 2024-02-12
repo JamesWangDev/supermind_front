@@ -333,6 +333,7 @@ input[type='number'] {
 }
 
 .form-select {
+  --bs-form-select-bg-img: url("../../images/light-down-arrow.svg");
   body[dir='rtl'] & {
     background-position: left 0.75rem center;
   }

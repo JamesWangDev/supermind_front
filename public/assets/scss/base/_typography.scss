@@ -1,13 +1,14 @@
 /**=====================
      Typography scss
 ==========================**/
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
 body {
-    font-family: $public-sans;
+    font-family: "Poppins", sans-serif;
     position: relative;
     font-size: 14px;
     color: $title-color;
     margin: 0;
-    background-color: $white;
+    background-color: $background;
     transition: all 0.3s ease-in-out;
     padding-right: 0 !important;
 
@@ -15,6 +16,18 @@ body {
         color: #fff;
         background-color: var(--theme-color);
     }
+}
+
+.bg-default {
+    background-color: $background;
+}
+
+.bg-second {
+    background-color: $secondBg;
+}
+
+.border-10 {
+    border-radius: 10px;
 }
 
 .bg-overlay {

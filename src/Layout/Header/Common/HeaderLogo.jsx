@@ -56,7 +56,7 @@ const HeaderLogo = () => {
         </span>
       </Btn>
       <Link href='/' className='web-logo nav-logo'>
-        {isImage ? <Image src={logo} className="img-fluid" alt='Header' height={28} width={162} /> : <img src={logo ? logo : logoImage} className="img-fluid" alt='Header' height={28} width={162} />}
+        {isImage ? <Image src={logo} className="img-fluid" alt='Header' height={64} width={162} /> : <img src={logo ? logo : logoImage} className="img-fluid" alt='Header' height={28} width={162} />}
       </Link>
     </>
   );

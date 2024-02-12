@@ -24,7 +24,7 @@ const ProductSection4 = ({ dataAPI, ProductData, svgUrl, noCustomClass, customCl
           </div>
         </div>
       ) : (
-        <NoDataFound data={{ customClass: 'bg-light no-data-added', title: 'No Product Found' }} />
+        <NoDataFound data={{ customClass: 'bg-second border-10 no-data-added', title: 'No Product Found' }} />
       )}
     </>
   );

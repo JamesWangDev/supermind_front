@@ -11,7 +11,7 @@ const RomeFeatureBlog = ({ dataAPI }) => {
       {dataAPI?.featured_blogs?.blog_ids?.length > 0 ? (
         <FeatureBlog dataAPI={dataAPI?.featured_blogs} classes={{ sliderClass: 'slider-3 arrow-slider', sliderOption: romeBlogSliderOption, ratioClass: 'ratio_65' }} />
       ) : (
-        <NoDataFound data={{ customClass: 'bg-light no-data-added', title: 'No Blog Found' }} />
+        <NoDataFound data={{ customClass: 'bg-second border-10 no-data-added', title: 'No Blog Found' }} />
       )}
     </WrapperComponent>
   );

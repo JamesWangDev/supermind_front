@@ -364,9 +364,9 @@
 }
 
 .category-menu {
-  background-color: $light-gray;
+  background-color: $secondBg;
   padding: calc(12px + (33 - 12) * ((100vw - 320px) / (1920 - 320)));
-  border-radius: 5px;
+  border-radius: 10px;
 
   &-2 {
     background: linear-gradient(136.8deg, #f6f5f2 17.01%, #fdf7f0 93.97%);

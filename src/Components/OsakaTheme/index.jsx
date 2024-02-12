@@ -70,7 +70,7 @@ const OsakaTheme = () => {
               </Col>
             </Row>
           ) : (
-            <NoDataFound data={{ customClass: 'bg-light no-data-added', title: 'No Blog Found' }} />
+            <NoDataFound data={{ customClass: 'bg-second border-10 no-data-added', title: 'No Blog Found' }} />
           )}
         </WrapperComponent>
       )}

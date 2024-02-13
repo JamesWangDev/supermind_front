@@ -10,7 +10,7 @@
 .home-contain {
   overflow: hidden;
   position: relative;
-  border-radius: 10px;
+  border-radius: 30px;
 
   .home-detail {
     @include pseudowh;
@@ -288,7 +288,7 @@
   }
 
   .home-contain {
-    border-radius: 10px;
+    border-radius: 30px;
     overflow: hidden;
     position: relative;
 

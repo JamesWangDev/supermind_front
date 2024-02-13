@@ -22,7 +22,7 @@ const ProductSection = ({ dataAPI }) => {
                 <OfferBanner classes={{ customClass: 'ratio_medium section-t-space' }} imgUrl={bannerTwo} elem={dataAPI?.main_content?.sidebar?.left_side_banners?.banner_2} />
               </>
             )}
-            <TrendingProduct dataAPI={dataAPI} />
+            {/* <TrendingProduct dataAPI={dataAPI} /> */}
           </div>
         </Col>
       )}

@@ -21,7 +21,7 @@ const FooterUseFul = ({ footerMenu, setFooterMenu }) => {
           {themeOption?.footer?.useful_link?.length > 0 ? (
             themeOption?.footer?.useful_link?.map((elem, i) => (
               <li key={i}>
-                <Link href={`/${i18Lang}/${elem.value}`} className='text-content text-capitalize'>
+                <Link href={`/${i18Lang}/${elem.value}`} className='text-title text-capitalize'>
                   {elem.name}
                 </Link>
               </li>

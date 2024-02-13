@@ -2,7 +2,7 @@
      Footer scss
 ==========================**/
 footer {
-  background-color: $light-gray;
+  background-color: $secondBg;
   position: relative;
   z-index: unset;
 
@@ -119,7 +119,7 @@ footer {
 
         p {
           font-size: calc(14px + (16 - 14) * ((100vw - 320px) / (1920 - 320)));
-          color: $content-color;
+          color: $title-color;
           line-height: 27px;
           margin-bottom: 0;
           width: 88%;
@@ -466,7 +466,7 @@ footer {
             svg {
               font-size: 22px;
               margin-top: 3px;
-              color: $content-color;
+              color: $title-color;
             }
 
             .contact-number {
@@ -606,7 +606,8 @@ footer {
               a,
               i,
               svg {
-                color: #bfbfbf;
+                color: #fff;
+                stroke: #fff;
               }
             }
           }
@@ -623,7 +624,7 @@ footer {
         ul {
           li {
             a {
-              color: #bfbfbf;
+              color: #fff;
             }
           }
         }
@@ -638,12 +639,12 @@ footer {
 
             .footer-number {
               svg {
-                color: #bfbfbf;
+                color: #fff;
               }
 
               .contact-number {
                 h6 {
-                  color: #bfbfbf;
+                  color: #fff;
                 }
 
                 h5 {
@@ -682,7 +683,7 @@ footer {
 
       .footer-logo-contain {
         p {
-          color: #bfbfbf;
+          color: #fff;
           margin-top: calc(18px + (30 - 18) * ((100vw - 320px) / (1920 - 320)));
         }
       }

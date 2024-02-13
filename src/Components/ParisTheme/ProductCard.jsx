@@ -26,11 +26,12 @@ const ProductCard = ({ dataAPI }) => {
           svgUrl={<LeafSVG className='icon-width' />}
           noCustomClass={true}
           classObj={{ productStyle: 'product-modern', productBoxClass: '' }}
+          isHeadingVisible={false}
         />
       )}
       {dataAPI?.main_content?.section2_categories_list?.status && (
         <ProductSection2
-          isHeadingVisible={true}
+          isHeadingVisible={false}
           dataAPI={dataAPI?.main_content?.section2_categories_list}
           svgUrl={<LeafSVG className='icon-width' />}
           classes={{ sliderOption: categorySliderOption }}

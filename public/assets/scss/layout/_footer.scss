@@ -150,14 +150,14 @@ footer {
 
             svg {
               @include pseudowh($width: 18px, $height: 18px);
-              stroke: $content-color;
+              stroke: #dddddd;
               font-size: 22px;
-              color: $content-color;
+              color: #dddddd;
             }
 
             a {
               margin: 0 0 0 10px;
-              color: $content-color;
+              color: #dddddd;
               line-height: 18px;
               font-size: calc(14px + (16 - 14) * ((100vw - 320px) / (1920 - 320)));
 
@@ -545,11 +545,11 @@ footer {
 
           a {
             display: block;
-            color: $content-color;
+            color: $title-color;
 
             svg {
               font-size: calc(15px + (17 - 15) * ((100vw - 320px) / (1920 - 320)));
-              color: $content-color;
+              color: $title-color;
               transition: all 0.3s ease-in-out;
             }
           }

@@ -14,7 +14,7 @@ const FooterSocial = () => {
     <>
       {isFooterSocial ? (
         <div className='social-link'>
-          <h6 className='text-content'>{t('Stayconnected')} :</h6>
+          <h6 className='text-title'>{t('Stayconnected')} :</h6>
           <ul>
             {themeOption?.footer?.facebook && (
               <li>

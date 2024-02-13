@@ -10,7 +10,7 @@ const SubFooter = () => {
     <div className='sub-footer section-small-space'>
       {themeOption?.footer?.footer_copyright && (
         <div className='reserve'>
-          <h6 className='text-content'>{themeOption?.footer?.copyright_content}</h6>
+          <h6 className='text-title'>{themeOption?.footer?.copyright_content}</h6>
         </div>
       )}
 

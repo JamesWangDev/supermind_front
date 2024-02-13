@@ -30,6 +30,10 @@ body {
     border-radius: 10px;
 }
 
+.border-30 {
+    border-radius: 30px;
+}
+
 .bg-overlay {
     @include pseudowh($width: 100vw, $height: 100vh);
     background-color: $title-color;

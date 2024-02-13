@@ -34,7 +34,7 @@ const ProductSection1 = ({ dataAPI, ProductData, svgUrl, noCustomClass = false, 
       ) : (
         <NoDataFound
           data={{
-            customClass: 'bg-second border-10 no-data-added',
+            customClass: 'bg-second border-30 no-data-added',
             title: 'No Product Found',
           }}
         />

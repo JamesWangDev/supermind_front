@@ -10,7 +10,7 @@ const NewsLetter = ({ dataAPI }) => {
   const { i18Lang } = useContext(I18NextContext);
   const { t } = useTranslation(i18Lang, 'common');
   return (
-    <WrapperComponent classes={{ sectionClass: 'newsletter-section section-b-space section-t-space' }} noRowCol={true}>
+    <WrapperComponent classes={{ sectionClass: 'newsletter-section' }} noRowCol={true}>
       <div className='newsletter-box newsletter-box-2' style={{ backgroundImage: `url(${dataAPI?.image_url})` }}>
         <div className='newsletter-contain py-5'>
           <Container fluid={true}>

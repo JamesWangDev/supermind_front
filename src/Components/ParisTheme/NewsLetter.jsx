@@ -21,10 +21,10 @@ const NewsLetter = ({ dataAPI }) => {
                   <h5>{dataAPI?.sub_title}</h5>
                   <div className='input-box'>
                     <Input type='email' placeholder='Enter Your Email' />
-                    <div className="mail-icon">
+                    {/* <div className="mail-icon">
                       <RiMailLine />
-                    </div>
-                    <Btn className='sub-btn btn-animation'>
+                    </div> */}
+                    <Btn className='sub-btn'>
                       <span className='d-sm-block d-none'>{t('Subscribe')}</span>
                       <RiArrowRightLine />
                     </Btn>

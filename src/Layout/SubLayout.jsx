@@ -47,7 +47,7 @@ const SubLayout = ({ children }) => {
       <MainHeader />
       <MobileMenu />
       {children}
-      <TapTop />
+      {/* <TapTop /> */}
       <MainFooter />
       <CookiesComponent />
       <StickyCompare />

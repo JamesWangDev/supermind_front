@@ -15,7 +15,7 @@ const HeaderContactUs = () => {
           <RiPhoneLine />
         </div>
         <div className='delivery-detail'>
-          <h6>{t('24/7Delivery')}</h6>
+          {/* <h6>{t('24/7Delivery')}</h6> */}
           <h5>{themeOption?.header?.support_number}</h5>
         </div>
       </a>

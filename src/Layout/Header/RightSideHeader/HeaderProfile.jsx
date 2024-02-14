@@ -49,9 +49,9 @@ const HeaderProfile = () => {
           )}
         </div>
         <div className='delivery-detail'>
-          <h6>
+          {/* <h6>
             {t('Hi')}, {accountData?.name ?? t('User')}
-          </h6>
+          </h6> */}
           <h5>{t('MyAccount')}</h5>
         </div>
       </div>

@@ -659,17 +659,20 @@ header {
             ::placeholder {
               font-size: 16px;
               font-weight: 400;
-              color: $content-color;
+              color: $second-title;
             }
 
             .form-control {
               width: 577px;
-              border-radius: 5px 0 0 5px;
+              border-radius: 10px 0 0 10px;
               color: $title-color;
               border-color: $border-color;
+              border: none;
+              background-color: #443F63;
+              padding-left: 24px;
 
               body[dir='rtl'] & {
-                border-radius: 0 5px 5px 0;
+                border-radius: 0 10px 10px 0;
               }
 
               @media (max-width: 1812px) {
@@ -678,11 +681,11 @@ header {
             }
 
             button {
-              background-color: #ffa53b;
+              background-color: #443F63;
               color: #ffffff;
-              padding: 14px 20px;
-              border-radius: 5px;
-              border: 1px solid #ffa53b;
+              padding: 14px 24px;
+              border-radius: 10px;
+              border: none;
 
               body[dir='rtl'] & {
                 border-radius: 5px 0 0 5px !important;
@@ -791,7 +794,7 @@ header {
 
               .delivery-icon {
                 svg {
-                  color: $content-color;
+                  color: $white;
                   margin-right: 14px;
                   font-size: 24px;
 
@@ -845,7 +848,7 @@ header {
 
               svg {
                 font-size: 24px;
-                color: $content-color;
+                color: $white;
               }
 
               &:focus {

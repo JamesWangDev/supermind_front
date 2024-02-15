@@ -2,7 +2,7 @@
      Breadcrumb scss
 ==========================**/
 .breadscrumb-section {
-  background-color: $light-gray;
+  background-color: $background;
   position: relative;
   overflow: hidden;
 
@@ -24,6 +24,7 @@
       font-weight: 700;
       font-size: calc(16px + (22 - 16) * ((100vw - 320px) / (1920 - 320)));
       margin-bottom: 0;
+      overflow: visible;
 
       @include mq-max(md) {
         text-align: center;
@@ -84,12 +85,12 @@
           font-weight: 500;
 
           svg {
-            color: $content-color;
+            color: $title-color;
             font-size: 20px;
           }
 
           &.active {
-            color: $black;
+            color: $white;
             line-height: 1;
             margin-top: 2px;
             display: flex;
@@ -108,7 +109,7 @@
             &::before {
               @include remixicon;
               content: "\ea6e";
-              color: $content-color;
+              color: $title-color;
               float: unset;
               font-size: 18px;
               padding-right: 8px;
@@ -274,7 +275,7 @@
 .faq-breadscrumb {
   background-color: $light-gray;
   position: relative;
-  overflow: hidden;
+  overflow: auto;
 
   .breadscrumb-contain {
     padding: calc(26px + (60 - 26) * ((100vw - 320px) / (1920 - 320))) 0;

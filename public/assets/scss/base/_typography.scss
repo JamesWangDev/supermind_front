@@ -67,13 +67,13 @@ p {
 }
 
 a {
-    color: var(--theme-color);
+    color: $primary;
     transition: 0.5s ease;
     text-decoration: none;
     cursor: pointer;
 
     &:hover {
-        text-decoration: none;
+        text-decoration: underline;
         transition: 0.5s ease;
     }
 
@@ -99,7 +99,7 @@ button {
 }
 
 .form-control {
-    background-color: $white;
+    background-color: $thirdBG;
 
     &:focus {
         box-shadow: none;
@@ -153,6 +153,10 @@ h6 {
 
 span {
     display: inline-block;
+}
+
+input {
+    color: rgba(255, 255, 255, 0.70) !important;
 }
 
 .theme-color {

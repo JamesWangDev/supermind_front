@@ -160,10 +160,10 @@ input {
 }
 
 .theme-color {
-    color: var(--theme-color) !important;
+    color: $primary !important;
 }
 
 .theme-bg-color {
-    background: var(--theme-color) !important;
+    background: $primary !important;
     color: #fff !important;
 }

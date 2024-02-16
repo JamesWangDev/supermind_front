@@ -4676,7 +4676,7 @@
   margin-bottom: 22px;
 
   h3 {
-    font-size: 20px;
+    font-size: 24px;
     line-height: 1.3;
     position: relative;
     font-weight: 600;
@@ -4693,8 +4693,8 @@
 
 .user-dashboard-section {
   .dashboard-left-sidebar {
-    background: $light-gray;
-    box-shadow: 0 0 8px rgba($title-color, 0.14);
+    background: $secondBg;
+    // box-shadow: 0 0 8px rgba($title-color, 0.14);
     border-radius: 10px;
     overflow: hidden;
     position: sticky;
@@ -4881,10 +4881,10 @@
 
           &.active,
           .show>.nav-link {
-            border-left: 3px solid var(--theme-color);
+            border-left: 3px solid $primary;
             font-weight: 600;
             background-color: transparent;
-            color: var(--theme-color);
+            color: $primary;
 
             body[dir="rtl"] & {
               border-left: unset;
@@ -4896,7 +4896,7 @@
               @include pos;
               top: 0;
               left: 0;
-              background: var(--theme-color);
+              background: $primary;
               z-index: -1;
               opacity: 0.1;
             }
@@ -4917,7 +4917,7 @@
   }
 
   .dashboard-right-sidebar {
-    background-color: $light-gray;
+    background-color: $secondBg;
     padding: calc(20px + (40 - 20) * ((100vw - 320px) / (1920 - 320)));
     border-radius: 8px;
     height: 100%;
@@ -4928,7 +4928,7 @@
 
     .dashboard-bg-box {
       padding: calc(12px + (20 - 12) * ((100vw - 320px) / (1920 - 320)));
-      background-color: $white;
+      background-color: $thirdBG;
       border-radius: 6px;
 
       +.dashboard-bg-box {
@@ -4956,10 +4956,10 @@
 
         .total-contain {
           @include flex_wrap($dis: flex, $wrap: nowrap, $gap: 15px);
-          background-color: $white;
+          background-color: $thirdBG;
           padding: calc(16px + (25 - 16) * ((100vw - 320px) / (1920 - 320)));
           border-radius: 9px;
-          box-shadow: 0 0 8px rgba($title-color, 0.08);
+          // box-shadow: 0 0 8px rgba($title-color, 0.08);
           align-items: center;
           position: relative;
           overflow: hidden;
@@ -5001,7 +5001,7 @@
           .total-detail {
             h5 {
               margin-bottom: calc(3px + (7 - 3) * ((100vw - 320px) / (1920 - 320)));
-              color: $content-color;
+              color: $title-color;
               @include line;
               font-size: calc(14px + (16 - 14) * ((100vw - 320px) / (1920 - 320)));
             }
@@ -5204,7 +5204,7 @@
       .address-box {
         border-radius: 8px;
         padding: calc(12px + (24 - 12) * ((100vw - 320px) / (1920 - 320)));
-        background-color: $white;
+        background-color: $thirdBG;
         box-shadow: 0 0 9px rgba($black, 0.07);
         position: relative;
         height: 100%;
@@ -5218,7 +5218,7 @@
             position: absolute;
             top: 0;
             right: 0;
-            background-color: var(--theme-color);
+            background-color: $primary;
             padding: 2px 8px;
             border-radius: 4px;
             color: $white;
@@ -5267,7 +5267,7 @@
                   border: none;
                   font-size: calc(14px + (16 - 14) * ((100vw - 320px) / (1920 - 320)));
                   padding: 4px 0;
-                  color: $content-color;
+                  color: $title-color;
                   background-color: transparent;
 
                   &:first-child {
@@ -7182,7 +7182,7 @@
 }
 
 .custom-anchor {
-  color: var(--theme-color);
+  color: $primary;
   transition: 0.5s ease;
   text-decoration: none;
   cursor: pointer;

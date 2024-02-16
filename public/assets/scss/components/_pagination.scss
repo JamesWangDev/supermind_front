@@ -31,29 +31,31 @@
 
             .page-link {
                 border-radius: 5px;
-                color: $content-color;
-                border: 1px solid transparent;
+                color: $title-color;
+                border: 1px solid $primary;
                 width: 32px;
                 height: 32px;
                 padding: 0;
                 @include flex_common;
+                background-color: unset;
 
                 &:hover {
                     border-radius: 5px;
-                    border: 1px solid var(--theme-color);
-                    background-color: unset;
+                    border: 1px solid $primary;
+                    background-color: $thirdBG;
                 }
 
                 &:focus {
-                    color: var(--theme-color);
-                    background-color: #fff;
+                    color: $primary;
+                    background-color: unset;
                     box-shadow: none;
-                    border-color: var(--theme-color);
+                    border-color: $primary;
+                    border: 1px solid $primary;
                 }
 
                 &.active {
-                    background-color: var(--theme-color);
-                    border-color: var(--theme-color);
+                    background-color: $primary;
+                    border-color: $primary;
                     color: #fff;
                 }
 

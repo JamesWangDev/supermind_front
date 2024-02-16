@@ -140,11 +140,11 @@ footer {
 
             &:hover {
               a {
-                color: var(--theme-color);
+                color: $primary;
               }
 
               svg {
-                color: var(--theme-color);
+                color: $primary;
               }
             }
 
@@ -274,7 +274,7 @@ footer {
               @include pseudowh($width: 0, $height: 2px);
               left: 0;
               bottom: 0;
-              background-color: var(--theme-color);
+              background-color: $primary;
               transition: all 0.3s ease-in-out;
 
               body[dir='rtl'] & {
@@ -288,7 +288,7 @@ footer {
               @include center(vertical);
               @include pseudowh($width: 5px, $height: 5px);
               left: -13px;
-              background-color: var(--theme-color);
+              background-color: $primary;
               border-radius: 100%;
               opacity: 0;
               transition: all 0.3s ease-in-out;
@@ -300,7 +300,7 @@ footer {
             }
 
             &:hover {
-              color: var(--theme-color);
+              color: $primary;
               margin-left: 13px;
 
               body[dir='rtl'] & {

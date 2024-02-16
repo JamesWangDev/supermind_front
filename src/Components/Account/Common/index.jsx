@@ -2,7 +2,7 @@ import React, { useContext } from 'react';
 import Image from 'next/image';
 import Btn from '@/Elements/Buttons/Btn';
 import AccountContext from '@/Helper/AccountContext';
-import coverImage from '../../../../public/assets/images/inner-page/cover-img.jpg';
+import coverImage from '../../../../public/assets/images/inner-page/cover-img.png';
 import Avatar from '@/Components/Common/Avatar';
 
 const SidebarProfile = () => {
@@ -25,7 +25,7 @@ const SidebarProfile = () => {
 
           <div className='profile-name'>
             <h3>{accountData?.name}</h3>
-            <h6 className='text-content'>{accountData?.email}</h6>
+            <h6 className='text-title'>{accountData?.email}</h6>
           </div>
         </div>
       </div>

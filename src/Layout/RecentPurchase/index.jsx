@@ -55,7 +55,7 @@ const RecentPurchase = () => {
   }
   return (
     <Media className={`recently-purchase ${!show ? 'show' : ''}`}>
-      {product?.product_thumbnail.original_url ? <img src={product?.product_thumbnail?.original_url} className='media-height' alt={product?.name || 'product'} />
+      {product?.product_thumbnail?.original_url ? <img src={product?.product_thumbnail?.original_url} className='media-height' alt={product?.name || 'product'} />
         : <Image src={placeHolderImage} className='media-height' alt={product?.name || 'product'} height={64} width={85} />
       }
       <Media body>

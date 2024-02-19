@@ -4275,6 +4275,7 @@
 }
 
 .fresh-vegetable-section {
+  background-color: $secondBg;
   .fresh-image {
     margin-top: 30px;
     border-radius: calc(12px + (50 - 12) * ((100vw - 320px) / (1920 - 320))) 0;
@@ -4383,10 +4384,10 @@
 }
 
 .client-section {
-  background-color: $light-gray;
+  background-color: $background;
 
   .clint-contain {
-    background: $white;
+    background: $secondBg;
     padding: calc(27px + (50 - 27) * ((100vw - 320px) / (1920 - 320)));
     border-radius: calc(18px + (30 - 18) * ((100vw - 320px) / (1920 - 320)));
     position: relative;
@@ -4426,7 +4427,7 @@
       position: absolute;
       top: calc(14px + (24 - 14) * ((100vw - 320px) / (1920 - 320)));
       right: calc(24px + (34 - 24) * ((100vw - 320px) / (1920 - 320)));
-      color: $content-color;
+      color: $title-color;
       opacity: 0.05;
       font-size: calc(52px + (70 - 52) * ((100vw - 320px) / (1920 - 320)));
       font-weight: 800;
@@ -4443,7 +4444,7 @@
 
     p {
       font-size: calc(14px + (16 - 14) * ((100vw - 320px) / (1920 - 320)));
-      color: $content-color;
+      color: $title-color;
       margin: 0 auto;
       line-height: 1.7;
       margin-bottom: -5px;
@@ -4464,6 +4465,7 @@
 }
 
 .team-section {
+  background-color: $secondBg;
   .team-box {
     &:hover {
       .team-iamge {
@@ -4506,13 +4508,13 @@
       h5 {
         margin-top: 6px;
         letter-spacing: 0.5px;
-        color: $content-color;
+        color: $title-color;
       }
 
       p {
         font-size: calc(14px + (15 - 14) * ((100vw - 320px) / (1920 - 320)));
         line-height: 1.6;
-        color: $content-color;
+        color: $title-color;
         margin: 9px auto 14px;
         width: 80%;
         @include line($line: 2);
@@ -4585,10 +4587,10 @@
 }
 
 .review-section {
-  background-color: $light-gray;
+  background-color: $background;
 
   .reviewer-box {
-    background-color: $white;
+    background-color: $secondBg;
     padding: calc(18px + (34 - 18) * ((100vw - 320px) / (1920 - 320)));
     border-radius: 10px;
     z-index: 0;
@@ -4630,7 +4632,7 @@
     }
 
     p {
-      color: $content-color;
+      color: $title-color;
       line-height: 1.7;
       margin-bottom: 23px;
       font-size: calc(14px + (15 - 14) * ((100vw - 320px) / (1920 - 320)));
@@ -4662,7 +4664,7 @@
         }
 
         h6 {
-          color: $content-color;
+          color: $title-color;
           margin-top: 6px;
         }
       }

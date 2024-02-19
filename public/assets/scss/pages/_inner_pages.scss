@@ -2268,7 +2268,7 @@
           @include pseudowh($width: 70%, $height: 2px);
           bottom: -5px;
           left: 0;
-          background: var(--theme-color);
+          background: $primary;
 
           body[dir="rtl"] & {
             left: unset;
@@ -2284,7 +2284,7 @@
           $wrap: wrap,
           $gap: calc(2px + (5 - 2) * ((100vw - 320px) / (1920 - 320))));
         align-items: center;
-        background-color: $light-gray;
+        background-color: $secondBg;
         padding: calc(15px + (27 - 15) * ((100vw - 320px) / (1920 - 320))) calc(15px + (27 - 15) * ((100vw - 320px) / (1920 - 320))) calc(15px + (27 - 15) * ((100vw - 320px) / (1920 - 320))) calc(30px + (41 - 30) * ((100vw - 320px) / (1920 - 320)));
         position: relative;
         border-radius: 10px;
@@ -2300,7 +2300,7 @@
           @include center(vertical);
           position: absolute;
           left: -21px;
-          background-color: var(--theme-color);
+          background-color: $primary;
           padding: 13px;
           border-radius: 7px;
           display: inherit;
@@ -2334,7 +2334,7 @@
             margin: 0;
             font-size: calc(14px + (15 - 14) * ((100vw - 320px) / (1920 - 320)));
             line-height: 1.5;
-            color: $content-color;
+            color: $title-color;
             margin-bottom: -5px;
           }
         }
@@ -2345,11 +2345,11 @@
   .right-sidebar-box {
     padding: calc(21px + (60 - 21) * ((100vw - 320px) / (1920 - 320)));
     border-radius: 10px;
-    background-color: $light-gray;
+    background-color: $secondBg;
 
     .custom-form {
       label {
-        color: $content-color;
+        color: $title-color;
         display: block;
         font-size: 16px;
         margin-bottom: calc(3px + (8 - 3) * ((100vw - 320px) / (1920 - 320)));
@@ -2363,7 +2363,7 @@
           border: none;
 
           &:focus {
-            background-color: $white;
+            background-color: $thirdBG !important;
             border-color: transparent;
           }
         }
@@ -2390,7 +2390,7 @@
           border: none;
 
           &:focus {
-            background-color: $white;
+            background-color: $thirdBG !important;
             border-color: transparent;
           }
         }
@@ -2415,7 +2415,7 @@
           align-items: unset;
           top: 15px;
           padding: 0;
-          background-color: $white;
+          background-color: $thirdBG;
           border-color: transparent;
           line-height: unset;
           position: absolute;
@@ -2431,7 +2431,7 @@
           i,
           svg {
             font-size: calc(14px + (18 - 14) * ((100vw - 320px) / (1920 - 320)));
-            color: $content-color;
+            color: $title-color;
           }
         }
 
@@ -2441,7 +2441,8 @@
           padding-left: 57px;
           border-radius: 6px !important;
           z-index: unset;
-
+          color: $title-color;
+          
           body[dir="rtl"] & {
             padding-left: calc(12px + (15 - 12) * ((100vw - 320px) / (1920 - 320)));
             padding-right: 57px;
@@ -2449,6 +2450,11 @@
 
           &:focus {
             z-index: unset;
+            background-color: $thirdBG;
+          }
+
+          &::placeholder {
+            color: rgba(255, 255, 255, 0.70);
           }
         }
       }

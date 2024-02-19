@@ -3320,8 +3320,8 @@
       .accordion-item {
         border: none;
         padding: calc(18px + (25 - 18) * ((100vw - 320px) / (1920 - 320)));
-        background-color: $light-gray;
-        border-radius: 8px;
+        background-color: $secondBg;
+        border-radius: 10px;
 
         +.accordion-item {
           margin-top: 20px;
@@ -3329,7 +3329,7 @@
 
         .accordion-header {
           .accordion-button {
-            background-color: $light-gray;
+            background-color: $secondBg;
             color: $title-color;
             font-weight: 700;
             padding: 0;
@@ -3358,7 +3358,7 @@
         }
 
         .accordion-collapse {
-          background-color: $light-gray;
+          background-color: $secondBg;
 
           .accordion-body {
             padding: 0;
@@ -3423,7 +3423,7 @@
                       $align: center,
                       $justify: space-between);
                     margin-top: 8px;
-                    color: $content-color;
+                    color: $title-color;
                   }
                 }
               }
@@ -3456,7 +3456,7 @@
                         $justify: space-between);
 
                       h5 {
-                        color: $content-color;
+                        color: $title-color;
                         font-weight: 400;
                       }
 
@@ -3470,7 +3470,7 @@
                         @include flex_common;
                         font-size: 15px;
                         border-radius: 100%;
-                        color: #787878;
+                        color: $title-color;
                       }
                     }
                   }
@@ -3489,7 +3489,7 @@
                   transition: all 0.3s ease-in-out;
                   overflow: hidden;
                   position: relative;
-                  background-color: $white;
+                  background-color: $thirdBG;
 
                   &::after {
                     @include pos;
@@ -3498,7 +3498,7 @@
                     z-index: -1;
                     top: 0;
                     left: 0;
-                    background-color: var(--theme-color);
+                    background-color: $primary;
                     opacity: 0;
                   }
 
@@ -3516,7 +3516,7 @@
 
                   a {
                     font-size: calc(13px + (14 - 13) * ((100vw - 320px) / (1920 - 320)));
-                    color: $content-color;
+                    color: $title-color;
                     text-transform: capitalize;
                   }
                 }
@@ -3626,7 +3626,7 @@
         .super {
           display: flex;
           align-items: center;
-          color: $content-color;
+          color: $title-color;
           text-transform: uppercase;
           font-size: 13px;
           gap: 5px;
@@ -3674,7 +3674,7 @@
 
       p {
         line-height: 1.8;
-        color: $content-color;
+        color: $title-color;
         margin-bottom: 0;
         -webkit-line-clamp: 2;
         -webkit-box-orient: vertical;
@@ -3699,7 +3699,7 @@
         overflow: hidden;
         border-radius: 5px;
         padding: 10px 22px;
-        color: var(--theme-color);
+        color: $primary;
         transition: all 0.3s ease-in-out;
         margin-top: calc(8px + (22 - 8) * ((100vw - 320px) / (1920 - 320)));
         font-size: 14px;
@@ -3707,7 +3707,7 @@
 
         &:after {
           @include pos;
-          background-color: var(--theme-color);
+          background-color: $primary;
           opacity: 0.1;
           left: 0;
           top: 0;
@@ -3750,7 +3750,7 @@
         color: #ffffff;
         top: 8px;
         right: 8px;
-        background-color: var(--theme-color);
+        background-color: $primary;
         z-index: 1;
         border-radius: 6px;
         font-size: 18px;
@@ -3831,12 +3831,12 @@
       .blog-contain {
         a {
           h3 {
-            color: var(--theme-color);
+            color: $primary;
           }
         }
 
         .blog-button {
-          background-color: var(--theme-color);
+          background-color: $primary;
           color: $white;
         }
       }
@@ -3904,7 +3904,7 @@
 
       p {
         line-height: 1.8;
-        color: $content-color;
+        color: $title-color;
         margin-bottom: 0;
         -webkit-line-clamp: 4;
         -webkit-box-orient: vertical;
@@ -3923,6 +3923,8 @@
 
   .blog-detail-image {
     position: relative;
+    border-top-left-radius: 30px;
+    border-top-right-radius: 30px;
 
     .blog-image-contain {
       position: absolute;
@@ -3931,7 +3933,7 @@
       padding: 55px 15px 40px;
       text-align: center;
       background: $white;
-      background: linear-gradient(0deg, $white 0%, rgba(246, 246, 246, 0) 100%);
+      background: linear-gradient(0deg, $secondBg 0%, rgba(246, 246, 246, 0) 100%);
       color: $title-color;
 
       @include mq-max(xs) {
@@ -3947,7 +3949,7 @@
               @include pos;
               @include pseudowh($width: 15px, $height: 1px);
               @include center(vertical);
-              background-color: $title-color;
+              background-color: $thirdBG;
               left: -24px;
             }
           }
@@ -3967,7 +3969,7 @@
         @include flex_common;
         flex-wrap: wrap;
         gap: calc(10px + (23 - 10) * ((100vw - 320px) / (1920 - 320)));
-        color: #777;
+        color: $title-color;
 
         li {
           .user-list {
@@ -3985,8 +3987,13 @@
   }
 
   .blog-detail-contain {
+    background-color: $secondBg;
+    padding: 16px;
+    padding-bottom: 42px;
+    border-bottom-left-radius: 30px;
+    border-bottom-right-radius: 30px;
     p {
-      color: $content-color;
+      color: $title-color;
       font-size: calc(15px + (17 - 15) * ((100vw - 320px) / (1920 - 320)));
       line-height: calc(25px + (30 - 25) * ((100vw - 320px) / (1920 - 320)));
       margin-bottom: calc(12px + (20 - 12) * ((100vw - 320px) / (1920 - 320)));
@@ -3996,7 +4003,7 @@
           $height: calc(38px + (50 - 38) * ((100vw - 320px) / (1920 - 320))));
         @include flex_common;
         font-size: calc(55px + (70 - 55) * ((100vw - 320px) / (1920 - 320)));
-        color: $content-color;
+        color: $title-color;
         float: left;
         margin-right: calc(8px + (20 - 8) * ((100vw - 320px) / (1920 - 320)));
         margin-top: 8px;
@@ -4007,7 +4014,7 @@
       padding: calc(18px + (60 - 18) * ((100vw - 320px) / (1920 - 320))) calc(18px + (60 - 18) * ((100vw - 320px) / (1920 - 320))) calc(18px + (60 - 18) * ((100vw - 320px) / (1920 - 320))) calc(62px + (180 - 62) * ((100vw - 320px) / (1920 - 320)));
       border-radius: 10px;
       margin-bottom: calc(12px + (20 - 12) * ((100vw - 320px) / (1920 - 320)));
-      background-color: $content-color;
+      background-color: $title-color;
       position: relative;
       color: $white;
 

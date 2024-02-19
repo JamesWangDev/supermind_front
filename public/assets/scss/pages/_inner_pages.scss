@@ -1841,7 +1841,7 @@
 
                   .accordion-header {
                     .accordion-button {
-                      color: $content-color;
+                      color: $title-color;
                       position: relative;
                       padding: 0;
 
@@ -2885,7 +2885,7 @@
       p {
         margin: 17px 0 0;
         line-height: 1.6;
-        color: $content-color;
+        color: $title-color;
         @include line($line: 2);
         margin-bottom: -4px;
       }
@@ -2913,7 +2913,7 @@
       margin: calc(8px + (15 - 8) * ((100vw - 320px) / (1920 - 320))) 0 0;
       font-size: calc(13px + (15 - 13) * ((100vw - 320px) / (1920 - 320)));
       line-height: 1.5;
-      color: $content-color;
+      color: $title-color;
 
       @include mq-max(xl) {
         width: 70%;
@@ -2939,14 +2939,15 @@
       .accordion-item {
         width: 100%;
         border-radius: 7px;
-        background-color: $light-gray;
+        background-color: $thirdBG;
         border: none;
         overflow: hidden;
         z-index: 0;
 
         .accordion-header {
           .accordion-button {
-            background-color: $light-gray;
+            color: $title-color;
+            background-color: $thirdBG;
             font-size: calc(16px + 4 * (100vw - 320px) / 1600);
             font-weight: 500;
             line-height: 1.5;
@@ -2974,7 +2975,7 @@
 
             &:not(.collapsed) {
               font-weight: 700;
-              color: var(--theme-color);
+              color: $primary;
               background-color: transparent;
               box-shadow: none;
 
@@ -2997,7 +2998,7 @@
             p {
               font-size: calc(14px + (15 - 14) * ((100vw - 320px) / (1920 - 320)));
               line-height: 1.6;
-              color: $content-color;
+              color: $title-color;
               margin-bottom: calc(12px + (16 - 12) * ((100vw - 320px) / (1920 - 320)));
 
               &:last-child {

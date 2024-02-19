@@ -34,7 +34,7 @@ const SubLayout = ({ children }) => {
       let value =
         themeOption?.general?.site_title && themeOption?.general?.site_tagline
           ? `${themeOption?.general?.site_title} | ${themeOption?.general?.site_tagline}`
-          : 'FastKart Marketplace: Where Vendors Shine Together';
+          : 'Supermind Marketplace: Where Vendors Shine Together';
       document.title = value;
       clearTimeout(timer);
     }

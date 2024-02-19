@@ -22,7 +22,7 @@ const NotFoundComponent = () => {
         </Col>
         <Col xs={12}>
           <div className='contain-404'>
-            <h3 className='text-content'>{themeOption?.error_page?.error_page_content}</h3>
+            <h3 className='text-title'>{themeOption?.error_page?.error_page_content}</h3>
             <Btn id='back_button' className='btn-md text-white theme-bg-color mt-4 mx-auto'  title={themeOption?.error_page?.back_button_text} onClick={()=>router.back()} />
           </div>
         </Col>

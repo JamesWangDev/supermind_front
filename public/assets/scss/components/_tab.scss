@@ -32,7 +32,7 @@
             white-space: nowrap;
             background-color: $white;
             line-height: 1;
-            border: 1px solid var(--theme-color);
+            border: 1px solid $primary;
             padding: calc(9px + (14 - 9) * ((100vw - 320px) / (1920 - 320))) calc(14px + (30 - 14) * ((100vw - 320px) / (1920 - 320)));
             margin: 0;
             cursor: pointer;
@@ -41,7 +41,7 @@
 
             &.active,
             &:hover {
-                background-color: var(--theme-color);
+                background-color: $primary;
                 color: $white;
 
                 html.dark & {

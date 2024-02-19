@@ -388,7 +388,7 @@
           background-color: #2a2d2d;
 
           i {
-            color: var(--theme-color);
+            color: $primary;
           }
         }
       }
@@ -1244,7 +1244,7 @@ header {
 
     h2 {
       &.super-sale {
-        color: var(--theme-color) !important;
+        color: $primary !important;
       }
     }
 
@@ -1613,11 +1613,11 @@ header {
   .header-nav {
     .header-nav-right {
       .deal-button {
-        color: var(--theme-color) !important;
+        color: $primary !important;
 
         i,
         span {
-          color: var(--theme-color);
+          color: $primary;
         }
       }
     }
@@ -1781,10 +1781,10 @@ header {
             background-color: #2a2d2d;
 
             &:hover {
-              color: var(--theme-color);
+              color: $primary;
 
               i {
-                color: var(--theme-color);
+                color: $primary;
               }
             }
           }
@@ -2460,7 +2460,7 @@ header {
               &.active {
                 button {
                   color: #ffffff;
-                  background-color: var(--theme-color);
+                  background-color: $primary;
                 }
               }
 
@@ -2521,7 +2521,7 @@ header {
       .select-package {
         li {
           &.active {
-            border-color: var(--theme-color);
+            border-color: $primary;
           }
         }
       }
@@ -2537,7 +2537,7 @@ header {
             &:hover {
               button {
                 color: #fff;
-                background-color: var(--theme-color);
+                background-color: $primary;
               }
             }
           }
@@ -2619,7 +2619,7 @@ header {
 
           &:hover {
             i {
-              color: var(--theme-color);
+              color: $primary;
             }
           }
         }
@@ -2896,7 +2896,7 @@ header {
 .custom-box-loader {
   .loader {
     border-color: #2a2d2d;
-    border-bottom-color: var(--theme-color);
+    border-bottom-color: $primary;
   }
 
   .box-loader {
@@ -2951,7 +2951,7 @@ header {
 .loader-wrapper {
   .loader {
     border-color: #1d1d22;
-    border-bottom-color: var(--theme-color);
+    border-bottom-color: $primary;
   }
 
   h3 {
@@ -3184,7 +3184,7 @@ header {
   .home-contain {
     .home-detail {
       .home-button {
-        color: var(--theme-color) !important;
+        color: $primary !important;
       }
 
       p {
@@ -3538,14 +3538,14 @@ header {
 
     button {
       &.bg-white {
-        color: var(--theme-color) !important;
+        color: $primary !important;
       }
 
       &.shop-now-button {
-        color: var(--theme-color) !important;
+        color: $primary !important;
 
         i {
-          color: var(--theme-color);
+          color: $primary;
         }
       }
     }
@@ -3569,7 +3569,7 @@ footer {
     .newsletter-detail {
       .newsletter-form {
         .submit-button {
-          color: var(--theme-color) !important;
+          color: $primary !important;
         }
       }
     }
@@ -3674,7 +3674,7 @@ footer {
 
             @include mq-max(xl) {
               background-color: #ffffff;
-              color: var(--theme-color);
+              color: $primary;
             }
           }
         }

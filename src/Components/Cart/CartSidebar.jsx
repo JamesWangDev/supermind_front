@@ -49,7 +49,7 @@ const CartSidebar = () => {
         <div className='button-group cart-button'>
           <ul>
             <li>
-              <Link href={isAuth ? `/${i18Lang}/checkout` : `/${i18Lang}/auth/login`} className='btn btn-animation proceed-btn fw-bold'>
+              <Link href={isAuth ? `/${i18Lang}/checkout` : `/${i18Lang}/auth/login`} className='btn proceed-btn fw-bold' style={{backgroundColor: "#FE7A30"}}>
                 {t('ProcessToCheckout')}
               </Link>
             </li>

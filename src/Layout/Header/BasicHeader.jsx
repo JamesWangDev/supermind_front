@@ -30,11 +30,11 @@ const BasicHeader = () => {
         </div>
       </div>
 
-      <div className='container-fluid-lg mt-4'>
+      {/* <div className='container-fluid-lg mt-4'>
         <Row>
           <HeaderCategory />
         </Row>
-      </div>
+      </div> */}
     </header>
   );
 };

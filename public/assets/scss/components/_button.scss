@@ -146,12 +146,12 @@
   }
 
   &.btn-theme-outline {
-    color: var(--theme-color);
-    border: 1px solid var(--theme-color);
+    color: $primary;
+    border: 1px solid $primary;
     transition: all 0.5s ease;
 
     &:hover {
-      background-color: var(--theme-color);
+      background-color: $primary;
       color: #ffffff;
     }
   }
@@ -159,24 +159,24 @@
 
 .save-back-button {
   .btn-primary {
-    background-color: var(--theme-color) !important;
-    border: 1px solid var(--theme-color) !important;
+    background-color: $primary !important;
+    border: 1px solid $primary !important;
     transition: all 0.5s ease;
 
     &:hover {
       background-color: $white !important;
-      color: var(--theme-color);
+      color: $primary;
     }
   }
 
   .btn-outline {
-    border: 1px solid var(--theme-color) !important;
-    color: var(--theme-color) !important;
+    border: 1px solid $primary !important;
+    color: $primary !important;
     background-color: $white !important;
     transition: all 0.5s ease;
 
     &:hover {
-      background-color: var(--theme-color) !important;
+      background-color: $primary !important;
       color: $white !important;
     }
   }

@@ -115,7 +115,7 @@ input[type='number'] {
     font-weight: 500;
 
     &:focus {
-      border-color: var(--theme-color);
+      border-color: $primary;
       outline: 0;
       box-shadow: 0 0 0 4px transparent;
     }
@@ -171,7 +171,7 @@ input[type='number'] {
     font-weight: 500;
 
     &:focus {
-      border-color: var(--theme-color);
+      border-color: $primary;
       outline: 0;
       box-shadow: 0 0 0 4px transparent;
     }
@@ -261,8 +261,8 @@ input[type='number'] {
     margin-top: 0;
 
     &:checked {
-      background-color: var(--theme-color);
-      border-color: var(--theme-color);
+      background-color: $primary;
+      border-color: $primary;
     }
 
     &:focus {
@@ -402,7 +402,7 @@ select {
 
         &:hover {
           p {
-            color: var(--theme-color);
+            color: $primary;
           }
         }
 
@@ -430,7 +430,7 @@ select {
         }
 
         .selected {
-          color: var(--theme-color);
+          color: $primary;
         }
       }
     }

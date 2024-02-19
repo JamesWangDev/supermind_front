@@ -77,7 +77,7 @@
             background-color: transparent;
 
             &.bg-color {
-                background-color: var(--theme-color);
+                background-color: $primary;
                 color: $white;
             }
 

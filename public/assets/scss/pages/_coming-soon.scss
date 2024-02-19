@@ -55,7 +55,7 @@
                             @include center(vertical);
                             left: calc(-10px + (-17 - -10) * ((100vw - 320px) / (1920 - 320)));
                             font-size: calc(24px + (30 - 24) * ((100vw - 320px) / (1920 - 320)));
-                            color: var(--theme-color);
+                            color: $primary;
                         }
                     }
 
@@ -66,7 +66,7 @@
                         >div {
                             font-size: calc(22px + (27 - 22) * ((100vw - 320px) / (1920 - 320)));
                             font-weight: 600;
-                            color: var(--theme-color);
+                            color: $primary;
                             line-height: 1;
                         }
 
@@ -90,7 +90,7 @@
                 margin: 22px auto 0;
                 border-radius: 4px;
                 overflow: hidden;
-                border: 1px solid var(--theme-color);
+                border: 1px solid $primary;
 
                 .form-control {
                     border: none;
@@ -116,7 +116,7 @@
                     height: 100%;
                     border: none;
                     padding: 0 calc(15px + (25 - 15) * ((100vw - 320px) / (1920 - 320)));
-                    background: var(--theme-color);
+                    background: $primary;
                     color: $white;
                     font-weight: 700;
                 }

@@ -109,7 +109,7 @@
                             top: 0;
                             left: 0;
                             z-index: -1;
-                            background-color: var(--theme-color);
+                            background-color: $primary;
 
                             body[dir="rtl"] & {
                                 left: unset;
@@ -119,7 +119,7 @@
 
                         svg {
                             font-size: 19px;
-                            color: var(--theme-color);
+                            color: $primary;
                         }
                     }
 

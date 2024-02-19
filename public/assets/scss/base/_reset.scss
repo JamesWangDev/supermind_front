@@ -196,7 +196,7 @@
   }
 
   span {
-    color: $content-color;
+    color: $title-color;
     font-size: 12px;
     margin-left: 5px;
 
@@ -223,7 +223,7 @@
 
 /* colors */
 .text-theme {
-  color: var(--theme-color);
+  color: $primary;
 }
 
 .text-title {
@@ -247,7 +247,7 @@
 }
 
 .bg-theme {
-  background-color: var(--theme-color);
+  background-color: $primary;
 }
 
 .bg-gradient-color {
@@ -361,7 +361,7 @@ input {
   &.bs-tooltip-auto[data-popper-placement^='top'] {
     .tooltip-arrow {
       &::before {
-        border-top-color: var(--theme-color);
+        border-top-color: $primary;
       }
     }
   }

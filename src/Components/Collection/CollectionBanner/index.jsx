@@ -5,7 +5,7 @@ import MainCollection from '../MainCollection';
 const CollectionBanner = ({ filter, setFilter }) => {
   return (
     <>
-      <WrapperComponent classes={{ sectionClass: 'section-b-space shop-section' }} customCol={true}>
+      <WrapperComponent classes={{ sectionClass: 'section-b-space section-t-space shop-section' }} customCol={true}>
         <CollectionSidebar filter={filter} setFilter={setFilter} />
         <MainCollection filter={filter} setFilter={setFilter} isBanner={true} />
       </WrapperComponent>

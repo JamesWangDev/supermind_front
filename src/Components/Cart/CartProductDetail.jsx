@@ -23,18 +23,18 @@ const CartProductDetail = ({ elem }) => {
               <Link href={`/${i18Lang}/product/${elem?.product?.slug}`}>{elem?.variation?.name ?? elem?.product?.name}</Link>
             </li>
 
-            <li className='text-content'>
+            <li className='text-title'>
               <span className='text-title'>{t('SoldBy')} : </span> {t('Fastkart')}
             </li>
 
-            <li className='text-content'>
+            <li className='text-title'>
               <span className='text-title'>{t('Unit')}</span> : {elem?.variation?.unit ?? elem?.product?.unit}
             </li>
 
             <li>
-              <h5 className='text-content d-inline-block'>{t('Price')} :</h5>
+              <h5 className='text-title d-inline-block'>{t('Price')} :</h5>
               <span>{convertCurrency(elem?.product?.sale_price)}</span>
-              <span className='text-content'>{convertCurrency(elem?.variation?.price) ?? convertCurrency(elem?.product?.price)}</span>
+              <span className='text-title'>{convertCurrency(elem?.variation?.price) ?? convertCurrency(elem?.product?.price)}</span>
             </li>
 
             <li>

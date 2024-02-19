@@ -720,7 +720,7 @@ footer {
             @include pseudowh;
             left: 0;
             top: 0;
-            background-color: var(--theme-color);
+            background-color: $primary;
             opacity: 0.06;
             border-radius: 50%;
             z-index: -1;
@@ -873,12 +873,12 @@ footer {
                 left: 0;
                 opacity: 0;
                 background: none;
-                color: var(--theme-color);
+                color: $primary;
               }
 
               &:hover {
                 padding-left: 6px;
-                color: var(--theme-color);
+                color: $primary;
 
                 &::before {
                   opacity: 1;

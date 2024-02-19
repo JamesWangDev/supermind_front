@@ -33,7 +33,7 @@ const FilterSort = ({ filter, setFilter }) => {
   };
   return (
     <div className='category-dropdown'>
-      <h5 className='text-content'>{t('SortBy')} :</h5>
+      <h5 className='text-title'>{t('SortBy')} :</h5>
       <Dropdown isOpen={dropdownOpen} toggle={toggle}>
         <DropdownToggle caret>
           <span>{filterSort.find((elem) => elem.value == filter.sortBy)?.label || t('Sort')}</span>

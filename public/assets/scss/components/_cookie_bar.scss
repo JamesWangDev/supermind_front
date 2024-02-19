@@ -2,7 +2,7 @@
      Cookie Bar scss
 ==========================**/
 .cookie-bar-box {
-    background: $white;
+    background: $secondBg;
     position: fixed;
     bottom: 10px;
     right: 10px;
@@ -67,11 +67,11 @@
             text-transform: capitalize;
 
             &.privacy-button {
-                background-color: $light-gray;
+                background-color: $thirdBG;
             }
 
             &.ok-button {
-                background-color: var(--theme-color);
+                background-color: $primary;
                 color: #ffffff;
             }
         }

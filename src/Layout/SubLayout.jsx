@@ -52,7 +52,7 @@ const SubLayout = ({ children }) => {
       <CookiesComponent />
       <StickyCompare />
       <RecentPurchase />
-      {!isNewsLetter && <NewsLetterModal />}
+      {/* {!isNewsLetter && <NewsLetterModal />} */}
       <ExitModal />
     </>
   );

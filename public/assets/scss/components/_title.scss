@@ -21,7 +21,7 @@
     background-color: $background;
     width: 45px;
     z-index: 1;
-    fill: var(--theme-color);
+    fill: $primary;
 
     &.bg-gray {
       background-color: $light-gray;
@@ -137,7 +137,7 @@
 
         &.active {
           font-weight: 500;
-          color: var(--theme-color);
+          color: $primary;
 
           &::before {
             @include pos;
@@ -145,7 +145,7 @@
             bottom: 0;
             left: 17px;
             border-radius: 50px;
-            background-color: var(--theme-color);
+            background-color: $primary;
           }
 
           &::after {
@@ -154,7 +154,7 @@
             bottom: 0;
             left: 75px;
             border-radius: 50px;
-            background-color: var(--theme-color);
+            background-color: $primary;
           }
         }
       }
@@ -266,7 +266,7 @@
     left: -20px;
     width: 3px;
     height: 26px;
-    background-color: var(--theme-color);
+    background-color: $primary;
 
     body[dir="rtl"] & {
       left: unset;

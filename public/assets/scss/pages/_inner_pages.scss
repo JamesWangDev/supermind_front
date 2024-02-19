@@ -29,7 +29,7 @@
       @include center(horizontal);
       @include pseudowh($width: 70px, $height: 1px);
       bottom: 0;
-      background-color: var(--theme-color);
+      background-color: $primary;
     }
 
     img {
@@ -222,8 +222,8 @@
                   margin-right: 10px;
 
                   &:checked {
-                    background-color: var(--theme-color);
-                    border-color: var(--theme-color);
+                    background-color: $primary;
+                    border-color: $primary;
                   }
 
                   &:focus {
@@ -277,7 +277,8 @@
 ==========================**/
 /* Shopping Cart Box */
 .cart-table {
-  background-color: $light-gray;
+  border-radius: 15px;
+  background-color: $secondBg;
   padding: calc(18px + (35 - 18) * ((100vw - 320px) / (1920 - 320))) calc(12px + (25 - 12) * ((100vw - 320px) / (1920 - 320)));
 
   &.cart-table-2 {
@@ -490,7 +491,7 @@
                               $height: calc(26px + (35 - 26) * ((100vw - 320px) / (1920 - 320))));
                             @include flex_common;
                             border: none;
-                            background-color: #e3e0e0;
+                            background-color: $thirdBG;
                             border-radius: 100% !important;
                             padding: 0;
 
@@ -538,7 +539,7 @@
           &.saving {
             font-size: 16px;
             font-weight: 500;
-            color: var(--theme-color);
+            color: $primary;
           }
 
           &.quantity {
@@ -564,9 +565,10 @@
               font-size: 16px;
               display: block;
               text-decoration: underline;
+              color: #28FFCB;
 
               &:hover {
-                color: var(--theme-color);
+                color: #28FFCB;
               }
             }
 
@@ -574,7 +576,7 @@
               font-weight: 400;
               box-shadow: unset;
               font-size: 15px;
-              color: #bf2020;
+              color: #FF3B3B;
               text-decoration: underline;
             }
           }
@@ -606,7 +608,7 @@
                   $height: calc(29px + (35 - 29) * ((100vw - 320px) / (1920 - 320))));
                 @include flex_common;
                 border: none;
-                background-color: #e3e0e0;
+                background-color: $thirdBG;
                 border-radius: 100% !important;
                 padding: 0;
                 z-index: unset;
@@ -653,14 +655,14 @@
 
 /* Summery cart box */
 .summery-box {
-  border-radius: 5px;
-  background-color: $light-gray;
+  border-radius: 15px;
+  background-color: $secondBg;
 
   .summery-header {
     padding: calc(12px + (16 - 12) * ((100vw - 320px) / (1920 - 320))) calc(16px + (22 - 16) * ((100vw - 320px) / (1920 - 320)));
     display: flex;
     align-items: center;
-    border-bottom: 1px solid $border-color;
+    // border-bottom: 1px solid $border-color;
 
     h3 {
       font-weight: 600;
@@ -672,17 +674,17 @@
       font-size: calc(14px + (16 - 14) * ((100vw - 320px) / (1920 - 320)));
 
       &:hover {
-        color: var(--theme-color);
+        color: $primary;
       }
     }
   }
 
   .summery-contain {
     padding: 16px calc(16px + (22 - 16) * ((100vw - 320px) / (1920 - 320)));
-    border-bottom: 1px solid $border-color;
+    // border-bottom: 1px solid $border-color;
 
     &::-webkit-scrollbar-track {
-      background-color: $content-color;
+      background-color: $title-color;
     }
 
     &::-webkit-scrollbar {
@@ -690,7 +692,7 @@
     }
 
     &::-webkit-scrollbar-thumb {
-      background-color: var(--theme-color);
+      background-color: $primary;
       border-radius: 4px;
     }
 
@@ -701,7 +703,7 @@
         border-radius: 4px;
 
         .btn-apply {
-          background: var(--theme-color);
+          background: $primary;
           color: $white;
           padding: 0 calc(16px + (30 - 16) * ((100vw - 320px) / (1920 - 320)));
           font-weight: 700;
@@ -709,7 +711,7 @@
         }
 
         .form-control {
-          border: 2px solid var(--theme-color);
+          border: 2px solid $primary;
           padding: 10px;
         }
       }
@@ -727,10 +729,10 @@
 
         h4 {
           font-size: 15px;
-          color: $content-color;
+          color: $title-color;
 
           &.price {
-            color: $content-color;
+            color: $title-color;
             margin-left: auto;
 
             .shopping-contain {
@@ -751,7 +753,7 @@
 
   .summery-contain {
     padding: calc(11px + (16 - 11) * ((100vw - 320px) / (1920 - 320))) calc(11px + (22 - 11) * ((100vw - 320px) / (1920 - 320)));
-    border-bottom: 1px solid $border-color;
+    // border-bottom: 1px solid $border-color;
 
     &::-webkit-scrollbar-track {
       background-color: transparent;
@@ -762,7 +764,7 @@
     }
 
     &::-webkit-scrollbar-thumb {
-      background-color: var(--theme-color);
+      background-color: $primary;
       border-radius: 4px;
     }
 
@@ -841,7 +843,7 @@
 
         h4 {
           font-weight: 600;
-          color: var(--theme-color);
+          color: $primary;
         }
       }
 
@@ -905,8 +907,8 @@
 
         &.shopping-button {
           font-size: calc(13px + (14 - 13) * ((100vw - 320px) / (1920 - 320)));
-          background-color: $border-color;
-          color: $black;
+          background-color: #5A3B3F;
+          color: #FF8744 !important;
 
           svg {
             margin-right: 8px;
@@ -938,7 +940,7 @@
 
       .accordion-header {
         .accordion-button {
-          color: $content-color;
+          color: $title-color;
           position: relative;
           padding: 0;
 
@@ -996,7 +998,7 @@
           .cod-review {
             a {
               &:hover {
-                color: var(--theme-color);
+                color: $primary;
               }
             }
           }
@@ -1062,7 +1064,7 @@
           @include pseudowh($width: 0px, $height: 100%);
           bottom: 0;
           left: 0;
-          background-color: var(--theme-color);
+          background-color: $primary;
           background-color: transparent;
           transition: 0.3s ease;
           border-radius: 4px;
@@ -1071,10 +1073,10 @@
         &.active {
           color: $title-color;
           background-color: transparent;
-          border: 2px solid var(--theme-color);
+          border: 2px solid $primary;
 
           &::before {
-            box-shadow: 0 4px 0px var(--theme-color);
+            box-shadow: 0 4px 0px $primary;
             width: 100%;
           }
 
@@ -1082,7 +1084,7 @@
 
             h4,
             i {
-              color: var(--theme-color);
+              color: $primary;
               z-index: 1;
               -webkit-text-stroke: 1px transparent;
             }
@@ -1146,7 +1148,7 @@
         position: absolute;
         top: 0;
         right: 0;
-        background-color: var(--theme-color);
+        background-color: $primary;
         padding: 2px 8px;
         border-radius: 4px;
         color: $white;
@@ -1161,8 +1163,8 @@
           margin-top: 2px;
 
           &:checked {
-            background-color: var(--theme-color);
-            border-color: var(--theme-color);
+            background-color: $primary;
+            border-color: $primary;
           }
 
           &:checked[type="radio"] {
@@ -1520,7 +1522,7 @@
                     position: absolute;
                     top: 0;
                     right: 0;
-                    background-color: var(--theme-color);
+                    background-color: $primary;
                     padding: 2px 8px;
                     border-radius: 4px;
                     color: $white;
@@ -1535,8 +1537,8 @@
                       margin-top: 2px;
 
                       &:checked {
-                        background-color: var(--theme-color);
-                        border-color: var(--theme-color);
+                        background-color: $primary;
+                        border-color: $primary;
                       }
 
                       &:checked[type="radio"] {
@@ -1905,7 +1907,7 @@
 
                         a {
                           &:hover {
-                            color: var(--theme-color);
+                            color: $primary;
                           }
                         }
                       }
@@ -1960,7 +1962,7 @@
           font-size: calc(14px + (16 - 14) * ((100vw - 320px) / (1920 - 320)));
 
           &:hover {
-            color: var(--theme-color);
+            color: $primary;
           }
         }
       }
@@ -1977,7 +1979,7 @@
         }
 
         &::-webkit-scrollbar-thumb {
-          background-color: var(--theme-color);
+          background-color: $primary;
           border-radius: 4px;
         }
 
@@ -1995,7 +1997,7 @@
             border-radius: 4px;
 
             .btn-apply {
-              background: var(--theme-color);
+              background: $primary;
               color: $white;
               padding: 0 calc(16px + (30 - 16) * ((100vw - 320px) / (1920 - 320)));
               font-weight: 700;
@@ -2003,7 +2005,7 @@
             }
 
             .form-control {
-              border: 2px solid var(--theme-color);
+              border: 2px solid $primary;
               padding: 10px;
             }
           }
@@ -2056,7 +2058,7 @@
         }
 
         &::-webkit-scrollbar-thumb {
-          background-color: var(--theme-color);
+          background-color: $primary;
           border-radius: 4px;
         }
 
@@ -2126,7 +2128,7 @@
 
             h4 {
               font-weight: 600;
-              color: var(--theme-color);
+              color: $primary;
             }
           }
 
@@ -2644,7 +2646,7 @@
 
         span {
           font-weight: 500;
-          color: var(--theme-color);
+          color: $primary;
         }
       }
     }
@@ -2939,7 +2941,7 @@
       .accordion-item {
         width: 100%;
         border-radius: 7px;
-        background-color: $thirdBG;
+        background-color: $secondBg;
         border: none;
         overflow: hidden;
         z-index: 0;
@@ -2947,7 +2949,7 @@
         .accordion-header {
           .accordion-button {
             color: $title-color;
-            background-color: $thirdBG;
+            background-color: $secondBg;
             font-size: calc(16px + 4 * (100vw - 320px) / 1600);
             font-weight: 500;
             line-height: 1.5;
@@ -3037,7 +3039,7 @@
       th {
         font-size: 16px;
         font-weight: 500;
-        color: var(--theme-color);
+        color: $primary;
         background-color: $light-gray;
       }
 
@@ -3089,7 +3091,7 @@
 
             span {
               margin-left: 4px;
-              color: var(--theme-color);
+              color: $primary;
             }
           }
         }
@@ -3250,7 +3252,7 @@
 .compare-fix {
   position: fixed;
   right: calc(54px + (72 - 54) * ((100vw - 320px) / (1920 - 320)));
-  background-color: var(--theme-color);
+  background-color: $primary;
   color: $white;
   padding: calc(7px + (12 - 7) * ((100vw - 320px) / (1920 - 320))) calc(10px + (12 - 10) * ((100vw - 320px) / (1920 - 320)));
   bottom: calc(10px + (25 - 10) * ((100vw - 320px) / (1920 - 320)));
@@ -4034,7 +4036,7 @@
         @include pos($pos: absolute, $content: "\f10d");
         @include font;
         font-size: calc(38px + (70 - 38) * ((100vw - 320px) / (1920 - 320)));
-        color: var(--theme-color);
+        color: $primary;
         top: calc(-6px + (26 - -6) * ((100vw - 320px) / (1920 - 320)));
         left: calc(15px + (87 - 15) * ((100vw - 320px) / (1920 - 320)));
       }
@@ -4236,7 +4238,7 @@
     &.center {
       &::before {
         @include center(horizontal);
-        color: var(--theme-color);
+        color: $primary;
       }
     }
   }
@@ -4246,7 +4248,7 @@
   h4 {
     font-size: calc(16px + (21 - 16) * ((100vw - 320px) / (1920 - 320)));
     margin-bottom: calc(7px + (13 - 7) * ((100vw - 320px) / (1920 - 320)));
-    color: var(--theme-color);
+    color: $primary;
   }
 
   h2 {
@@ -4404,7 +4406,7 @@
       }
 
       h4 {
-        color: var(--theme-color);
+        color: $primary;
       }
     }
 
@@ -4596,7 +4598,7 @@
     &:hover {
       .icon {
         svg {
-          color: var(--theme-color);
+          color: $primary;
           font-size: calc(115px + (168 - 115) * ((100vw - 320px) / (1920 - 320)));
           opacity: 0.15;
           transform: rotate(7deg);
@@ -4656,7 +4658,7 @@
         h4 {
           font-weight: 700;
           font-size: calc(16px + (18 - 16) * ((100vw - 320px) / (1920 - 320)));
-          color: var(--theme-color);
+          color: $primary;
         }
 
         h6 {
@@ -4902,7 +4904,7 @@
 
             body[dir="rtl"] & {
               border-left: unset;
-              border-right: 3px solid var(--theme-color);
+              border-right: 3px solid $primary;
             }
 
             &::before {
@@ -5041,7 +5043,7 @@
             font-size: calc(14px + (15 - 14) * ((100vw - 320px) / (1920 - 320)));
 
             &:hover {
-              color: var(--theme-color);
+              color: $primary;
             }
           }
         }
@@ -5055,7 +5057,7 @@
 
         a {
           &:hover {
-            color: var(--theme-color);
+            color: $primary;
           }
         }
       }
@@ -5077,7 +5079,7 @@
             .order-icon {
               position: relative;
               z-index: 0;
-              color: var(--theme-color);
+              color: $primary;
               padding: 9px;
               border-radius: 100%;
               overflow: hidden;
@@ -5087,7 +5089,7 @@
                 @include pseudowh;
                 left: 0;
                 top: 0;
-                background-color: var(--theme-color);
+                background-color: $primary;
                 opacity: 0.1;
                 z-index: -1;
               }
@@ -5112,7 +5114,7 @@
                   font-weight: 600;
 
                   &.success-bg {
-                    background: var(--theme-color);
+                    background: $primary;
                   }
                 }
               }
@@ -5249,8 +5251,8 @@
               margin-top: 2px;
 
               &:checked {
-                background-color: var(--theme-color);
-                border-color: var(--theme-color);
+                background-color: $primary;
+                border-color: $primary;
               }
 
               &:checked[type="radio"] {
@@ -5305,7 +5307,7 @@
                     color: $title-color;
 
                     span {
-                      background-color: var(--theme-color);
+                      background-color: $primary;
                       padding: 4px 8px;
                       border-radius: 4px;
                       color: $white;
@@ -5328,7 +5330,7 @@
             font-weight: 600;
 
             &:hover {
-              background-color: var(--theme-color);
+              background-color: $primary;
               color: $white;
             }
 
@@ -5537,7 +5539,7 @@
             }
 
             span {
-              background: var(--theme-color);
+              background: $primary;
               color: $white;
               padding: 3px 8px;
               margin-left: 10px;
@@ -5571,13 +5573,13 @@
             @include pseudowh;
             top: 0;
             left: 0;
-            background: var(--theme-color);
+            background: $primary;
             opacity: 0.08;
             z-index: -1;
           }
 
           &:hover {
-            color: var(--theme-color);
+            color: $primary;
           }
         }
 
@@ -5643,7 +5645,7 @@
                   align-items: center;
 
                   &:hover {
-                    color: var(--theme-color);
+                    color: $primary;
                   }
 
                   span {
@@ -5661,7 +5663,7 @@
                       @include pseudowh;
                       top: 0;
                       left: 0;
-                      background: var(--theme-color);
+                      background: $primary;
                       opacity: 0.08;
                       z-index: -1;
                     }
@@ -5718,7 +5720,7 @@
                 border-radius: 100%;
                 left: 2px;
                 top: 2px;
-                background: var(--theme-color);
+                background: $primary;
                 transition: all 0.3s ease-in-out;
               }
             }
@@ -5759,14 +5761,14 @@
                 border-radius: 100%;
                 left: 2px;
                 top: 2px;
-                background-color: var(--theme-color);
+                background-color: $primary;
                 transition: all 0.3s ease-in-out;
               }
             }
 
             &:checked {
               &+label {
-                background-color: var(--theme-color);
+                background-color: $primary;
 
                 &:before {
                   left: 39px;
@@ -5936,7 +5938,7 @@
 
       &.progtrckr-done {
         color: $title-color;
-        border-top: 4px solid var(--theme-color);
+        border-top: 4px solid $primary;
         width: 100% !important;
 
         &:first-of-type {
@@ -5952,7 +5954,7 @@
           align-items: self-start;
           padding-bottom: calc(20px + (40 - 20) * ((100vw - 320px) / (1920 - 320)));
           border-top: unset;
-          border-left: 4px solid var(--theme-color);
+          border-left: 4px solid $primary;
         }
 
         &:before {
@@ -5962,7 +5964,7 @@
           padding-top: 2px;
           content: "\f00c";
           color: $white;
-          background-color: var(--theme-color);
+          background-color: $primary;
           line-height: 35px;
           border: none;
           border-radius: 35px;
@@ -6027,7 +6029,7 @@
         white-space: nowrap;
 
         &.active {
-          background: var(--theme-color);
+          background: $primary;
           color: $white;
         }
       }
@@ -6254,7 +6256,7 @@
   margin-bottom: 50px;
   border-radius: 9px;
   box-shadow: 0 0 8px rgba($title-color, 0.13);
-  background: var(--theme-color);
+  background: $primary;
   color: $white;
 
   .vendor-logo {
@@ -6453,13 +6455,13 @@
       .service-svg {
         svg {
           transform: scale(1.05);
-          fill: var(--theme-color);
+          fill: $primary;
         }
       }
 
       .service-detail {
         h4 {
-          color: var(--theme-color);
+          color: $primary;
 
           &::after {
             width: 68%;
@@ -6505,7 +6507,7 @@
           @include center(horizontal);
           width: 0;
           height: 4px;
-          background-color: var(--theme-color);
+          background-color: $primary;
           opacity: 0.3;
           z-index: -1;
           border-radius: 50px;
@@ -6592,7 +6594,7 @@
       .business-number {
         width: calc(54px + (65 - 54) * ((100vw - 320px) / (1920 - 320)));
         height: calc(54px + (65 - 54) * ((100vw - 320px) / (1920 - 320)));
-        background: var(--theme-color);
+        background: $primary;
         @include flex_common;
         margin: 0 auto calc(19px + (28 - 19) * ((100vw - 320px) / (1920 - 320)));
         border-radius: 5px;
@@ -6653,7 +6655,7 @@
 
           svg {
             font-size: 17px;
-            color: var(--theme-color);
+            color: $primary;
           }
         }
 
@@ -6701,14 +6703,14 @@
         font-size: 13px;
         letter-spacing: 0.5px;
         border-radius: 4px;
-        color: var(--theme-color);
+        color: $primary;
         position: relative;
         z-index: 0;
 
         &:after {
           @include pos;
           @include pseudowh;
-          background-color: var(--theme-color);
+          background-color: $primary;
           opacity: 0.1;
           left: 0;
           top: 0;
@@ -6812,14 +6814,14 @@
         font-size: 13px;
         letter-spacing: 0.5px;
         border-radius: 4px;
-        color: var(--theme-color);
+        color: $primary;
         position: relative;
         z-index: 0;
 
         &:after {
           @include pos($pos: absolute, $content: "");
           @include pseudowh;
-          background-color: var(--theme-color);
+          background-color: $primary;
           opacity: 0.1;
           left: 0;
           top: 0;
@@ -6995,7 +6997,7 @@
 
           &.success {
             background-color: rgba(13, 164, 135, 0.1);
-            color: var(--theme-color);
+            color: $primary;
           }
 
           &.danger {
@@ -7229,7 +7231,7 @@
       font-weight: 500;
       border: none;
       border-radius: 6px;
-      background-color: $light-gray;
+      background-color: $thirdBG;
       color: $title-color;
       padding: calc(9px + (12 - 9) * ((100vw - 320px) / (1920 - 320))) calc(16px + (22 - 16) * ((100vw - 320px) / (1920 - 320)));
     }

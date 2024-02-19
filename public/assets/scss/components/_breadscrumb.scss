@@ -151,7 +151,7 @@
           }
 
           &__background {
-            fill: var(--theme-color);
+            fill: $primary;
             animation: rotate 35s linear both infinite;
           }
         }
@@ -159,7 +159,7 @@
         .star {
           position: absolute;
           animation: grow 3s infinite;
-          fill: var(--theme-color);
+          fill: $primary;
           opacity: 0;
 
           &:nth-child(1) {
@@ -229,7 +229,7 @@
           }
 
           &__background {
-            fill: var(--theme-color);
+            fill: $primary;
             animation: rotate 35s linear both infinite;
           }
         }
@@ -251,7 +251,7 @@
 
         &.order-fail {
           i {
-            color: var(--theme-color);
+            color: $primary;
           }
         }
       }
@@ -345,7 +345,7 @@
           display: flex;
           align-items: center;
           padding: 0 calc(12px + (20 - 12) * ((100vw - 320px) / (1920 - 320)));
-          color: var(--theme-color);
+          color: $primary;
           font-size: calc(14px + (16 - 14) * ((100vw - 320px) / (1920 - 320)));
         }
 
@@ -367,7 +367,7 @@
         .faq-dropdown-button {
           font-size: calc(14px + (16 - 14) * ((100vw - 320px) / (1920 - 320)));
           font-weight: 600;
-          color: var(--theme-color);
+          color: $primary;
           z-index: 0;
 
           &::after {
@@ -425,7 +425,7 @@
 
         i {
           font-size: calc(21px + (27 - 21) * ((100vw - 320px) / (1920 - 320)));
-          color: var(--theme-color);
+          color: $primary;
         }
       }
 

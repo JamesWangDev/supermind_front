@@ -5,7 +5,7 @@ import WrapperComponent from '@/Components/Common/WrapperComponent';
 
 const SellerDetailClassic = ({ filter, setFilter, StoreData }) => {
   return (
-    <WrapperComponent classes={{ sectionClass: 'section-b-space shop-section' }} customCol={true}>
+    <WrapperComponent classes={{ sectionClass: 'section-b-space section-t-space shop-section' }} customCol={true}>
       <CollectionSidebar filter={filter} setFilter={setFilter} isAttributes={false} />
       <MainCollection filter={filter} setFilter={setFilter} classicStoreCard={<SellerClassicCard StoreData={StoreData} />} />
     </WrapperComponent>

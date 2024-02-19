@@ -122,7 +122,7 @@
     }
 
     .input-group {
-      background-color: $light-gray;
+      background-color: $thirdBG;
       border-radius: 100px;
       padding: 4px;
       text-align: center;
@@ -137,13 +137,13 @@
         @include flex_common;
         border: none;
         padding: 0;
-        background-color: $white;
+        background-color: $thirdBG;
         z-index: 0;
         border-radius: 100% !important;
 
         i {
           font-size: 21px;
-          color: var(--theme-color);
+          color: $primary;
           margin-top: 0;
         }
 
@@ -159,7 +159,7 @@
         padding: 0;
         text-align: center;
         font-size: 14px;
-        color: $content-color;
+        color: $title-color;
       }
     }
   }
@@ -175,7 +175,7 @@
     background-color: #f7f7f7;
     padding: 0;
     border-radius: 100%;
-    color: var(--theme-color);
+    color: $primary;
   }
 
   .qty-box-2 {
@@ -214,7 +214,7 @@
 
         i {
           font-size: 13px;
-          color: var(--theme-color);
+          color: $primary;
           margin-top: 1px;
         }
 
@@ -263,7 +263,7 @@
 
       i {
         font-size: 13px;
-        color: var(--theme-color);
+        color: $primary;
         margin-top: 1px;
       }
 
@@ -329,7 +329,7 @@
   ul {
     @include flex_common($dis: flex, $align: center, $justify: space-between);
     padding: 8px 12px;
-    border: 1px dashed var(--theme-color);
+    border: 1px dashed $primary;
     text-align: center;
 
     li {
@@ -383,7 +383,7 @@
       @include pseudowh($width: 102px, $height: 2px);
       bottom: calc(-11px + (-8 - -11) * ((100vw - 320px) / (1920 - 320)));
       left: 0;
-      background-color: var(--theme-color);
+      background-color: $primary;
 
       body[dir="rtl"] & {
         left: unset;
@@ -460,7 +460,7 @@
               left: 0;
               opacity: 0.5;
               border-radius: 50px;
-              background-color: var(--theme-color);
+              background-color: $primary;
               z-index: -1;
               transition: all 0.3s ease-in-out;
 
@@ -923,7 +923,7 @@
 
   .stock {
     font-size: 14px;
-    color: var(--theme-color);
+    color: $primary;
     margin-left: auto;
   }
 
@@ -977,7 +977,7 @@
         bottom: 0;
         right: 0;
         padding: 7px 11px;
-        background-color: var(--theme-color);
+        background-color: $primary;
         color: $white;
         font-size: 16px;
         font-weight: 600;
@@ -1255,7 +1255,7 @@
         .offer-detail {
           a {
             .name {
-              color: var(--theme-color);
+              color: $primary;
             }
           }
         }
@@ -1402,7 +1402,7 @@
           align-items: center;
 
           &:hover {
-            color: var(--theme-color);
+            color: $primary;
           }
 
           i {
@@ -1604,7 +1604,7 @@
       @include pseudowh($width: 120px, $height: 2px);
       bottom: 0;
       left: 0;
-      background-color: var(--theme-color);
+      background-color: $primary;
 
       body[dir='rtl'] & {
         left: unset;
@@ -1648,7 +1648,7 @@
       &:hover {
         .top-selling-detail {
           h5 {
-            color: var(--theme-color);
+            color: $primary;
           }
 
           .product-option {
@@ -1695,14 +1695,14 @@
               @include pseudowh($width: 45px, $height: 45px);
               @include flex_common;
               border-radius: 100%;
-              border: 1px solid var(--theme-color);
+              border: 1px solid $primary;
               position: relative;
               z-index: 0;
               overflow: hidden;
-              color: var(--theme-color);
+              color: $primary;
 
               &:hover {
-                color: var(--theme-color);
+                color: $primary;
               }
 
               &:after {
@@ -1710,7 +1710,7 @@
                 @include pseudowh;
                 top: 0;
                 left: 0;
-                background-color: var(--theme-color);
+                background-color: $primary;
                 opacity: 0.1;
               }
 
@@ -1741,7 +1741,7 @@
         h6 {
           margin-top: calc(7px + (13 - 7) * ((100vw - 320px) / (1920 - 320)));
           font-weight: 600;
-          color: var(--theme-color);
+          color: $primary;
         }
       }
     }
@@ -1762,7 +1762,7 @@
 
     .product-detail {
       h6 {
-        color: var(--theme-color);
+        color: $primary;
       }
 
       .product-option {
@@ -1822,13 +1822,13 @@
           @include pseudowh($width: 45px, $height: 45px);
           @include flex_common;
           border-radius: 100%;
-          border: 1px solid var(--theme-color);
+          border: 1px solid $primary;
           position: relative;
           z-index: 0;
           overflow: hidden;
 
           &:hover {
-            color: var(--theme-color);
+            color: $primary;
           }
 
           &:after {
@@ -1836,7 +1836,7 @@
             @include pseudowh;
             top: 0;
             left: 0;
-            background-color: var(--theme-color);
+            background-color: $primary;
             opacity: 0.1;
           }
 
@@ -1858,7 +1858,7 @@
     }
 
     h3 {
-      color: var(--theme-color);
+      color: $primary;
       font-weight: 600;
       margin-bottom: 12px;
     }
@@ -2140,10 +2140,10 @@
 
       .qty-box {
         .input-group {
-          background-color: $white;
+          background-color: $thirdBG;
 
           button {
-            background-color: #f9f8f6;
+            background-color: $thirdBG;
 
             html.dark & {
               background-color: #1d1d22;
@@ -2159,14 +2159,14 @@
   padding: 0;
   font-size: 18px;
   margin-left: auto;
-  background-color: $light-gray;
+  // background-color: $light-gray;
   width: 27px;
   height: 27px;
   border-radius: 5px;
   box-shadow: 0 3px 3px rgba($title-color, 0.14);
 
   &:hover {
-    background-color: $light-gray;
+    // background-color: $light-gray;
     box-shadow: 0 3px 3px rgba($title-color, 0.14);
     color: $title-color;
   }
@@ -2183,7 +2183,7 @@
 .product-box-3 {
   padding: calc(7px + (14 - 7) * ((100vw - 320px) / (1920 - 320)));
   position: relative;
-  background-color: $light-gray;
+  background-color: $secondBg;
   border-radius: 5px;
   transition: all 0.4s ease-in-out;
   border: unset;
@@ -2334,7 +2334,7 @@
   }
 
   .add-to-cart-box {
-    background-color: #fff;
+    background-color: $thirdBG;
 
     .btn-add-cart {
       .add-icon {
@@ -2383,7 +2383,7 @@
     }
 
     &.bg-theme {
-      background: var(--theme-color) !important;
+      background: $primary !important;
     }
 
     label {
@@ -2460,7 +2460,7 @@
   .product-title {
     padding: 16px;
     text-align: center;
-    background-color: var(--theme-color);
+    background-color: $primary;
     color: $white;
     border-radius: 8px 8px 0 0;
     border: 2px solid transparent;
@@ -2541,7 +2541,7 @@
     .product-detail {
       a {
         .name {
-          color: var(--theme-color) !important;
+          color: $primary !important;
           font-weight: 600;
         }
       }
@@ -2549,7 +2549,7 @@
   }
 
   &-3 {
-    border: 2px solid var(--theme-color);
+    border: 2px solid $primary;
     border-radius: 0 0 8px 8px;
 
     @include mq-max(4xl) {
@@ -2595,7 +2595,7 @@
     height: 10px;
 
     .progress-bar {
-      background-color: var(--theme-color);
+      background-color: $primary;
     }
   }
 
@@ -2663,7 +2663,7 @@
         @include flex_common;
         background-color: $white;
         border-radius: 100%;
-        border: 1px solid var(--theme-color);
+        border: 1px solid $primary;
         margin: 0 4px;
         opacity: 0;
         transform: translateY(40px);
@@ -2681,7 +2681,7 @@
           @include pseudowh;
           top: 0;
           left: 0;
-          background-color: var(--theme-color);
+          background-color: $primary;
           opacity: 0.1;
           z-index: -1;
         }
@@ -2809,7 +2809,7 @@
       bottom: 0;
       right: 0;
       padding: 7px 11px;
-      background-color: var(--theme-color);
+      background-color: $primary;
       color: $white;
 
       @include mq-max(xs) {
@@ -2818,9 +2818,9 @@
         right: unset;
         width: 100%;
         margin-top: 12px;
-        color: var(--theme-color);
+        color: $primary;
         border-radius: 5px;
-        border: 1px solid var(--theme-color);
+        border: 1px solid $primary;
       }
 
       i {
@@ -2841,7 +2841,7 @@
 
         .progress-bar {
           border-radius: 50px;
-          background-color: var(--theme-color);
+          background-color: $primary;
         }
       }
 
@@ -3163,7 +3163,7 @@
       }
 
       .price {
-        color: var(--theme-color);
+        color: $primary;
         font-weight: 500;
 
         del {
@@ -3195,7 +3195,7 @@
           @include flex_common;
           background-color: $white;
           border-radius: 50%;
-          border: 1px solid var(--theme-color);
+          border: 1px solid $primary;
           margin: 0 4px;
           opacity: 0;
           transform: translateY(40px);
@@ -3213,7 +3213,7 @@
             @include pseudowh;
             top: 0;
             left: 0;
-            background-color: var(--theme-color);
+            background-color: $primary;
             opacity: 0.1;
             z-index: -1;
           }
@@ -3275,7 +3275,7 @@
       }
 
       &.active {
-        background-color: var(--theme-color);
+        background-color: $primary;
         color: $white;
 
         button {
@@ -3379,7 +3379,7 @@
 .product-standard {
   .add-to-cart-box {
     .btn-add-cart {
-      background-color: $white;
+      background-color: $thirdBG;
 
       html.dark & {
         background-color: #2a2d2d;
@@ -3395,7 +3395,7 @@
     .add-to-cart-box {
       .btn-add-cart {
         .add-icon {
-          background-color: var(--theme-color);
+          background-color: $primary;
           color: $white;
         }
       }

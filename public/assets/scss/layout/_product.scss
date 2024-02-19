@@ -40,7 +40,7 @@
 }
 
 .add-to-cart-box {
-  background-color: $light-gray;
+  background-color: $thirdBG;
   border-radius: 50px;
   position: relative;
   max-width: 100%;
@@ -50,7 +50,7 @@
     width: 100%;
     font-size: calc(14px + (15 - 14) * ((100vw - 320px) / (1920 - 320)));
     margin-top: 10px;
-    color: $content-color;
+    color: $title-color;
     border-radius: 50px;
     font-weight: 500;
 
@@ -66,9 +66,9 @@
       @include center(vertical);
       @include flex_common;
       @include pseudowh($width: calc(30px + (37 - 30) * ((100vw - 320px) / (1920 - 320))), $height: calc(30px + (37 - 30) * ((100vw - 320px) / (1920 - 320))));
-      background-color: $white;
+      background-color: $primary;
       border-radius: 100%;
-      color: var(--theme-color);
+      color: $title-color;
       position: absolute;
       right: 4px;
       font-size: 20px;
@@ -100,7 +100,7 @@
 
     &:first-child {
       &:active {
-        color: $content-color;
+        color: $title-color;
         background-color: transparent;
         border-color: transparent;
       }
@@ -830,7 +830,7 @@
       @include flex_common($dis: flex, $align: center, $justify: space-between);
       position: absolute;
       bottom: -5px;
-      background-color: $white;
+      background-color: $thirdBG;
       width: 70%;
       padding: 10px 5px;
       border-radius: 7px;
@@ -853,7 +853,7 @@
 
           svg {
             font-size: 17px;
-            color: $content-color;
+            color: $title-color;
           }
         }
 
@@ -863,7 +863,7 @@
             @include pseudowh($width: 1px, $height: 100%);
             top: 0;
             left: 0;
-            background-color: $content-color;
+            background-color: $title-color;
             opacity: 0.3;
 
             body[dir='rtl'] & {
@@ -2127,10 +2127,10 @@
 
     .add-to-cart-box {
       .btn-add-cart {
-        background-color: $white;
+        background-color: $thirdBG;
 
         .add-icon {
-          background-color: #f9f8f6;
+          background-color: $primary;
 
           html.dark & {
             background-color: #1d1d22;
@@ -2338,7 +2338,7 @@
 
     .btn-add-cart {
       .add-icon {
-        background-color: #f8f8f8;
+        background-color: $primary;
       }
     }
 
@@ -2994,7 +2994,7 @@
       @include flex_common($dis: flex, $align: center, $justify: space-between);
       position: absolute;
       bottom: -5px;
-      background-color: $white;
+      background-color: $thirdBG;
       width: 70%;
       padding: 10px 5px;
       border-radius: 7px;
@@ -3017,7 +3017,7 @@
 
           svg {
             font-size: 17px;
-            color: $content-color;
+            color: $title-color;
           }
         }
 

@@ -13,7 +13,7 @@
     @include center(vertical);
     @include pseudowh($width: 100%, $height: 1px);
     left: 0;
-    background-color: var(--theme-color);
+    background-color: $primary;
     z-index: -1;
   }
 

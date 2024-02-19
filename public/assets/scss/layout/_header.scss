@@ -659,16 +659,16 @@ header {
             ::placeholder {
               font-size: 16px;
               font-weight: 400;
-              color: $second-title;
+              color: rgba(255, 255, 255, 0.50);
             }
 
             .form-control {
               width: 577px;
               border-radius: 10px 0 0 10px;
               color: $title-color;
-              border-color: $border-color;
+              border-color: $secondBg;
               border: none;
-              background-color: #443F63;
+              background-color: $background;
               padding-left: 24px;
 
               body[dir='rtl'] & {

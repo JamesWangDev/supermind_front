@@ -107,73 +107,75 @@ const BattleArea = () => {
     }
 
     return (
-        <div className="m-auto p-3 w-50 d-flex border " style={{height: '650px'}}>
-            <div className="w-25 border-end pe-3">
-                <div className="fs-3 fw-bold">Prompt</div>
-                <textarea onChange={handleChangePrompt} onKeyDown={handleOnEnterPress} value={prompt} placeholder="Enter your prompt" className="w-100 border border-white" style={{resize: "none", height: "calc(100% - 90px)"}}></textarea>
-                <div className="d-flex w-100 justify-content-center">
-                    <Btn
-                        className='btn-md add-button border me-3'
-                        title={'Run'}
-                        onClick={handleSubmitPrompt}>
-                    </Btn>
-                    <Btn
-                        className='btn-md add-button border'
-                        title={'Clear'}
-                        onClick={handleClearPrompt}>
-                    </Btn>
-                </div>
-            </div>
-            <div className="w-75 ps-3 h-100 d-flex flex-column justify-content-between">
-                <div style={{height: "33%"}}>
-                    <Dropdown isOpen={dropdown1} toggle={toggle1}>
-                        <DropdownToggle caret className='select-dropdown' type='button' size="sm">
-                            {selectedSupermind.dropdown1.name ? selectedSupermind.dropdown1.name : "Select Supermind...."}
-                        </DropdownToggle>
-                        {<DropdownMenu className='dropdown-menu-end sm-dropdown-menu'>
-                            {cartProducts && cartProducts.length >0 && cartProducts.map((item, index) => (
-                                <DropdownItem id={`${item.product.name}${index}-1`} key={`${item.product.name}${index}-1`} onClick={handleOnSelectSupermind(item.product.name, item.product.api_url, "dropdown1")}>
-                                    {item.product.name}
-                                </DropdownItem>
-                            ))}
-                        </DropdownMenu>}
-                    </Dropdown>
-                    <div className="border p-2" style={{height: "calc(100% - 37px)", overflowY: "auto", overflowWrap: "anywhere"}}>
-                        {answer.dropdown1}
+        <div style={{height: "700px", display: "flex"}}>
+            <div className="m-auto p-3 w-50 d-flex border" style={{height: '650px', backgroundColor: "#28243D"}}>
+                <div className="w-25 border-end pe-3">
+                    <div className="fs-3 fw-bold">Prompt</div>
+                    <textarea onChange={handleChangePrompt} onKeyDown={handleOnEnterPress} value={prompt} placeholder="Enter your prompt" className="w-100 border border-white" style={{resize: "none", height: "calc(100% - 90px)", backgroundColor: "#443F63", color: "white", padding: "8px"}}></textarea>
+                    <div className="d-flex w-100 justify-content-center">
+                        <Btn
+                            className='btn-md add-button border me-3'
+                            title={'Run'}
+                            onClick={handleSubmitPrompt}>
+                        </Btn>
+                        <Btn
+                            className='btn-md add-button border'
+                            title={'Clear'}
+                            onClick={handleClearPrompt}>
+                        </Btn>
                     </div>
                 </div>
-                <div style={{height: "33%"}}>
-                    <Dropdown isOpen={dropdown2} toggle={toggle2}>
-                        <DropdownToggle caret className='select-dropdown' type='button' size="sm">
-                            {selectedSupermind.dropdown2.name ? selectedSupermind.dropdown2.name : "Select Supermind...."}
-                        </DropdownToggle>
-                        <DropdownMenu className='dropdown-menu-end sm-dropdown-menu'>
-                            {cartProducts && cartProducts.length >0 && cartProducts.map((item, index) => (
-                                <DropdownItem id={`${item.product.name}${index}-2`} key={`${item.product.name}${index}-2`} onClick={handleOnSelectSupermind(item.product.name, item.product.api_url, "dropdown2")}>
-                                    {item.product.name}
-                                </DropdownItem>
-                            ))}
-                        </DropdownMenu>
-                    </Dropdown>
-                    <div className="border p-2" style={{height: "calc(100% - 37px)", overflowY: "auto", overflowWrap: "anywhere"}}>
-                        {answer.dropdown2}
+                <div className="w-75 ps-3 h-100 d-flex flex-column justify-content-between">
+                    <div style={{height: "32%"}}>
+                        <Dropdown isOpen={dropdown1} toggle={toggle1}>
+                            <DropdownToggle caret className='select-dropdown' type='button' size="sm" style={{background: "#443F63", marginBottom: "4px", marginTop: "4px"}}>
+                                {selectedSupermind.dropdown1.name ? selectedSupermind.dropdown1.name : "Select Supermind...."}
+                            </DropdownToggle>
+                            {<DropdownMenu className='dropdown-menu-end sm-dropdown-menu' style={{background: "#443F63"}}>
+                                {cartProducts && cartProducts.length >0 && cartProducts.map((item, index) => (
+                                    <DropdownItem id={`${item.product.name}${index}-1`} key={`${item.product.name}${index}-1`} onClick={handleOnSelectSupermind(item.product.name, item.product.api_url, "dropdown1")}>
+                                        {item.product.name}
+                                    </DropdownItem>
+                                ))}
+                            </DropdownMenu>}
+                        </Dropdown>
+                        <div className="border p-2" style={{height: "calc(100% - 37px)", overflowY: "auto", overflowWrap: "anywhere", background: "#443F63", color: "white"}}>
+                            {answer.dropdown1}
+                        </div>
                     </div>
-                </div>
-                <div style={{height: "33%"}}>
-                    <Dropdown isOpen={dropdown3} toggle={toggle3}>
-                        <DropdownToggle caret className='select-dropdown' type='button' size="sm">
-                            {selectedSupermind.dropdown3.name ? selectedSupermind.dropdown3.name : "Select Supermind...."}
-                        </DropdownToggle>
-                        <DropdownMenu className='dropdown-menu-end sm-dropdown-menu'>
-                            {cartProducts && cartProducts.length >0 && cartProducts.map((item, index) => (
-                                <DropdownItem id={`${item.product.name}${index}-3`} key={`${item.product.name}${index}-3`} onClick={handleOnSelectSupermind(item.product.name, item.product.api_url, "dropdown3")}>
-                                    {item.product.name}
-                                </DropdownItem>
-                            ))}
-                        </DropdownMenu>
-                    </Dropdown>
-                    <div className="border p-2" style={{height: "calc(100% - 37px)", overflowY: "auto", overflowWrap: "anywhere"}}>
-                        {answer.dropdown3}
+                    <div style={{height: "32%"}}>
+                        <Dropdown isOpen={dropdown2} toggle={toggle2}>
+                            <DropdownToggle caret className='select-dropdown' type='button' size="sm" style={{background: "#443F63", marginBottom: "4px", marginTop: "4px"}}>
+                                {selectedSupermind.dropdown2.name ? selectedSupermind.dropdown2.name : "Select Supermind...."}
+                            </DropdownToggle>
+                            <DropdownMenu className='dropdown-menu-end sm-dropdown-menu' style={{background: "#443F63"}}>
+                                {cartProducts && cartProducts.length >0 && cartProducts.map((item, index) => (
+                                    <DropdownItem id={`${item.product.name}${index}-2`} key={`${item.product.name}${index}-2`} onClick={handleOnSelectSupermind(item.product.name, item.product.api_url, "dropdown2")}>
+                                        {item.product.name}
+                                    </DropdownItem>
+                                ))}
+                            </DropdownMenu>
+                        </Dropdown>
+                        <div className="border p-2" style={{height: "calc(100% - 37px)", overflowY: "auto", overflowWrap: "anywhere", background: "#443F63", color: "white"}}>
+                            {answer.dropdown2}
+                        </div>
+                    </div>
+                    <div style={{height: "32%"}}>
+                        <Dropdown isOpen={dropdown3} toggle={toggle3}>
+                            <DropdownToggle caret className='select-dropdown' type='button' size="sm" style={{background: "#443F63", marginBottom: "4px", marginTop: "4px"}}>
+                                {selectedSupermind.dropdown3.name ? selectedSupermind.dropdown3.name : "Select Supermind...."}
+                            </DropdownToggle>
+                            <DropdownMenu className='dropdown-menu-end sm-dropdown-menu' style={{background: "#443F63"}}>
+                                {cartProducts && cartProducts.length >0 && cartProducts.map((item, index) => (
+                                    <DropdownItem id={`${item.product.name}${index}-3`} key={`${item.product.name}${index}-3`} onClick={handleOnSelectSupermind(item.product.name, item.product.api_url, "dropdown3")}>
+                                        {item.product.name}
+                                    </DropdownItem>
+                                ))}
+                            </DropdownMenu>
+                        </Dropdown>
+                        <div className="border p-2" style={{height: "calc(100% - 37px)", overflowY: "auto", overflowWrap: "anywhere", background: "#443F63", color: "white"}}>
+                            {answer.dropdown3}
+                        </div>
                     </div>
                 </div>
             </div>

@@ -6,7 +6,7 @@
   color: $title-color;
   padding: calc(7px + (14 - 7) * ((100vw - 320px) / (1920 - 320))) calc(14px + (32 - 14) * ((100vw - 320px) / (1920 - 320)));
   font-weight: 500;
-  background: transparent;
+  background: $thirdBG;
   transition: all 0.3s ease;
   position: relative;
   border: none;

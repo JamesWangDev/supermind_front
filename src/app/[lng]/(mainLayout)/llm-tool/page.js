@@ -493,155 +493,156 @@ const LLMTool = () => {
         onChange={handleLoadOutputData}
       />
       <div
-        className={"flex flex-column w-75 m-auto overflow-hidden border border-black"}
+        className={"flex flex-column w-75 m-auto mb-4 rounded-3 overflow-hidden"}
+        style={{backgroundColor: "#28243D"}}
       >
         <div
-          className="w-100 border-bottom border-black d-flex"
+          className="w-100 d-flex"
           style={{ height: "40px" }}
         >
           <div className="d-flex text-center" style={{width: "17%"}}>
             <Btn
-              className="btn-sm border border-black w-100"
+              className="btn-sm rounded-3 me-1 w-100"
               title={"Load Setup Data"}
               onClick={handleLoadBtnClick}
             ></Btn>
           </div>
           <div className="d-flex text-center" style={{width: "16%"}}>
             <Btn
-              className="btn-sm border border-black w-100"
+              className="btn-sm rounded-3 me-1 w-100"
               title={"Export Setup Data"}
               onClick={handleSaveData}
             ></Btn>
           </div>
           <div className="d-flex text-center" style={{width: "16%"}}>
             <Btn
-              className="btn-sm border border-black w-100"
+              className="btn-sm rounded-3 me-1 w-100"
               title={"Clear Setup Data"}
               onClick={handleClearData}
             ></Btn>
           </div>
           <div className="d-flex text-center" style={{width: "16%"}}>
             <Btn
-              className="btn-sm border border-black w-100"
+              className="btn-sm rounded-3 me-1 w-100"
               title={"Load Output Data"}
               onClick={handleLoadOutputDataBtnClick}
             ></Btn>
           </div>
           <div className="d-flex text-center" style={{width: "17%"}}>
             <Btn
-              className="btn-sm border border-black w-100"
+              className="btn-sm rounded-3 me-1 w-100"
               title={"Save Output Data"}
               onClick={handleSaveOutputData}
             ></Btn>
           </div>
           <div className="d-flex text-center" style={{width: "17%"}}>
             <Btn
-              className="btn-sm border border-black w-100"
+              className="btn-sm rounded-3 me-1 w-100"
               title={"Clear Output Data"}
               onClick={clearOutputData}
             ></Btn>
           </div>
           <div className="d-flex text-center" style={{width: "17%"}}>
             <Btn
-              className="btn-sm border border-black w-100"
+              className="btn-sm rounded-3 w-100"
               title={"Export Prompt Data"}
               onClick={exportPromptText}
             ></Btn>
           </div>
         </div>
         <div
-          className="w-100 border-bottom border-black d-flex"
-          style={{ height: "60px" }}
+          className="w-100 d-flex gap-1"
+          style={{ height: "80px" }}
         >
           <div
-            className="border-end border-black d-flex text-center"
-            style={{ width: "14%" }}
+            className="d-flex text-center"
+            style={{ width: "15%" }}
           >
             <div className="d-flex flex-column w-100">
-              <div className="h-50 flex border-bottom border-black">
+              <div className="h-50 flex">
                 <span className="m-auto text-center">Model Choice</span>
               </div>
               <div className="h-50">
-                <CustomDropDown items={modelChoiceItems} value={modelChoice} handleSelectChange={setModelChoice} placeholder={"Select Model Choice..."} toggleStyle={{height: "30px"}} toggleClassName={"w-100 select-dropdown border-none rounded-0"} />
+                <CustomDropDown items={modelChoiceItems} value={modelChoice} handleSelectChange={setModelChoice} placeholder={"Select Model Choice..."} toggleStyle={{height: "40px"}} toggleClassName={"w-100 select-dropdown rounded-3"} />
               </div>
             </div>
           </div>
           <div
-            className="border-end border-black d-flex text-center"
+            className="d-flex text-center"
             style={{ width: "14%" }}
           >
             <div className="d-flex flex-column w-100">
-              <div className="h-50 flex border-bottom border-black">
+              <div className="h-50 flex">
                 <span className="m-auto text-center">Rows Max</span>
               </div>
               <div className="h-50">
-                <Input type='number' value={maxRow} onChange={(e) => setMaxRow(e.target.value)} style={{height: "29px", border: "none"}} className="text-center" />
+                <Input type='number' value={maxRow} onChange={(e) => setMaxRow(e.target.value)} style={{height: "40px", border: "none"}} className="text-center" />
               </div>
             </div>
           </div>
           <div
-            className="border-end border-black d-flex text-center"
+            className="d-flex text-center"
             style={{ width: "14%" }}
           >
             <div className="d-flex flex-column w-100">
-              <div className="h-50 flex border-bottom border-black">
+              <div className="h-50 flex">
                 <span className="m-auto text-center">Max Loops</span>
               </div>
               <div className="h-50">
-                <Input type='number' value={timeMax} onChange={(e) => setTimeMax(e.target.value)} style={{height: "29px", border: "none"}} className="text-center" />
+                <Input type='number' value={timeMax} onChange={(e) => setTimeMax(e.target.value)} style={{height: "40px", border: "none"}} className="text-center" />
               </div>
             </div>
           </div>
           <div
-            className="border-end border-black d-flex text-center"
-            style={{ width: "15%" }}
-          >
-            <div className="d-flex flex-column w-100">
-              <div className="h-50 flex border-bottom border-black">
-                <span className="m-auto text-center">Token Max</span>
-              </div>
-              <div className="h-50">
-                <Input type='number' value={tokenMax} onChange={(e) => setTokenMax(e.target.value)} style={{height: "29px", border: "none"}} className="text-center" />
-              </div>
-            </div>
-          </div>
-          <div
-            className="border-end border-black d-flex text-center"
+            className="d-flex text-center"
             style={{ width: "14%" }}
           >
             <div className="d-flex flex-column w-100">
-              <div className="h-50 flex border-bottom border-black">
-                <span className="m-auto text-center">Enable GPT</span>
+              <div className="h-50 flex">
+                <span className="m-auto text-center">Token Max</span>
               </div>
               <div className="h-50">
-                <CustomDropDown items={gptFlag} value={isEnableGPT} handleSelectChange={setIsEnableGPT} placeholder={"Set Enable GPT Flag..."} toggleStyle={{height: "30px"}} toggleClassName={"w-100 select-dropdown border-none rounded-0"} />
+                <Input type='number' value={tokenMax} onChange={(e) => setTokenMax(e.target.value)} style={{height: "40px", border: "none"}} className="text-center" />
               </div>
             </div>
           </div>
           <div
-            className="border-end border-black d-flex text-center"
+            className="d-flex text-center"
+            style={{ width: "14%" }}
+          >
+            <div className="d-flex flex-column w-100">
+              <div className="h-50 flex">
+                <span className="m-auto text-center">Enable GPT</span>
+              </div>
+              <div className="h-50">
+                <CustomDropDown items={gptFlag} value={isEnableGPT} handleSelectChange={setIsEnableGPT} placeholder={"Set Enable GPT Flag..."} toggleStyle={{height: "40px"}} toggleClassName={"w-100 select-dropdown rounded-3"} />
+              </div>
+            </div>
+          </div>
+          <div
+            className="d-flex text-center"
             style={{ width: "15%" }}
           >
             <div className="d-flex flex-column w-100">
-              <div className="h-50 flex border-bottom border-black">
+              <div className="h-50 flex">
                 <span className="m-auto text-center">Remove Duplicated?</span>
               </div>
               <div className="h-50">
-                <CustomDropDown items={duplicatedRemove} value={isRemoveDuplicated} handleSelectChange={setIsRemoveDuplicated} placeholder={"Remove Duplicated?"} toggleStyle={{height: "30px"}} toggleClassName={"w-100 select-dropdown border-none rounded-0"} />
+                <CustomDropDown items={duplicatedRemove} value={isRemoveDuplicated} handleSelectChange={setIsRemoveDuplicated} placeholder={"Remove Duplicated?"} toggleStyle={{height: "40px"}} toggleClassName={"w-100 select-dropdown rounded-3"} />
               </div>
             </div>
           </div>
           <div className="text-center d-flex" style={{ width: "15%" }}>
             <div className="d-flex flex-column w-100">
-              <div className="h-50 flex border-bottom border-black">
+              <div className="h-50 flex">
                 <span className="m-auto text-center">How many rows to inject?</span>
               </div>
               <div className="h-50 flex">
                 <div className={rowInject === 2 ? "w-60" : "w-100"}>
-                  <CustomDropDown items={rowsInjectItem} value={rowInject} handleSelectChange={setRowInject} placeholder={"Set rows to inject..."} toggleStyle={{height: "30px"}} toggleClassName={"w-100 select-dropdown border-none rounded-0"} />
+                  <CustomDropDown items={rowsInjectItem} value={rowInject} handleSelectChange={setRowInject} placeholder={"Set rows to inject..."} toggleStyle={{height: "40px"}} toggleClassName={"w-100 select-dropdown rounded-3"} />
                 </div>
                 {rowInject === 2 && <div className="w-50">
-                  <Input type='number' value={customRowsInject} onChange={(e) => setCustomRowsInject(e.target.value)} style={{height: "29px", border: "none"}} className="border-start border-black rounded-0 text-center" />
+                  <Input type='number' value={customRowsInject} onChange={(e) => setCustomRowsInject(e.target.value)} style={{height: "40px", border: "none"}} className="border-start border-grey rounded-3 text-center" />
                 </div>}
               </div>
             </div>
@@ -662,7 +663,7 @@ const LLMTool = () => {
           </div>
         </div>
         <Btn
-          className="btn-sm w-100 border border-black mb-1"
+          className="btn-sm w-100 rounded-3 mb-1"
           title={isRunning ? "Stop" : "Run"}
           onClick={isRunning? stopCallGPT : handleOnClickRun}
         ></Btn>
@@ -672,17 +673,17 @@ const LLMTool = () => {
               className={"flex flex-column w-100"}
               style={{ height: "700px", width: fileW - 240 }}
             >
-              <CustomDropDown items={texttypes} value={selectedTextType} handleSelectChange={setSelectedTextType} placeholder={"Select Text Box Type...."} />
+              <CustomDropDown items={texttypes} value={selectedTextType} handleSelectChange={setSelectedTextType} placeholder={"Select Text Box Type...."} toggleClassName={"w-100 select-dropdown rounded-3"} />
               <Btn
-                className="btn-sm w-100 border border-black mt-1 mb-1"
+                className="btn-sm w-100 rounded-3 mt-1 mb-1"
                 title={"Add Text Box"}
                 onClick={handleAddTextBox}
               ></Btn>
               <div className="overflow-auto">
                 {textBoxes.map((box, index) => (
                   <div
-                    style={{ position: "relative" }}
-                    className="border border-black rounded p-1"
+                    style={{ position: "relative", backgroundColor: "#28243D" }}
+                    className="rounded-0 p-1 border-top border-bottom border-grey mt-1"
                     key={`textBoxes${index}`}
                   >
                     {box === 0 && <PromptTextBox boxIndex={index} data={textBoxesData[index]} handleChangeTextBoxData={handleChangeTextBoxData} />}
@@ -707,7 +708,7 @@ const LLMTool = () => {
             </div>
           </div>
           <SampleSplitter isDragging={isFileDragging} {...fileDragBarProps} />
-          <div className={"w-100 border-top border-start border-black p-1 overflow-auto"} style={{height: "700px", width: "200", fontSize: 16}}>
+          <div className={"w-100 p-1 overflow-auto"} style={{height: "700px", width: "200", fontSize: 16}}>
             {
             // outputData.length > 0 && outputData.length === 1 ? 
               // (<div className="text-wrap overflow-auto ps-1 pe-1" style={{fontSize: 15}}>
@@ -716,7 +717,7 @@ const LLMTool = () => {
               // (
               outputData && outputData.length > 0 ? (outputData.map((data, index) => {
                 return (
-                  <div style={{height: '120px'}} className={`${index < outputData.length - 1 && "border-bottom border-black"} w-100 p-2 d-flex flex-column`}>
+                  <div style={{height: '120px', backgroundColor: "#443F63"}} className={`${index < outputData.length - 1 && "mb-1"} w-100 p-2 d-flex flex-column rounded-3`}>
                     <div className="fw-bold">{data.hasOwnProperty("label") ? data.label : ""}</div>
                     <hr className="mt-2 mb-1"/>
                     <div className="text-wrap overflow-auto ps-1 pe-1" style={{fontSize: 15}}>
@@ -855,9 +856,9 @@ const PromptTextBox = ({boxIndex, data, handleChangeTextBoxData}) => {
         onChange={handleLoadData}
       />
       <div className="d-flex mt-1 mb-1">
-        <Btn className="me-1 fw-bold border border-black rounded-0" onClick={handleOnclickLoadBtn} style={{fontSize: 13, height: "20px", width: "80px", padding: "8px"}}>Load file</Btn>
-        <Btn className="me-1 fw-bold border border-black rounded-0" onClick={handleSaveData} style={{fontSize: 13, height: "20px", width: "80px", padding: "8px"}}>Save file</Btn>
-        <Btn className="fw-bold border border-black rounded-0" onClick={handleClearData} style={{fontSize: 13, height: "20px", width: "80px", padding: "8px"}}>Clear</Btn>
+        <Btn className="me-1 fw-bold rounded-3" onClick={handleOnclickLoadBtn} style={{fontSize: 13, height: "20px", width: "80px", padding: "8px"}}>Load file</Btn>
+        <Btn className="me-1 fw-bold rounded-3" onClick={handleSaveData} style={{fontSize: 13, height: "20px", width: "80px", padding: "8px"}}>Save file</Btn>
+        <Btn className="fw-bold rounded-3" onClick={handleClearData} style={{fontSize: 13, height: "20px", width: "80px", padding: "8px"}}>Clear</Btn>
       </div>
       <div
         style={{
@@ -865,7 +866,6 @@ const PromptTextBox = ({boxIndex, data, handleChangeTextBoxData}) => {
           height: "100px",
           padding: "1px",
           border: "none",
-          borderTop: "solid 1px grey",
           display: "flex"
         }}
       >
@@ -877,7 +877,6 @@ const PromptTextBox = ({boxIndex, data, handleChangeTextBoxData}) => {
             height: "100px",
             padding: "4px",
             border: "none",
-            borderRight: "solid 1px grey",
           }}
           value={text}
           onChange={handleTextChange}
@@ -1029,20 +1028,19 @@ const DataSourceTextBox = ({boxIndex, data, handleChangeTextBoxData}) => {
         onChange={handleLoadData}
       />
       <div className="d-flex mt-1 mb-1">
-        <Btn className="me-1 fw-bold border border-black rounded-0" onClick={handleOnclickLoadBtn} style={{fontSize: 13, height: "20px", width: "80px", padding: "8px"}}>Load file</Btn>
-        <Btn className="me-1 fw-bold border border-black rounded-0" onClick={handleSaveData} style={{fontSize: 13, height: "20px", width: "80px", padding: "8px"}}>Save file</Btn>
-        <Btn className="fw-bold border border-black rounded-0" onClick={handleClearData} style={{fontSize: 13, height: "20px", width: "80px", padding: "8px"}}>Clear</Btn>
+        <Btn className="me-1 fw-bold rounded-3" onClick={handleOnclickLoadBtn} style={{fontSize: 13, height: "20px", width: "80px", padding: "8px"}}>Load file</Btn>
+        <Btn className="me-1 fw-bold rounded-3" onClick={handleSaveData} style={{fontSize: 13, height: "20px", width: "80px", padding: "8px"}}>Save file</Btn>
+        <Btn className="fw-bold rounded-3" onClick={handleClearData} style={{fontSize: 13, height: "20px", width: "80px", padding: "8px"}}>Clear</Btn>
       </div>
       <div
         style={{
           width: "100%",
           padding: "2px",
           border: "none",
-          borderTop: "solid 1px grey",
           display: "flex"
         }}
       >
-        <div style={{width: "75%", borderRight: "solid 1px grey"}}>
+        <div style={{width: "75%"}}>
           <textarea
             ref={textareaRef1}
             style={{
@@ -1064,7 +1062,6 @@ const DataSourceTextBox = ({boxIndex, data, handleChangeTextBoxData}) => {
               height: "100px",
               padding: "4px",
               border: "none",
-              borderTop: "solid 1px grey",
             }}
             value={output}
             onChange={(e) => setOutput(e.target.value)}
@@ -1239,20 +1236,19 @@ const QueryTextBox = ({boxIndex, data, handleChangeTextBoxData}) => {
         onChange={handleLoadData}
       />
       <div className="d-flex mt-1 mb-1">
-        <Btn className="me-1 fw-bold border border-black rounded-0" onClick={handleOnclickLoadBtn} style={{fontSize: 13, height: "20px", width: "80px", padding: "8px"}}>Load file</Btn>
-        <Btn className="me-1 fw-bold border border-black rounded-0" onClick={handleSaveData} style={{fontSize: 13, height: "20px", width: "80px", padding: "8px"}}>Save file</Btn>
-        <Btn className="fw-bold border border-black rounded-0" onClick={handleClearData} style={{fontSize: 13, height: "20px", width: "80px", padding: "8px"}}>Clear</Btn>
+        <Btn className="me-1 fw-bold rounded-3" onClick={handleOnclickLoadBtn} style={{fontSize: 13, height: "20px", width: "80px", padding: "8px"}}>Load file</Btn>
+        <Btn className="me-1 fw-bold rounded-3" onClick={handleSaveData} style={{fontSize: 13, height: "20px", width: "80px", padding: "8px"}}>Save file</Btn>
+        <Btn className="fw-bold rounded-3" onClick={handleClearData} style={{fontSize: 13, height: "20px", width: "80px", padding: "8px"}}>Clear</Btn>
       </div>
       <div
         style={{
           width: "100%",
           padding: "2px",
           border: "none",
-          borderTop: "solid 1px grey",
           display: "flex"
         }}
       >
-        <div style={{width: "75%", borderRight: "solid 1px grey"}}>
+        <div style={{width: "75%"}}>
           <textarea
             ref={textareaRef1}
             style={{
@@ -1274,7 +1270,6 @@ const QueryTextBox = ({boxIndex, data, handleChangeTextBoxData}) => {
               height: "80px",
               padding: "4px",
               border: "none",
-              borderTop: "solid 1px grey",
             }}
             value={dataSource}
             onChange={(e) => setDataSource(e.target.value)}
@@ -1288,7 +1283,6 @@ const QueryTextBox = ({boxIndex, data, handleChangeTextBoxData}) => {
               height: "80px",
               padding: "4px",
               border: "none",
-              borderTop: "solid 1px grey",
             }}
             value={output}
             onChange={(e) => setOutput(e.target.value)}

@@ -159,6 +159,17 @@ input {
     color: rgba(255, 255, 255, 0.70) !important;
 }
 
+textarea {
+    background-color: $thirdBG;
+    color: $title-color;
+    border: none;
+    border-radius: 10px;
+
+    &::placeholder {
+        color: rgba(255, 255, 255, 0.50);
+    }
+}
+
 .theme-color {
     color: $primary !important;
 }

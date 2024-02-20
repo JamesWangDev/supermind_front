@@ -402,6 +402,7 @@ header {
               min-width: 100%;
               right: 0 !important;
               left: unset !important;
+              background-color: $thirdBG;
 
               body[dir="rtl"] & {
                 right: unset !important;

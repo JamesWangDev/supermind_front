@@ -23,7 +23,7 @@ const MainProductContent = ({ productState, setProductState }) => {
           {productState?.product?.sale_starts_at && productState?.product?.sale_expired_at && <OfferTimer productState={productState} />}
           <ProductDetailAction productState={productState} setProductState={setProductState} />
           <AddProductDetail productState={productState} />
-          <ProductInformation productState={productState} />
+          {/* <ProductInformation productState={productState} /> */}
           {productState?.product?.estimated_delivery_text || (productState?.product?.return_policy_text && productState?.product?.is_return) ? (
             <ProductDeliveryInformation productState={productState} />
           ) : null}

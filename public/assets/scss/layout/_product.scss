@@ -607,10 +607,12 @@
 
 .product-box {
   padding: calc(8px + (14 - 8) * ((100vw - 320px) / (1920 - 320)));
-  border-right: 1px solid $border-color;
+  // border: 1px solid $border-color;
   position: relative;
   transition: all 0.3s ease-in-out;
   overflow: hidden;
+  margin-left: 4px;
+  margin-right: 4px;
 
   html.dark & {
     border-right-color: rgba(119, 119, 119, 0.44);
@@ -1686,7 +1688,7 @@
           position: absolute;
           top: 0;
           left: 0;
-          background-color: $white;
+          background-color: $thirdBG;
           opacity: 0;
           transition: all 0.3s ease-in-out;
 
@@ -1813,7 +1815,7 @@
       position: absolute;
       top: 0;
       left: 0;
-      background-color: $white;
+      background-color: $thirdBG;
       opacity: 0;
       transition: all 0.3s ease-in-out;
 
@@ -2241,7 +2243,7 @@
         @include flex_common($dis: flex, $align: center, $justify: space-between);
         position: absolute;
         bottom: -5px;
-        background-color: $white;
+        background-color: $thirdBG;
         width: 100%;
         padding: 10px 5px;
         border-radius: 7px;
@@ -3452,7 +3454,7 @@
 }
 
 .product-modern {
-  border: 1px solid $border-color;
+  // border: 1px solid $border-color;
   border-radius: 10px;
   padding: 0;
 

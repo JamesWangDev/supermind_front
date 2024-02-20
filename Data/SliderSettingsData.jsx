@@ -1,3 +1,5 @@
+import { sassFalse } from "sass";
+
 // ----------------*****************----------------******************------------
 export const themeSec2BannerSlider = {
   infinite: true,
@@ -30,7 +32,7 @@ export const themeSec2BannerSlider = {
 };
 
 export const productSliderOption = {
-  infinite: true,
+  infinite: false,
   arrows: true,
   slidesToShow: 5,
   slidesToScroll: 1,

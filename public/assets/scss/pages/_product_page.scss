@@ -1658,7 +1658,7 @@
 }
 
 .recently-purchase {
-  background: $white;
+  background: $secondBg;
   border: 0;
   border-radius: 6px;
   bottom: -130px;
@@ -1714,7 +1714,7 @@
     right: 7px;
     top: 6px;
     opacity: 0.5;
-    color: $black;
+    color: $white;
     cursor: pointer;
 
     body[dir="rtl"] & {

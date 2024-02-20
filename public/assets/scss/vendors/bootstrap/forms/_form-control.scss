@@ -33,7 +33,7 @@
   // Customize the `:focus` state to imitate native WebKit styles.
   &:focus {
     color: rgba(255, 255, 255, 0.70);
-    background-color: $input-focus-bg;
+    background-color: #443F63;
     border-color: $input-focus-border-color;
     outline: 0;
     @if $enable-shadows {
@@ -73,7 +73,7 @@
 
   // Placeholder
   &::placeholder {
-    color: $input-placeholder-color;
+    color: rgba(255, 255, 255, 0.50);    ;
     // Override Firefox's unusual default opacity; see https://github.com/twbs/bootstrap/pull/11526.
     opacity: 1;
   }
@@ -85,7 +85,7 @@
   // don't honor that edge case; we style them as disabled anyway.
   &:disabled {
     color: $input-disabled-color;
-    background-color: $input-disabled-bg;
+    background-color: #443F63;
     border-color: $input-disabled-border-color;
     // iOS fix for unreadable disabled content; see https://github.com/twbs/bootstrap/issues/11655.
     opacity: 1;

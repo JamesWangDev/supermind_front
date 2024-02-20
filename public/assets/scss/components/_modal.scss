@@ -49,7 +49,7 @@
         position: absolute;
         top: calc(7px + (10 - 7) * ((100vw - 320px) / (1920 - 320)));
         right: calc(7px + (10 - 7) * ((100vw - 320px) / (1920 - 320)));
-        background-color: $primary;
+        background-color: $thirdBG;
         opacity: 1;
         background-image: none;
         border-radius: 4px;
@@ -912,7 +912,7 @@
             align-items: center;
             padding: 0 15px;
             font-size: 17px;
-            color: $content-color;
+            color: $title-color;
           }
         }
 
@@ -2464,13 +2464,13 @@
           font-size: 14px;
           padding: 12px;
           border: unset;
-          background-color: $white;
+          background-color: $thirdBG;
           box-shadow: 0px 0px 12px 0px rgba($title-color, 0.05);
           border-radius: 0;
 
           &::placeholder {
             font-size: 14px;
-            color: #909090;
+            color: rgba(255, 255, 255, 0.50);
           }
         }
 

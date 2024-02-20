@@ -1367,8 +1367,8 @@
     }
 
     .form-control {
-      background-color: $light-gray;
-      border: 1px solid $light-gray;
+      background-color: $thirdBG;
+      // border: 1px solid $light-gray;
       text-transform: capitalize;
 
       &:focus {

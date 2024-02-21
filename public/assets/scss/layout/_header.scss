@@ -847,6 +847,7 @@ header {
             }
 
             .header-wishlist {
+              background-color: $secondBg;
               &:hover {
                 background-color: transparent;
               }

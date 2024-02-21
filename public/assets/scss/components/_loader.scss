@@ -248,7 +248,7 @@ div#loading-bar {
   background-position: -500px 0;
   animation: skeletonShine 1s linear 0s infinite normal forwards;
   border-radius: 5px;
-  background-image: linear-gradient(135deg, $thirdBG 0%, $thirdBG 20%, $thirdBG 40%, $thirdBG 100%);
+  background-image: linear-gradient(135deg, $thirdBG 0%, $secondBg 20%, $thirdBG 40%, $thirdBG 100%);
   background-repeat: no-repeat;
   background-size: 1000px 100%;
   width: 100%;
@@ -329,21 +329,21 @@ div#loading-bar {
     width: 66px;
     height: 66px;
     border-radius: 11px;
-    background: #f6f7f8;
+    background: $thirdBG;
     background-position: -500px 0;
     animation: skeletonShine 1s linear 0s infinite normal forwards;
-    background-image: linear-gradient(135deg, #f6f7f8 0%, #edeef1 20%, #f6f7f8 40%, #f6f7f8 100%);
+    background-image: linear-gradient(135deg, $thirdBG 0%, $secondBg 20%, $thirdBG 40%, $thirdBG 100%);
     background-repeat: no-repeat;
     background-size: 1000px 100%;
   }
 
   .contain-name {
     h3 {
-      background: #f6f7f8;
+      background: $thirdBG;
       background-position: -500px 0;
       animation: skeletonShine 1s linear 0s infinite normal forwards;
       border-radius: 5px;
-      background-image: linear-gradient(135deg, #f6f7f8 0%, #edeef1 20%, #f6f7f8 40%, #f6f7f8 100%);
+      background-image: linear-gradient(135deg, $thirdBG 0%, $secondBg 20%, $thirdBG 40%, $thirdBG 100%);
       background-repeat: no-repeat;
       background-size: 1000px 100%;
       width: 50%;
@@ -351,11 +351,11 @@ div#loading-bar {
     }
 
     .product-label {
-      background: #f6f7f8;
+      background: $thirdBG;
       background-position: -500px 0;
       animation: skeletonShine 1s linear 0s infinite normal forwards;
       border-radius: 5px;
-      background-image: linear-gradient(135deg, #f6f7f8 0%, #edeef1 20%, #f6f7f8 40%, #f6f7f8 100%);
+      background-image: linear-gradient(135deg, $thirdBG 0%, $secondBg 20%, $thirdBG 40%, $thirdBG 100%);
       background-repeat: no-repeat;
       background-size: 1000px 100%;
       width: 20%;
@@ -368,11 +368,11 @@ div#loading-bar {
   }
 
   .saller-contact {
-    background: #f6f7f8;
+    background: $thirdBG;
     background-position: -500px 0;
     animation: skeletonShine 1s linear 0s infinite normal forwards;
     border-radius: 5px;
-    background-image: linear-gradient(135deg, #f6f7f8 0%, #edeef1 20%, #f6f7f8 40%, #f6f7f8 100%);
+    background-image: linear-gradient(135deg, $thirdBG 0%, $secondBg 20%, $thirdBG 40%, $thirdBG 100%);
     background-repeat: no-repeat;
     background-size: 1000px 100%;
     width: 50% !important;
@@ -424,10 +424,10 @@ div#loading-bar {
   .offer-image {
     width: 80px;
     height: 80px;
-    background: #f6f7f8;
+    background: $thirdBG;
     background-position: -500px 0;
     animation: skeletonShine 1s linear 0s infinite normal forwards;
-    background-image: linear-gradient(135deg, #f6f7f8 0%, #edeef1 20%, #f6f7f8 40%, #f6f7f8 100%);
+    background-image: linear-gradient(135deg, $thirdBG 0%, $secondBg 20%, $thirdBG 40%, $thirdBG 100%);
     background-repeat: no-repeat;
     background-size: 1000px 100%;
     border-radius: 7px;
@@ -436,10 +436,10 @@ div#loading-bar {
   &.offer-product {
     .offer-detail {
       .vertical-price {
-        background: #f6f7f8;
+        background: $thirdBG;
         background-position: -500px 0;
         animation: skeletonShine 1s linear 0s infinite normal forwards;
-        background-image: linear-gradient(135deg, #f6f7f8 0%, #edeef1 20%, #f6f7f8 40%, #f6f7f8 100%);
+        background-image: linear-gradient(135deg, $thirdBG 0%, $secondBg 20%, $thirdBG 40%, $thirdBG 100%);
         background-repeat: no-repeat;
         background-size: 1000px 100%;
         width: 120px;
@@ -448,10 +448,10 @@ div#loading-bar {
       }
 
       span {
-        background: #f6f7f8;
+        background: $thirdBG;
         background-position: -500px 0;
         animation: skeletonShine 1s linear 0s infinite normal forwards;
-        background-image: linear-gradient(135deg, #f6f7f8 0%, #edeef1 20%, #f6f7f8 40%, #f6f7f8 100%);
+        background-image: linear-gradient(135deg, $thirdBG 0%, $secondBg 20%, $thirdBG 40%, $thirdBG 100%);
         background-repeat: no-repeat;
         background-size: 1000px 100%;
         width: 30px;
@@ -461,10 +461,10 @@ div#loading-bar {
 
       a {
         .name {
-          background: #f6f7f8;
+          background: $thirdBG;
           background-position: -500px 0;
           animation: skeletonShine 1s linear 0s infinite normal forwards;
-          background-image: linear-gradient(135deg, #f6f7f8 0%, #edeef1 20%, #f6f7f8 40%, #f6f7f8 100%);
+          background-image: linear-gradient(135deg, $thirdBG 0%, $secondBg 20%, $thirdBG 40%, $thirdBG 100%);
           background-repeat: no-repeat;
           background-size: 1000px 100%;
           width: 120px;
@@ -539,11 +539,11 @@ div#loading-bar {
     }
 
     .placeholder {
-      background: #f6f7f8;
+      background: $thirdBG;
       background-position: -500px 0;
       animation: skeletonShine 1s linear 0s infinite normal forwards;
       border-radius: 5px;
-      background-image: linear-gradient(135deg, #f6f7f8 0%, #edeef1 20%, #f6f7f8 40%, #f6f7f8 100%);
+      background-image: linear-gradient(135deg, $thirdBG 0%, $secondBg 20%, $thirdBG 40%, $thirdBG 100%);
       background-repeat: no-repeat;
       background-size: 1000px 100%;
       opacity: 1;
@@ -572,21 +572,21 @@ div#loading-bar {
       width: 230px;
       height: 230px;
       border-radius: 15px;
-      background: #f6f7f8;
+      background: $thirdBG;
       background-position: -500px 0;
       animation: skeletonShine 1s linear 0s infinite normal forwards;
-      background-image: linear-gradient(135deg, #f6f7f8 0%, #edeef1 20%, #f6f7f8 40%, #f6f7f8 100%);
+      background-image: linear-gradient(135deg, $thirdBG 0%, $secondBg 20%, $thirdBG 40%, $thirdBG 100%);
       background-repeat: no-repeat;
       background-size: 1000px 100%;
       opacity: 1;
     }
 
     .placeholder {
-      background: #f6f7f8;
+      background: $thirdBG;
       background-position: -500px 0;
       animation: skeletonShine 1s linear 0s infinite normal forwards;
       border-radius: 5px;
-      background-image: linear-gradient(135deg, #f6f7f8 0%, #edeef1 20%, #f6f7f8 40%, #f6f7f8 100%);
+      background-image: linear-gradient(135deg, $thirdBG 0%, $secondBg 20%, $thirdBG 40%, $thirdBG 100%);
       background-repeat: no-repeat;
       background-size: 1000px 100%;
       opacity: 1;
@@ -646,7 +646,7 @@ div#loading-bar {
         .question-box {
           h5 {
             border: none;
-            background-color: $light-gray;
+            background-color: $secondBg;
           }
         }
       }

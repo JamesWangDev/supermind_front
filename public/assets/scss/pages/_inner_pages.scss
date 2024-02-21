@@ -6145,7 +6145,7 @@
   padding: calc(20px + (28 - 20) * ((100vw - 992px) / (1920 - 992)));
   margin-bottom: 29px;
   border-radius: 9px;
-  background: $light-gray;
+  background: $secondBg;
 
   @include mq-max(lg) {
     padding: 0;
@@ -6192,7 +6192,7 @@
       margin-bottom: -6px;
       line-height: 1.5;
       font-size: calc(14px + (15 - 14) * ((100vw - 320px) / (1920 - 320)));
-      color: $content-color;
+      color: $title-color;
       margin-top: 15px;
     }
   }
@@ -6243,7 +6243,7 @@
 
       li {
         a {
-          color: $content-color;
+          color: $title-color;
           display: block;
           font-size: 16px;
           line-height: 1;
@@ -6383,7 +6383,7 @@
           position: relative;
 
           a {
-            color: #f1f1f1;
+            color: $title-color;
             font-size: 16px;
             width: 20px;
             height: 20px;
@@ -6634,7 +6634,7 @@
      Seller Grid scss
 ==========================**/
 .seller-grid-box {
-  background-color: $light-gray;
+  background-color: $secondBg;
   padding: calc(12px + (25 - 12) * ((100vw - 320px) / (1920 - 320)));
   border-radius: 14px;
   position: relative;
@@ -6769,7 +6769,7 @@
         align-items: center;
         position: absolute;
         top: 0;
-        background-color: $light-gray;
+        background-color: $secondBg;
         right: 0;
         padding-left: 5px;
 
@@ -6785,7 +6785,7 @@
         }
 
         h6 {
-          color: $content-color;
+          color: $title-color;
         }
 
         .product-rating {
@@ -6845,7 +6845,7 @@
           @include pseudowh($width: calc(35px + (40 - 35) * ((100vw - 320px) / (1920 - 320))),
             $height: calc(35px + (40 - 35) * ((100vw - 320px) / (1920 - 320))));
           @include flex_common;
-          background: $white;
+          background: $thirdBG;
           border-radius: 100%;
           padding: 4px;
           box-shadow: 0 0 2px rgba($title-color, 0.2);

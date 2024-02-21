@@ -713,7 +713,7 @@ export const headerMenu = [
     children: [
       {
         title: 'BecomeSeller',
-        path: '/seller/become-seller',
+        path: '/seller/become-developer',
       },
       {
         title: 'SellerStoresBasic',

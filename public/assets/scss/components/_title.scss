@@ -194,7 +194,7 @@
   p {
     margin-bottom: 0;
     font-size: 15px;
-    color: $content-color;
+    color: $title-color;
     line-height: 1.6;
   }
 }
@@ -211,7 +211,7 @@
   p {
     margin-bottom: 0;
     font-size: calc(14px + (16 - 14) * ((100vw - 320px) / (1920 - 320)));
-    color: $content-color;
+    color: $title-color;
     line-height: 1.6;
   }
 }

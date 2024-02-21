@@ -6421,8 +6421,13 @@
      Seller become scss
 ==========================**/
 .seller-poster-section {
+  background-color: $secondBg;
+  padding-top: 50px;
+  padding-bottom: 50px;
   .poster-box {
     .poster-image {
+      margin-top: 20px;
+      border-radius: 30px;
       margin-bottom: calc(22px + .01875*(100vw - 320px));
       text-align: center;
       height: calc(140px + .225*(100vw - 320px));
@@ -6446,6 +6451,8 @@
 }
 
 .become-service {
+  background-color: $secondBg;
+  padding-bottom: 90px;
   .service-box {
     text-align: center;
     border-radius: 8px;
@@ -6476,7 +6483,7 @@
       @include pseudowh($width: calc(58px + (80 - 58) * ((100vw - 320px) / (1920 - 320))),
         $height: calc(58px + (80 - 58) * ((100vw - 320px) / (1920 - 320))));
       @include flex_common;
-      background: $white;
+      background: $secondBg;
       margin: 0 auto calc(14px + (18 - 14) * ((100vw - 320px) / (1920 - 320)));
       border-radius: 5px;
       padding: calc(5px + (8 - 5) * ((100vw - 320px) / (1920 - 320)));
@@ -6520,7 +6527,7 @@
       p {
         margin: 0;
         line-height: 1.5;
-        color: $content-color;
+        color: $title-color;
         transition: all 0.3s ease-in-out;
         font-size: calc(15px + (16 - 15) * ((100vw - 320px) / (1920 - 320)));
       }
@@ -6529,27 +6536,28 @@
 }
 
 .business-section {
-  background-color: $light-gray;
+  padding-top: 70px;
+  background-color: $background;
 
   .business-contain {
     position: relative;
     z-index: 0;
 
-    &::after {
-      @include pos;
-      @include pseudowh;
-      @include center(vertical);
-      background-image: url("https://angular.pixelstrap.net/fastkart/arrow.684125b0e42c2e24.svg");
-      background-position: center;
-      background-repeat: no-repeat;
-      background-size: contain;
-      left: 0;
-      z-index: -1;
+    // &::after {
+    //   @include pos;
+    //   @include pseudowh;
+    //   @include center(vertical);
+    //   background-image: url("https://angular.pixelstrap.net/fastkart/arrow.684125b0e42c2e24.svg");
+    //   background-position: center;
+    //   background-repeat: no-repeat;
+    //   background-size: contain;
+    //   left: 0;
+    //   z-index: -1;
 
-      @include mq-max(xl) {
-        content: none;
-      }
-    }
+    //   @include mq-max(xl) {
+    //     content: none;
+    //   }
+    // }
 
     >.row {
       margin-inline: -50px;
@@ -6586,10 +6594,10 @@
 
     .business-box {
       text-align: center;
-      background-color: $white;
-      border-radius: 9px;
+      background-color: $secondBg;
+      border-radius: 30px;
       padding: calc(17px + (35 - 17) * ((100vw - 320px) / (1920 - 320)));
-      box-shadow: 0 0 8px rgba($title-color, 0.05);
+      // box-shadow: 0 0 8px rgba($title-color, 0.05);
       display: flex;
       align-items: center;
 
@@ -6599,7 +6607,7 @@
         background: $primary;
         @include flex_common;
         margin: 0 auto calc(19px + (28 - 19) * ((100vw - 320px) / (1920 - 320)));
-        border-radius: 5px;
+        border-radius: 10px;
 
         h2 {
           color: $white;
@@ -6621,13 +6629,18 @@
 
         p {
           margin: 0;
-          color: $content-color;
+          color: $title-color;
           line-height: 1.6;
           font-size: 16px;
         }
       }
     }
   }
+}
+
+.selling-section {
+  padding-top: 70px;
+  background-color: $secondBg;
 }
 
 /**=====================

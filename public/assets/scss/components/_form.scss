@@ -124,7 +124,7 @@ input[type='number'] {
   .form-control {
     &:focus {
       background-color: $thirdBG !important;
-      border: 1px solid #ced4da;
+      // border: 1px solid #ced4da;
     }
   }
 
@@ -180,7 +180,7 @@ input[type='number'] {
   .form-control {
     &:focus {
       background-color: $thirdBG !important;
-      border: 1px solid #ced4da;
+      // border: 1px solid #ced4da;
     }
   }
 
@@ -276,7 +276,7 @@ input[type='number'] {
   padding: calc(8px + (14 - 8) * ((100vw - 320px) / (1920 - 320))) calc(12px + (15 - 12) * ((100vw - 320px) / (1920 - 320)));
 
   &::placeholder {
-    color: rgba($content-color, 0.3215686275);
+    color: rgba($title-color, 0.3215686275);
   }
 
   &.subscribe-input {

@@ -14,7 +14,7 @@
   appearance: none; // Fix appearance for date inputs in Safari
   background-color: #443F63;
   background-clip: padding-box;
-  border: $input-border-width solid $input-border-color;
+  // border: $input-border-width solid $input-border-color;
 
   // Note: This has no effect on <select>s in some browsers, due to the limited stylability of `<select>`s in CSS.
   @include border-radius($input-border-radius, 0);

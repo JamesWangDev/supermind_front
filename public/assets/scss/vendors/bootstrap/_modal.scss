@@ -141,6 +141,9 @@
 .modal-title {
   margin-bottom: 0;
   line-height: var(--#{$prefix}modal-title-line-height);
+  svg {
+    display: none;
+  }
 }
 
 // Modal body

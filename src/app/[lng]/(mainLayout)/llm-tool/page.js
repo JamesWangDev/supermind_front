@@ -447,6 +447,7 @@ const LLMTool = () => {
   const exportPromptText = useCallback(() => {
     if(!promptText) {
       alert("Please enter the prompt text...")
+      console.log("This is giving an error")
       return;
     }
 
@@ -469,13 +470,17 @@ const LLMTool = () => {
   }, [])
 
   const handleOnClickRun = useCallback(() => {
+
     if(currentLoop > timeMax - 1) {
-      const rv = confirm("You reached to Max loop already, Do you want to clear the current loop and continue?");
+      const rv = confirm("You reached the Max loop already, Do you want to clear the current loop and continue?");
       if (rv) {
         setCurrentLoop(0);
+        clearOutputData();
       }
     }
+
     setIsRunning(true);
+
   }, [setIsRunning, currentLoop, timeMax])
 
   return (
@@ -664,7 +669,7 @@ const LLMTool = () => {
         </div>
         <Btn
           className="btn-sm w-100 rounded-3 mb-1"
-          title={isRunning ? "Stop" : "Run"}
+          title={isRunning && promptText ? "Stop" : "Run"}
           onClick={isRunning? stopCallGPT : handleOnClickRun}
         ></Btn>
         <div className={"flex grow"}>
@@ -784,13 +789,13 @@ const PromptTextBox = ({boxIndex, data, handleChangeTextBoxData}) => {
     }
   }, [selectionStart, selectionEnd]);
 
-  const handleTextChange = (e) => {
-    setText(e.target.value);
-  };
-
   useEffect(() => {
     handleChangeTextBoxData(boxIndex, {type:0, text})
   }, [text])
+
+  const handleTextChange = (e) => {
+    setText(e.target.value);
+  };
 
   const handleLoadData = (event) => {
     const file = event.target.files[0];

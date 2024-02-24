@@ -233,9 +233,10 @@ const LLMTool = () => {
         messages: [
           {
             role: 'user',
-            content: `${dataString}${promptText}`
+            content: `${dataString}${promptText}`,
           }
-        ]
+        ],
+        temperature: 1.2, // more precise feedback from the AI and less repetition. Tune up the number to lower repetition and raise level of preciseness
       };
       
       const response = await axios.post(apiUrl, requestBody, {
@@ -771,23 +772,25 @@ const PromptTextBox = ({boxIndex, data, handleChangeTextBoxData}) => {
   const [selectionEnd, setSelectionEnd] = useState(0);
   const textareaRef = useRef(null);
 
-  useEffect(() => {
-    if (textareaRef.current) {
-      // Save current selection range
-      const { selectionStart, selectionEnd } = textareaRef.current;
-      setSelectionStart(selectionStart);
-      setSelectionEnd(selectionEnd);
-    }
-    // Update text state with new data text
-    setText(data && data.text ? data.text : '');
-  }, [data]);
+  //I believe that these useEffect hooks are causing the infinite loop issue/rendering crash
 
-  useEffect(() => {
-    if (textareaRef.current) {
-      // Restore selection range after text update
-      textareaRef.current.setSelectionRange(selectionStart, selectionEnd);
-    }
-  }, [selectionStart, selectionEnd]);
+  // useEffect(() => {
+  //   if (textareaRef.current) {
+  //     // Save current selection range
+  //     const { selectionStart, selectionEnd } = textareaRef.current;
+  //     setSelectionStart(selectionStart);
+  //     setSelectionEnd(selectionEnd);
+  //   }
+  //   // Update text state with new data text
+  //   setText(data && data.text ? data.text : '');
+  // }, [data]);
+
+  // useEffect(() => {
+  //   if (textareaRef.current) {
+  //     // Restore selection range after text update
+  //     textareaRef.current.setSelectionRange(selectionStart, selectionEnd);
+  //   }
+  // }, [selectionStart, selectionEnd]);
 
   useEffect(() => {
     handleChangeTextBoxData(boxIndex, {type:0, text})

@@ -266,8 +266,10 @@ const LLMTool = () => {
         console.log("cannot parse to JSON");
         setOutputdata((prev) => {
           const updatedOutPutData = [...prev, {id: "none", label: "Not JSON response", text: response.data.choices[0].message.content.trim()}]
-          handleSetDataString(updatedOutPutData)
-          return updatedOutPutData;
+          //stores only unique responses to a new array. This is to remove duplicates from appearing in the output data
+          const uniqueData = [...new Map(updatedOutPutData.map(item => [item['id'], item])).values()] 
+          handleSetDataString(uniqueData)
+          return uniqueData;
         });
         setCurrentLoop(prev => prev + 1);
       }

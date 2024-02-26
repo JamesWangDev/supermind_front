@@ -6,7 +6,7 @@ import { useResizable } from "react-resizable-layout";
 import { cn } from "./cn";
 import Btn from "@/Elements/Buttons/Btn";
 import CustomDropDown from "@/Components/Common/CustomDropDown/CustomDropDown";
-import {Input} from "reactstrap";
+import { Input } from "reactstrap";
 import Switch from "@/Components/Common/Switch/Switch";
 import axios from "axios";
 
@@ -87,7 +87,7 @@ const modelChoiceItems = [
   {
     name: "gpt-4-vision-preview",
     value: 7,
-  }
+  },
 ];
 
 const gptFlag = [
@@ -99,7 +99,7 @@ const gptFlag = [
     name: "Yes",
     value: 1,
   },
-]
+];
 
 const duplicatedRemove = [
   {
@@ -110,7 +110,7 @@ const duplicatedRemove = [
     name: "Yes",
     value: 1,
   },
-]
+];
 
 const rowsInjectItem = [
   {
@@ -125,33 +125,33 @@ const rowsInjectItem = [
     name: "Custom",
     value: 2,
   },
-]
+];
 
 const LLMTool = () => {
   const fileInputRef = useRef(null);
   const outputfileInputRef = useRef(null);
   const [selectedTextType, setSelectedTextType] = useState(0);
-  const [modelChoice, setModelChoice] = useState(0)
+  const [modelChoice, setModelChoice] = useState(0);
   const [maxRow, setMaxRow] = useState(10);
   const [timeMax, setTimeMax] = useState(10);
   const [tokenMax, setTokenMax] = useState(20);
   const [isEnableGPT, setIsEnableGPT] = useState(0);
   const [isRemoveDuplicated, setIsRemoveDuplicated] = useState(0);
   const [rowInject, setRowInject] = useState("");
-  const [customRowsInject, setCustomRowsInject] = useState(10)
+  const [customRowsInject, setCustomRowsInject] = useState(10);
   const [textBoxes, setTextBoxes] = useState([0, 0]);
-  const [textBoxesData, setTextBoxesData]= useState([
+  const [textBoxesData, setTextBoxesData] = useState([
     {
       type: 0,
-      text: ""
+      text: "",
     },
     {
       type: 0,
-      text: ""
-    }
+      text: "",
+    },
   ]);
   const [isRunning, setIsRunning] = useState(false);
-  const [outputData, setOutputdata] = useState([])
+  const [outputData, setOutputdata] = useState([]);
   const {
     isDragging: isFileDragging,
     position: fileW,
@@ -166,123 +166,175 @@ const LLMTool = () => {
   const [currentLoop, setCurrentLoop] = useState(0);
 
   useEffect(() => {
-    if(textBoxesData.length === 0) return;
+    if (textBoxesData.length === 0) return;
     let promptText = "";
     let isPromtAdded = false;
 
-    textBoxesData.map(box => {
-      if(box.type === 0 && box.text) {
-        if(!isPromtAdded) {
-          promptText +=  `Prompt Text:\n`;
+    textBoxesData.map((box) => {
+      if (box.type === 0 && box.text) {
+        if (!isPromtAdded) {
+          promptText += `Prompt Text:\n`;
           isPromtAdded = true;
         }
         promptText += `${box.text}\n`;
       }
-    })
+    });
 
-    setPromptText(promptText)
-  }, [textBoxesData])
+    setPromptText(promptText);
+  }, [textBoxesData]);
 
   const handleSetDataString = (outputData) => {
-    if(outputData.length == 0) return;
+    if (outputData.length == 0) return;
     let dataString = "";
     let isDataAdded = false;
 
-    if(outputData.length > 0) {
+    if (outputData.length > 0) {
       outputData.map((data, index) => {
-        if(data.label || data.text) {
-          if(!isDataAdded) {
-            dataString +=  `BEGIN PDB(Previous Data Block//This is the data you produced on the last iteration of this prompt. Do not items duplicate in this response.\n`;
+        if (data.label || data.text) {
+          if (!isDataAdded) {
+            dataString += `BEGIN PDB(Previous Data Block//This is the data you produced on the last iteration of this prompt. Do not items duplicate in this response.\n`;
             isDataAdded = true;
           }
-          dataString += `ID: ${(index + 1)}: Label: ${data.label}\n`;
-          dataString += `ID: ${(index + 1)}: Data: ${data.text}\n`;
-          if(index === outputData.length - 1) {
+          dataString += `ID: ${index + 1}: Label: ${data.label}\n`;
+          dataString += `ID: ${index + 1}: Data: ${data.text}\n`;
+          if (index === outputData.length - 1) {
             dataString += `\n\nEND PDB`;
           }
         }
-      })
+      });
     }
-    setDataString(dataString)
-  }
+    setDataString(dataString);
+  };
 
   useEffect(() => {
-    if(!isRunning || currentLoop > timeMax - 1) {
+    if (!isRunning || currentLoop > timeMax - 1) {
       setIsRunning(false);
       return;
-    };
-    if(modelChoice === "") {
+    }
+    if (modelChoice === "") {
       alert("Please select Model Choice you want...");
       return;
     }
 
-    if(!promptText) {
-      alert("Please enter the prompt text...")
+    if (!promptText) {
+      alert("Please enter the prompt text...");
       return;
     }
 
     callGPT();
-  }, [currentLoop, isRunning])
+  }, [currentLoop, isRunning]);
 
   const callGPT = async () => {
     try {
-      const apiKey = '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'; // Replace with your ChatGPT 4.0 API key
-      const apiUrl = 'https://api.openai.com/v1/chat/completions'; // Endpoint for ChatGPT 4.0 completions
+      const apiKey = "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"; // Replace with your ChatGPT 4.0 API key
+      const apiUrl = "https://api.openai.com/v1/chat/completions"; // Endpoint for ChatGPT 4.0 completions
       const requestBody = {
         model: modelChoiceItems[modelChoice].name,
         messages: [
           {
-            role: 'user',
-            content: `${dataString}${promptText}`,
-          }
+            role: "user",
+            content: `${dataString}${promptText}. 
+              INSTRUCTION: Update JSON Response Format.
+              1. Determine lastID from the highest 'id' in previously provided JSON packages.
+              2. For new query responses, increment lastID for each new item. 
+              3. Create new JSON object for each item with incremented 'id', 'label', 'text'. 
+              4. Include new items in the response if they are not already present in the initial data.
+              5. Output only new JSON objects.
+              6. Exclude all explanatory or descriptive text in the output; provide only the JSON objects.
+              7. Ensure only JSON Array output and the id, label, text properties exist in each array element.
+              8. If there is no label or ID present for the response, increment the ID and provide a label with given context.,
+              10. Remove all of the line breaks within the response. `,
+          },
         ],
-        temperature: 1.2, // more precise feedback from the AI and less repetition. Tune up the number to lower repetition and raise level of preciseness
+        temperature: 0.6, // more precise feedback from the AI and less repetition. Tune up the number to lower repetition and raise level of preciseness
       };
-      
+
       const response = await axios.post(apiUrl, requestBody, {
         headers: {
-          'Content-Type': 'application/json',
-          'Authorization': `Bearer ${apiKey}`
-        }
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${apiKey}`,
+        },
       });
 
       try {
-        const responseData = JSON.parse(response.data.choices[0].message.content.trim());
-        if(Array.isArray(responseData) && responseData.every(item => typeof item === 'object' && 'label' in item && 'text' in item)) {
+        const responseDataString = response.data.choices[0].message.content
+          .trim()
+          .replace(/\n/g, "");
+        const responseData = JSON.parse(responseDataString);
+        if (
+          Array.isArray(responseData) &&
+          responseData.every(
+            (item) =>
+              typeof item === "object" && "label" in item && "text" in item
+          )
+        ) {
           setOutputdata((prev) => {
-            const updatedOutPutData = [...prev, ...responseData]
-            handleSetDataString(updatedOutPutData)
-            return updatedOutPutData;
+            const updatedOutPutData = [...prev, ...responseData];
+            console.log(updatedOutPutData);
+            //stores only unique responses to a filtered array. This is to remove duplicates from appearing in the output data
+            const uniqueData = updatedOutPutData.filter((item, index) => {
+              const itemIndex = updatedOutPutData.findIndex(
+                (i) => i.text === item.text
+              );
+              return itemIndex === index;
+            });
+            handleSetDataString(uniqueData);
+            return uniqueData;
           });
         } else {
           setOutputdata((prev) => {
-            const updatedOutPutData = [...prev, {id: "none", label: "wrong response form from GPT", text: response.data.choices[0].message.content.trim()}]
-            handleSetDataString(updatedOutPutData)
-            return updatedOutPutData;
+            const updatedOutPutData = [
+              ...prev,
+              {
+                id: null,
+                label: "Wrongly formatted response from GPT",
+                text: response.data.choices[0].message.content.trim(),
+              },
+            ];
+            console.log(updatedOutPutData);
+            //stores only unique responses to a filtered array. This is to remove duplicates from appearing in the output data
+            const uniqueData = updatedOutPutData.filter((item, index) => {
+              const itemIndex = updatedOutPutData.findIndex(
+                (i) => i.text === item.text
+              );
+              return itemIndex === index;
+            });
+            handleSetDataString(uniqueData);
+            return uniqueData;
           });
         }
-        setCurrentLoop(prev => prev + 1)
+        setCurrentLoop((prev) => prev + 1);
       } catch (error) {
         console.log("cannot parse to JSON");
         setOutputdata((prev) => {
-          const updatedOutPutData = [...prev, {id: "none", label: "Not JSON response", text: response.data.choices[0].message.content.trim()}]
+          const updatedOutPutData = [
+            ...prev,
+            {
+              id: null,
+              label: "Could not parse to JSON.",
+              text: response.data.choices[0].message.content[0].trim(),
+            },
+          ];
+          console.log(updatedOutPutData);
           //stores only unique responses to a filtered array. This is to remove duplicates from appearing in the output data
-          const uniqueData = updatedOutPutData.filter((item, index) => { 
-            const itemIndex = updatedOutPutData.findIndex(i => i.text === item.text);
+          const uniqueData = updatedOutPutData.filter((item, index) => {
+            const itemIndex = updatedOutPutData.findIndex(
+              (i) => i.text === item.text
+            );
             return itemIndex === index;
-          })
-          handleSetDataString(uniqueData)
+          });
+          handleSetDataString(uniqueData);
           return uniqueData;
         });
-        setCurrentLoop(prev => prev + 1);
+        setCurrentLoop((prev) => prev + 1);
       }
     } catch (error) {
-      console.error('Error fetching response:', error);
-      alert('Error fetching response. Please try again.');
+      console.error("Error fetching response:", error);
+      alert("Error fetching response. Please try again.");
       setIsRunning(false);
       setCurrentLoop(0);
     }
-  }
+  };
 
   const handleAddTextBox = useCallback(() => {
     if (selectedTextType === "") {
@@ -297,17 +349,20 @@ const LLMTool = () => {
   const handleRemoveTextBox = (index) => {
     const update = textBoxes.filter((_, i) => i !== index);
     const updatedTextBoxData = textBoxesData.filter((_, i) => i !== index);
-    setTextBoxes(update)
-    setTextBoxesData(updatedTextBoxData)
+    setTextBoxes(update);
+    setTextBoxesData(updatedTextBoxData);
   };
 
-  const handleChangeTextBoxData = useCallback((boxIndex, data) => {
-    setTextBoxesData(prev => {
-      const newArray = [...prev];
-      newArray[boxIndex] = data;
-      return newArray
-    })
-  }, [setTextBoxesData])
+  const handleChangeTextBoxData = useCallback(
+    (boxIndex, data) => {
+      setTextBoxesData((prev) => {
+        const newArray = [...prev];
+        newArray[boxIndex] = data;
+        return newArray;
+      });
+    },
+    [setTextBoxesData]
+  );
 
   const handleSaveData = useCallback(() => {
     const data = {
@@ -320,17 +375,28 @@ const LLMTool = () => {
       isEnableGPT,
       isRemoveDuplicated,
       rowInject,
-      customRowsInject
-    }
+      customRowsInject,
+    };
 
-    const blob = new Blob([JSON.stringify(data)], {type: 'text/plain'});
+    const blob = new Blob([JSON.stringify(data)], { type: "text/plain" });
     const url = URL.createObjectURL(blob);
-    const link = document.createElement('a');
+    const link = document.createElement("a");
     link.href = url;
-    link.download = 'data.txt';
+    link.download = "data.txt";
     link.click();
     URL.revokeObjectURL(url);
-  }, [textBoxes, textBoxesData, modelChoice, maxRow, timeMax, tokenMax, isEnableGPT, isRemoveDuplicated, rowInject, customRowsInject])
+  }, [
+    textBoxes,
+    textBoxesData,
+    modelChoice,
+    maxRow,
+    timeMax,
+    tokenMax,
+    isEnableGPT,
+    isRemoveDuplicated,
+    rowInject,
+    customRowsInject,
+  ]);
 
   const handleLoadData = (event) => {
     const file = event.target.files[0];
@@ -341,18 +407,29 @@ const LLMTool = () => {
         try {
           const contents = e.target.result;
           const jsonData = JSON.parse(contents);
-          const keyArray = ["textBoxesData", "textBoxes", "modelChoice", "maxRow", "timeMax", "tokenMax", "isEnableGPT", "isRemoveDuplicated", "rowInject", "customRowsInject"]
-          if (keyArray.every(key => jsonData.hasOwnProperty(key))) {
-            setTextBoxes(jsonData.textBoxes)
-            setTextBoxesData(jsonData.textBoxesData)
-            setModelChoice(jsonData.modelChoice)
-            setMaxRow(jsonData.maxRow)
-            setTimeMax(jsonData.timeMax)
-            setTokenMax(jsonData.tokenMax)
-            setIsEnableGPT(jsonData.isEnableGPT)
-            setIsRemoveDuplicated(jsonData.isRemoveDuplicated)
-            setRowInject(jsonData.rowInject)
-            setCustomRowsInject(jsonData.customRowsInject)
+          const keyArray = [
+            "textBoxesData",
+            "textBoxes",
+            "modelChoice",
+            "maxRow",
+            "timeMax",
+            "tokenMax",
+            "isEnableGPT",
+            "isRemoveDuplicated",
+            "rowInject",
+            "customRowsInject",
+          ];
+          if (keyArray.every((key) => jsonData.hasOwnProperty(key))) {
+            setTextBoxes(jsonData.textBoxes);
+            setTextBoxesData(jsonData.textBoxesData);
+            setModelChoice(jsonData.modelChoice);
+            setMaxRow(jsonData.maxRow);
+            setTimeMax(jsonData.timeMax);
+            setTokenMax(jsonData.tokenMax);
+            setIsEnableGPT(jsonData.isEnableGPT);
+            setIsRemoveDuplicated(jsonData.isRemoveDuplicated);
+            setRowInject(jsonData.rowInject);
+            setCustomRowsInject(jsonData.customRowsInject);
             fileInputRef.current.value = null;
           } else {
             alert("File Data is unacceptable format.");
@@ -360,66 +437,81 @@ const LLMTool = () => {
             return;
           }
         } catch (error) {
-          alert("Cannot parse this file content to JSON data. Please check your file content.....")
-          console.error('Error parsing JSON:', error.message);
+          alert(
+            "Cannot parse this file content to JSON data. Please check your file content....."
+          );
+          console.error("Error parsing JSON:", error.message);
           fileInputRef.current.value = null;
         }
       };
 
       reader.readAsText(file);
     }
-  }
+  };
 
   const handleLoadBtnClick = useCallback(() => {
     fileInputRef.current.click();
-  }, [fileInputRef])
+  }, [fileInputRef]);
 
   const handleLoadOutputDataBtnClick = useCallback(() => {
     outputfileInputRef.current.click();
-  }, [outputfileInputRef])
+  }, [outputfileInputRef]);
 
   const handleClearData = useCallback(() => {
-    setTextBoxes([0,0])
+    setTextBoxes([0, 0]);
     setTextBoxesData([
       {
         type: 0,
-        text: ""
+        text: "",
       },
       {
         type: 0,
-        text: ""
-      }
-    ])
-    setIsEnableGPT(0)
-    setIsRemoveDuplicated(0)
-    setMaxRow(10)
-    setTimeMax(10)
-    setTokenMax(10)
-    setRowInject("")
-    setOutputdata([])
+        text: "",
+      },
+    ]);
+    setIsEnableGPT(0);
+    setIsRemoveDuplicated(0);
+    setMaxRow(10);
+    setTimeMax(10);
+    setTokenMax(10);
+    setRowInject("");
+    setOutputdata([]);
     fileInputRef.current.value = null;
     outputfileInputRef.current.value = null;
-  }, [setTextBoxesData, setIsEnableGPT, setIsRemoveDuplicated, setMaxRow, setModelChoice, setRowInject, setTokenMax, setTimeMax, setTextBoxes, setOutputdata, fileInputRef, outputfileInputRef])
+  }, [
+    setTextBoxesData,
+    setIsEnableGPT,
+    setIsRemoveDuplicated,
+    setMaxRow,
+    setModelChoice,
+    setRowInject,
+    setTokenMax,
+    setTimeMax,
+    setTextBoxes,
+    setOutputdata,
+    fileInputRef,
+    outputfileInputRef,
+  ]);
 
   const handleSaveOutputData = useCallback(() => {
     const data = {
-      output: outputData
-    }
+      output: outputData,
+    };
 
-    const blob = new Blob([JSON.stringify(data)], {type: 'text/plain'});
+    const blob = new Blob([JSON.stringify(data)], { type: "text/plain" });
     const url = URL.createObjectURL(blob);
-    const link = document.createElement('a');
+    const link = document.createElement("a");
     link.href = url;
-    link.download = 'outputData.txt';
+    link.download = "outputData.txt";
     link.click();
     URL.revokeObjectURL(url);
-  }, [outputData])
+  }, [outputData]);
 
   const clearOutputData = useCallback(() => {
     setOutputdata([]);
     setCurrentLoop(0);
     setDataString("");
-  }, [outputData])
+  }, [outputData]);
 
   const handleLoadOutputData = (event) => {
     const file = event.target.files[0];
@@ -431,8 +523,8 @@ const LLMTool = () => {
           const contents = e.target.result;
           const jsonData = JSON.parse(contents);
           if (jsonData.hasOwnProperty("output")) {
-            setOutputdata(jsonData.output)
-            handleSetDataString(jsonData.output)
+            setOutputdata(jsonData.output);
+            handleSetDataString(jsonData.output);
             outputfileInputRef.current.value = null;
           } else {
             alert("File Data is unacceptable format.");
@@ -440,20 +532,22 @@ const LLMTool = () => {
             return;
           }
         } catch (error) {
-          alert("Cannot parse this file content to JSON data. Please check your file content.....")
-          console.error('Error parsing JSON:', error.message);
+          alert(
+            "Cannot parse this file content to JSON data. Please check your file content....."
+          );
+          console.error("Error parsing JSON:", error.message);
           outputfileInputRef.current.value = null;
         }
       };
 
       reader.readAsText(file);
     }
-  }
-  
+  };
+
   const exportPromptText = useCallback(() => {
-    if(!promptText) {
-      alert("Please enter the prompt text...")
-      console.log("This is giving an error")
+    if (!promptText) {
+      alert("Please enter the prompt text...");
+      console.log("This is giving an error");
       return;
     }
 
@@ -462,23 +556,24 @@ const LLMTool = () => {
     //   return
     // }
 
-    const blob = new Blob([dataString + promptText], {type: 'text/plain'});
+    const blob = new Blob([dataString + promptText], { type: "text/plain" });
     const url = URL.createObjectURL(blob);
-    const link = document.createElement('a');
+    const link = document.createElement("a");
     link.href = url;
-    link.download = 'prompt_text.txt';
+    link.download = "prompt_text.txt";
     link.click();
     URL.revokeObjectURL(url);
-  }, [promptText, dataString]) 
+  }, [promptText, dataString]);
 
   const stopCallGPT = useCallback(() => {
     setIsRunning(false);
-  }, [])
+  }, []);
 
   const handleOnClickRun = useCallback(() => {
-
-    if(currentLoop > timeMax - 1) {
-      const rv = confirm("You reached the Max loop already, Do you want to clear the current loop and continue?");
+    if (currentLoop > timeMax - 1) {
+      const rv = confirm(
+        "You reached the Max loop already, Do you want to clear the current loop and continue?"
+      );
       if (rv) {
         setCurrentLoop(0);
         clearOutputData();
@@ -486,74 +581,72 @@ const LLMTool = () => {
     }
 
     setIsRunning(true);
-
-  }, [setIsRunning, currentLoop, timeMax])
+  }, [setIsRunning, currentLoop, timeMax]);
 
   return (
     <div>
       <input
         type="file"
         ref={fileInputRef}
-        style={{ display: 'none' }}
+        style={{ display: "none" }}
         onChange={handleLoadData}
       />
       <input
         type="file"
         ref={outputfileInputRef}
-        style={{ display: 'none' }}
+        style={{ display: "none" }}
         onChange={handleLoadOutputData}
       />
       <div
-        className={"flex flex-column w-75 m-auto mb-4 rounded-3 overflow-hidden"}
-        style={{backgroundColor: "#28243D"}}
+        className={
+          "flex flex-column w-75 m-auto mb-4 rounded-3 overflow-hidden"
+        }
+        style={{ backgroundColor: "#28243D" }}
       >
-        <div
-          className="w-100 d-flex"
-          style={{ height: "40px" }}
-        >
-          <div className="d-flex text-center" style={{width: "17%"}}>
+        <div className="w-100 d-flex" style={{ height: "40px" }}>
+          <div className="d-flex text-center" style={{ width: "17%" }}>
             <Btn
               className="btn-sm rounded-3 me-1 w-100"
               title={"Load Setup Data"}
               onClick={handleLoadBtnClick}
             ></Btn>
           </div>
-          <div className="d-flex text-center" style={{width: "16%"}}>
+          <div className="d-flex text-center" style={{ width: "16%" }}>
             <Btn
               className="btn-sm rounded-3 me-1 w-100"
               title={"Export Setup Data"}
               onClick={handleSaveData}
             ></Btn>
           </div>
-          <div className="d-flex text-center" style={{width: "16%"}}>
+          <div className="d-flex text-center" style={{ width: "16%" }}>
             <Btn
               className="btn-sm rounded-3 me-1 w-100"
               title={"Clear Setup Data"}
               onClick={handleClearData}
             ></Btn>
           </div>
-          <div className="d-flex text-center" style={{width: "16%"}}>
+          <div className="d-flex text-center" style={{ width: "16%" }}>
             <Btn
               className="btn-sm rounded-3 me-1 w-100"
               title={"Load Output Data"}
               onClick={handleLoadOutputDataBtnClick}
             ></Btn>
           </div>
-          <div className="d-flex text-center" style={{width: "17%"}}>
+          <div className="d-flex text-center" style={{ width: "17%" }}>
             <Btn
               className="btn-sm rounded-3 me-1 w-100"
               title={"Save Output Data"}
               onClick={handleSaveOutputData}
             ></Btn>
           </div>
-          <div className="d-flex text-center" style={{width: "17%"}}>
+          <div className="d-flex text-center" style={{ width: "17%" }}>
             <Btn
               className="btn-sm rounded-3 me-1 w-100"
               title={"Clear Output Data"}
               onClick={clearOutputData}
             ></Btn>
           </div>
-          <div className="d-flex text-center" style={{width: "17%"}}>
+          <div className="d-flex text-center" style={{ width: "17%" }}>
             <Btn
               className="btn-sm rounded-3 w-100"
               title={"Export Prompt Data"}
@@ -561,122 +654,193 @@ const LLMTool = () => {
             ></Btn>
           </div>
         </div>
-        <div
-          className="w-100 d-flex gap-1"
-          style={{ height: "80px" }}
-        >
-          <div
-            className="d-flex text-center"
-            style={{ width: "15%" }}
-          >
+        <div className="w-100 d-flex gap-1" style={{ height: "80px" }}>
+          <div className="d-flex text-center" style={{ width: "15%" }}>
             <div className="d-flex flex-column w-100">
               <div className="h-50 flex">
                 <span className="m-auto text-center">Model Choice</span>
               </div>
               <div className="h-50">
-                <CustomDropDown items={modelChoiceItems} value={modelChoice} handleSelectChange={setModelChoice} placeholder={"Select Model Choice..."} toggleStyle={{height: "40px"}} toggleClassName={"w-100 select-dropdown rounded-3"} />
+                <CustomDropDown
+                  items={modelChoiceItems}
+                  value={modelChoice}
+                  handleSelectChange={setModelChoice}
+                  placeholder={"Select Model Choice..."}
+                  toggleStyle={{ height: "40px" }}
+                  toggleClassName={"w-100 select-dropdown rounded-3"}
+                />
               </div>
             </div>
           </div>
-          <div
-            className="d-flex text-center"
-            style={{ width: "14%" }}
-          >
+          <div className="d-flex text-center" style={{ width: "14%" }}>
             <div className="d-flex flex-column w-100">
               <div className="h-50 flex">
                 <span className="m-auto text-center">Rows Max</span>
               </div>
               <div className="h-50">
-                <Input type='number' value={maxRow} onChange={(e) => setMaxRow(e.target.value)} style={{height: "40px", border: "none"}} className="text-center" />
+                <Input
+                  type="number"
+                  value={maxRow}
+                  onChange={(e) => setMaxRow(e.target.value)}
+                  style={{ height: "40px", border: "none" }}
+                  className="text-center"
+                />
               </div>
             </div>
           </div>
-          <div
-            className="d-flex text-center"
-            style={{ width: "14%" }}
-          >
+          <div className="d-flex text-center" style={{ width: "14%" }}>
             <div className="d-flex flex-column w-100">
               <div className="h-50 flex">
                 <span className="m-auto text-center">Max Loops</span>
               </div>
               <div className="h-50">
-                <Input type='number' value={timeMax} onChange={(e) => setTimeMax(e.target.value)} style={{height: "40px", border: "none"}} className="text-center" />
+                <Input
+                  type="number"
+                  value={timeMax}
+                  onChange={(e) => setTimeMax(e.target.value)}
+                  style={{ height: "40px", border: "none" }}
+                  className="text-center"
+                />
               </div>
             </div>
           </div>
-          <div
-            className="d-flex text-center"
-            style={{ width: "14%" }}
-          >
+          <div className="d-flex text-center" style={{ width: "14%" }}>
             <div className="d-flex flex-column w-100">
               <div className="h-50 flex">
                 <span className="m-auto text-center">Token Max</span>
               </div>
               <div className="h-50">
-                <Input type='number' value={tokenMax} onChange={(e) => setTokenMax(e.target.value)} style={{height: "40px", border: "none"}} className="text-center" />
+                <Input
+                  type="number"
+                  value={tokenMax}
+                  onChange={(e) => setTokenMax(e.target.value)}
+                  style={{ height: "40px", border: "none" }}
+                  className="text-center"
+                />
               </div>
             </div>
           </div>
-          <div
-            className="d-flex text-center"
-            style={{ width: "14%" }}
-          >
+          <div className="d-flex text-center" style={{ width: "14%" }}>
             <div className="d-flex flex-column w-100">
               <div className="h-50 flex">
                 <span className="m-auto text-center">Enable GPT</span>
               </div>
               <div className="h-50">
-                <CustomDropDown items={gptFlag} value={isEnableGPT} handleSelectChange={setIsEnableGPT} placeholder={"Set Enable GPT Flag..."} toggleStyle={{height: "40px"}} toggleClassName={"w-100 select-dropdown rounded-3"} />
+                <CustomDropDown
+                  items={gptFlag}
+                  value={isEnableGPT}
+                  handleSelectChange={setIsEnableGPT}
+                  placeholder={"Set Enable GPT Flag..."}
+                  toggleStyle={{ height: "40px" }}
+                  toggleClassName={"w-100 select-dropdown rounded-3"}
+                />
               </div>
             </div>
           </div>
-          <div
-            className="d-flex text-center"
-            style={{ width: "15%" }}
-          >
+          <div className="d-flex text-center" style={{ width: "15%" }}>
             <div className="d-flex flex-column w-100">
               <div className="h-50 flex">
                 <span className="m-auto text-center">Remove Duplicated?</span>
               </div>
               <div className="h-50">
-                <CustomDropDown items={duplicatedRemove} value={isRemoveDuplicated} handleSelectChange={setIsRemoveDuplicated} placeholder={"Remove Duplicated?"} toggleStyle={{height: "40px"}} toggleClassName={"w-100 select-dropdown rounded-3"} />
+                <CustomDropDown
+                  items={duplicatedRemove}
+                  value={isRemoveDuplicated}
+                  handleSelectChange={setIsRemoveDuplicated}
+                  placeholder={"Remove Duplicated?"}
+                  toggleStyle={{ height: "40px" }}
+                  toggleClassName={"w-100 select-dropdown rounded-3"}
+                />
               </div>
             </div>
           </div>
           <div className="text-center d-flex" style={{ width: "15%" }}>
             <div className="d-flex flex-column w-100">
               <div className="h-50 flex">
-                <span className="m-auto text-center">How many rows to inject?</span>
+                <span className="m-auto text-center">
+                  How many rows to inject?
+                </span>
               </div>
               <div className="h-50 flex">
                 <div className={rowInject === 2 ? "w-60" : "w-100"}>
-                  <CustomDropDown items={rowsInjectItem} value={rowInject} handleSelectChange={setRowInject} placeholder={"Set rows to inject..."} toggleStyle={{height: "40px"}} toggleClassName={"w-100 select-dropdown rounded-3"} />
+                  <CustomDropDown
+                    items={rowsInjectItem}
+                    value={rowInject}
+                    handleSelectChange={setRowInject}
+                    placeholder={"Set rows to inject..."}
+                    toggleStyle={{ height: "40px" }}
+                    toggleClassName={"w-100 select-dropdown rounded-3"}
+                  />
                 </div>
-                {rowInject === 2 && <div className="w-50">
-                  <Input type='number' value={customRowsInject} onChange={(e) => setCustomRowsInject(e.target.value)} style={{height: "40px", border: "none"}} className="border-start border-grey rounded-3 text-center" />
-                </div>}
+                {rowInject === 2 && (
+                  <div className="w-50">
+                    <Input
+                      type="number"
+                      value={customRowsInject}
+                      onChange={(e) => setCustomRowsInject(e.target.value)}
+                      style={{ height: "40px", border: "none" }}
+                      className="border-start border-grey rounded-3 text-center"
+                    />
+                  </div>
+                )}
               </div>
             </div>
           </div>
         </div>
-        <div className="w-100 flex" style={{height: 56, fontSize: 16}}>
-          <div className="d-flex justify-content-center" style={{width: "25%"}}>
-            {<span className="m-auto">Model: <span style={{color: "red", fontWeight: "bold"}}>{modelChoice !== "" ? modelChoiceItems[modelChoice].name : "Not selected"}</span></span>}
+        <div className="w-100 flex" style={{ height: 56, fontSize: 16 }}>
+          <div
+            className="d-flex justify-content-center"
+            style={{ width: "25%" }}
+          >
+            {
+              <span className="m-auto">
+                Model:{" "}
+                <span style={{ color: "red", fontWeight: "bold" }}>
+                  {modelChoice !== ""
+                    ? modelChoiceItems[modelChoice].name
+                    : "Not selected"}
+                </span>
+              </span>
+            }
           </div>
-          <div className="d-flex justify-content-center" style={{width: "25%"}}>
-            <span className="m-auto">Rows Affected: <span style={{color: "red", fontWeight: "bold"}}>{outputData.length}</span></span>
+          <div
+            className="d-flex justify-content-center"
+            style={{ width: "25%" }}
+          >
+            <span className="m-auto">
+              Rows Affected:{" "}
+              <span style={{ color: "red", fontWeight: "bold" }}>
+                {outputData.length}
+              </span>
+            </span>
           </div>
-          <div className="d-flex justify-content-center" style={{width: "25%"}}>
-            <span className="m-auto">Current Loop Index: <span style={{color: "red", fontWeight: "bold"}}>{currentLoop}</span></span>
+          <div
+            className="d-flex justify-content-center"
+            style={{ width: "25%" }}
+          >
+            <span className="m-auto">
+              Current Loop Index:{" "}
+              <span style={{ color: "red", fontWeight: "bold" }}>
+                {currentLoop}
+              </span>
+            </span>
           </div>
-          <div className="d-flex justify-content-center" style={{width: "25%"}}>
-            <span className="m-auto">Max Token: <span style={{color: "red", fontWeight: "bold"}}>{tokenMax}</span></span>
+          <div
+            className="d-flex justify-content-center"
+            style={{ width: "25%" }}
+          >
+            <span className="m-auto">
+              Max Token:{" "}
+              <span style={{ color: "red", fontWeight: "bold" }}>
+                {tokenMax}
+              </span>
+            </span>
           </div>
         </div>
         <Btn
           className="btn-sm w-100 rounded-3 mb-1"
           title={isRunning && promptText ? "Stop" : "Run"}
-          onClick={isRunning? stopCallGPT : handleOnClickRun}
+          onClick={isRunning ? stopCallGPT : handleOnClickRun}
         ></Btn>
         <div className={"flex grow"}>
           <div className={"shrink-0 contents"} style={{ width: fileW - 240 }}>
@@ -684,7 +848,13 @@ const LLMTool = () => {
               className={"flex flex-column w-100"}
               style={{ height: "700px", width: fileW - 240 }}
             >
-              <CustomDropDown items={texttypes} value={selectedTextType} handleSelectChange={setSelectedTextType} placeholder={"Select Text Box Type...."} toggleClassName={"w-100 select-dropdown rounded-3"} />
+              <CustomDropDown
+                items={texttypes}
+                value={selectedTextType}
+                handleSelectChange={setSelectedTextType}
+                placeholder={"Select Text Box Type...."}
+                toggleClassName={"w-100 select-dropdown rounded-3"}
+              />
               <Btn
                 className="btn-sm w-100 rounded-3 mt-1 mb-1"
                 title={"Add Text Box"}
@@ -697,9 +867,27 @@ const LLMTool = () => {
                     className="rounded-0 p-1 border-top border-bottom border-grey mt-1"
                     key={`textBoxes${index}`}
                   >
-                    {box === 0 && <PromptTextBox boxIndex={index} data={textBoxesData[index]} handleChangeTextBoxData={handleChangeTextBoxData} />}
-                    {box === 1 && <DataSourceTextBox boxIndex={index} data={textBoxesData[index]} handleChangeTextBoxData={handleChangeTextBoxData} />}
-                    {box === 2 && <QueryTextBox boxIndex={index} data={textBoxesData[index]} handleChangeTextBoxData={handleChangeTextBoxData} />}
+                    {box === 0 && (
+                      <PromptTextBox
+                        boxIndex={index}
+                        data={textBoxesData[index]}
+                        handleChangeTextBoxData={handleChangeTextBoxData}
+                      />
+                    )}
+                    {box === 1 && (
+                      <DataSourceTextBox
+                        boxIndex={index}
+                        data={textBoxesData[index]}
+                        handleChangeTextBoxData={handleChangeTextBoxData}
+                      />
+                    )}
+                    {box === 2 && (
+                      <QueryTextBox
+                        boxIndex={index}
+                        data={textBoxesData[index]}
+                        handleChangeTextBoxData={handleChangeTextBoxData}
+                      />
+                    )}
                     <span
                       style={{
                         position: "absolute",
@@ -719,29 +907,44 @@ const LLMTool = () => {
             </div>
           </div>
           <SampleSplitter isDragging={isFileDragging} {...fileDragBarProps} />
-          <div className={"w-100 p-1 overflow-auto"} style={{height: "700px", width: "200", fontSize: 16}}>
+          <div
+            className={"w-100 p-1 overflow-auto"}
+            style={{ height: "700px", width: "200", fontSize: 16 }}
+          >
             {
-            // outputData.length > 0 && outputData.length === 1 ? 
+              // outputData.length > 0 && outputData.length === 1 ?
               // (<div className="text-wrap overflow-auto ps-1 pe-1" style={{fontSize: 15}}>
               //   {outputData[0]}
               // </div>) :
               // (
-              outputData && outputData.length > 0 ? (outputData.map((data, index) => {
-                return (
-                  <div style={{height: '120px', backgroundColor: "#443F63"}} className={`${index < outputData.length - 1 && "mb-1"} w-100 p-2 d-flex flex-column rounded-3`}>
-                    <div className="fw-bold">{data.hasOwnProperty("label") ? data.label : ""}</div>
-                    <hr className="mt-2 mb-1"/>
-                    <div className="text-wrap overflow-auto ps-1 pe-1" style={{fontSize: 15}}>
-                      {data.hasOwnProperty("text") ? data.text : ""}
+              outputData && outputData.length > 0 ? (
+                outputData.map((data, index) => {
+                  return (
+                    <div
+                      style={{ height: "120px", backgroundColor: "#443F63" }}
+                      className={`${
+                        index < outputData.length - 1 && "mb-1"
+                      } w-100 p-2 d-flex flex-column rounded-3`}
+                    >
+                      <div className="fw-bold">
+                        {data.hasOwnProperty("label") ? data.label : ""}
+                      </div>
+                      <hr className="mt-2 mb-1" />
+                      <div
+                        className="text-wrap overflow-auto ps-1 pe-1"
+                        style={{ fontSize: 15 }}
+                      >
+                        {data.hasOwnProperty("text") ? data.text : ""}
+                      </div>
                     </div>
-                  </div>
-                )
-              }))
-              :
-              <div className="w-100 h-100 d-flex">
-                <span className="m-auto">No OutPut Data</span>
-              </div>
-            // )
+                  );
+                })
+              ) : (
+                <div className="w-100 h-100 d-flex">
+                  <span className="m-auto">No OutPut Data</span>
+                </div>
+              )
+              // )
             }
           </div>
         </div>
@@ -770,9 +973,9 @@ const SampleSplitter = ({ id = "drag-bar", dir, isDragging, ...props }) => {
   );
 };
 
-const PromptTextBox = ({boxIndex, data, handleChangeTextBoxData}) => {
+const PromptTextBox = ({ boxIndex, data, handleChangeTextBoxData }) => {
   const fileInputRef = useRef(null);
-  const [text, setText] = useState(data && data.text ? data.text : '');
+  const [text, setText] = useState(data && data.text ? data.text : "");
   const [selectionStart, setSelectionStart] = useState(0);
   const [selectionEnd, setSelectionEnd] = useState(0);
   const textareaRef = useRef(null);
@@ -798,8 +1001,8 @@ const PromptTextBox = ({boxIndex, data, handleChangeTextBoxData}) => {
   // }, [selectionStart, selectionEnd]);
 
   useEffect(() => {
-    handleChangeTextBoxData(boxIndex, {type:0, text})
-  }, [text])
+    handleChangeTextBoxData(boxIndex, { type: 0, text });
+  }, [text]);
 
   const handleTextChange = (e) => {
     setText(e.target.value);
@@ -815,7 +1018,7 @@ const PromptTextBox = ({boxIndex, data, handleChangeTextBoxData}) => {
           const contents = e.target.result;
           const jsonData = JSON.parse(contents);
           if (jsonData.hasOwnProperty("promptText")) {
-            setText(jsonData.promptText)
+            setText(jsonData.promptText);
             fileInputRef.current.value = null;
           } else {
             alert("File Data is unacceptable format.");
@@ -823,55 +1026,90 @@ const PromptTextBox = ({boxIndex, data, handleChangeTextBoxData}) => {
             return;
           }
         } catch (error) {
-          alert("Cannot parse this file content to JSON data. Please check your file content.....")
-          console.error('Error parsing JSON:', error.message);
+          alert(
+            "Cannot parse this file content to JSON data. Please check your file content....."
+          );
+          console.error("Error parsing JSON:", error.message);
           fileInputRef.current.value = null;
         }
       };
 
       reader.readAsText(file);
     }
-  }
+  };
 
   const handleSaveData = useCallback(() => {
-    if(!text) {
-      alert("Cannot save empty data.")
+    if (!text) {
+      alert("Cannot save empty data.");
       return;
     }
     const data = {
-      promptText: text
-    }
+      promptText: text,
+    };
 
-    const blob = new Blob([JSON.stringify(data)], {type: 'text/plain'});
+    const blob = new Blob([JSON.stringify(data)], { type: "text/plain" });
     const url = URL.createObjectURL(blob);
-    const link = document.createElement('a');
+    const link = document.createElement("a");
     link.href = url;
     link.download = `prompt_text_box_id_${boxIndex}.txt`;
     link.click();
     URL.revokeObjectURL(url);
-  }, [text])
+  }, [text]);
 
   const handleOnclickLoadBtn = useCallback(() => {
     fileInputRef.current.click();
-  }, [fileInputRef])
+  }, [fileInputRef]);
 
   const handleClearData = useCallback(() => {
     setText("");
     fileInputRef.current.value = null;
-  }, [setText])
+  }, [setText]);
 
   return (
     <div>
       <input
         type="file"
         ref={fileInputRef}
-        style={{ display: 'none' }}
+        style={{ display: "none" }}
         onChange={handleLoadData}
       />
       <div className="d-flex mt-1 mb-1">
-        <Btn className="me-1 fw-bold rounded-3" onClick={handleOnclickLoadBtn} style={{fontSize: 13, height: "20px", width: "80px", padding: "8px"}}>Load file</Btn>
-        <Btn className="me-1 fw-bold rounded-3" onClick={handleSaveData} style={{fontSize: 13, height: "20px", width: "80px", padding: "8px"}}>Save file</Btn>
-        <Btn className="fw-bold rounded-3" onClick={handleClearData} style={{fontSize: 13, height: "20px", width: "80px", padding: "8px"}}>Clear</Btn>
+        <Btn
+          className="me-1 fw-bold rounded-3"
+          onClick={handleOnclickLoadBtn}
+          style={{
+            fontSize: 13,
+            height: "20px",
+            width: "80px",
+            padding: "8px",
+          }}
+        >
+          Load file
+        </Btn>
+        <Btn
+          className="me-1 fw-bold rounded-3"
+          onClick={handleSaveData}
+          style={{
+            fontSize: 13,
+            height: "20px",
+            width: "80px",
+            padding: "8px",
+          }}
+        >
+          Save file
+        </Btn>
+        <Btn
+          className="fw-bold rounded-3"
+          onClick={handleClearData}
+          style={{
+            fontSize: 13,
+            height: "20px",
+            width: "80px",
+            padding: "8px",
+          }}
+        >
+          Clear
+        </Btn>
       </div>
       <div
         style={{
@@ -879,7 +1117,7 @@ const PromptTextBox = ({boxIndex, data, handleChangeTextBoxData}) => {
           height: "100px",
           padding: "1px",
           border: "none",
-          display: "flex"
+          display: "flex",
         }}
       >
         <textarea
@@ -902,7 +1140,7 @@ const PromptTextBox = ({boxIndex, data, handleChangeTextBoxData}) => {
             padding: "2px",
             border: "none",
             display: "flex",
-            alignItems: "center"
+            alignItems: "center",
           }}
         >
           <div
@@ -911,7 +1149,7 @@ const PromptTextBox = ({boxIndex, data, handleChangeTextBoxData}) => {
               flexDirection: "column",
               justifyContent: "space-between",
               height: "70%",
-              margin: "auto"
+              margin: "auto",
             }}
           >
             <Switch label={"Required"} checked={true} onChange={() => {}} />
@@ -924,10 +1162,12 @@ const PromptTextBox = ({boxIndex, data, handleChangeTextBoxData}) => {
   );
 };
 
-const DataSourceTextBox = ({boxIndex, data, handleChangeTextBoxData}) => {
+const DataSourceTextBox = ({ boxIndex, data, handleChangeTextBoxData }) => {
   const fileInputRef = useRef(null);
-  const [dataSource, setDataSource] = useState(data && data.dataSource ? data.dataSource : '')
-  const [output, setOutput] = useState(data && data.output ? data.output : '')
+  const [dataSource, setDataSource] = useState(
+    data && data.dataSource ? data.dataSource : ""
+  );
+  const [output, setOutput] = useState(data && data.output ? data.output : "");
   const [selectionStart1, setSelectionStart1] = useState(0);
   const [selectionEnd1, setSelectionEnd1] = useState(0);
   const textareaRef1 = useRef(null);
@@ -950,8 +1190,8 @@ const DataSourceTextBox = ({boxIndex, data, handleChangeTextBoxData}) => {
       setSelectionEnd2(selectionEnd2);
     }
     // Update text state with new data text
-    setDataSource(data && data.dataSource ? data.dataSource : '')
-    setOutput(data && data.output ? data.output : '')
+    setDataSource(data && data.dataSource ? data.dataSource : "");
+    setOutput(data && data.output ? data.output : "");
   }, [data]);
 
   useEffect(() => {
@@ -969,8 +1209,8 @@ const DataSourceTextBox = ({boxIndex, data, handleChangeTextBoxData}) => {
   }, [selectionStart2, selectionEnd2]);
 
   useEffect(() => {
-    handleChangeTextBoxData(boxIndex, {type:1, dataSource, output})
-  }, [dataSource, output])
+    handleChangeTextBoxData(boxIndex, { type: 1, dataSource, output });
+  }, [dataSource, output]);
 
   const handleLoadData = (event) => {
     const file = event.target.files[0];
@@ -981,8 +1221,8 @@ const DataSourceTextBox = ({boxIndex, data, handleChangeTextBoxData}) => {
         try {
           const contents = e.target.result;
           const jsonData = JSON.parse(contents);
-          const keyArray = ["dataSource", "output"]
-          if (keyArray.every(key => jsonData.hasOwnProperty(key))) {
+          const keyArray = ["dataSource", "output"];
+          if (keyArray.every((key) => jsonData.hasOwnProperty(key))) {
             setDataSource(jsonData.dataSource);
             setOutput(jsonData.output);
             fileInputRef.current.value = null;
@@ -992,68 +1232,103 @@ const DataSourceTextBox = ({boxIndex, data, handleChangeTextBoxData}) => {
             return;
           }
         } catch (error) {
-          alert("Cannot parse this file content to JSON data. Please check your file content.....")
-          console.error('Error parsing JSON:', error.message);
+          alert(
+            "Cannot parse this file content to JSON data. Please check your file content....."
+          );
+          console.error("Error parsing JSON:", error.message);
           fileInputRef.current.value = null;
         }
       };
 
       reader.readAsText(file);
     }
-  }
+  };
 
   const handleSaveData = useCallback(() => {
-    if(!dataSource && !output) {
-      alert("Cannot save empty data.")
+    if (!dataSource && !output) {
+      alert("Cannot save empty data.");
       return;
     }
 
     const data = {
       dataSource: dataSource ? dataSource : "",
-      output: output ? output : ""
-    }
+      output: output ? output : "",
+    };
 
-    const blob = new Blob([JSON.stringify(data)], {type: 'text/plain'});
+    const blob = new Blob([JSON.stringify(data)], { type: "text/plain" });
     const url = URL.createObjectURL(blob);
-    const link = document.createElement('a');
+    const link = document.createElement("a");
     link.href = url;
     link.download = `data_source_box_id_${boxIndex}.txt`;
     link.click();
     URL.revokeObjectURL(url);
-  }, [dataSource, output])
+  }, [dataSource, output]);
 
   const handleOnclickLoadBtn = useCallback(() => {
     fileInputRef.current.click();
-  }, [fileInputRef])
+  }, [fileInputRef]);
 
   const handleClearData = useCallback(() => {
     setDataSource("");
     setOutput("");
     fileInputRef.current.value = null;
-  }, [setDataSource, setOutput])
+  }, [setDataSource, setOutput]);
 
   return (
     <div>
       <input
         type="file"
         ref={fileInputRef}
-        style={{ display: 'none' }}
+        style={{ display: "none" }}
         onChange={handleLoadData}
       />
       <div className="d-flex mt-1 mb-1">
-        <Btn className="me-1 fw-bold rounded-3" onClick={handleOnclickLoadBtn} style={{fontSize: 13, height: "20px", width: "80px", padding: "8px"}}>Load file</Btn>
-        <Btn className="me-1 fw-bold rounded-3" onClick={handleSaveData} style={{fontSize: 13, height: "20px", width: "80px", padding: "8px"}}>Save file</Btn>
-        <Btn className="fw-bold rounded-3" onClick={handleClearData} style={{fontSize: 13, height: "20px", width: "80px", padding: "8px"}}>Clear</Btn>
+        <Btn
+          className="me-1 fw-bold rounded-3"
+          onClick={handleOnclickLoadBtn}
+          style={{
+            fontSize: 13,
+            height: "20px",
+            width: "80px",
+            padding: "8px",
+          }}
+        >
+          Load file
+        </Btn>
+        <Btn
+          className="me-1 fw-bold rounded-3"
+          onClick={handleSaveData}
+          style={{
+            fontSize: 13,
+            height: "20px",
+            width: "80px",
+            padding: "8px",
+          }}
+        >
+          Save file
+        </Btn>
+        <Btn
+          className="fw-bold rounded-3"
+          onClick={handleClearData}
+          style={{
+            fontSize: 13,
+            height: "20px",
+            width: "80px",
+            padding: "8px",
+          }}
+        >
+          Clear
+        </Btn>
       </div>
       <div
         style={{
           width: "100%",
           padding: "2px",
           border: "none",
-          display: "flex"
+          display: "flex",
         }}
       >
-        <div style={{width: "75%"}}>
+        <div style={{ width: "75%" }}>
           <textarea
             ref={textareaRef1}
             style={{
@@ -1061,7 +1336,7 @@ const DataSourceTextBox = ({boxIndex, data, handleChangeTextBoxData}) => {
               width: "100%",
               height: "65px",
               padding: "4px",
-              border: "none"
+              border: "none",
             }}
             value={dataSource}
             onChange={(e) => setDataSource(e.target.value)}
@@ -1088,7 +1363,7 @@ const DataSourceTextBox = ({boxIndex, data, handleChangeTextBoxData}) => {
             padding: "2px",
             border: "none",
             display: "flex",
-            alignItems: "center"
+            alignItems: "center",
           }}
         >
           <div
@@ -1097,7 +1372,7 @@ const DataSourceTextBox = ({boxIndex, data, handleChangeTextBoxData}) => {
               flexDirection: "column",
               justifyContent: "space-between",
               height: "42%",
-              margin: "auto"
+              margin: "auto",
             }}
           >
             <Switch label={"Required"} checked={true} onChange={() => {}} />
@@ -1110,11 +1385,13 @@ const DataSourceTextBox = ({boxIndex, data, handleChangeTextBoxData}) => {
   );
 };
 
-const QueryTextBox = ({boxIndex, data, handleChangeTextBoxData}) => {
+const QueryTextBox = ({ boxIndex, data, handleChangeTextBoxData }) => {
   const fileInputRef = useRef(null);
-  const [text, setText] = useState(data && data.text ? data.text : '');
-  const [dataSource, setDataSource] = useState(data && data.dataSource ? data.dataSource : '')
-  const [output, setOutput] = useState(data && data.output ? data.output : '')
+  const [text, setText] = useState(data && data.text ? data.text : "");
+  const [dataSource, setDataSource] = useState(
+    data && data.dataSource ? data.dataSource : ""
+  );
+  const [output, setOutput] = useState(data && data.output ? data.output : "");
   const [selectionStart1, setSelectionStart1] = useState(0);
   const [selectionEnd1, setSelectionEnd1] = useState(0);
   const textareaRef1 = useRef(null);
@@ -1147,9 +1424,9 @@ const QueryTextBox = ({boxIndex, data, handleChangeTextBoxData}) => {
       setSelectionEnd3(selectionEnd3);
     }
     // Update text state with new data text
-    setDataSource(data && data.dataSource ? data.dataSource : '');
-    setText(data && data.text ? data.text : '');
-    setOutput(data && data.output ? data.output : '')
+    setDataSource(data && data.dataSource ? data.dataSource : "");
+    setText(data && data.text ? data.text : "");
+    setOutput(data && data.output ? data.output : "");
   }, [data]);
 
   useEffect(() => {
@@ -1174,8 +1451,8 @@ const QueryTextBox = ({boxIndex, data, handleChangeTextBoxData}) => {
   }, [selectionStart3, selectionEnd3]);
 
   useEffect(() => {
-    handleChangeTextBoxData(boxIndex, {type:2, text, dataSource, output})
-  }, [dataSource, output, text])
+    handleChangeTextBoxData(boxIndex, { type: 2, text, dataSource, output });
+  }, [dataSource, output, text]);
 
   const handleLoadData = (event) => {
     const file = event.target.files[0];
@@ -1186,8 +1463,8 @@ const QueryTextBox = ({boxIndex, data, handleChangeTextBoxData}) => {
         try {
           const contents = e.target.result;
           const jsonData = JSON.parse(contents);
-          const keyArray = ["dataSource", "output", "text"]
-          if (keyArray.every(key => jsonData.hasOwnProperty(key))) {
+          const keyArray = ["dataSource", "output", "text"];
+          if (keyArray.every((key) => jsonData.hasOwnProperty(key))) {
             setDataSource(jsonData.dataSource);
             setOutput(jsonData.output);
             setText(jsonData.text);
@@ -1198,70 +1475,105 @@ const QueryTextBox = ({boxIndex, data, handleChangeTextBoxData}) => {
             return;
           }
         } catch (error) {
-          alert("Cannot parse this file content to JSON data. Please check your file content.....")
-          console.error('Error parsing JSON:', error.message);
+          alert(
+            "Cannot parse this file content to JSON data. Please check your file content....."
+          );
+          console.error("Error parsing JSON:", error.message);
           fileInputRef.current.value = null;
         }
       };
 
       reader.readAsText(file);
     }
-  }
+  };
 
   const handleSaveData = useCallback(() => {
-    if(!dataSource && !output && !text) {
-      alert("Cannot save empty data.")
+    if (!dataSource && !output && !text) {
+      alert("Cannot save empty data.");
       return;
     }
 
     const data = {
       dataSource: dataSource ? dataSource : "",
       output: output ? output : "",
-      text: text ? text : ""
-    }
+      text: text ? text : "",
+    };
 
-    const blob = new Blob([JSON.stringify(data)], {type: 'text/plain'});
+    const blob = new Blob([JSON.stringify(data)], { type: "text/plain" });
     const url = URL.createObjectURL(blob);
-    const link = document.createElement('a');
+    const link = document.createElement("a");
     link.href = url;
     link.download = `query_text_box_id_${boxIndex}.txt`;
     link.click();
     URL.revokeObjectURL(url);
-  }, [dataSource, output, text])
+  }, [dataSource, output, text]);
 
   const handleOnclickLoadBtn = useCallback(() => {
     fileInputRef.current.click();
-  }, [fileInputRef])
+  }, [fileInputRef]);
 
   const handleClearData = useCallback(() => {
     setDataSource("");
     setOutput("");
     setText("");
     fileInputRef.current.value = null;
-  }, [setDataSource, setOutput, setText])
+  }, [setDataSource, setOutput, setText]);
 
   return (
     <div>
       <input
         type="file"
         ref={fileInputRef}
-        style={{ display: 'none' }}
+        style={{ display: "none" }}
         onChange={handleLoadData}
       />
       <div className="d-flex mt-1 mb-1">
-        <Btn className="me-1 fw-bold rounded-3" onClick={handleOnclickLoadBtn} style={{fontSize: 13, height: "20px", width: "80px", padding: "8px"}}>Load file</Btn>
-        <Btn className="me-1 fw-bold rounded-3" onClick={handleSaveData} style={{fontSize: 13, height: "20px", width: "80px", padding: "8px"}}>Save file</Btn>
-        <Btn className="fw-bold rounded-3" onClick={handleClearData} style={{fontSize: 13, height: "20px", width: "80px", padding: "8px"}}>Clear</Btn>
+        <Btn
+          className="me-1 fw-bold rounded-3"
+          onClick={handleOnclickLoadBtn}
+          style={{
+            fontSize: 13,
+            height: "20px",
+            width: "80px",
+            padding: "8px",
+          }}
+        >
+          Load file
+        </Btn>
+        <Btn
+          className="me-1 fw-bold rounded-3"
+          onClick={handleSaveData}
+          style={{
+            fontSize: 13,
+            height: "20px",
+            width: "80px",
+            padding: "8px",
+          }}
+        >
+          Save file
+        </Btn>
+        <Btn
+          className="fw-bold rounded-3"
+          onClick={handleClearData}
+          style={{
+            fontSize: 13,
+            height: "20px",
+            width: "80px",
+            padding: "8px",
+          }}
+        >
+          Clear
+        </Btn>
       </div>
       <div
         style={{
           width: "100%",
           padding: "2px",
           border: "none",
-          display: "flex"
+          display: "flex",
         }}
       >
-        <div style={{width: "75%"}}>
+        <div style={{ width: "75%" }}>
           <textarea
             ref={textareaRef1}
             style={{
@@ -1309,7 +1621,7 @@ const QueryTextBox = ({boxIndex, data, handleChangeTextBoxData}) => {
             padding: "2px",
             border: "none",
             display: "flex",
-            alignItems: "center"
+            alignItems: "center",
           }}
         >
           <div
@@ -1318,7 +1630,7 @@ const QueryTextBox = ({boxIndex, data, handleChangeTextBoxData}) => {
               flexDirection: "column",
               justifyContent: "space-between",
               height: "30%",
-              margin: "auto"
+              margin: "auto",
             }}
           >
             <Switch label={"Required"} checked={true} onChange={() => {}} />
@@ -1327,7 +1639,6 @@ const QueryTextBox = ({boxIndex, data, handleChangeTextBoxData}) => {
           </div>
         </div>
       </div>
-      
     </div>
   );
 };

@@ -140,6 +140,7 @@ const LLMTool = () => {
   const [rowInject, setRowInject] = useState("");
   const [customRowsInject, setCustomRowsInject] = useState(10);
   const [textBoxes, setTextBoxes] = useState([0, 0]);
+  const [temperatureValue, setTemperatureValue] = useState(0.8);
   const [textBoxesData, setTextBoxesData] = useState([
     {
       type: 0,
@@ -246,7 +247,7 @@ const LLMTool = () => {
               10. Remove all of the line breaks within the response. `,
           },
         ],
-        temperature: 0.6, // more precise feedback from the AI and less repetition. Tune up the number to lower repetition and raise level of preciseness
+        temperature: temperatureValue, // more precise feedback from the AI and less repetition. Tune up the number to lower repetition and raise level of preciseness
       };
 
       const response = await axios.post(apiUrl, requestBody, {
@@ -288,7 +289,7 @@ const LLMTool = () => {
               {
                 id: null,
                 label: "Wrongly formatted response from GPT",
-                text: response.data.choices[0].message.content.trim(),
+                text: "There was an error with the response from the GPT",
               },
             ];
             console.log(updatedOutPutData);
@@ -312,7 +313,7 @@ const LLMTool = () => {
             {
               id: null,
               label: "Could not parse to JSON.",
-              text: response.data.choices[0].message.content[0].trim(),
+              text: "Trying again...",
             },
           ];
           console.log(updatedOutPutData);
@@ -583,6 +584,11 @@ const LLMTool = () => {
     setIsRunning(true);
   }, [setIsRunning, currentLoop, timeMax]);
 
+  const handleTemperatureChange = (event) => {
+    const selectedTemperature = parseFloat(event.target.value);
+    setTemperatureValue(selectedTemperature);
+  }
+
   return (
     <div>
       <input
@@ -842,6 +848,16 @@ const LLMTool = () => {
           title={isRunning && promptText ? "Stop" : "Run"}
           onClick={isRunning ? stopCallGPT : handleOnClickRun}
         ></Btn>
+         <Btn className="btn-sm rounded-3 my-1 ">
+          <label for="temperature" className="mx-2">Temperature</label>
+            <select name="temperature" id="temperature" value={temperatureValue} onChange={handleTemperatureChange}>
+              <option value="0.2">0.2</option>
+              <option value="0.4">0.4</option>
+              <option value="0.6">0.6</option>
+              <option value="0.8">0.8</option>
+              <option value="1">1</option>
+            </select>
+        </Btn>
         <div className={"flex grow"}>
           <div className={"shrink-0 contents"} style={{ width: fileW - 240 }}>
             <div

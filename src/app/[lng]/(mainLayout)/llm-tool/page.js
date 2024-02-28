@@ -40,6 +40,17 @@ import axios from "axios";
 // JUST_NEED: "Output should be a JSON Array with only the new data appended, following the defined id, label, text schema."
 // END_DIRECTIVE`
 
+const promptDirective = `INSTRUCTION: Update JSON Response Format.
+1. Determine lastID from the highest 'id' in previously provided JSON packages.
+2. For new query responses, increment lastID for each new item. 
+3. Create new JSON object for each item with incremented 'id', 'label', 'text'. 
+4. Include new items in the response if they are not already present in the initial data.
+5. Output only new JSON objects.
+6. Exclude all explanatory or descriptive text in the output; provide only the JSON objects.
+7. Ensure only JSON Array output and the id, label, text properties exist in each array element.
+8. If there is no label or ID present for the response, increment the ID and provide a label with given context.,
+10. Remove all of the line breaks within the response. `;
+
 const texttypes = [
   {
     name: "Prompt Text",
@@ -133,6 +144,7 @@ const LLMTool = () => {
   const [selectedTextType, setSelectedTextType] = useState(0);
   const [modelChoice, setModelChoice] = useState(0);
   const [maxRow, setMaxRow] = useState(10);
+  const [currentRowCount, setCurrentRowCount] = useState(0);
   const [timeMax, setTimeMax] = useState(10);
   const [tokenMax, setTokenMax] = useState(20);
   const [isEnableGPT, setIsEnableGPT] = useState(0);
@@ -144,13 +156,14 @@ const LLMTool = () => {
   const [textBoxesData, setTextBoxesData] = useState([
     {
       type: 0,
-      text: "",
+      text: promptDirective,
     },
     {
       type: 0,
       text: "",
     },
   ]);
+
   const [isRunning, setIsRunning] = useState(false);
   const [outputData, setOutputdata] = useState([]);
   const {
@@ -169,13 +182,13 @@ const LLMTool = () => {
   useEffect(() => {
     if (textBoxesData.length === 0) return;
     let promptText = "";
-    let isPromtAdded = false;
+    let isPromptAdded = false;
 
     textBoxesData.map((box) => {
       if (box.type === 0 && box.text) {
-        if (!isPromtAdded) {
+        if (!isPromptAdded) {
           promptText += `Prompt Text:\n`;
-          isPromtAdded = true;
+          isPromptAdded = true;
         }
         promptText += `${box.text}\n`;
       }
@@ -234,17 +247,7 @@ const LLMTool = () => {
         messages: [
           {
             role: "user",
-            content: `${dataString}${promptText}. 
-              INSTRUCTION: Update JSON Response Format.
-              1. Determine lastID from the highest 'id' in previously provided JSON packages.
-              2. For new query responses, increment lastID for each new item. 
-              3. Create new JSON object for each item with incremented 'id', 'label', 'text'. 
-              4. Include new items in the response if they are not already present in the initial data.
-              5. Output only new JSON objects.
-              6. Exclude all explanatory or descriptive text in the output; provide only the JSON objects.
-              7. Ensure only JSON Array output and the id, label, text properties exist in each array element.
-              8. If there is no label or ID present for the response, increment the ID and provide a label with given context.,
-              10. Remove all of the line breaks within the response. `,
+            content: `${dataString}${promptText}. `,
           },
         ],
         temperature: temperatureValue, // more precise feedback from the AI and less repetition. Tune up the number to lower repetition and raise level of preciseness
@@ -463,7 +466,7 @@ const LLMTool = () => {
     setTextBoxesData([
       {
         type: 0,
-        text: "",
+        text: promptDirective,
       },
       {
         type: 0,
@@ -587,6 +590,21 @@ const LLMTool = () => {
   const handleTemperatureChange = (event) => {
     const selectedTemperature = parseFloat(event.target.value);
     setTemperatureValue(selectedTemperature);
+  };
+
+  const insertResponse = (id, newResponse) => {
+    const updatedResponses = outputData.map(item => {
+      if (item.id === id) {
+        return { ...item, response: newResponse };
+      }
+      return item;
+    });
+    setOutputdata(updatedResponses);
+  };
+
+  const handleInsertRow = (event) => {
+    const idToInsert = event.target.value; // Example ID to insert response
+    setCurrentRowCount(idToInsert);
   }
 
   return (
@@ -764,16 +782,16 @@ const LLMTool = () => {
             <div className="d-flex flex-column w-100">
               <div className="h-50 flex">
                 <span className="m-auto text-center">
-                  How many rows to inject?
+                  Select Rows to inject
                 </span>
               </div>
               <div className="h-50 flex">
                 <div className={rowInject === 2 ? "w-60" : "w-100"}>
                   <CustomDropDown
                     items={rowsInjectItem}
-                    value={rowInject}
+                    value={customRowsInject}
                     handleSelectChange={setRowInject}
-                    placeholder={"Set rows to inject..."}
+                    placeholder={rowsInjectItem.name}
                     toggleStyle={{ height: "40px" }}
                     toggleClassName={"w-100 select-dropdown rounded-3"}
                   />
@@ -848,16 +866,23 @@ const LLMTool = () => {
           title={isRunning && promptText ? "Stop" : "Run"}
           onClick={isRunning ? stopCallGPT : handleOnClickRun}
         ></Btn>
-         <Btn className="btn-sm rounded-3 my-1 ">
-          <label for="temperature" className="mx-2">Temperature</label>
-            <select name="temperature" id="temperature" value={temperatureValue} onChange={handleTemperatureChange}>
+          <Btn className="btn-sm rounded-3 my-1 px-5 mr-5">
+            <label for="temperature" className="mx-2">
+              Temperature
+            </label>
+            <select
+              name="temperature"
+              id="temperature"
+              value={temperatureValue}
+              onChange={handleTemperatureChange}
+            >
               <option value="0.2">0.2</option>
               <option value="0.4">0.4</option>
               <option value="0.6">0.6</option>
               <option value="0.8">0.8</option>
               <option value="1">1</option>
             </select>
-        </Btn>
+          </Btn>
         <div className={"flex grow"}>
           <div className={"shrink-0 contents"} style={{ width: fileW - 240 }}>
             <div
@@ -937,6 +962,7 @@ const LLMTool = () => {
                 outputData.map((data, index) => {
                   return (
                     <div
+                      id={`${data.id}`}
                       style={{ height: "120px", backgroundColor: "#443F63" }}
                       className={`${
                         index < outputData.length - 1 && "mb-1"

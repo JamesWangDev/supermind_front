@@ -9,6 +9,7 @@ import CustomDropDown from "@/Components/Common/CustomDropDown/CustomDropDown";
 import { Input } from "reactstrap";
 import Switch from "@/Components/Common/Switch/Switch";
 import axios from "axios";
+import { randomUUID } from "crypto";
 
 // const prePrompt = `\n Just need only JSON Array output and the id, label, text properties must exist in the each array element in the following structure.\n [
 //   {
@@ -144,7 +145,8 @@ const LLMTool = () => {
   const [selectedTextType, setSelectedTextType] = useState(0);
   const [modelChoice, setModelChoice] = useState(0);
   const [maxRow, setMaxRow] = useState(10);
-  const [currentRowCount, setCurrentRowCount] = useState(0);
+  const [isInserting, setIsInserting] = useState(false);
+  const [insertRow, setInsertRow] = useState(0);
   const [timeMax, setTimeMax] = useState(10);
   const [tokenMax, setTokenMax] = useState(20);
   const [isEnableGPT, setIsEnableGPT] = useState(0);
@@ -265,6 +267,15 @@ const LLMTool = () => {
           .trim()
           .replace(/\n/g, "");
         const responseData = JSON.parse(responseDataString);
+
+        if (isInserting) {
+          setOutputdata((prev) => {
+            const newData = [...prev, ...responseData];
+            newData.splice(insertRow, 0, ...responseData);
+            return newData;
+          });
+        }
+
         if (
           Array.isArray(responseData) &&
           responseData.every(
@@ -515,6 +526,7 @@ const LLMTool = () => {
     setOutputdata([]);
     setCurrentLoop(0);
     setDataString("");
+    setIsInserting(false);
   }, [outputData]);
 
   const handleLoadOutputData = (event) => {
@@ -581,6 +593,7 @@ const LLMTool = () => {
       if (rv) {
         setCurrentLoop(0);
         clearOutputData();
+        setIsInserting(false);
       }
     }
 
@@ -592,20 +605,12 @@ const LLMTool = () => {
     setTemperatureValue(selectedTemperature);
   };
 
-  const insertResponse = (id, newResponse) => {
-    const updatedResponses = outputData.map(item => {
-      if (item.id === id) {
-        return { ...item, response: newResponse };
-      }
-      return item;
-    });
-    setOutputdata(updatedResponses);
-  };
-
   const handleInsertRow = (event) => {
     const idToInsert = event.target.value; // Example ID to insert response
-    setCurrentRowCount(idToInsert);
-  }
+    setInsertRow(idToInsert);
+    setIsInserting(true);
+    console.log(idToInsert);
+  };
 
   return (
     <div>
@@ -779,36 +784,34 @@ const LLMTool = () => {
             </div>
           </div>
           <div className="text-center d-flex" style={{ width: "15%" }}>
+          {outputData.length > 0 && 
             <div className="d-flex flex-column w-100">
               <div className="h-50 flex">
-                <span className="m-auto text-center">
-                  Select Rows to inject
-                </span>
+                <span className="m-auto text-center">Select Row to inject</span>
               </div>
-              <div className="h-50 flex">
-                <div className={rowInject === 2 ? "w-60" : "w-100"}>
-                  <CustomDropDown
-                    items={rowsInjectItem}
-                    value={customRowsInject}
-                    handleSelectChange={setRowInject}
-                    placeholder={rowsInjectItem.name}
-                    toggleStyle={{ height: "40px" }}
-                    toggleClassName={"w-100 select-dropdown rounded-3"}
-                  />
-                </div>
-                {rowInject === 2 && (
-                  <div className="w-50">
-                    <Input
-                      type="number"
-                      value={customRowsInject}
-                      onChange={(e) => setCustomRowsInject(e.target.value)}
-                      style={{ height: "40px", border: "none" }}
-                      className="border-start border-grey rounded-3 text-center"
-                    />
-                  </div>
-                )}
+              <div className="dropdown">
+              
+                <Btn className="btn-sm rounded-3 w-100">
+                  <label for="insert-row" className="mx-2">
+                    Insert Row
+                  </label>
+                  <select
+                    name="insert-row"
+                    id="insert-row"
+                    value={insertRow}
+                    onChange={handleInsertRow}
+                  >
+                    {outputData.map((response) => {
+                      return (
+                        <option key={response.text} value={response.id}>
+                          {response.id}
+                        </option>
+                      );
+                    })}
+                  </select>
+                </Btn>
               </div>
-            </div>
+            </div>}
           </div>
         </div>
         <div className="w-100 flex" style={{ height: 56, fontSize: 16 }}>
@@ -866,7 +869,8 @@ const LLMTool = () => {
           title={isRunning && promptText ? "Stop" : "Run"}
           onClick={isRunning ? stopCallGPT : handleOnClickRun}
         ></Btn>
-          <Btn className="btn-sm rounded-3 my-1 px-5 mr-5">
+        <div className="flex justify-start mr-5">
+          <Btn className="btn-sm rounded-3 my-1 px-5">
             <label for="temperature" className="mx-2">
               Temperature
             </label>
@@ -883,6 +887,28 @@ const LLMTool = () => {
               <option value="1">1</option>
             </select>
           </Btn>
+          {outputData.length > 0 && (
+            <Btn className="btn-sm rounded-3 my-1 px-5 mx-1">
+              <label for="insert-row" className="mx-2">
+                Insert Row
+              </label>
+              <select
+                name="insert-row"
+                id="insert-row"
+                value={insertRow}
+                onChange={handleInsertRow}
+              >
+                {outputData.map((response) => {
+                  return (
+                    <option key={response.text} value={response.id}>
+                      {response.id}
+                    </option>
+                  );
+                })}
+              </select>
+            </Btn>
+          )}
+        </div>
         <div className={"flex grow"}>
           <div className={"shrink-0 contents"} style={{ width: fileW - 240 }}>
             <div

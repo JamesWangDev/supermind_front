@@ -50,7 +50,7 @@ const promptDirective = `INSTRUCTION: Update JSON Response Format.
 6. Exclude all explanatory or descriptive text in the output; provide only the JSON objects.
 7. Ensure only JSON Array output and the id, label, text properties exist in each array element.
 8. If there is no label or ID present for the response, increment the ID and provide a label with given context.,
-10. Remove all of the line breaks within the response. `;
+10. Remove all of the line breaks within the response.`;
 
 const texttypes = [
   {
@@ -208,7 +208,7 @@ const LLMTool = () => {
       outputData.map((data, index) => {
         if (data.label || data.text) {
           if (!isDataAdded) {
-            dataString += `BEGIN PDB(Previous Data Block//This is the data you produced on the last iteration of this prompt. Do not items duplicate in this response.\n`;
+            dataString += `BEGIN PDB(Previous Data Block//This is the data you produced on the last iteration of this prompt. Do not items duplicate in this response. Parse the given previous data block. Compare the prompt text to the given previous data block. If there is mention within the prompt of anything relevant to items inside of the pdb, insert the relevant response with an ID similar to its applicable relative. The new response with the same ID as its relatives should be placed alongside the relatives in the data block order\n`;
             isDataAdded = true;
           }
           dataString += `ID: ${index + 1}: Label: ${data.label}\n`;
@@ -249,7 +249,7 @@ const LLMTool = () => {
         messages: [
           {
             role: "user",
-            content: `${dataString}${promptText}. `,
+            content: `${dataString}${promptText}.`,
           },
         ],
         temperature: temperatureValue, // more precise feedback from the AI and less repetition. Tune up the number to lower repetition and raise level of preciseness
@@ -268,13 +268,13 @@ const LLMTool = () => {
           .replace(/\n/g, "");
         const responseData = JSON.parse(responseDataString);
 
-        if (isInserting) {
-          setOutputdata((prev) => {
-            const newData = [...prev, ...responseData];
-            newData.splice(insertRow, 0, ...responseData);
-            return newData;
-          });
-        }
+        // if (isInserting) {
+        //   setOutputdata((prev) => {
+        //     const newData = [...prev, ...responseData];
+        //     newData.splice(insertRow, 0, ...responseData);
+        //     return newData;
+        //   });
+        // }
 
         if (
           Array.isArray(responseData) &&
@@ -285,7 +285,6 @@ const LLMTool = () => {
         ) {
           setOutputdata((prev) => {
             const updatedOutPutData = [...prev, ...responseData];
-            console.log(updatedOutPutData);
             //stores only unique responses to a filtered array. This is to remove duplicates from appearing in the output data
             const uniqueData = updatedOutPutData.filter((item, index) => {
               const itemIndex = updatedOutPutData.findIndex(
@@ -294,6 +293,7 @@ const LLMTool = () => {
               return itemIndex === index;
             });
             handleSetDataString(uniqueData);
+            console.log(dataString)
             return uniqueData;
           });
         } else {
@@ -605,12 +605,12 @@ const LLMTool = () => {
     setTemperatureValue(selectedTemperature);
   };
 
-  const handleInsertRow = (event) => {
-    const idToInsert = event.target.value; // Example ID to insert response
-    setInsertRow(idToInsert);
-    setIsInserting(true);
-    console.log(idToInsert);
-  };
+  // const handleInsertRow = (event) => {
+  //   const idToInsert = event.target.value; // Example ID to insert response
+  //   setInsertRow(idToInsert);
+  //   setIsInserting(true);
+  //   console.log(idToInsert);
+  // };
 
   return (
     <div>
@@ -784,7 +784,7 @@ const LLMTool = () => {
             </div>
           </div>
           <div className="text-center d-flex" style={{ width: "15%" }}>
-          {outputData.length > 0 && 
+          {/* {outputData.length > 0 && 
             <div className="d-flex flex-column w-100">
               <div className="h-50 flex">
                 <span className="m-auto text-center">Select Row to inject</span>
@@ -811,7 +811,7 @@ const LLMTool = () => {
                   </select>
                 </Btn>
               </div>
-            </div>}
+            </div>} */}
           </div>
         </div>
         <div className="w-100 flex" style={{ height: 56, fontSize: 16 }}>
@@ -887,27 +887,6 @@ const LLMTool = () => {
               <option value="1">1</option>
             </select>
           </Btn>
-          {outputData.length > 0 && (
-            <Btn className="btn-sm rounded-3 my-1 px-5 mx-1">
-              <label for="insert-row" className="mx-2">
-                Insert Row
-              </label>
-              <select
-                name="insert-row"
-                id="insert-row"
-                value={insertRow}
-                onChange={handleInsertRow}
-              >
-                {outputData.map((response) => {
-                  return (
-                    <option key={response.text} value={response.id}>
-                      {response.id}
-                    </option>
-                  );
-                })}
-              </select>
-            </Btn>
-          )}
         </div>
         <div className={"flex grow"}>
           <div className={"shrink-0 contents"} style={{ width: fileW - 240 }}>

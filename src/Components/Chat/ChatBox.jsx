@@ -36,7 +36,7 @@ export default function ChatBox({productData}) {
         return {model: model, api: ChatGPTAPI, api_key: process.env.OPENAI_API_KEY};
     }
 
-    const {model, api, api_key} = getModelandAPI(productData.gpt_model)
+    const {model, api, api_key} = getModelandAPI(productData.gpt_model || "")
 
     setMessages(updatedMessages);
     setLoading(true);

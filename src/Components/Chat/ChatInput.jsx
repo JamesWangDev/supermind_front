@@ -1,5 +1,4 @@
 import { useRef, useState } from "react";
-import Btn from "@/Elements/Buttons/Btn";
 import { ResetChat } from "./ResetChat";
 
 export const ChatInput = ({ onSend, onReset, loading }) => {

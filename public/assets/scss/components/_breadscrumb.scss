@@ -2,7 +2,7 @@
      Breadcrumb scss
 ==========================**/
 .breadscrumb-section {
-  background-color: $light-gray;
+  background-color: $background;
   position: relative;
   overflow: hidden;
 
@@ -24,6 +24,7 @@
       font-weight: 700;
       font-size: calc(16px + (22 - 16) * ((100vw - 320px) / (1920 - 320)));
       margin-bottom: 0;
+      overflow: visible;
 
       @include mq-max(md) {
         text-align: center;
@@ -84,12 +85,12 @@
           font-weight: 500;
 
           svg {
-            color: $content-color;
+            color: $title-color;
             font-size: 20px;
           }
 
           &.active {
-            color: $black;
+            color: $white;
             line-height: 1;
             margin-top: 2px;
             display: flex;
@@ -108,7 +109,7 @@
             &::before {
               @include remixicon;
               content: "\ea6e";
-              color: $content-color;
+              color: $title-color;
               float: unset;
               font-size: 18px;
               padding-right: 8px;
@@ -150,7 +151,7 @@
           }
 
           &__background {
-            fill: var(--theme-color);
+            fill: $primary;
             animation: rotate 35s linear both infinite;
           }
         }
@@ -158,7 +159,7 @@
         .star {
           position: absolute;
           animation: grow 3s infinite;
-          fill: var(--theme-color);
+          fill: $primary;
           opacity: 0;
 
           &:nth-child(1) {
@@ -228,7 +229,7 @@
           }
 
           &__background {
-            fill: var(--theme-color);
+            fill: $primary;
             animation: rotate 35s linear both infinite;
           }
         }
@@ -250,7 +251,7 @@
 
         &.order-fail {
           i {
-            color: var(--theme-color);
+            color: $primary;
           }
         }
       }
@@ -274,7 +275,7 @@
 .faq-breadscrumb {
   background-color: $light-gray;
   position: relative;
-  overflow: hidden;
+  overflow: auto;
 
   .breadscrumb-contain {
     padding: calc(26px + (60 - 26) * ((100vw - 320px) / (1920 - 320))) 0;
@@ -344,7 +345,7 @@
           display: flex;
           align-items: center;
           padding: 0 calc(12px + (20 - 12) * ((100vw - 320px) / (1920 - 320)));
-          color: var(--theme-color);
+          color: $primary;
           font-size: calc(14px + (16 - 14) * ((100vw - 320px) / (1920 - 320)));
         }
 
@@ -366,7 +367,7 @@
         .faq-dropdown-button {
           font-size: calc(14px + (16 - 14) * ((100vw - 320px) / (1920 - 320)));
           font-weight: 600;
-          color: var(--theme-color);
+          color: $primary;
           z-index: 0;
 
           &::after {
@@ -424,7 +425,7 @@
 
         i {
           font-size: calc(21px + (27 - 21) * ((100vw - 320px) / (1920 - 320)));
-          color: var(--theme-color);
+          color: $primary;
         }
       }
 

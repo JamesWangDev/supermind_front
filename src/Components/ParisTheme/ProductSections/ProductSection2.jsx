@@ -19,7 +19,7 @@ const ProductSection2 = ({ dataAPI, isHeadingVisible = false, classes = {}, svgU
       {isHeadingVisible ? <CustomHeading customClass={classes?.noCustomClass ? '' : 'section-t-space title'} title={dataAPI?.title} svgUrl={svgUrl} subTitle={dataAPI?.description} /> : ''}
 
       {categoryData?.length > 0 ? (
-        <div className='category-slider-2 product-wrapper no-arrow'>
+        <div className='mt-4 category-slider-2 product-wrapper no-arrow'>
           <Slider {...classes?.sliderOption}>
             {categoryData?.map((elem) => (
               <div key={elem.id}>
@@ -36,7 +36,7 @@ const ProductSection2 = ({ dataAPI, isHeadingVisible = false, classes = {}, svgU
       ) : (
         <NoDataFound
           data={{
-            customClass: 'bg-light no-data-added',
+            customClass: 'bg-second border-30 no-data-added',
             title: 'No Category Found',
           }}
         />

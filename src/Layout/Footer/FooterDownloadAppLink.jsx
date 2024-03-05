@@ -15,7 +15,7 @@ const FooterDownloadAppLink = () => {
     <>
       {themeOption?.footer?.app_store_url || themeOption?.footer?.play_store_url ? (
         <li className='social-app mb-0'>
-          <h5 className='mb-2 text-content'>{t('DownloadApp')} :</h5>
+          <h5 className='mb-2 text-title'>{t('DownloadApp')} :</h5>
           <ul>
             {themeOption?.footer?.app_store_url && (
               <li className='mb-0'>

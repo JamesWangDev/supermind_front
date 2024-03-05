@@ -18,10 +18,10 @@ const DashboardContent = () => {
     <div className='dashboard-home'>
       <AccountHeading title="MyDashboard" /> 
       <div className='dashboard-user-name'>
-        <h6 className='text-content'>
+        <h6 className='text-title'>
           {t('Hello')}, <b className='text-title'>{accountData?.name ?? t('User')}</b>
         </h6>
-        <p className='text-content'>{t("DashboardDescription")}</p>
+        <p className='text-title'>{t("DashboardDescription")}</p>
       </div>
 
       <div className='total-box'>

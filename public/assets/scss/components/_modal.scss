@@ -49,7 +49,7 @@
         position: absolute;
         top: calc(7px + (10 - 7) * ((100vw - 320px) / (1920 - 320)));
         right: calc(7px + (10 - 7) * ((100vw - 320px) / (1920 - 320)));
-        background-color: var(--theme-color);
+        background-color: $thirdBG;
         opacity: 1;
         background-image: none;
         border-radius: 4px;
@@ -150,7 +150,7 @@
       padding: 18px;
       border-radius: 100%;
       background-color: rgba(26, 164, 136, 0.1);
-      color: var(--theme-color);
+      color: $primary;
       margin-bottom: 10px;
       display: flex;
       align-items: center;
@@ -343,13 +343,13 @@
             }
 
             &.active {
-              border: 1px solid var(--theme-color);
+              border: 1px solid $primary;
               border-radius: 6px;
               padding: 3px;
 
               button,
               img {
-                background: var(--theme-color);
+                background: $primary;
                 color: $white;
                 font-weight: 600;
 
@@ -433,7 +433,7 @@
             &.active {
               button {
                 color: $white;
-                background-color: var(--theme-color);
+                background-color: $primary;
               }
             }
 
@@ -488,7 +488,7 @@
               @include pos($pos: relative, $content: '');
               width: 12px;
               height: 12px;
-              background-color: var(--theme-color);
+              background-color: $primary;
               border-radius: 100%;
               transition: 0.3s ease-in-out;
               transform: scale(0);
@@ -504,7 +504,7 @@
 
             &:checked {
               background-color: $white;
-              border-color: var(--theme-color);
+              border-color: $primary;
 
               &::after {
                 transform: scale(1);
@@ -580,7 +580,7 @@
             &.active {
               button {
                 color: $white;
-                background-color: var(--theme-color);
+                background-color: $primary;
               }
             }
 
@@ -601,7 +601,7 @@
         }
 
         .price {
-          color: var(--theme-color);
+          color: $primary;
           font-weight: 600;
           font-size: calc(19px + (22 - 19) * ((100vw - 320px) / (1920 - 320)));
 
@@ -763,7 +763,7 @@
             gap: 6px;
             align-items: flex-start;
             text-align: left;
-            background-color: #f9f9f9;
+            background-color: $secondBg;
             padding: 15px;
             border-radius: 12px;
             width: 80%;
@@ -787,7 +787,7 @@
               width: 100%;
               font-size: calc(14px + (15 - 14) * ((100vw - 320px) / (1920 - 320)));
               position: relative;
-              color: #777;
+              color: $title-color;
 
               html.dark & {
                 color: #ddd;
@@ -912,7 +912,7 @@
             align-items: center;
             padding: 0 15px;
             font-size: 17px;
-            color: $content-color;
+            color: $title-color;
           }
         }
 
@@ -957,7 +957,7 @@
                 @include pseudowh;
                 top: 0;
                 left: 0;
-                background-color: var(--theme-color);
+                background-color: $primary;
                 opacity: 0;
                 transition: all 0.3s ease-in-out;
                 z-index: -1;
@@ -969,12 +969,12 @@
                 }
 
                 h6 {
-                  color: var(--theme-color);
+                  color: $primary;
                 }
 
                 span {
                   border-color: transparent;
-                  background-color: var(--theme-color);
+                  background-color: $primary;
                   color: $white;
                 }
               }
@@ -1051,7 +1051,7 @@
             &:nth-child(3n + 1) {
               .deal-offer-contain {
                 &::before {
-                  background-color: var(--theme-color);
+                  background-color: $primary;
                 }
               }
             }
@@ -1232,7 +1232,7 @@
     box-shadow: 0 2px 10px -3px rgba($title-color, 0.1);
 
     .offcanvas-title {
-      color: var(--theme-color);
+      color: $primary;
       font-weight: 600;
     }
 
@@ -1282,7 +1282,7 @@
                 @include pseudowh($width: 0, $height: 3px);
                 bottom: 0;
                 left: 0;
-                background-color: var(--theme-color);
+                background-color: $primary;
                 opacity: 0.5;
                 transition: all 0.3s ease-in-out;
               }
@@ -1528,7 +1528,7 @@
           padding-bottom: 16px;
 
           p {
-            color: $content-color;
+            color: $title-color;
             line-height: 1.7;
             margin: calc(14px + (16 - 14) * ((100vw - 320px) / (1920 - 320))) 0 0;
             font-size: calc(14px + (16 - 14) * ((100vw - 320px) / (1920 - 320)));
@@ -1576,13 +1576,13 @@
               }
 
               &.active {
-                border: 1px solid var(--theme-color);
+                border: 1px solid $primary;
                 border-radius: 6px;
                 padding: 3px;
 
                 button,
                 img {
-                  background: var(--theme-color);
+                  background: $primary;
                   color: $white;
                   font-weight: 600;
                 }
@@ -1648,7 +1648,7 @@
               &.active {
                 button {
                   color: $white;
-                  background-color: var(--theme-color);
+                  background-color: $primary;
                 }
               }
 
@@ -1708,7 +1708,7 @@
                 @include pos($pos: relative, $content: "");
                 width: 12px;
                 height: 12px;
-                background-color: var(--theme-color);
+                background-color: $primary;
                 border-radius: 100%;
                 transition: 0.3s ease-in-out;
                 transform: scale(0);
@@ -1724,7 +1724,7 @@
 
               &:checked {
                 background-color: $white;
-                border-color: var(--theme-color);
+                border-color: $primary;
 
                 &::after {
                   transform: scale(1);
@@ -1797,7 +1797,7 @@
               &.active {
                 button {
                   color: $white;
-                  background-color: var(--theme-color);
+                  background-color: $primary;
                 }
               }
 
@@ -1846,17 +1846,17 @@
             max-width: 170px;
 
             .input-group {
-              background-color: $light-gray;
+              background-color: $secondBg;
             }
 
             button {
-              background-color: $white;
+              background-color: $thirdBG;
 
               &:hover {
-                background-color: $white;
+                background-color: $thirdBG;
 
                 i {
-                  color: var(--theme-color);
+                  color: $primary;
                 }
               }
             }
@@ -1948,7 +1948,7 @@
               align-items: flex-start;
               text-align: left;
               column-count: 2;
-              background-color: #f9f9f9;
+              background-color: $secondBg;
               padding: 15px;
               border-radius: 12px;
               width: 80%;
@@ -1964,7 +1964,7 @@
                 width: 100%;
                 font-size: calc(14px + (15 - 14) * ((100vw - 320px) / (1920 - 320)));
                 position: relative;
-                color: #777;
+                color: $title-color;
 
                 @include mq-max(xs) {
                   margin-left: unset;
@@ -2006,7 +2006,7 @@
           .pickup-icon {
             i {
               font-size: 20px;
-              color: var(--theme-color);
+              color: $primary;
             }
           }
 
@@ -2029,7 +2029,7 @@
 
             a {
               margin-top: 0;
-              color: var(--theme-color);
+              color: $primary;
               display: inline-block;
             }
           }
@@ -2079,11 +2079,11 @@
                 display: block;
                 text-align: center;
                 font-size: 18px;
-                color: $content-color;
+                color: $title-color;
                 transition: all 0.5s ease;
 
                 &:hover {
-                  color: var(--theme-color);
+                  color: $primary;
                   transition: all 0.5s ease;
                 }
               }
@@ -2127,13 +2127,13 @@
               }
 
               &.active {
-                border: 1px solid var(--theme-color);
+                border: 1px solid $primary;
                 border-radius: 6px;
                 padding: 3px;
 
                 button,
                 img {
-                  background: var(--theme-color);
+                  background: $primary;
                   color: $white;
                   font-weight: 600;
                 }
@@ -2203,7 +2203,7 @@
               &.active {
                 button {
                   color: $white;
-                  background-color: var(--theme-color);
+                  background-color: $primary;
                 }
               }
 
@@ -2263,7 +2263,7 @@
                 @include pos($pos: relative, $content: "");
                 width: 12px;
                 height: 12px;
-                background-color: var(--theme-color);
+                background-color: $primary;
                 border-radius: 100%;
                 transition: 0.3s ease-in-out;
                 transform: scale(0);
@@ -2279,7 +2279,7 @@
 
               &:checked {
                 background-color: $white;
-                border-color: var(--theme-color);
+                border-color: $primary;
 
                 &::after {
                   transform: scale(1);
@@ -2352,7 +2352,7 @@
               &.active {
                 button {
                   color: $white;
-                  background-color: var(--theme-color);
+                  background-color: $primary;
                 }
               }
 
@@ -2381,10 +2381,10 @@
       .btn-close {
         @include mq-max(lg) {
           background-color: #ffffff;
-          color: var(--theme-color);
+          color: $primary;
 
           html.dark & {
-            color: var(--theme-color);
+            color: $primary;
           }
         }
       }
@@ -2437,7 +2437,7 @@
         font-size: calc(29px + (38 - 29) * ((100vw - 320px) / (1920 - 320)));
         font-weight: bolder;
         text-transform: uppercase;
-        color: var(--theme-color);
+        color: $primary;
         margin-bottom: calc(15px + (21 - 15) * ((100vw - 320px) / (1920 - 320)));
 
         span {
@@ -2464,19 +2464,19 @@
           font-size: 14px;
           padding: 12px;
           border: unset;
-          background-color: $white;
+          background-color: $thirdBG;
           box-shadow: 0px 0px 12px 0px rgba($title-color, 0.05);
           border-radius: 0;
 
           &::placeholder {
             font-size: 14px;
-            color: #909090;
+            color: rgba(255, 255, 255, 0.50);
           }
         }
 
         .input-group-text {
           padding: 12px calc(19px + (24 - 19) * ((100vw - 320px) / (1920 - 320)));
-          background-color: var(--theme-color);
+          background-color: $primary;
           color: #ffffff;
           font-size: 14px;
           border: unset;
@@ -2613,14 +2613,14 @@
                 font-size: 18px;
                 padding: 0 0 8px 0;
                 font-weight: 600;
-                border-bottom: 1px solid var(--theme-color);
+                border-bottom: 1px solid $primary;
               }
 
               a {
                 display: block;
 
                 &:hover {
-                  color: var(--theme-color);
+                  color: $primary;
                 }
               }
             }
@@ -2724,7 +2724,7 @@
                       @include pseudowh($width: 100%, $height: 1px);
                       bottom: -8px;
                       left: 0;
-                      background-color: var(--theme-color);
+                      background-color: $primary;
                     }
                   }
                 }
@@ -2786,7 +2786,7 @@
 
                 &.active {
                   color: $white;
-                  background-color: var(--theme-color);
+                  background-color: $primary;
                   font-size: 19px;
                   font-weight: 600;
 
@@ -2852,4 +2852,8 @@
       margin: 0;
     }
   }
+}
+
+.full-modal {
+  padding: 0px;
 }

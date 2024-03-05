@@ -10,7 +10,7 @@ const NewsLetter = ({ dataAPI }) => {
   const { i18Lang } = useContext(I18NextContext);
   const { t } = useTranslation(i18Lang, 'common');
   return (
-    <WrapperComponent classes={{ sectionClass: 'newsletter-section section-b-space' }} noRowCol={true}>
+    <WrapperComponent classes={{ sectionClass: 'newsletter-section' }} noRowCol={true}>
       <div className='newsletter-box newsletter-box-2' style={{ backgroundImage: `url(${dataAPI?.image_url})` }}>
         <div className='newsletter-contain py-5'>
           <Container fluid={true}>
@@ -21,10 +21,10 @@ const NewsLetter = ({ dataAPI }) => {
                   <h5>{dataAPI?.sub_title}</h5>
                   <div className='input-box'>
                     <Input type='email' placeholder='Enter Your Email' />
-                    <div className="mail-icon">
+                    {/* <div className="mail-icon">
                       <RiMailLine />
-                    </div>
-                    <Btn className='sub-btn btn-animation'>
+                    </div> */}
+                    <Btn className='sub-btn'>
                       <span className='d-sm-block d-none'>{t('Subscribe')}</span>
                       <RiArrowRightLine />
                     </Btn>

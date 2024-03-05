@@ -12,7 +12,7 @@ const VegetableBanner = ({ dataAPI }) => {
     return 'product/' + product?.slug;
   };
   return (
-    <div className='section-t-space'>
+    <div className='mt-3'>
       {dataAPI?.main_content?.section8_full_width_banner?.redirect_link?.link_type === 'external_url' ? (
         <Link href={dataAPI?.main_content?.section8_full_width_banner?.redirect_link?.link || '/'} target='_blank'>
           <div className='banner-contain hover-effect'>

@@ -6,7 +6,7 @@ import emptyImage from '../../../..../..//public/assets/svg/empty-items.svg';
 
 const SearchedData = ({ data }) => {
   return (
-    <WrapperComponent classes={{ sectionClass: 'section-b-space' }} noRowCol={true}>
+    <WrapperComponent classes={{ sectionClass: 'section-b-space section-t-space' }} noRowCol={true}>
       {data?.length > 0 ? (
       <Row xs={2} md={3} xxl={6} className='cols-lg-4 g-3 g-sm-4 product-list-section'>
           {data?.map((elem, i) => (

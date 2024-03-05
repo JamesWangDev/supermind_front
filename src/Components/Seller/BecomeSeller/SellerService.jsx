@@ -7,7 +7,7 @@ import SellerServiceBox from './SellerServiceBox';
 const SellerService = () => {
   const { themeOption } = useContext(ThemeOptionContext);
   return (
-    <WrapperComponent classes={{ sectionClass: 'become-service section-b-space' }} noRowCol={true}>
+    <WrapperComponent classes={{ sectionClass: 'become-service section-b-space section-t-space' }} noRowCol={true}>
       <div className='seller-title mb-5'>
         <h2>{themeOption?.seller?.services?.title}</h2>
       </div>

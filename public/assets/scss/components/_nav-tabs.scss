@@ -60,11 +60,11 @@
         &:focus,
         &:hover,
         &.active {
-          background-color: $white;
+          background-color: $background;
 
           &::after {
             width: 100%;
-            background: var(--theme-color);
+            background: $primary;
           }
         }
       }
@@ -108,7 +108,7 @@
     .tab-pane {
       p {
         margin: 0;
-        color: $content-color;
+        color: $title-color;
         line-height: 1.7;
         font-size: calc(13px + (15 - 13) * ((100vw - 320px) / (1920 - 320)));
         width: auto;
@@ -151,7 +151,7 @@
       .product-description {
         p {
           margin-bottom: calc(12px + (20 - 12) * ((100vw - 320px) / (1920 - 320)));
-          color: $content-color;
+          color: $title-color;
           line-height: 1.7;
           font-size: calc(14px + (15 - 14) * ((100vw - 320px) / (1920 - 320)));
 
@@ -251,7 +251,7 @@
                   font-size: 15px;
 
                   &:hover {
-                    color: var(--theme-color);
+                    color: $primary;
                   }
                 }
 
@@ -343,7 +343,7 @@
                 border-radius: 3px;
 
                 .progress-bar {
-                  background: var(--theme-color);
+                  background: $primary;
                 }
               }
             }
@@ -470,7 +470,7 @@
 
         h5 {
           border: 1px solid transparent;
-          background-color: var(--theme-color);
+          background-color: $primary;
           color: $white;
           text-transform: capitalize;
           font-size: calc(15px + (16 - 15) * ((100vw - 320px) / (1920 - 320)));

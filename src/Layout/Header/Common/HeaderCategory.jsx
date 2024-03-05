@@ -24,7 +24,7 @@ const HeaderCategory = ({ customClass, icon, dropDownClass }) => {
   return (
     <Col xs={12}>
       <div className={`${customClass ? customClass : 'header-nav'}`}>
-        <div className='header-nav-left'>
+        {/* <div className='header-nav-left'>
           <Btn className={`dropdown-category ${dropDownClass ?? ''}`}>
             {icon ? icon : <RiAlignLeft />}
             <span>{t('AllCategories')}</span>
@@ -57,9 +57,9 @@ const HeaderCategory = ({ customClass, icon, dropDownClass }) => {
               )}
             </ul>
           </div>
-        </div>
+        </div> */}
         <ClassicHeaderMenu />
-        <TodaysDeal />
+        {/* <TodaysDeal /> */}
       </div>
     </Col>
   );

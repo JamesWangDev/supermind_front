@@ -29,7 +29,7 @@
       @include center(horizontal);
       @include pseudowh($width: 70px, $height: 1px);
       bottom: 0;
-      background-color: var(--theme-color);
+      background-color: $primary;
     }
 
     img {
@@ -222,8 +222,8 @@
                   margin-right: 10px;
 
                   &:checked {
-                    background-color: var(--theme-color);
-                    border-color: var(--theme-color);
+                    background-color: $primary;
+                    border-color: $primary;
                   }
 
                   &:focus {
@@ -277,7 +277,8 @@
 ==========================**/
 /* Shopping Cart Box */
 .cart-table {
-  background-color: $light-gray;
+  border-radius: 15px;
+  background-color: $secondBg;
   padding: calc(18px + (35 - 18) * ((100vw - 320px) / (1920 - 320))) calc(12px + (25 - 12) * ((100vw - 320px) / (1920 - 320)));
 
   &.cart-table-2 {
@@ -490,7 +491,7 @@
                               $height: calc(26px + (35 - 26) * ((100vw - 320px) / (1920 - 320))));
                             @include flex_common;
                             border: none;
-                            background-color: #e3e0e0;
+                            background-color: $thirdBG;
                             border-radius: 100% !important;
                             padding: 0;
 
@@ -538,7 +539,7 @@
           &.saving {
             font-size: 16px;
             font-weight: 500;
-            color: var(--theme-color);
+            color: $primary;
           }
 
           &.quantity {
@@ -564,9 +565,10 @@
               font-size: 16px;
               display: block;
               text-decoration: underline;
+              color: #28FFCB;
 
               &:hover {
-                color: var(--theme-color);
+                color: #28FFCB;
               }
             }
 
@@ -574,7 +576,7 @@
               font-weight: 400;
               box-shadow: unset;
               font-size: 15px;
-              color: #bf2020;
+              color: #FF3B3B;
               text-decoration: underline;
             }
           }
@@ -606,7 +608,7 @@
                   $height: calc(29px + (35 - 29) * ((100vw - 320px) / (1920 - 320))));
                 @include flex_common;
                 border: none;
-                background-color: #e3e0e0;
+                background-color: $thirdBG;
                 border-radius: 100% !important;
                 padding: 0;
                 z-index: unset;
@@ -653,14 +655,14 @@
 
 /* Summery cart box */
 .summery-box {
-  border-radius: 5px;
-  background-color: $light-gray;
+  border-radius: 15px;
+  background-color: $secondBg;
 
   .summery-header {
     padding: calc(12px + (16 - 12) * ((100vw - 320px) / (1920 - 320))) calc(16px + (22 - 16) * ((100vw - 320px) / (1920 - 320)));
     display: flex;
     align-items: center;
-    border-bottom: 1px solid $border-color;
+    // border-bottom: 1px solid $border-color;
 
     h3 {
       font-weight: 600;
@@ -672,17 +674,17 @@
       font-size: calc(14px + (16 - 14) * ((100vw - 320px) / (1920 - 320)));
 
       &:hover {
-        color: var(--theme-color);
+        color: $primary;
       }
     }
   }
 
   .summery-contain {
     padding: 16px calc(16px + (22 - 16) * ((100vw - 320px) / (1920 - 320)));
-    border-bottom: 1px solid $border-color;
+    // border-bottom: 1px solid $border-color;
 
     &::-webkit-scrollbar-track {
-      background-color: $content-color;
+      background-color: $title-color;
     }
 
     &::-webkit-scrollbar {
@@ -690,7 +692,7 @@
     }
 
     &::-webkit-scrollbar-thumb {
-      background-color: var(--theme-color);
+      background-color: $primary;
       border-radius: 4px;
     }
 
@@ -701,7 +703,7 @@
         border-radius: 4px;
 
         .btn-apply {
-          background: var(--theme-color);
+          background: $primary;
           color: $white;
           padding: 0 calc(16px + (30 - 16) * ((100vw - 320px) / (1920 - 320)));
           font-weight: 700;
@@ -709,7 +711,7 @@
         }
 
         .form-control {
-          border: 2px solid var(--theme-color);
+          border: 2px solid $primary;
           padding: 10px;
         }
       }
@@ -727,10 +729,10 @@
 
         h4 {
           font-size: 15px;
-          color: $content-color;
+          color: $title-color;
 
           &.price {
-            color: $content-color;
+            color: $title-color;
             margin-left: auto;
 
             .shopping-contain {
@@ -751,7 +753,7 @@
 
   .summery-contain {
     padding: calc(11px + (16 - 11) * ((100vw - 320px) / (1920 - 320))) calc(11px + (22 - 11) * ((100vw - 320px) / (1920 - 320)));
-    border-bottom: 1px solid $border-color;
+    // border-bottom: 1px solid $border-color;
 
     &::-webkit-scrollbar-track {
       background-color: transparent;
@@ -762,7 +764,7 @@
     }
 
     &::-webkit-scrollbar-thumb {
-      background-color: var(--theme-color);
+      background-color: $primary;
       border-radius: 4px;
     }
 
@@ -841,7 +843,7 @@
 
         h4 {
           font-weight: 600;
-          color: var(--theme-color);
+          color: $primary;
         }
       }
 
@@ -905,8 +907,8 @@
 
         &.shopping-button {
           font-size: calc(13px + (14 - 13) * ((100vw - 320px) / (1920 - 320)));
-          background-color: $border-color;
-          color: $black;
+          background-color: #5A3B3F;
+          color: #FF8744 !important;
 
           svg {
             margin-right: 8px;
@@ -938,7 +940,7 @@
 
       .accordion-header {
         .accordion-button {
-          color: $content-color;
+          color: $title-color;
           position: relative;
           padding: 0;
 
@@ -996,7 +998,7 @@
           .cod-review {
             a {
               &:hover {
-                color: var(--theme-color);
+                color: $primary;
               }
             }
           }
@@ -1062,7 +1064,7 @@
           @include pseudowh($width: 0px, $height: 100%);
           bottom: 0;
           left: 0;
-          background-color: var(--theme-color);
+          background-color: $primary;
           background-color: transparent;
           transition: 0.3s ease;
           border-radius: 4px;
@@ -1071,10 +1073,10 @@
         &.active {
           color: $title-color;
           background-color: transparent;
-          border: 2px solid var(--theme-color);
+          border: 2px solid $primary;
 
           &::before {
-            box-shadow: 0 4px 0px var(--theme-color);
+            box-shadow: 0 4px 0px $primary;
             width: 100%;
           }
 
@@ -1082,7 +1084,7 @@
 
             h4,
             i {
-              color: var(--theme-color);
+              color: $primary;
               z-index: 1;
               -webkit-text-stroke: 1px transparent;
             }
@@ -1146,7 +1148,7 @@
         position: absolute;
         top: 0;
         right: 0;
-        background-color: var(--theme-color);
+        background-color: $primary;
         padding: 2px 8px;
         border-radius: 4px;
         color: $white;
@@ -1161,8 +1163,8 @@
           margin-top: 2px;
 
           &:checked {
-            background-color: var(--theme-color);
-            border-color: var(--theme-color);
+            background-color: $primary;
+            border-color: $primary;
           }
 
           &:checked[type="radio"] {
@@ -1520,7 +1522,7 @@
                     position: absolute;
                     top: 0;
                     right: 0;
-                    background-color: var(--theme-color);
+                    background-color: $primary;
                     padding: 2px 8px;
                     border-radius: 4px;
                     color: $white;
@@ -1535,8 +1537,8 @@
                       margin-top: 2px;
 
                       &:checked {
-                        background-color: var(--theme-color);
-                        border-color: var(--theme-color);
+                        background-color: $primary;
+                        border-color: $primary;
                       }
 
                       &:checked[type="radio"] {
@@ -1841,7 +1843,7 @@
 
                   .accordion-header {
                     .accordion-button {
-                      color: $content-color;
+                      color: $title-color;
                       position: relative;
                       padding: 0;
 
@@ -1905,7 +1907,7 @@
 
                         a {
                           &:hover {
-                            color: var(--theme-color);
+                            color: $primary;
                           }
                         }
                       }
@@ -1960,7 +1962,7 @@
           font-size: calc(14px + (16 - 14) * ((100vw - 320px) / (1920 - 320)));
 
           &:hover {
-            color: var(--theme-color);
+            color: $primary;
           }
         }
       }
@@ -1977,7 +1979,7 @@
         }
 
         &::-webkit-scrollbar-thumb {
-          background-color: var(--theme-color);
+          background-color: $primary;
           border-radius: 4px;
         }
 
@@ -1995,7 +1997,7 @@
             border-radius: 4px;
 
             .btn-apply {
-              background: var(--theme-color);
+              background: $primary;
               color: $white;
               padding: 0 calc(16px + (30 - 16) * ((100vw - 320px) / (1920 - 320)));
               font-weight: 700;
@@ -2003,7 +2005,7 @@
             }
 
             .form-control {
-              border: 2px solid var(--theme-color);
+              border: 2px solid $primary;
               padding: 10px;
             }
           }
@@ -2056,7 +2058,7 @@
         }
 
         &::-webkit-scrollbar-thumb {
-          background-color: var(--theme-color);
+          background-color: $primary;
           border-radius: 4px;
         }
 
@@ -2126,7 +2128,7 @@
 
             h4 {
               font-weight: 600;
-              color: var(--theme-color);
+              color: $primary;
             }
           }
 
@@ -2268,7 +2270,7 @@
           @include pseudowh($width: 70%, $height: 2px);
           bottom: -5px;
           left: 0;
-          background: var(--theme-color);
+          background: $primary;
 
           body[dir="rtl"] & {
             left: unset;
@@ -2284,7 +2286,7 @@
           $wrap: wrap,
           $gap: calc(2px + (5 - 2) * ((100vw - 320px) / (1920 - 320))));
         align-items: center;
-        background-color: $light-gray;
+        background-color: $secondBg;
         padding: calc(15px + (27 - 15) * ((100vw - 320px) / (1920 - 320))) calc(15px + (27 - 15) * ((100vw - 320px) / (1920 - 320))) calc(15px + (27 - 15) * ((100vw - 320px) / (1920 - 320))) calc(30px + (41 - 30) * ((100vw - 320px) / (1920 - 320)));
         position: relative;
         border-radius: 10px;
@@ -2300,7 +2302,7 @@
           @include center(vertical);
           position: absolute;
           left: -21px;
-          background-color: var(--theme-color);
+          background-color: $primary;
           padding: 13px;
           border-radius: 7px;
           display: inherit;
@@ -2334,7 +2336,7 @@
             margin: 0;
             font-size: calc(14px + (15 - 14) * ((100vw - 320px) / (1920 - 320)));
             line-height: 1.5;
-            color: $content-color;
+            color: $title-color;
             margin-bottom: -5px;
           }
         }
@@ -2345,11 +2347,11 @@
   .right-sidebar-box {
     padding: calc(21px + (60 - 21) * ((100vw - 320px) / (1920 - 320)));
     border-radius: 10px;
-    background-color: $light-gray;
+    background-color: $secondBg;
 
     .custom-form {
       label {
-        color: $content-color;
+        color: $title-color;
         display: block;
         font-size: 16px;
         margin-bottom: calc(3px + (8 - 3) * ((100vw - 320px) / (1920 - 320)));
@@ -2363,7 +2365,7 @@
           border: none;
 
           &:focus {
-            background-color: $white;
+            background-color: $thirdBG !important;
             border-color: transparent;
           }
         }
@@ -2390,7 +2392,7 @@
           border: none;
 
           &:focus {
-            background-color: $white;
+            background-color: $thirdBG !important;
             border-color: transparent;
           }
         }
@@ -2415,7 +2417,7 @@
           align-items: unset;
           top: 15px;
           padding: 0;
-          background-color: $white;
+          background-color: $thirdBG;
           border-color: transparent;
           line-height: unset;
           position: absolute;
@@ -2431,7 +2433,7 @@
           i,
           svg {
             font-size: calc(14px + (18 - 14) * ((100vw - 320px) / (1920 - 320)));
-            color: $content-color;
+            color: $title-color;
           }
         }
 
@@ -2441,7 +2443,8 @@
           padding-left: 57px;
           border-radius: 6px !important;
           z-index: unset;
-
+          color: $title-color;
+          
           body[dir="rtl"] & {
             padding-left: calc(12px + (15 - 12) * ((100vw - 320px) / (1920 - 320)));
             padding-right: 57px;
@@ -2449,6 +2452,11 @@
 
           &:focus {
             z-index: unset;
+            background-color: $thirdBG;
+          }
+
+          &::placeholder {
+            color: rgba(255, 255, 255, 0.70);
           }
         }
       }
@@ -2476,6 +2484,7 @@
   align-items: center;
   position: relative;
   z-index: 0;
+  background-color: $thirdBG;
 
   &::after {
     @include pos;
@@ -2515,8 +2524,8 @@
   }
 
   .log-in-box {
-    background-color: $light-gray;
-    padding: calc(16px + (50 - 16) * ((100vw - 320px) / (1920 - 320)));
+    background-color: $background;
+    padding: calc(16px + (32 - 16) * ((100vw - 320px) / (1920 - 320)));
     border-radius: calc(8px + (12 - 8) * ((100vw - 320px) / (1920 - 320)));
     width: 100%;
 
@@ -2546,7 +2555,7 @@
 
       h4,
       h5 {
-        color: $content-color;
+        color: $title-color;
         margin-top: 8px;
       }
     }
@@ -2637,7 +2646,7 @@
 
         span {
           font-weight: 500;
-          color: var(--theme-color);
+          color: $primary;
         }
       }
     }
@@ -2648,7 +2657,7 @@
       display: block;
 
       &:hover {
-        color: var(--theme-color);
+        color: $yellow-text;
       }
     }
 
@@ -2667,9 +2676,9 @@
       }
 
       h6 {
-        color: $content-color;
+        color: $title-color;
         position: relative;
-        background-color: #f9f9f9;
+        background-color: $background;
         padding: 0 14px;
         display: inline-block;
         text-transform: uppercase;
@@ -2681,9 +2690,9 @@
       text-align: center;
 
       h4 {
-        color: $content-color;
+        color: $title-color;
         font-size: calc(14px + (16 - 14) * ((100vw - 320px) / (1920 - 320)));
-        margin-bottom: calc(0px + (3 - 0) * ((100vw - 320px) / (1920 - 320)));
+        margin-bottom: calc(0px + (8 - 0) * ((100vw - 320px) / (1920 - 320)));
       }
 
       a {
@@ -2693,7 +2702,7 @@
         display: block;
 
         &:hover {
-          color: var(--theme-color);
+          color: $primary;
         }
       }
     }
@@ -2725,7 +2734,7 @@
 
             &:not(:placeholder-shown) {
               ~label {
-                opacity: 0.65;
+                opacity: 1;
               }
             }
 
@@ -2778,7 +2787,7 @@
 
           .form-select {
             height: 100%;
-            background-color: $white !important;
+            background-color: $thirdBG!important;
             font-size: calc(14px + (16 - 14) * ((100vw - 320px) / (1920 - 320)));
 
             body[dir="rtl"] & {
@@ -2878,7 +2887,7 @@
       p {
         margin: 17px 0 0;
         line-height: 1.6;
-        color: $content-color;
+        color: $title-color;
         @include line($line: 2);
         margin-bottom: -4px;
       }
@@ -2906,7 +2915,7 @@
       margin: calc(8px + (15 - 8) * ((100vw - 320px) / (1920 - 320))) 0 0;
       font-size: calc(13px + (15 - 13) * ((100vw - 320px) / (1920 - 320)));
       line-height: 1.5;
-      color: $content-color;
+      color: $title-color;
 
       @include mq-max(xl) {
         width: 70%;
@@ -2932,14 +2941,15 @@
       .accordion-item {
         width: 100%;
         border-radius: 7px;
-        background-color: $light-gray;
+        background-color: $secondBg;
         border: none;
         overflow: hidden;
         z-index: 0;
 
         .accordion-header {
           .accordion-button {
-            background-color: $light-gray;
+            color: $title-color;
+            background-color: $secondBg;
             font-size: calc(16px + 4 * (100vw - 320px) / 1600);
             font-weight: 500;
             line-height: 1.5;
@@ -2967,7 +2977,7 @@
 
             &:not(.collapsed) {
               font-weight: 700;
-              color: var(--theme-color);
+              color: $primary;
               background-color: transparent;
               box-shadow: none;
 
@@ -2990,7 +3000,7 @@
             p {
               font-size: calc(14px + (15 - 14) * ((100vw - 320px) / (1920 - 320)));
               line-height: 1.6;
-              color: $content-color;
+              color: $title-color;
               margin-bottom: calc(12px + (16 - 12) * ((100vw - 320px) / (1920 - 320)));
 
               &:last-child {
@@ -3029,7 +3039,7 @@
       th {
         font-size: 16px;
         font-weight: 500;
-        color: var(--theme-color);
+        color: $primary;
         background-color: $light-gray;
       }
 
@@ -3081,7 +3091,7 @@
 
             span {
               margin-left: 4px;
-              color: var(--theme-color);
+              color: $primary;
             }
           }
         }
@@ -3242,7 +3252,7 @@
 .compare-fix {
   position: fixed;
   right: calc(54px + (72 - 54) * ((100vw - 320px) / (1920 - 320)));
-  background-color: var(--theme-color);
+  background-color: $primary;
   color: $white;
   padding: calc(7px + (12 - 7) * ((100vw - 320px) / (1920 - 320))) calc(10px + (12 - 10) * ((100vw - 320px) / (1920 - 320)));
   bottom: calc(10px + (25 - 10) * ((100vw - 320px) / (1920 - 320)));
@@ -3312,8 +3322,8 @@
       .accordion-item {
         border: none;
         padding: calc(18px + (25 - 18) * ((100vw - 320px) / (1920 - 320)));
-        background-color: $light-gray;
-        border-radius: 8px;
+        background-color: $secondBg;
+        border-radius: 10px;
 
         +.accordion-item {
           margin-top: 20px;
@@ -3321,7 +3331,7 @@
 
         .accordion-header {
           .accordion-button {
-            background-color: $light-gray;
+            background-color: $secondBg;
             color: $title-color;
             font-weight: 700;
             padding: 0;
@@ -3350,7 +3360,7 @@
         }
 
         .accordion-collapse {
-          background-color: $light-gray;
+          background-color: $secondBg;
 
           .accordion-body {
             padding: 0;
@@ -3415,7 +3425,7 @@
                       $align: center,
                       $justify: space-between);
                     margin-top: 8px;
-                    color: $content-color;
+                    color: $title-color;
                   }
                 }
               }
@@ -3448,7 +3458,7 @@
                         $justify: space-between);
 
                       h5 {
-                        color: $content-color;
+                        color: $title-color;
                         font-weight: 400;
                       }
 
@@ -3462,7 +3472,7 @@
                         @include flex_common;
                         font-size: 15px;
                         border-radius: 100%;
-                        color: #787878;
+                        color: $title-color;
                       }
                     }
                   }
@@ -3481,7 +3491,7 @@
                   transition: all 0.3s ease-in-out;
                   overflow: hidden;
                   position: relative;
-                  background-color: $white;
+                  background-color: $thirdBG;
 
                   &::after {
                     @include pos;
@@ -3490,7 +3500,7 @@
                     z-index: -1;
                     top: 0;
                     left: 0;
-                    background-color: var(--theme-color);
+                    background-color: $primary;
                     opacity: 0;
                   }
 
@@ -3508,7 +3518,7 @@
 
                   a {
                     font-size: calc(13px + (14 - 13) * ((100vw - 320px) / (1920 - 320)));
-                    color: $content-color;
+                    color: $title-color;
                     text-transform: capitalize;
                   }
                 }
@@ -3618,7 +3628,7 @@
         .super {
           display: flex;
           align-items: center;
-          color: $content-color;
+          color: $title-color;
           text-transform: uppercase;
           font-size: 13px;
           gap: 5px;
@@ -3666,7 +3676,7 @@
 
       p {
         line-height: 1.8;
-        color: $content-color;
+        color: $title-color;
         margin-bottom: 0;
         -webkit-line-clamp: 2;
         -webkit-box-orient: vertical;
@@ -3691,7 +3701,7 @@
         overflow: hidden;
         border-radius: 5px;
         padding: 10px 22px;
-        color: var(--theme-color);
+        color: $primary;
         transition: all 0.3s ease-in-out;
         margin-top: calc(8px + (22 - 8) * ((100vw - 320px) / (1920 - 320)));
         font-size: 14px;
@@ -3699,7 +3709,7 @@
 
         &:after {
           @include pos;
-          background-color: var(--theme-color);
+          background-color: $primary;
           opacity: 0.1;
           left: 0;
           top: 0;
@@ -3742,7 +3752,7 @@
         color: #ffffff;
         top: 8px;
         right: 8px;
-        background-color: var(--theme-color);
+        background-color: $primary;
         z-index: 1;
         border-radius: 6px;
         font-size: 18px;
@@ -3823,12 +3833,12 @@
       .blog-contain {
         a {
           h3 {
-            color: var(--theme-color);
+            color: $primary;
           }
         }
 
         .blog-button {
-          background-color: var(--theme-color);
+          background-color: $primary;
           color: $white;
         }
       }
@@ -3896,7 +3906,7 @@
 
       p {
         line-height: 1.8;
-        color: $content-color;
+        color: $title-color;
         margin-bottom: 0;
         -webkit-line-clamp: 4;
         -webkit-box-orient: vertical;
@@ -3915,6 +3925,8 @@
 
   .blog-detail-image {
     position: relative;
+    border-top-left-radius: 30px;
+    border-top-right-radius: 30px;
 
     .blog-image-contain {
       position: absolute;
@@ -3923,7 +3935,7 @@
       padding: 55px 15px 40px;
       text-align: center;
       background: $white;
-      background: linear-gradient(0deg, $white 0%, rgba(246, 246, 246, 0) 100%);
+      background: linear-gradient(0deg, $secondBg 0%, rgba(246, 246, 246, 0) 100%);
       color: $title-color;
 
       @include mq-max(xs) {
@@ -3939,7 +3951,7 @@
               @include pos;
               @include pseudowh($width: 15px, $height: 1px);
               @include center(vertical);
-              background-color: $title-color;
+              background-color: $thirdBG;
               left: -24px;
             }
           }
@@ -3959,7 +3971,7 @@
         @include flex_common;
         flex-wrap: wrap;
         gap: calc(10px + (23 - 10) * ((100vw - 320px) / (1920 - 320)));
-        color: #777;
+        color: $title-color;
 
         li {
           .user-list {
@@ -3977,8 +3989,13 @@
   }
 
   .blog-detail-contain {
+    background-color: $secondBg;
+    padding: 16px;
+    padding-bottom: 42px;
+    border-bottom-left-radius: 30px;
+    border-bottom-right-radius: 30px;
     p {
-      color: $content-color;
+      color: $title-color;
       font-size: calc(15px + (17 - 15) * ((100vw - 320px) / (1920 - 320)));
       line-height: calc(25px + (30 - 25) * ((100vw - 320px) / (1920 - 320)));
       margin-bottom: calc(12px + (20 - 12) * ((100vw - 320px) / (1920 - 320)));
@@ -3988,7 +4005,7 @@
           $height: calc(38px + (50 - 38) * ((100vw - 320px) / (1920 - 320))));
         @include flex_common;
         font-size: calc(55px + (70 - 55) * ((100vw - 320px) / (1920 - 320)));
-        color: $content-color;
+        color: $title-color;
         float: left;
         margin-right: calc(8px + (20 - 8) * ((100vw - 320px) / (1920 - 320)));
         margin-top: 8px;
@@ -3999,7 +4016,7 @@
       padding: calc(18px + (60 - 18) * ((100vw - 320px) / (1920 - 320))) calc(18px + (60 - 18) * ((100vw - 320px) / (1920 - 320))) calc(18px + (60 - 18) * ((100vw - 320px) / (1920 - 320))) calc(62px + (180 - 62) * ((100vw - 320px) / (1920 - 320)));
       border-radius: 10px;
       margin-bottom: calc(12px + (20 - 12) * ((100vw - 320px) / (1920 - 320)));
-      background-color: $content-color;
+      background-color: $title-color;
       position: relative;
       color: $white;
 
@@ -4019,7 +4036,7 @@
         @include pos($pos: absolute, $content: "\f10d");
         @include font;
         font-size: calc(38px + (70 - 38) * ((100vw - 320px) / (1920 - 320)));
-        color: var(--theme-color);
+        color: $primary;
         top: calc(-6px + (26 - -6) * ((100vw - 320px) / (1920 - 320)));
         left: calc(15px + (87 - 15) * ((100vw - 320px) / (1920 - 320)));
       }
@@ -4221,7 +4238,7 @@
     &.center {
       &::before {
         @include center(horizontal);
-        color: var(--theme-color);
+        color: $primary;
       }
     }
   }
@@ -4231,7 +4248,7 @@
   h4 {
     font-size: calc(16px + (21 - 16) * ((100vw - 320px) / (1920 - 320)));
     margin-bottom: calc(7px + (13 - 7) * ((100vw - 320px) / (1920 - 320)));
-    color: var(--theme-color);
+    color: $primary;
   }
 
   h2 {
@@ -4258,6 +4275,7 @@
 }
 
 .fresh-vegetable-section {
+  background-color: $secondBg;
   .fresh-image {
     margin-top: 30px;
     border-radius: calc(12px + (50 - 12) * ((100vw - 320px) / (1920 - 320))) 0;
@@ -4366,10 +4384,10 @@
 }
 
 .client-section {
-  background-color: $light-gray;
+  background-color: $background;
 
   .clint-contain {
-    background: $white;
+    background: $secondBg;
     padding: calc(27px + (50 - 27) * ((100vw - 320px) / (1920 - 320)));
     border-radius: calc(18px + (30 - 18) * ((100vw - 320px) / (1920 - 320)));
     position: relative;
@@ -4389,7 +4407,7 @@
       }
 
       h4 {
-        color: var(--theme-color);
+        color: $primary;
       }
     }
 
@@ -4409,7 +4427,7 @@
       position: absolute;
       top: calc(14px + (24 - 14) * ((100vw - 320px) / (1920 - 320)));
       right: calc(24px + (34 - 24) * ((100vw - 320px) / (1920 - 320)));
-      color: $content-color;
+      color: $title-color;
       opacity: 0.05;
       font-size: calc(52px + (70 - 52) * ((100vw - 320px) / (1920 - 320)));
       font-weight: 800;
@@ -4426,7 +4444,7 @@
 
     p {
       font-size: calc(14px + (16 - 14) * ((100vw - 320px) / (1920 - 320)));
-      color: $content-color;
+      color: $title-color;
       margin: 0 auto;
       line-height: 1.7;
       margin-bottom: -5px;
@@ -4447,6 +4465,7 @@
 }
 
 .team-section {
+  background-color: $secondBg;
   .team-box {
     &:hover {
       .team-iamge {
@@ -4489,13 +4508,13 @@
       h5 {
         margin-top: 6px;
         letter-spacing: 0.5px;
-        color: $content-color;
+        color: $title-color;
       }
 
       p {
         font-size: calc(14px + (15 - 14) * ((100vw - 320px) / (1920 - 320)));
         line-height: 1.6;
-        color: $content-color;
+        color: $title-color;
         margin: 9px auto 14px;
         width: 80%;
         @include line($line: 2);
@@ -4568,10 +4587,10 @@
 }
 
 .review-section {
-  background-color: $light-gray;
+  background-color: $background;
 
   .reviewer-box {
-    background-color: $white;
+    background-color: $secondBg;
     padding: calc(18px + (34 - 18) * ((100vw - 320px) / (1920 - 320)));
     border-radius: 10px;
     z-index: 0;
@@ -4581,7 +4600,7 @@
     &:hover {
       .icon {
         svg {
-          color: var(--theme-color);
+          color: $primary;
           font-size: calc(115px + (168 - 115) * ((100vw - 320px) / (1920 - 320)));
           opacity: 0.15;
           transform: rotate(7deg);
@@ -4613,7 +4632,7 @@
     }
 
     p {
-      color: $content-color;
+      color: $title-color;
       line-height: 1.7;
       margin-bottom: 23px;
       font-size: calc(14px + (15 - 14) * ((100vw - 320px) / (1920 - 320)));
@@ -4641,11 +4660,11 @@
         h4 {
           font-weight: 700;
           font-size: calc(16px + (18 - 16) * ((100vw - 320px) / (1920 - 320)));
-          color: var(--theme-color);
+          color: $primary;
         }
 
         h6 {
-          color: $content-color;
+          color: $title-color;
           margin-top: 6px;
         }
       }
@@ -4675,7 +4694,7 @@
   margin-bottom: 22px;
 
   h3 {
-    font-size: 20px;
+    font-size: 24px;
     line-height: 1.3;
     position: relative;
     font-weight: 600;
@@ -4692,8 +4711,8 @@
 
 .user-dashboard-section {
   .dashboard-left-sidebar {
-    background: $light-gray;
-    box-shadow: 0 0 8px rgba($title-color, 0.14);
+    background: $secondBg;
+    // box-shadow: 0 0 8px rgba($title-color, 0.14);
     border-radius: 10px;
     overflow: hidden;
     position: sticky;
@@ -4880,14 +4899,14 @@
 
           &.active,
           .show>.nav-link {
-            border-left: 3px solid var(--theme-color);
+            border-left: 3px solid $primary;
             font-weight: 600;
             background-color: transparent;
-            color: var(--theme-color);
+            color: $primary;
 
             body[dir="rtl"] & {
               border-left: unset;
-              border-right: 3px solid var(--theme-color);
+              border-right: 3px solid $primary;
             }
 
             &::before {
@@ -4895,7 +4914,7 @@
               @include pos;
               top: 0;
               left: 0;
-              background: var(--theme-color);
+              background: $primary;
               z-index: -1;
               opacity: 0.1;
             }
@@ -4916,7 +4935,7 @@
   }
 
   .dashboard-right-sidebar {
-    background-color: $light-gray;
+    background-color: $secondBg;
     padding: calc(20px + (40 - 20) * ((100vw - 320px) / (1920 - 320)));
     border-radius: 8px;
     height: 100%;
@@ -4927,7 +4946,7 @@
 
     .dashboard-bg-box {
       padding: calc(12px + (20 - 12) * ((100vw - 320px) / (1920 - 320)));
-      background-color: $white;
+      background-color: $thirdBG;
       border-radius: 6px;
 
       +.dashboard-bg-box {
@@ -4955,10 +4974,10 @@
 
         .total-contain {
           @include flex_wrap($dis: flex, $wrap: nowrap, $gap: 15px);
-          background-color: $white;
+          background-color: $thirdBG;
           padding: calc(16px + (25 - 16) * ((100vw - 320px) / (1920 - 320)));
           border-radius: 9px;
-          box-shadow: 0 0 8px rgba($title-color, 0.08);
+          // box-shadow: 0 0 8px rgba($title-color, 0.08);
           align-items: center;
           position: relative;
           overflow: hidden;
@@ -5000,7 +5019,7 @@
           .total-detail {
             h5 {
               margin-bottom: calc(3px + (7 - 3) * ((100vw - 320px) / (1920 - 320)));
-              color: $content-color;
+              color: $title-color;
               @include line;
               font-size: calc(14px + (16 - 14) * ((100vw - 320px) / (1920 - 320)));
             }
@@ -5026,7 +5045,7 @@
             font-size: calc(14px + (15 - 14) * ((100vw - 320px) / (1920 - 320)));
 
             &:hover {
-              color: var(--theme-color);
+              color: $primary;
             }
           }
         }
@@ -5040,7 +5059,7 @@
 
         a {
           &:hover {
-            color: var(--theme-color);
+            color: $primary;
           }
         }
       }
@@ -5062,7 +5081,7 @@
             .order-icon {
               position: relative;
               z-index: 0;
-              color: var(--theme-color);
+              color: $primary;
               padding: 9px;
               border-radius: 100%;
               overflow: hidden;
@@ -5072,7 +5091,7 @@
                 @include pseudowh;
                 left: 0;
                 top: 0;
-                background-color: var(--theme-color);
+                background-color: $primary;
                 opacity: 0.1;
                 z-index: -1;
               }
@@ -5097,7 +5116,7 @@
                   font-weight: 600;
 
                   &.success-bg {
-                    background: var(--theme-color);
+                    background: $primary;
                   }
                 }
               }
@@ -5203,7 +5222,7 @@
       .address-box {
         border-radius: 8px;
         padding: calc(12px + (24 - 12) * ((100vw - 320px) / (1920 - 320)));
-        background-color: $white;
+        background-color: $thirdBG;
         box-shadow: 0 0 9px rgba($black, 0.07);
         position: relative;
         height: 100%;
@@ -5217,7 +5236,7 @@
             position: absolute;
             top: 0;
             right: 0;
-            background-color: var(--theme-color);
+            background-color: $primary;
             padding: 2px 8px;
             border-radius: 4px;
             color: $white;
@@ -5234,8 +5253,8 @@
               margin-top: 2px;
 
               &:checked {
-                background-color: var(--theme-color);
-                border-color: var(--theme-color);
+                background-color: $primary;
+                border-color: $primary;
               }
 
               &:checked[type="radio"] {
@@ -5266,7 +5285,7 @@
                   border: none;
                   font-size: calc(14px + (16 - 14) * ((100vw - 320px) / (1920 - 320)));
                   padding: 4px 0;
-                  color: $content-color;
+                  color: $title-color;
                   background-color: transparent;
 
                   &:first-child {
@@ -5290,7 +5309,7 @@
                     color: $title-color;
 
                     span {
-                      background-color: var(--theme-color);
+                      background-color: $primary;
                       padding: 4px 8px;
                       border-radius: 4px;
                       color: $white;
@@ -5313,7 +5332,7 @@
             font-weight: 600;
 
             &:hover {
-              background-color: var(--theme-color);
+              background-color: $primary;
               color: $white;
             }
 
@@ -5522,7 +5541,7 @@
             }
 
             span {
-              background: var(--theme-color);
+              background: $primary;
               color: $white;
               padding: 3px 8px;
               margin-left: 10px;
@@ -5556,13 +5575,13 @@
             @include pseudowh;
             top: 0;
             left: 0;
-            background: var(--theme-color);
+            background: $primary;
             opacity: 0.08;
             z-index: -1;
           }
 
           &:hover {
-            color: var(--theme-color);
+            color: $primary;
           }
         }
 
@@ -5628,7 +5647,7 @@
                   align-items: center;
 
                   &:hover {
-                    color: var(--theme-color);
+                    color: $primary;
                   }
 
                   span {
@@ -5646,7 +5665,7 @@
                       @include pseudowh;
                       top: 0;
                       left: 0;
-                      background: var(--theme-color);
+                      background: $primary;
                       opacity: 0.08;
                       z-index: -1;
                     }
@@ -5703,7 +5722,7 @@
                 border-radius: 100%;
                 left: 2px;
                 top: 2px;
-                background: var(--theme-color);
+                background: $primary;
                 transition: all 0.3s ease-in-out;
               }
             }
@@ -5744,14 +5763,14 @@
                 border-radius: 100%;
                 left: 2px;
                 top: 2px;
-                background-color: var(--theme-color);
+                background-color: $primary;
                 transition: all 0.3s ease-in-out;
               }
             }
 
             &:checked {
               &+label {
-                background-color: var(--theme-color);
+                background-color: $primary;
 
                 &:before {
                   left: 39px;
@@ -5921,7 +5940,7 @@
 
       &.progtrckr-done {
         color: $title-color;
-        border-top: 4px solid var(--theme-color);
+        border-top: 4px solid $primary;
         width: 100% !important;
 
         &:first-of-type {
@@ -5937,7 +5956,7 @@
           align-items: self-start;
           padding-bottom: calc(20px + (40 - 20) * ((100vw - 320px) / (1920 - 320)));
           border-top: unset;
-          border-left: 4px solid var(--theme-color);
+          border-left: 4px solid $primary;
         }
 
         &:before {
@@ -5947,7 +5966,7 @@
           padding-top: 2px;
           content: "\f00c";
           color: $white;
-          background-color: var(--theme-color);
+          background-color: $primary;
           line-height: 35px;
           border: none;
           border-radius: 35px;
@@ -6012,7 +6031,7 @@
         white-space: nowrap;
 
         &.active {
-          background: var(--theme-color);
+          background: $primary;
           color: $white;
         }
       }
@@ -6086,12 +6105,19 @@
 
     .input-group {
       .form-control {
+        border: 1px solid #443F63;
+        background-color: $background;
         body[dir="rtl"] & {
           border-radius: 0 6px 6px 0 !important;
         }
 
         &:focus {
           z-index: 0;
+          background-color: $background;
+        }
+
+        &::placeholder {
+          color: rgba(255, 255, 255, 0.50);
         }
       }
 
@@ -6119,7 +6145,7 @@
   padding: calc(20px + (28 - 20) * ((100vw - 992px) / (1920 - 992)));
   margin-bottom: 29px;
   border-radius: 9px;
-  background: $light-gray;
+  background: $secondBg;
 
   @include mq-max(lg) {
     padding: 0;
@@ -6166,7 +6192,7 @@
       margin-bottom: -6px;
       line-height: 1.5;
       font-size: calc(14px + (15 - 14) * ((100vw - 320px) / (1920 - 320)));
-      color: $content-color;
+      color: $title-color;
       margin-top: 15px;
     }
   }
@@ -6217,7 +6243,7 @@
 
       li {
         a {
-          color: $content-color;
+          color: $title-color;
           display: block;
           font-size: 16px;
           line-height: 1;
@@ -6232,7 +6258,7 @@
   margin-bottom: 50px;
   border-radius: 9px;
   box-shadow: 0 0 8px rgba($title-color, 0.13);
-  background: var(--theme-color);
+  background: $primary;
   color: $white;
 
   .vendor-logo {
@@ -6357,7 +6383,7 @@
           position: relative;
 
           a {
-            color: #f1f1f1;
+            color: $title-color;
             font-size: 16px;
             width: 20px;
             height: 20px;
@@ -6395,8 +6421,13 @@
      Seller become scss
 ==========================**/
 .seller-poster-section {
+  background-color: $secondBg;
+  padding-top: 50px;
+  padding-bottom: 50px;
   .poster-box {
     .poster-image {
+      margin-top: 20px;
+      border-radius: 30px;
       margin-bottom: calc(22px + .01875*(100vw - 320px));
       text-align: center;
       height: calc(140px + .225*(100vw - 320px));
@@ -6420,6 +6451,8 @@
 }
 
 .become-service {
+  background-color: $secondBg;
+  padding-bottom: 90px;
   .service-box {
     text-align: center;
     border-radius: 8px;
@@ -6431,13 +6464,13 @@
       .service-svg {
         svg {
           transform: scale(1.05);
-          fill: var(--theme-color);
+          fill: $primary;
         }
       }
 
       .service-detail {
         h4 {
-          color: var(--theme-color);
+          color: $primary;
 
           &::after {
             width: 68%;
@@ -6450,7 +6483,7 @@
       @include pseudowh($width: calc(58px + (80 - 58) * ((100vw - 320px) / (1920 - 320))),
         $height: calc(58px + (80 - 58) * ((100vw - 320px) / (1920 - 320))));
       @include flex_common;
-      background: $white;
+      background: $secondBg;
       margin: 0 auto calc(14px + (18 - 14) * ((100vw - 320px) / (1920 - 320)));
       border-radius: 5px;
       padding: calc(5px + (8 - 5) * ((100vw - 320px) / (1920 - 320)));
@@ -6483,7 +6516,7 @@
           @include center(horizontal);
           width: 0;
           height: 4px;
-          background-color: var(--theme-color);
+          background-color: $primary;
           opacity: 0.3;
           z-index: -1;
           border-radius: 50px;
@@ -6494,7 +6527,7 @@
       p {
         margin: 0;
         line-height: 1.5;
-        color: $content-color;
+        color: $title-color;
         transition: all 0.3s ease-in-out;
         font-size: calc(15px + (16 - 15) * ((100vw - 320px) / (1920 - 320)));
       }
@@ -6503,27 +6536,28 @@
 }
 
 .business-section {
-  background-color: $light-gray;
+  padding-top: 70px;
+  background-color: $background;
 
   .business-contain {
     position: relative;
     z-index: 0;
 
-    &::after {
-      @include pos;
-      @include pseudowh;
-      @include center(vertical);
-      background-image: url("https://angular.pixelstrap.net/fastkart/arrow.684125b0e42c2e24.svg");
-      background-position: center;
-      background-repeat: no-repeat;
-      background-size: contain;
-      left: 0;
-      z-index: -1;
+    // &::after {
+    //   @include pos;
+    //   @include pseudowh;
+    //   @include center(vertical);
+    //   background-image: url("https://angular.pixelstrap.net/fastkart/arrow.684125b0e42c2e24.svg");
+    //   background-position: center;
+    //   background-repeat: no-repeat;
+    //   background-size: contain;
+    //   left: 0;
+    //   z-index: -1;
 
-      @include mq-max(xl) {
-        content: none;
-      }
-    }
+    //   @include mq-max(xl) {
+    //     content: none;
+    //   }
+    // }
 
     >.row {
       margin-inline: -50px;
@@ -6560,20 +6594,20 @@
 
     .business-box {
       text-align: center;
-      background-color: $white;
-      border-radius: 9px;
+      background-color: $secondBg;
+      border-radius: 30px;
       padding: calc(17px + (35 - 17) * ((100vw - 320px) / (1920 - 320)));
-      box-shadow: 0 0 8px rgba($title-color, 0.05);
+      // box-shadow: 0 0 8px rgba($title-color, 0.05);
       display: flex;
       align-items: center;
 
       .business-number {
         width: calc(54px + (65 - 54) * ((100vw - 320px) / (1920 - 320)));
         height: calc(54px + (65 - 54) * ((100vw - 320px) / (1920 - 320)));
-        background: var(--theme-color);
+        background: $primary;
         @include flex_common;
         margin: 0 auto calc(19px + (28 - 19) * ((100vw - 320px) / (1920 - 320)));
-        border-radius: 5px;
+        border-radius: 10px;
 
         h2 {
           color: $white;
@@ -6595,7 +6629,7 @@
 
         p {
           margin: 0;
-          color: $content-color;
+          color: $title-color;
           line-height: 1.6;
           font-size: 16px;
         }
@@ -6604,11 +6638,16 @@
   }
 }
 
+.selling-section {
+  padding-top: 70px;
+  background-color: $secondBg;
+}
+
 /**=====================
      Seller Grid scss
 ==========================**/
 .seller-grid-box {
-  background-color: $light-gray;
+  background-color: $secondBg;
   padding: calc(12px + (25 - 12) * ((100vw - 320px) / (1920 - 320)));
   border-radius: 14px;
   position: relative;
@@ -6631,7 +6670,7 @@
 
           svg {
             font-size: 17px;
-            color: var(--theme-color);
+            color: $primary;
           }
         }
 
@@ -6679,14 +6718,14 @@
         font-size: 13px;
         letter-spacing: 0.5px;
         border-radius: 4px;
-        color: var(--theme-color);
+        color: $primary;
         position: relative;
         z-index: 0;
 
         &:after {
           @include pos;
           @include pseudowh;
-          background-color: var(--theme-color);
+          background-color: $primary;
           opacity: 0.1;
           left: 0;
           top: 0;
@@ -6743,7 +6782,7 @@
         align-items: center;
         position: absolute;
         top: 0;
-        background-color: $light-gray;
+        background-color: $secondBg;
         right: 0;
         padding-left: 5px;
 
@@ -6759,7 +6798,7 @@
         }
 
         h6 {
-          color: $content-color;
+          color: $title-color;
         }
 
         .product-rating {
@@ -6790,14 +6829,14 @@
         font-size: 13px;
         letter-spacing: 0.5px;
         border-radius: 4px;
-        color: var(--theme-color);
+        color: $primary;
         position: relative;
         z-index: 0;
 
         &:after {
           @include pos($pos: absolute, $content: "");
           @include pseudowh;
-          background-color: var(--theme-color);
+          background-color: $primary;
           opacity: 0.1;
           left: 0;
           top: 0;
@@ -6819,7 +6858,7 @@
           @include pseudowh($width: calc(35px + (40 - 35) * ((100vw - 320px) / (1920 - 320))),
             $height: calc(35px + (40 - 35) * ((100vw - 320px) / (1920 - 320))));
           @include flex_common;
-          background: $white;
+          background: $thirdBG;
           border-radius: 100%;
           padding: 4px;
           box-shadow: 0 0 2px rgba($title-color, 0.2);
@@ -6973,7 +7012,7 @@
 
           &.success {
             background-color: rgba(13, 164, 135, 0.1);
-            color: var(--theme-color);
+            color: $primary;
           }
 
           &.danger {
@@ -7113,7 +7152,7 @@
 
 .no-data-added {
   text-align: center;
-  padding: 60px 0;
+  padding: 190px 0;
 
   img {
     width: 18%;
@@ -7181,7 +7220,7 @@
 }
 
 .custom-anchor {
-  color: var(--theme-color);
+  color: $primary;
   transition: 0.5s ease;
   text-decoration: none;
   cursor: pointer;
@@ -7207,7 +7246,7 @@
       font-weight: 500;
       border: none;
       border-radius: 6px;
-      background-color: $light-gray;
+      background-color: $thirdBG;
       color: $title-color;
       padding: calc(9px + (12 - 9) * ((100vw - 320px) / (1920 - 320))) calc(16px + (22 - 16) * ((100vw - 320px) / (1920 - 320)));
     }
@@ -7218,8 +7257,8 @@
   .product-box {
     padding: calc(8px + (14 - 8) * ((100vw - 320px) / (1920 - 320)));
     position: relative;
-    background-color: $light-gray;
-    border-radius: 5px;
+    background-color: $secondBg;
+    border-radius: 15px;
     transition: all 0.4s ease-in-out;
 
     body[dir="rtl"] & {

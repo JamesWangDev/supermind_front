@@ -18,7 +18,7 @@ const HeaderCart = () => {
   return (
     <li className='right-side'>
       <div className='onhover-dropdown header-badge'>
-        <Btn type='button' className='btn p-0 position-relative header-wishlist' onClick={() => cartStyle == 'cart_sidebar' && setCartCanvas(!cartCanvas)}>
+        <Btn type='button' className='p-0 position-relative header-wishlist' onClick={() => cartStyle == 'cart_sidebar' && setCartCanvas(!cartCanvas)}>
           <RiShoppingCartLine />
           {cartProducts?.length > 0 && (
             <span className='position-absolute top-0 start-100 translate-middle badge'>

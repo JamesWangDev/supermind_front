@@ -7,7 +7,7 @@ import Btn from '@/Elements/Buttons/Btn';
 const SellerSelling = () => {
   const { themeOption } = useContext(ThemeOptionContext);
   return (
-    <WrapperComponent classes={{ sectionClass: 'selling-section section-b-space' }}>
+    <WrapperComponent classes={{ sectionClass: 'selling-section section-b-space section-t-space' }}>
       <div className='vendor-title'>
         <h5>{themeOption?.seller?.start_selling?.title}</h5>
         <p>{themeOption?.seller?.start_selling?.description}</p>

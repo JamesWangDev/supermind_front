@@ -21,7 +21,7 @@
                 @include flex_common ($dis: flex, $align: center, $justify: space-between);
                 color: $title-color;
                 transition: all 0.3s ease-in-out;
-                background-color: $light-gray;
+                background-color: $secondBg;
                 box-shadow: unset;
                 font-size: 18px;
                 font-weight: 600;

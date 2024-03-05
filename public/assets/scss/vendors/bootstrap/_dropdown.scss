@@ -53,10 +53,10 @@
   padding: var(--#{$prefix}dropdown-padding-y) var(--#{$prefix}dropdown-padding-x);
   margin: 0; // Override default margin of ul
   @include font-size(var(--#{$prefix}dropdown-font-size));
-  color: var(--#{$prefix}dropdown-color);
+  color: white;
   text-align: left; // Ensures proper alignment if parent has it changed (e.g., modal footer)
   list-style: none;
-  background-color: var(--#{$prefix}dropdown-bg);
+  background-color: #443F63;
   background-clip: padding-box;
   border: var(--#{$prefix}dropdown-border-width) solid var(--#{$prefix}dropdown-border-color);
   @include border-radius(var(--#{$prefix}dropdown-border-radius));
@@ -178,7 +178,7 @@
   padding: var(--#{$prefix}dropdown-item-padding-y) var(--#{$prefix}dropdown-item-padding-x);
   clear: both;
   font-weight: $font-weight-normal;
-  color: var(--#{$prefix}dropdown-link-color);
+  color: white;
   text-align: inherit; // For `<button>`s
   text-decoration: if($link-decoration == none, null, none);
   white-space: nowrap; // prevent links from randomly breaking onto new lines

@@ -47,7 +47,7 @@ const AddToCartButton = ({ productState, addToCart, isLoading, buyNow, extraOpti
             onClick={buyNow}
             disabled={productState?.product?.stock_status == 'out_of_stock' || productState?.product?.quantity < productState?.productQty ? true : false}
             loading={Number(isLoading)}>
-            {t('BuyNow')}
+            {t('Open Chat')}
           </Btn>
         ) : (
           <Btn
@@ -55,7 +55,7 @@ const AddToCartButton = ({ productState, addToCart, isLoading, buyNow, extraOpti
             onClick={buyNow}
             disabled={productState?.selectedVariation?.stock_status == 'out_of_stock' || productState?.stock_status == 'out_of_stock' ? true : false}
             loading={Number(isLoading)}>
-            {t('BuyNow')}
+            {t('OpenChat')}
           </Btn>
         )
       ) : null}

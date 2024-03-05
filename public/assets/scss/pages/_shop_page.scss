@@ -89,7 +89,7 @@
     margin-bottom: 18px;
     font-weight: 600;
     font-size: calc(16px + (18 - 16) * ((100vw - 320px) / (1920 - 320)));
-    color: var(--theme-color);
+    color: $primary;
   }
 }
 
@@ -202,14 +202,14 @@
     .dropdown-toggle {
       font-weight: 400;
       display: block;
-      background-color: #f6f5f2;
+      background-color: $thirdBG;
       font-size: calc(14px + (16 - 14) * ((100vw - 320px) / (1920 - 320)));
       padding: calc(9px + (10 - 9) * ((100vw - 320px) / (1920 - 320))) 15px;
-      border-radius: 5px;
+      border-radius: 10px;
       color: $title-color;
       width: 100%;
       text-align: left;
-      border: 1px solid $border-color;
+      // border: 1px solid $border-color;
 
       body[dir='rtl'] & {
         text-align: right;
@@ -238,7 +238,7 @@
       font-size: calc(14px + (16 - 14) * ((100vw - 320px) / (1920 - 320)));
       border: 1px solid $light-semi-gray;
       border-radius: 6px;
-      color: #898989;
+      color: $title-color;
       box-shadow: 0px 6px 10px 4px $light-semi-gray;
       padding: 10px;
       width: 100%;
@@ -283,12 +283,12 @@
 
           &:hover {
             background-color: transparent;
-            color: var(--theme-color);
+            color: $primary;
           }
 
           &:active,
           &:focus {
-            color: var(--theme-color);
+            color: $primary;
             background-color: transparent;
           }
         }
@@ -453,14 +453,14 @@
             font-size: 18px;
             padding: 0 0 8px 0;
             font-weight: 600;
-            border-bottom: 1px solid var(--theme-color);
+            border-bottom: 1px solid $primary;
           }
 
           a {
             display: block;
 
             &:hover {
-              color: var(--theme-color);
+              color: $primary;
             }
           }
         }
@@ -471,7 +471,7 @@
 
           li {
             padding: 9px 11px;
-            background-color: #f9f8f6;
+            background-color: $secondBg;
             position: relative;
             border-radius: 4px;
             display: flex;
@@ -491,7 +491,7 @@
             }
 
             a {
-              color: #777;
+              color: $title-color;
             }
           }
         }
@@ -501,8 +501,11 @@
         @include flex_wrap($dis: flex, $wrap: wrap, $gap: 25px);
 
         .accordion-item {
+          padding: calc(18px + (25 - 18) * ((100vw - 320px) / (1920 - 320)));
           border: none;
           width: 100%;
+          background-color: $secondBg;
+          border-radius: 10px;
 
           .accordion-header {
             .accordion-button {
@@ -533,7 +536,7 @@
                 @include flex_common;
                 top: 0;
                 right: 5px;
-                background-color: #f7f6f4;
+                background-color: $secondBg;
                 font-size: 15px;
                 border-radius: 100%;
                 transition: all 0.3s ease-in-out;
@@ -546,7 +549,7 @@
 
               &:not(.collapsed) {
                 color: $title-color;
-                background-color: transparent;
+                background-color: $secondBg;
                 box-shadow: none;
               }
 
@@ -558,7 +561,7 @@
                   @include pseudowh($width: 100%, $height: 1px);
                   bottom: -8px;
                   left: 0;
-                  background-color: var(--theme-color);
+                  background-color: $primary;
                 }
               }
             }
@@ -628,7 +631,7 @@
 
             &.active {
               color: $white;
-              background-color: var(--theme-color);
+              background-color: $primary;
               font-size: 19px;
               font-weight: 600;
 
@@ -683,7 +686,7 @@
         font-size: calc(14px + (16 - 14) * ((100vw - 320px) / (1920 - 320)));
         font-weight: 600;
         padding: calc(6px + (8 - 6) * ((100vw - 320px) / (1920 - 320))) calc(9px + (12 - 9) * ((100vw - 320px) / (1920 - 320)));
-        background-color: var(--theme-color);
+        background-color: $primary;
         border-radius: 5px;
         display: inline-block;
         color: #fff;
@@ -707,7 +710,7 @@
           font-size: calc(14px + (16 - 14) * ((100vw - 320px) / (1920 - 320)));
           font-weight: 600;
           padding: calc(6px + (8 - 6) * ((100vw - 320px) / (1920 - 320))) calc(9px + (12 - 9) * ((100vw - 320px) / (1920 - 320)));
-          background-color: var(--theme-color);
+          background-color: $primary;
           border-radius: 5px;
           display: inline-block;
         }
@@ -771,7 +774,7 @@
           ul {
             li {
               &.active {
-                background: var(--theme-color);
+                background: $primary;
 
                 img {
                   filter: invert(1) brightness(100);
@@ -842,14 +845,15 @@
           .dropdown-toggle {
             font-weight: 400;
             display: block;
-            background-color: #f6f5f2;
+            background-color: $thirdBG;
             font-size: calc(14px + (16 - 14) * ((100vw - 320px) / (1920 - 320)));
             padding: calc(9px + (10 - 9) * ((100vw - 320px) / (1920 - 320))) 15px;
-            border-radius: 5px;
+            border-radius: 10px;
             color: $title-color;
             width: 100%;
             text-align: left;
-            border: 1px solid $border-color;
+            border: none;
+            // border: 1px solid $border-color;
 
             body[dir='rtl'] & {
               text-align: right;
@@ -873,12 +877,14 @@
           }
 
           .dropdown-menu {
-            background-color: $white;
+            background-color: $thirdBG;
             font-size: calc(14px + (16 - 14) * ((100vw - 320px) / (1920 - 320)));
-            border: 1px solid $light-semi-gray;
+            border: none;
+            box-shadow: none;
+            // border: 1px solid $light-semi-gray;
             border-radius: 6px;
-            color: #898989;
-            box-shadow: 0px 6px 10px 4px $light-semi-gray;
+            color: $title-color;
+            // box-shadow: 0px 6px 10px 4px $light-semi-gray;
             padding: 10px;
             width: 100%;
             margin-top: 7px;
@@ -940,12 +946,12 @@
 
                 &:hover {
                   background-color: transparent;
-                  color: var(--theme-color);
+                  color: $primary;
                 }
 
                 &:active,
                 &:focus {
-                  color: var(--theme-color);
+                  color: $primary;
                   background-color: transparent;
                 }
               }
@@ -969,14 +975,17 @@
           li {
             @include pseudowh($width: 35px, $height: 35px);
             border-radius: 5px;
-            background: linear-gradient(149.8deg, #f6f5f2 17.21%, #fbfaf9 79.21%);
+            background: $thirdBG;
             overflow: hidden;
+            img {
+              filter: invert(1) brightness(100);
+            }
 
             &.active {
-              background: var(--theme-color);
+              background: $primary;
 
               a {
-                background-color: var(--theme-color)
+                background-color: $primary
               }
 
               img {

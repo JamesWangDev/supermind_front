@@ -5,7 +5,7 @@ import SellerBasicCard from './SellerBasicCard';
 
 const SellerDetailBasic = ({ filter, setFilter, StoreData }) => {
   return (
-    <WrapperComponent classes={{ sectionClass: 'section-b-space shop-section' }} customCol={true}>
+    <WrapperComponent classes={{ sectionClass: 'section-b-space section-t-space shop-section' }} customCol={true}>
       <CollectionSidebar filter={filter} setFilter={setFilter} basicStoreCard={<SellerBasicCard StoreData={StoreData} />} sellerClass={'col-xxl-3 col-lg-4'} isAttributes={false} />
       <MainCollection filter={filter} setFilter={setFilter} sellerClass={'col-xxl-9 col-lg-8'}/>
     </WrapperComponent>

@@ -10,7 +10,7 @@
     align-items: center;
 
     .discount {
-        background-color: var(--theme-color);
+        background-color: $primary;
         color: $white;
         padding: 4px calc(7px + (10 - 7) * ((100vw - 320px) / (1920 - 320)));
         border-radius: 4px;

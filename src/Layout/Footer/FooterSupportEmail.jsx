@@ -15,7 +15,7 @@ const FooterSupportEmail = () => {
           <div className='footer-number'>
             <FiMail />
             <div className='contact-number'>
-              <h6 className='text-content'>{t("EmailAddress")} :</h6>
+              <h6 className='text-title'>{t("EmailAddress")} :</h6>
               <h5>{themeOption?.footer?.support_email}</h5>
             </div>
           </div>

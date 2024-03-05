@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import { Input, InputGroup } from 'reactstrap';
 import Btn from '@/Elements/Buttons/Btn';
 import CartContext from '@/Helper/CartContext';
@@ -8,8 +8,10 @@ import { useRouter } from 'next/navigation';
 import AddToWishlist from '@/Components/Common/ProductBox/AddToWishlist';
 import AddToCompare from '@/Components/Common/ProductBox/AddToCompare';
 import AddToCartButton from './AddToCartButton';
+import CustomModal from '@/Components/Common/CustomModal';
 
 const ProductDetailAction = ({ productState, setProductState, extraOption }) => {
+  const [openChat, setOpenChat] = useState(false);
   const { i18Lang } = useContext(I18NextContext);
   const { handleIncDec, isLoading } = useContext(CartContext);
   const router = useRouter();
@@ -17,8 +19,9 @@ const ProductDetailAction = ({ productState, setProductState, extraOption }) => 
     handleIncDec(productState?.productQty, productState?.product, false, false, false, productState);
   };
   const buyNow = () => {
-    handleIncDec(productState?.productQty, productState?.product, false, false, false, productState);
-    router.push(`/${i18Lang}/checkout`);
+    // handleIncDec(productState?.productQty, productState?.product, false, false, false, productState);
+    // router.push(`/${i18Lang}/checkout`);
+    setOpenChat(true);
   };
   const updateQty = (qty) => {
     if (1 > productState?.productQty + qty) return;
@@ -70,6 +73,9 @@ const ProductDetailAction = ({ productState, setProductState, extraOption }) => 
         ) : null}
       </div>
       <AddToCartButton productState={productState} isLoading={isLoading} addToCart={addToCart} buyNow={buyNow} extraOption={extraOption} />
+      <CustomModal modal={openChat} setModal={setOpenChat} fullscreen classes={{modalBodyClass: "full-modal"}}>
+          <iframe style={{width: "100%", height: "100%"}} src="https://pointer.gpt-autopilot.com/" title="W3Schools Free Online Web Tutorials"></iframe>
+      </CustomModal>
     </>
   );
 };

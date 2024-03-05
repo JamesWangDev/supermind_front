@@ -21,13 +21,14 @@
 }
 
 .vendor-box {
+  border-radius: 13px;
   padding: calc(12px + (33 - 12) * ((100vw - 320px) / (1920 - 320)));
-  background-color: $light-gray;
+  background-color: $secondBg;
 
   .vendor-contain {
     @include flex_wrap($dis: flex, $wrap: wrap, $gap: 10px);
     padding: 7px calc(16px + (26 - 16) * ((100vw - 320px) / (1920 - 320)));
-    background-color: $white;
+    background-color: $secondBg;
     align-items: center;
 
     .vendor-image {
@@ -53,7 +54,7 @@
 
         svg {
           font-size: 20px;
-          color: var(--theme-color);
+          color: $primary;
         }
 
         h5 {
@@ -300,7 +301,7 @@
 
     .product-contain {
       p {
-        color: $content-color;
+        color: $title-color;
         line-height: 1.7;
         margin: calc(14px + (16 - 14) * ((100vw - 320px) / (1920 - 320))) 0 0;
         font-size: calc(14px + (16 - 14) * ((100vw - 320px) / (1920 - 320)));
@@ -347,13 +348,13 @@
           }
 
           &.active {
-            border: 1px solid var(--theme-color);
+            border: 1px solid $primary;
             border-radius: 6px;
             padding: 3px;
 
             button,
             img {
-              background: var(--theme-color);
+              background: $primary;
               color: $white;
               font-weight: 600;
             }
@@ -438,7 +439,7 @@
           &.active {
             button {
               color: $white;
-              background-color: var(--theme-color);
+              background-color: $primary;
             }
           }
 
@@ -498,7 +499,7 @@
             @include pos($pos: relative, $content: '');
             width: 12px;
             height: 12px;
-            background-color: var(--theme-color);
+            background-color: $primary;
             border-radius: 100%;
             transition: 0.3s ease-in-out;
             transform: scale(0);
@@ -514,7 +515,7 @@
 
           &:checked {
             background-color: $white;
-            border-color: var(--theme-color);
+            border-color: $primary;
 
             &::after {
               transform: scale(1);
@@ -581,7 +582,7 @@
           &.active {
             button {
               color: $white;
-              background-color: var(--theme-color);
+              background-color: $primary;
             }
           }
 
@@ -616,11 +617,11 @@
         max-width: calc(128px + (170 - 128) * ((100vw - 320px) / (1920 - 320)));
 
         button {
-          background-color: $white;
+          background-color: $thirdBG;
         }
 
         .input-group {
-          background-color: $light-gray;
+          background-color: $secondBg;
         }
       }
     }
@@ -633,9 +634,9 @@
         padding: 0;
         width: calc(38px + (46 - 38) * ((100vw - 320px) / (1920 - 320)));
         height: calc(38px + (46 - 38) * ((100vw - 320px) / (1920 - 320)));
-        border: 1px solid #eee;
+        // border: 1px solid #eee;
         border-radius: 100%;
-        background-color: $light-gray;
+        background-color: $secondBg;
         transition: none;
 
         &:hover {
@@ -718,7 +719,7 @@
           @include flex_wrap($dis: flex, $wrap: wrap, $gap: calc(8px + (12 - 8) * ((100vw - 320px) / (1920 - 320))));
           align-items: flex-start;
           column-count: 2;
-          background-color: #f9f9f9;
+          background-color: $secondBg;
           padding: 15px;
           border-radius: 12px;
           width: 80%;
@@ -740,7 +741,7 @@
             width: 100%;
             font-size: calc(14px + (15 - 14) * ((100vw - 320px) / (1920 - 320)));
             position: relative;
-            color: #777;
+            color: $title-color;
 
             body[dir="rtl"] & {
               padding-left: unset;
@@ -804,7 +805,7 @@
       .pickup-icon {
         i {
           font-size: 20px;
-          color: var(--theme-color);
+          color: $primary;
         }
       }
 
@@ -827,7 +828,7 @@
 
         a {
           margin-top: 0;
-          color: var(--theme-color);
+          color: $primary;
           display: inline-block;
         }
       }
@@ -886,11 +887,11 @@
             display: block;
             text-align: center;
             font-size: 18px;
-            color: $content-color;
+            color: $title-color;
             transition: all 0.5s ease;
 
             &:hover {
-              color: var(--theme-color);
+              color: $primary;
               transition: all 0.5s ease;
             }
           }
@@ -1061,7 +1062,7 @@
 
               h6 {
                 margin-top: 5px;
-                color: var(--theme-color);
+                color: $primary;
 
                 del {
                   color: $content-color;
@@ -1175,7 +1176,7 @@
   bottom: -160px;
   width: 100%;
   z-index: 5;
-  background-color: $white;
+  background-color: $thirdBG;
   padding: calc(9px + (14 - 9) * ((100vw - 320px) / (1920 - 320))) 0;
   box-shadow: 0 0 3px 1px rgba($title-color, 0.06);
   transition: all 0.3s ease;
@@ -1235,7 +1236,7 @@
 
         &.disabled,
         &:disabled {
-          background-color: var(--theme-color);
+          background-color: $primary;
         }
       }
     }
@@ -1251,12 +1252,12 @@
       }
 
       .input-group {
-        background-color: $light-gray;
+        background-color: $secondBg;
         height: calc(38px + (51 - 38) * ((100vw - 480px) / (1920 - 480)));
 
         button {
           height: initial;
-          background-color: $white;
+          background-color: $thirdBG;
         }
       }
     }
@@ -1340,7 +1341,7 @@
         }
 
         span {
-          color: var(--theme-color);
+          color: $primary;
           margin-left: 5px;
 
           body[dir='rtl'] & {
@@ -1366,8 +1367,8 @@
     }
 
     .form-control {
-      background-color: $light-gray;
-      border: 1px solid $light-gray;
+      background-color: $thirdBG;
+      // border: 1px solid $light-gray;
       text-transform: capitalize;
 
       &:focus {
@@ -1424,8 +1425,8 @@
         color: $title-color;
 
         &:hover {
-          background-color: var(--theme-color);
-          border-color: var(--theme-color);
+          background-color: $primary;
+          border-color: $primary;
           color: $white;
         }
 
@@ -1501,7 +1502,7 @@
       }
 
       svg {
-        color: var(--theme-color);
+        color: $primary;
         font-size: 20px;
       }
     }
@@ -1611,7 +1612,7 @@
     color: $title-color;
 
     &:hover {
-      color: var(--theme-color);
+      color: $primary;
     }
 
     svg {
@@ -1645,19 +1646,19 @@
 
       &.success-progress {
         .progress-bar {
-          background-color: var(--theme-color);
+          background-color: $primary;
         }
       }
     }
 
     .progress-bar {
-      background-color: var(--theme-color);
+      background-color: $primary;
     }
   }
 }
 
 .recently-purchase {
-  background: $white;
+  background: $secondBg;
   border: 0;
   border-radius: 6px;
   bottom: -130px;
@@ -1713,7 +1714,7 @@
     right: 7px;
     top: 6px;
     opacity: 0.5;
-    color: $black;
+    color: $white;
     cursor: pointer;
 
     body[dir="rtl"] & {
@@ -1735,7 +1736,7 @@
     }
 
     .product-name {
-      color: var(--theme-color);
+      color: $primary;
     }
 
     .timeAgo {
@@ -1823,7 +1824,7 @@
           border-radius: 100px;
 
           .progress-bar {
-            background-color: var(--theme-color);
+            background-color: $primary;
             border-radius: 100px;
           }
         }
@@ -2001,7 +2002,7 @@
             h4 {
               font-size: 41px;
               font-weight: 600;
-              color: var(--theme-color);
+              color: $primary;
             }
           }
         }
@@ -2044,7 +2045,7 @@
                 font-size: 17px;
 
                 &:hover {
-                  color: var(--theme-color);
+                  color: $primary;
                 }
               }
             }
@@ -2072,7 +2073,7 @@
             font-size: 15px;
 
             &:hover {
-              color: var(--theme-color);
+              color: $primary;
             }
           }
 
@@ -2156,21 +2157,22 @@
 }
 
 .vendor-box {
+  border-radius: 13px;
   padding: calc(12px + (33 - 12) * ((100vw - 320px) / (1920 - 320)));
-  background-color: $light-gray;
+  background-color: $secondBg;
   overflow: hidden;
 
   .vendor-contain {
     @include flex_wrap($dis: flex, $wrap: wrap, $gap: 10px);
     padding: 15px;
-    background-color: $white;
+    background-color: $secondBg;
     align-items: center;
 
     .vendor-text {
       width: 44px;
       height: 44px;
       @include flex_common;
-      background-color: $light-gray;
+      background-color: $secondBg;
     }
 
     .vendor-image {
@@ -2203,7 +2205,7 @@
           svg {
             font-size: 20px;
             line-height: 1;
-            color: var(--theme-color);
+            color: $primary;
           }
 
           h5 {
@@ -2225,7 +2227,7 @@
   .vendor-detail {
     margin: calc(13px + (28 - 13) * ((100vw - 320px) / (1920 - 320))) 0 0;
     line-height: 1.7;
-    color: $content-color;
+    color: $title-color;
     padding: 0;
     border: unset;
   }
@@ -2245,33 +2247,33 @@
     border: 1px solid transparent;
 
     &.border-theme-color {
-      border: 1px solid var(--theme-color);
+      border: 1px solid $primary;
       background-color: transparent;
-      color: var(--theme-color);
+      color: $primary;
 
       .spinning {
         &::before {
-          border-right: 3px solid var(--theme-color);
+          border-right: 3px solid $primary;
         }
       }
 
       &.btn.disabled,
       &.btn:disabled {
-        border: 1px solid var(--theme-color);
+        border: 1px solid $primary;
         background-color: transparent;
-        color: var(--theme-color);
+        color: $primary;
       }
     }
 
     &.btn.disabled,
     &.btn:disabled {
-      background-color: var(--theme-color);
+      background-color: $primary;
       color: $white;
     }
 
     &:hover {
-      background-color: var(--theme-color);
-      border-color: var(--theme-color);
+      background-color: $primary;
+      border-color: $primary;
       color: #fff;
     }
 

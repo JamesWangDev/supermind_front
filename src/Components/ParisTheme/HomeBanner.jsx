@@ -6,7 +6,7 @@ import OfferBanner from './OfferBanner';
 const HomeBanner = ({ bannersData }) => {
   const banners = bannersData.filter((elem) => (elem.status == true ? true : false));
   return (
-    <WrapperComponent classes={{ sectionClass: 'banner-section ratio_60' }} noRowCol={true}>
+    <WrapperComponent classes={{ sectionClass: 'banner-section ratio_60' }} style={{marginTop: 30}} noRowCol={true}>
       <div className='banner-slider'>
         <Slider {...themeSec2BannerSlider}>
           {banners.map((elem, i) => (

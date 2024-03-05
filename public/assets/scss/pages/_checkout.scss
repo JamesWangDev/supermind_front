@@ -68,7 +68,7 @@
 				position: relative;
 				font-size: 18px;
 				line-height: 20px;
-				color: var(--theme-color);
+				color: $primary;
 				font-weight: 400;
 				width: 35%;
 				float: right;
@@ -160,7 +160,7 @@
 					transform: translate(-50%, -50%) scale(0);
 					width: 12px;
 					height: 12px;
-					background-color: var(--theme-color);
+					background-color: $primary;
 					transition: all 0.3s ease-in-out;
 					border-radius: 100%;
 				}
@@ -174,7 +174,7 @@
 					border-color: transparent;
 
 					&::before {
-						border-color: var(--theme-color);
+						border-color: $primary;
 					}
 
 					&::after {
@@ -184,7 +184,7 @@
 
 				&:focus {
 					box-shadow: none;
-					border-color: var(--theme-color);
+					border-color: $primary;
 				}
 			}
 		}
@@ -216,7 +216,7 @@
 						padding: 6px;
 						background-color: #f9f9f6;
 						@include flex_common;
-						color: var(--theme-color);
+						color: $primary;
 						box-shadow: 0 0 8px #eee;
 
 						svg {
@@ -304,11 +304,11 @@
 									}
 
 									&.active {
-										border-color: var(--theme-color);
-										color: var(--theme-color);
+										border-color: $primary;
+										color: $primary;
 
 										i {
-											color: var(--theme-color);
+											color: $primary;
 										}
 									}
 								}
@@ -352,7 +352,7 @@
 										position: absolute;
 										top: 0;
 										right: 0;
-										background-color: var(--theme-color);
+										background-color: $primary;
 										padding: 2px 8px;
 										border-radius: 4px;
 										color: $white;
@@ -600,13 +600,13 @@
 													text-align: center;
 													color: $title-color;
 													padding: 12px 8px;
-													border: 1px solid var(--theme-color);
+													border: 1px solid $primary;
 													border-radius: 8px;
 												}
 
 												&.active {
 													a {
-														background-color: var(--theme-color);
+														background-color: $primary;
 														color: $white;
 													}
 												}
@@ -687,7 +687,7 @@
 									overflow: hidden;
 									display: block;
 									width: 100%;
-									background-color: $light-gray;
+									background-color: $secondBg;
 									border-radius: 5px;
 
 									.accordion-header {
@@ -695,7 +695,7 @@
 											color: $content-color;
 											position: relative;
 											padding: 0;
-											background-color: $light-gray;
+											background-color: $secondBg;
 
 											&::after {
 												content: none;
@@ -771,7 +771,7 @@
 
 												a {
 													&:hover {
-														color: var(--theme-color);
+														color: $primary;
 													}
 												}
 											}
@@ -816,7 +816,7 @@
 		.product-details {
 			.cart-listing {
 				.text-theme {
-					color: var(--theme-color);
+					color: $primary;
 				}
 
 				li {
@@ -892,7 +892,7 @@
 		border: 1px dashed rgba(26, 164, 136, 0.2);
 
 		a {
-			color: var(--theme-color);
+			color: $primary;
 		}
 
 		h4 {
@@ -936,8 +936,8 @@
 		.btn-apply {
 			outline: 0;
 			box-shadow: none;
-			border: 1px solid var(--theme-color);
-			background-color: var(--theme-color);
+			border: 1px solid $primary;
+			background-color: $primary;
 			color: $white;
 			padding: 5px 16px;
 			border-radius: 0 5px 5px 0;

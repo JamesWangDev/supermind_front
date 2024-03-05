@@ -89,7 +89,7 @@
     transition: all 0.3s ease-in-out;
 
     &:hover {
-        background-color: var(--theme-color);
+        background-color: $primary;
 
         svg {
             fill: $white;
@@ -106,7 +106,7 @@
 
     svg {
         @include pseudowh($width: 42px, $height: 42px);
-        fill: var(--theme-color);
+        fill: $primary;
         transition: all 0.3s ease-in-out;
     }
 

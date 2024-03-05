@@ -25,6 +25,8 @@
     position: relative;
     transition: all 0.3s ease-in-out;
     overflow: hidden;
+    background-color: $secondBg;
+    border-radius: 10px;
 
     &:hover {
       .product-image {
@@ -63,7 +65,7 @@
           $justify: space-between);
         position: absolute;
         bottom: -5px;
-        background-color: $white;
+        background-color: $thirdBG;
         width: 70%;
         padding: 10px 5px;
         border-radius: 7px;
@@ -85,7 +87,7 @@
 
             svg {
               font-size: 17px;
-              color: $content-color;
+              color: $title-color;
             }
           }
 
@@ -198,7 +200,7 @@
 
     .stock {
       font-size: 14px;
-      color: var(--theme-color);
+      color: $primary;
       margin-left: auto;
     }
 
@@ -317,7 +319,7 @@
         color: $title-color !important;
 
         &.txt-primary {
-          color: var(--theme-color) !important;
+          color: $primary !important;
         }
 
         &.price {
@@ -430,12 +432,12 @@
         }
 
         &.active {
-          border-color: var(--theme-color);
-          color: var(--theme-color);
+          border-color: $primary;
+          color: $primary;
 
           i,
           svg {
-            color: var(--theme-color);
+            color: $primary;
           }
         }
       }
@@ -616,7 +618,7 @@
     padding: 4px;
     text-align: center;
     z-index: 0;
-    border: 1px solid #eee;
+    // border: 1px solid #eee;
 
     &.theme-bg-white {
       background-color: $white;
@@ -637,12 +639,12 @@
 
       svg {
         font-size: 20px;
-        fill: var(--theme-color);
+        fill: $primary;
       }
 
       i {
         font-size: 13px;
-        color: var(--theme-color);
+        color: $primary;
         margin-top: 1px;
       }
 
@@ -1062,7 +1064,7 @@
         background-color: $white !important;
 
         &.active {
-          background-color: var(--theme-color) !important;
+          background-color: $primary !important;
           color: $white !important;
         }
       }

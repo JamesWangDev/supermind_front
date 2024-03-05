@@ -11,7 +11,7 @@ const ForgotPasswordContent = () => {
   return (
     <>
       <Breadcrumb title={'ForgotPassword'} subNavigation={[{ name: 'ForgotPassword' }]} />
-      <WrapperComponent classes={{ sectionClass: 'log-in-section section-b-space forgot-section', fluidClass: 'w-100' }} customCol={true}>
+      <WrapperComponent classes={{ sectionClass: 'log-in-section section-b-space section-t-space forgot-section', fluidClass: 'w-100' }} customCol={true}>
         <Col xxl={6} xl={5} lg={6} className='d-lg-block d-none ms-auto'>
           <div className='image-contain'>
             <Image src={forgotPasswordImage} className='img-fluid' alt='forgotPasswordImage' />

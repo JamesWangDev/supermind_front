@@ -30,7 +30,7 @@ const CookiesComponent = () => {
           <h2>{t('cookies')} </h2>
         </div>
         <div className='cookie-contain'>
-          <h5 className='text-content'>{t('WeUseCookiesToMakeYourExperienceBetter')}</h5>
+          <h5 className='text-title'>{t('WeUseCookiesToMakeYourExperienceBetter')}</h5>
         </div>
       </div>
       <div className='button-group'>

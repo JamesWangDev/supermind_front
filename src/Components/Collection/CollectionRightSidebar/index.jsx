@@ -14,7 +14,7 @@ const CollectionRightSidebar = ({ filter, setFilter }) => {
           <OfferBanner classes={{ customHoverClass: 'banner-contain hover-effect' }} imgUrl={themeOption?.collection?.collection_banner_image_url} />
         )}
       </WrapperComponent>
-      <WrapperComponent classes={{ sectionClass: 'section-b-space shop-section' }} customCol={true}>
+      <WrapperComponent classes={{ sectionClass: 'section-b-space section-t-space shop-section' }} customCol={true}>
         <MainCollection filter={filter} setFilter={setFilter} />
         <CollectionSidebar filter={filter} setFilter={setFilter} rightSideClass='right-box' />
       </WrapperComponent>

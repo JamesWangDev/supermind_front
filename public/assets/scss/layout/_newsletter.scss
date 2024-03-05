@@ -3,7 +3,9 @@
  ========================== */
 .newsletter-section {
     .newsletter-box {
-        border-radius: 10px;
+        margin-top: 60px;
+        margin-bottom: 30px;
+        border-radius: 32px;
         position: relative;
         overflow: hidden;
 
@@ -42,7 +44,7 @@
 
                     ::placeholder {
                         font-size: 14px;
-                        color: $content-color;
+                        color: $second-title;
 
                         @include mq-max(2xs) {
                             padding-left: 0;
@@ -51,13 +53,15 @@
 
                     input {
                         height: calc(41px + (52 - 41) * ((100vw - 320px) / (1920 - 320)));
-                        border-radius: 5px;
+                        border-radius: 10px;
                         border: none;
-                        padding-left: 53px;
+                        padding-left: 22px;
                         padding-right: 147px;
+                        background-color: $thirdBG;
+                        color: $title-color;
 
                         body[dir="rtl"] & {
-                            padding-left: 147px;
+                            padding-left: 22px;
                             padding-right: 53px;
                         }
 
@@ -105,7 +109,7 @@
                             top: 0;
                             left: 0;
                             z-index: -1;
-                            background-color: var(--theme-color);
+                            background-color: $primary;
 
                             body[dir="rtl"] & {
                                 left: unset;
@@ -115,16 +119,16 @@
 
                         svg {
                             font-size: 19px;
-                            color: var(--theme-color);
+                            color: $primary;
                         }
                     }
 
                     .sub-btn {
                         @include center(vertical);
-                        background-color: $danger-color;
+                        background-color: $primary !important;
                         position: absolute;
-                        right: 3px;
-                        border-radius: 3px;
+                        right: 5px;
+                        border-radius: 7px;
                         border: none;
                         padding: calc(10px + (12 - 10) * ((100vw - 320px) / (1920 - 320))) calc(8px + (21 - 8) * ((100vw - 320px) / (1920 - 320)));
                         font-size: calc(14px + (15 - 14) * ((100vw - 320px) / (1920 - 320)));
@@ -132,6 +136,7 @@
                         font-weight: 500;
                         display: flex;
                         align-items: center;
+                        height: 42px;
 
                         body[dir="rtl"] & {
                             right: unset;
@@ -171,7 +176,7 @@
 
 .newsletter-section-2 {
     .newsletter-box {
-        border-radius: 10px;
+        border-radius: 32px;
         overflow: hidden;
         background-position: center;
         background-repeat: no-repeat;

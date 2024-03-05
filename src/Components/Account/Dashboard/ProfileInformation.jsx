@@ -20,14 +20,14 @@ const ProfileInformation = () => {
           </div>
 
           <div className='table-responsive'>
-            <Table>
+            <Table className='table-dark'>
               <tbody>
                 <tr>
                   <td>{t("Name")} :</td>
                   <td>{accountData?.name}</td>
                 </tr>
                 <tr>
-                  <td>{t("PhoneNumber")} :</td>
+                  <td style={{width: "150px"}}>{t("PhoneNumber")} :</td>
                   <td>
                     +{accountData?.country_code} {accountData?.phone}
                   </td>

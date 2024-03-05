@@ -31,7 +31,7 @@ header {
     padding: 8px 20px;
     margin-bottom: 0;
     font-size: 14px;
-    color: var(--theme-color);
+    color: $primary;
     white-space: nowrap;
 
     @include mq-max(xl) {
@@ -174,7 +174,7 @@ header {
       }
 
       &:hover {
-        color: var(--theme-color);
+        color: $primary;
       }
     }
 
@@ -213,7 +213,7 @@ header {
             i {
               font-size: 12px;
               margin-left: 4px;
-              color: var(--theme-color);
+              color: $primary;
             }
           }
 
@@ -287,7 +287,7 @@ header {
                 @include pseudowh($width: 0, $height: 4px);
                 bottom: 2px;
                 left: 0;
-                background-color: var(--theme-color);
+                background-color: $primary;
                 opacity: 0.3;
                 border-radius: 50px;
                 transition: all 0.3s ease-in-out;
@@ -405,7 +405,7 @@ header {
             }
 
             span {
-              color: var(--theme-color);
+              color: $primary;
               font-weight: 600;
 
               &::after {
@@ -446,7 +446,7 @@ header {
               @include pseudowh($width: 0, $height: 4px);
               bottom: 2px;
               left: 0;
-              background-color: var(--theme-color);
+              background-color: $primary;
               opacity: 0.3;
               border-radius: 50px;
               transition: all 0.3s ease-in-out;
@@ -640,7 +640,7 @@ header {
           padding: 0 8px;
           font-weight: 600;
           color: $white;
-          background-color: var(--theme-color);
+          background-color: $primary;
           border-radius: 50px;
 
           @include mq-max(xl) {
@@ -660,7 +660,7 @@ header {
             top: 100%;
             left: 10px;
             border-right: 4px solid transparent;
-            border-top: 4px solid var(--theme-color);
+            border-top: 4px solid $primary;
 
             @include mq-max(xl) {
               content: none;
@@ -794,22 +794,22 @@ header {
         color: $title-color;
 
         &:hover {
-          color: var(--theme-color);
+          color: $primary;
         }
 
         &:focus {
-          color: var(--theme-color);
+          color: $primary;
         }
       }
 
       .show {
         >.nav-link {
-          color: var(--theme-color);
+          color: $primary;
         }
       }
 
       .nav-link.active {
-        color: var(--theme-color);
+        color: $primary;
       }
     }
 
@@ -822,14 +822,14 @@ header {
       color: $content-color;
 
       a {
-        color: var(--theme-color);
+        color: $primary;
 
         &:hover {
-          color: var(--theme-color);
+          color: $primary;
         }
 
         &:focus {
-          color: var(--theme-color);
+          color: $primary;
         }
       }
     }
@@ -973,7 +973,7 @@ header {
     }
 
     h5 {
-      color: var(--theme-color);
+      color: $primary;
       font-weight: 600;
 
       @include mq-max(xl) {
@@ -1134,7 +1134,7 @@ header {
           &:hover {
             >.nav-link {
               &:not(.disabled) {
-                color: var(--theme-color);
+                color: $primary;
 
                 &::before {
                   transform: translateY(-50%) rotateX(180deg);
@@ -1148,7 +1148,7 @@ header {
           &.active {
             >.nav-link {
               &:not(.disabled) {
-                color: var(--theme-color);
+                color: $primary;
               }
             }
           }
@@ -1192,8 +1192,8 @@ header {
         transition: all 0.4s cubic-bezier(0.65, 0.05, 0.36, 1);
         margin-top: 0;
         box-shadow: -1px 0 10px 0 rgba($title-color, 0.07), 5px 20px 40px 0 rgba($title-color, 0.04);
-        background-color: $white;
-        border-color: $white;
+        background-color: $background;
+        border-color: $background;
         padding: 20px;
         border-radius: 10px;
 
@@ -1240,7 +1240,7 @@ header {
             @include pseudowh($width: 0, $height: 4px);
             bottom: 2px;
             left: 0;
-            background-color: var(--theme-color);
+            background-color: $primary;
             opacity: 0.3;
             border-radius: 50px;
             transition: all 0.3s ease-in-out;
@@ -1298,7 +1298,7 @@ header {
           padding-right: 0;
           padding-left: 0;
           border-radius: 5px;
-          background-color: $white;
+          background-color: $background;
 
           body[dir='rtl'] & {
             left: unset;
@@ -1402,7 +1402,7 @@ header {
               }
 
               &.success-label {
-                background-color: var(--theme-color);
+                background-color: $primary;
               }
             }
           }
@@ -1438,7 +1438,7 @@ header {
               bottom: -10px;
               width: 36px;
               height: 2px;
-              background-color: var(--theme-color);
+              background-color: $primary;
               left: 0;
 
               body[dir="rtl"] & {
@@ -1543,14 +1543,14 @@ header {
             font-weight: 700;
 
             &:hover {
-              color: var(--theme-color);
+              color: $primary;
               background-color: transparent;
             }
           }
 
           .nav-link {
             &.active {
-              color: var(--theme-color);
+              color: $primary;
               background-color: transparent;
             }
           }
@@ -1563,13 +1563,13 @@ header {
 
           .show {
             >.nav-link {
-              color: var(--theme-color);
+              color: $primary;
             }
           }
 
           .active {
             >.nav-link {
-              color: var(--theme-color);
+              color: $primary;
             }
           }
 
@@ -1592,7 +1592,7 @@ header {
               }
 
               &:hover {
-                color: var(--theme-color);
+                color: $primary;
                 background-color: transparent;
               }
 
@@ -1611,7 +1611,7 @@ header {
               }
 
               &.active {
-                color: var(--theme-color);
+                color: $primary;
                 background-color: transparent;
               }
 

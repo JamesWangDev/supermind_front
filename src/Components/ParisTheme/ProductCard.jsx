@@ -26,11 +26,12 @@ const ProductCard = ({ dataAPI }) => {
           svgUrl={<LeafSVG className='icon-width' />}
           noCustomClass={true}
           classObj={{ productStyle: 'product-modern', productBoxClass: '' }}
+          isHeadingVisible={false}
         />
       )}
       {dataAPI?.main_content?.section2_categories_list?.status && (
         <ProductSection2
-          isHeadingVisible={true}
+          isHeadingVisible={false}
           dataAPI={dataAPI?.main_content?.section2_categories_list}
           svgUrl={<LeafSVG className='icon-width' />}
           classes={{ sliderOption: categorySliderOption }}
@@ -44,7 +45,7 @@ const ProductCard = ({ dataAPI }) => {
 
       {dataAPI?.main_content?.section5_coupons?.status && (
         <SingleBanner
-          classes={{ sectionClass: 'section-t-space sale-banner' }}
+          classes={{ sectionClass: 'mt-3 sale-banner' }}
           image_url={dataAPI?.main_content?.section5_coupons?.image_url}
           height={138}
           width={1137}
@@ -71,7 +72,7 @@ const ProductCard = ({ dataAPI }) => {
               classes={{ sliderClass: 'slider-3-blog ratio_65 no-arrow product-wrapper', sliderOption: featureBlogSliderOption }}
             />
           ) : (
-            <NoDataFound data={{ customClass: 'bg-light no-data-added', title: 'No Blog Found' }} />
+            <NoDataFound data={{ customClass: 'bg-second border-30 no-data-added', title: 'No Blog Found' }} />
           )}
         </>
       )}

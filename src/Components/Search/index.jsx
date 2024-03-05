@@ -51,13 +51,13 @@ const SearchModule = () => {
         <div className='title d-block text-center'>
           <h2>{t('Searchforproducts')}</h2>
           <span className='title-leaf'>
-            <LeafSVG />
+            {/* <LeafSVG /> */}
           </span>
         </div>
 
         <div className='search-box'>
           <InputGroup>
-            <Input type='text' className='form-control' value={searchState} onChange={(e) => onChangeHandler(e.target.value)} />
+            <Input type='text' placeholder='Search' className='form-control' value={searchState} onChange={(e) => onChangeHandler(e.target.value)} />
             <Btn className='theme-bg-color text-white m-0' type='button' title='Search' onClick={onHandleSearch} />
           </InputGroup>
         </div>

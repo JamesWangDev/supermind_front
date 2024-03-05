@@ -54,7 +54,7 @@ const LeftCategory = ({ filter, setFilter }) => {
               ))}
             </Nav>
           ) : (
-            <NoDataFound data={{ customClass: 'bg-light no-data-added', title: 'No Category Found' }} />
+            <NoDataFound data={{ customClass: 'bg-second border-30 no-data-added', title: 'No Category Found' }} />
           )}
         </div>
       </div>

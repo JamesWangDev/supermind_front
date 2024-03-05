@@ -28,7 +28,7 @@ const TopSelling = ({ dataAPI, classes, customRow }) => {
         ) : (
           <NoDataFound
             data={{
-              customClass: 'bg-light no-data-added',
+              customClass: 'bg-second border-30 no-data-added',
               title: 'No Product Found',
             }}
           />

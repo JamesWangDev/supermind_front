@@ -60,7 +60,7 @@ const CollectionSlider = ({ filter, setFilter }) => {
           </Slider>
         </div>
       ) : (
-        <NoDataFound data={{ customClass: 'bg-light no-data-added', title: 'No Category Found' }} />
+        <NoDataFound data={{ customClass: 'bg-second border-30 no-data-added', title: 'No Category Found' }} />
       )}
     </WrapperComponent>
   );

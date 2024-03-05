@@ -31,7 +31,7 @@
         button {
           margin: 0;
           width: calc(30px + (40 - 30) * ((100vw - 320px) / (1920 - 320)));
-          background-color: var(--theme-color);
+          background-color: $primary;
           transition: all 0.5s ease;
         }
       }
@@ -208,12 +208,12 @@
 
     &::before {
       @include remixicon;
-      color: var(--theme-color);
+      color: $primary;
       font-size: calc(17px + (20 - 17) * ((100vw - 320px) / (1920 - 320)));
     }
 
     &:hover {
-      background-color: var(--theme-color);
+      background-color: $primary;
 
       &::before {
         color: $white;
@@ -293,7 +293,7 @@
 
     &:hover {
       &::before {
-        color: var(--theme-color);
+        color: $primary;
       }
     }
   }
@@ -309,7 +309,7 @@
 
     &:hover {
       &::before {
-        color: var(--theme-color);
+        color: $primary;
       }
     }
   }
@@ -347,7 +347,7 @@
 
     &:hover,
     &:focus {
-      background-color: var(--theme-color);
+      background-color: $primary;
 
       &::before {
         color: $white;
@@ -365,7 +365,7 @@
 
     &:hover,
     &:focus {
-      background-color: var(--theme-color);
+      background-color: $primary;
 
       &::before {
         color: $white;
@@ -395,7 +395,7 @@
 
     &:hover,
     &:focus {
-      background-color: var(--theme-color);
+      background-color: $primary;
 
       &::before {
         color: $white;

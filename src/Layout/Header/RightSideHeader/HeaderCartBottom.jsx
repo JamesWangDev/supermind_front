@@ -80,7 +80,10 @@ const HeaderCartBottom = ({ modal, setModal, shippingFreeAmt, shippingCal }) => 
               <h4 className='theme-color fw-bold'>{convertCurrency(total)}</h4>
             </div>
             <div className='button-group'>
-            <Link href={`/${i18Lang}/cart`} className='btn btn-sm cart-button' onClick={() => setCartCanvas('')}>
+              <Link href={`/${i18Lang}/battle-area`} className='btn btn-sm cart-button' onClick={() => setCartCanvas('')}>
+                {t('Go to Battle Arena')}
+              </Link>
+              <Link href={`/${i18Lang}/cart`} className='btn btn-sm cart-button' onClick={() => setCartCanvas('')}>
                 {t('ViewCart')}
               </Link>
               <Link href={isAuth ? `/${i18Lang}/checkout` : `/${i18Lang}/auth/login`} className='btn btn-sm cart-button theme-bg-color text-white' onClick={() => setCartCanvas('')}>

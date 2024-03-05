@@ -10,7 +10,7 @@ const ProductSection = ({ dataAPI }) => {
   const bannerTwo = dataAPI?.main_content?.sidebar?.left_side_banners?.banner_2?.image_url;
 
   return (
-    <WrapperComponent classes={{ sectionClass: 'product-section', row: 'g-sm-4 g-3' }} customCol={true}>
+    <WrapperComponent classes={{ sectionClass: 'product-section section-t-space', row: 'g-sm-4 g-3' }} customCol={true}>
       {dataAPI?.main_content?.sidebar?.status && (
         <Col xxl={3} xl={4} className='d-none d-xl-block'>
           <div className='p-sticky'>
@@ -22,7 +22,7 @@ const ProductSection = ({ dataAPI }) => {
                 <OfferBanner classes={{ customClass: 'ratio_medium section-t-space' }} imgUrl={bannerTwo} elem={dataAPI?.main_content?.sidebar?.left_side_banners?.banner_2} />
               </>
             )}
-            <TrendingProduct dataAPI={dataAPI} />
+            {/* <TrendingProduct dataAPI={dataAPI} /> */}
           </div>
         </Col>
       )}

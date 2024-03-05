@@ -13,7 +13,7 @@ const EmailPassword = () => {
   return (
     <>
       <div className='table-responsive'>
-        <Table>
+        <Table className='table-dark'>
           <tbody>
             <tr>
               <td>{t('Email')} :</td>

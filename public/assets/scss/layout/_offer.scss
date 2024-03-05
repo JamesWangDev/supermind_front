@@ -4,7 +4,7 @@
 .coupon-box {
   position: relative;
   padding: calc(15px + (27 - 15) * ((100vw - 320px) / (1920 - 320)));
-  background: #f8f8f8;
+  background: $thirdBG;
   border-radius: 6px;
   width: 100%;
   overflow: hidden;
@@ -52,7 +52,7 @@
         @include pos;
         left: 0;
         height: 23px;
-        background-color: var(--theme-color);
+        background-color: $primary;
         width: 2px;
 
         body[dir="rtl"] & {
@@ -78,6 +78,7 @@
       margin-top: calc(10px + (20 - 10) * ((100vw - 320px) / (1920 - 320)));
 
       p {
+        color: $title-color;
         overflow: hidden;
         text-overflow: ellipsis;
         display: -webkit-box;
@@ -102,7 +103,7 @@
         font-size: 14px;
         position: relative;
         overflow: hidden;
-        color: var(--theme-color) !important;
+        color: $primary !important;
         background-color: transparent !important;
         font-weight: 600;
 
@@ -125,7 +126,7 @@
           top: 0;
           left: 0;
           @include pseudowh;
-          background-color: var(--theme-color);
+          background-color: $primary;
           opacity: 0.1;
           z-index: -1;
         }
@@ -133,7 +134,7 @@
     }
 
     p {
-      color: $content-color;
+      color: $title-color;
       line-height: 1.5;
       height: 42px;
       overflow: hidden;

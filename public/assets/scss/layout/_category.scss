@@ -2,12 +2,12 @@
     Slick slider scss 
  ========================== */
 .category-box {
-    background-color: $light-gray;
+    background-color: $secondBg;
     margin: 0px auto;
     display: block;
     width: 90%;
     text-align: center;
-    border-radius: 5px;
+    border-radius: 17px;
     overflow: hidden;
     transition: all 0.3s ease-in-out;
     position: relative;
@@ -23,11 +23,11 @@
         @include pseudowh;
         top: 0;
         left: 0;
-        background-image: url(../../images/vegetable/shape.png);
-        background-position: center;
-        background-repeat: no-repeat;
-        background-size: cover;
-        background-color: var(--theme-color);
+        // background-image: url(../../images/vegetable/shape.png);
+        // background-position: center;
+        // background-repeat: no-repeat;
+        // background-size: cover;
+        background-color: $primary;
         opacity: 0;
         z-index: -1;
         transition: all 0.3s ease-in-out;
@@ -38,10 +38,6 @@
 
         &::after {
             opacity: 1;
-        }
-
-        img {
-            filter: invert(1) brightness(100);
         }
 
         h5 {
@@ -77,7 +73,7 @@
 .shop-box {
     .shop-category-box {
         padding: calc(15px + (35 - 15) * ((100vw - 320px) / (1920 - 320))) 8px;
-        background-color: $light-gray;
+        background-color: $secondBg;
         text-align: center;
         margin: 0 5px;
         width: 100%;
@@ -89,11 +85,11 @@
             }
 
             a {
-                .shop-category-image {
-                    img {
-                        filter: invert(1) brightness(100);
-                    }
-                }
+                // .shop-category-image {
+                //     // img {
+                //     //     filter: invert(1) brightness(100);
+                //     // }
+                // }
 
                 .category-box-name {
                     h6 {
@@ -104,6 +100,11 @@
         }
 
         &:hover {
+            .shop-category-image {
+                img {
+                    filter: invert(0) brightness(100);
+                }
+            }
             a {
                 .category-box-name {
                     h6 {
@@ -120,7 +121,7 @@
                 color: $title-color;
 
                 h6 {
-                    color: $content-color;
+                    color: $title-color;
                     font-weight: 500;
                     @include line;
                     font-size: calc(15px + (16 - 15) * ((100vw - 320px) / (1920 - 320)));
@@ -175,7 +176,7 @@
             position: absolute;
             top: calc(18px + (25 - 18) * ((100vw - 320px) / (1920 - 320)));
             right: calc(18px + (25 - 18) * ((100vw - 320px) / (1920 - 320)));
-            background-color: var(--theme-color);
+            background-color: $primary;
             padding: calc(7px + (10 - 7) * ((100vw - 320px) / (1920 - 320)));
             border-radius: 5px;
         }
@@ -188,7 +189,7 @@
             }
 
             .hot-deal {
-                background-color: var(--theme-color);
+                background-color: $primary;
                 display: inline-block;
                 padding: 3px 10px;
                 border-radius: 50px;
@@ -211,7 +212,7 @@
             }
 
             .price {
-                color: var(--theme-color);
+                color: $primary;
                 font-weight: 500;
                 margin-bottom: 10px;
 
@@ -228,7 +229,7 @@
                 height: 10px;
 
                 .progress-bar {
-                    background: var(--theme-color);
+                    background: $primary;
                     border-radius: 50px;
                 }
             }
@@ -420,7 +421,7 @@
             .category-name {
                 h4 {
                     font-weight: 700;
-                    color: var(--theme-color);
+                    color: $primary;
                 }
 
                 h6 {
@@ -446,7 +447,7 @@
         .category-box-view {
             .shop-button {
                 @include center(horizontal);
-                background-color: var(--theme-color);
+                background-color: $primary;
                 font-size: 14px;
                 padding: 10px 20px;
                 color: $white;

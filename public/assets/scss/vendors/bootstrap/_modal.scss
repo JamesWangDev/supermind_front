@@ -98,9 +98,9 @@
   flex-direction: column;
   width: 100%; // Ensure `.modal-content` extends the full width of the parent `.modal-dialog`
   // counteract the pointer-events: none; in the .modal-dialog
-  color: var(--#{$prefix}modal-color);
+  color: white;
   pointer-events: auto;
-  background-color: var(--#{$prefix}modal-bg);
+  background-color: #28243D;
   background-clip: padding-box;
   border: var(--#{$prefix}modal-border-width) solid var(--#{$prefix}modal-border-color);
   @include border-radius(var(--#{$prefix}modal-border-radius));
@@ -141,6 +141,9 @@
 .modal-title {
   margin-bottom: 0;
   line-height: var(--#{$prefix}modal-title-line-height);
+  svg {
+    display: none;
+  }
 }
 
 // Modal body

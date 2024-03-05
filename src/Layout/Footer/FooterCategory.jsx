@@ -26,7 +26,7 @@ const FooterCategory = ({ footerMenu, setFooterMenu }) => {
               ?.filter((elem) => themeOption?.footer?.footer_categories.includes(elem.id))
               .map((result, i) => (
                 <li key={i}>
-                  <Link href='/' className='text-content'>
+                  <Link href='/' className='text-title'>
                     {result?.name}
                   </Link>
                 </li>

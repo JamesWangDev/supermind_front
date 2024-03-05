@@ -6,13 +6,13 @@
 
     .tooltip-arrow {
         &::before {
-            border-top-color: var(--theme-color);
+            border-top-color: $primary;
         }
     }
 
     .tooltip-inner {
         font-weight: 500;
-        background-color: var(--theme-color);
+        background-color: $primary;
         color: $white;
     }
 }

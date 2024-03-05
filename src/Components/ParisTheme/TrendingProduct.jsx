@@ -13,7 +13,7 @@ const TrendingProduct = ({ dataAPI }) => {
   const { convertCurrency } = useContext(SettingContext);
   const { filteredProduct } = useContext(ProductIdsContext);
   return (
-    <div className='section-t-space'>
+    <div className='mt-3'>
       <div className='category-menu'>
         <h3>{dataAPI?.main_content?.sidebar?.sidebar_products?.title}</h3>
         {dataAPI?.main_content?.sidebar?.sidebar_products?.product_ids?.length > 0 ? (
@@ -43,7 +43,7 @@ const TrendingProduct = ({ dataAPI }) => {
               ))}
           </ul>
         ) : (
-          <NoDataFound data={{ customClass: 'no-data-added bg-light', title: 'No Product Found' }} />
+          <NoDataFound data={{ customClass: 'no-data-added bg-second border-10', title: 'No Product Found' }} />
         )}
       </div>
     </div>

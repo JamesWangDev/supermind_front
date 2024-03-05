@@ -16,8 +16,8 @@ const RegisterContent = () => {
   const { t } = useTranslation(i18Lang, 'common');
   return (
     <>
-      <Breadcrumb title={'Register'} subNavigation={[{ name: 'Register' }]} />
-      <WrapperComponent classes={{ sectionClass: 'log-in-section section-b-space', fluidClass: 'w-100' }} customCol={true}>
+      {/* <Breadcrumb title={'Register'} subNavigation={[{ name: 'Register' }]} /> */}
+      <WrapperComponent classes={{ sectionClass: 'log-in-section section-b-space section-t-space', fluidClass: 'w-100' }} customCol={true}>
         <Col xxl={6} xl={5} lg={6} className='d-lg-block d-none ms-auto'>
           <div className='image-contain'>
             <Image src={signUpImage} className='img-fluid' alt='sign-up' height={465} width={550} />

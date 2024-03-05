@@ -31,7 +31,7 @@ input[type='number'] {
     border: none;
 
     &:focus {
-      background-color: $white;
+      background-color: $thirdBG !important;
     }
   }
 }
@@ -71,7 +71,9 @@ input[type='number'] {
 }
 
 .theme-form-floating {
-
+  >input {
+    color: rgba(255, 255, 255, 0.70);
+  }
   >.form-control:focus,
   >.form-control:not(:placeholder-shown),
   >.form-select {
@@ -82,9 +84,10 @@ input[type='number'] {
       top: -5px;
       left: 5px;
       height: 31px;
-      background-color: $white;
+      background-color: $thirdBG !important;
       white-space: nowrap;
       opacity: 1;
+      color: rgba(255, 255, 255, 0.70);
     }
   }
 
@@ -112,7 +115,7 @@ input[type='number'] {
     font-weight: 500;
 
     &:focus {
-      border-color: var(--theme-color);
+      border-color: $primary;
       outline: 0;
       box-shadow: 0 0 0 4px transparent;
     }
@@ -120,14 +123,14 @@ input[type='number'] {
 
   .form-control {
     &:focus {
-      background-color: $white;
-      border: 1px solid #ced4da;
+      background-color: $thirdBG !important;
+      // border: 1px solid #ced4da;
     }
   }
 
   label {
     font-size: calc(13px + (16 - 13) * ((100vw - 320px) / (1920 - 320)));
-    color: $content-color;
+    color: $title-color;
     border: none;
   }
 }
@@ -144,7 +147,7 @@ input[type='number'] {
       top: -5px;
       left: 10px;
       height: 31px;
-      background-color: $white;
+      background-color: $thirdBG !important;
       padding: 0 10px;
       opacity: 1;
     }
@@ -168,7 +171,7 @@ input[type='number'] {
     font-weight: 500;
 
     &:focus {
-      border-color: var(--theme-color);
+      border-color: $primary;
       outline: 0;
       box-shadow: 0 0 0 4px transparent;
     }
@@ -176,8 +179,8 @@ input[type='number'] {
 
   .form-control {
     &:focus {
-      background-color: $white;
-      border: 1px solid #ced4da;
+      background-color: $thirdBG !important;
+      // border: 1px solid #ced4da;
     }
   }
 
@@ -200,7 +203,7 @@ input[type='number'] {
 
   label {
     font-size: calc(13px + (16 - 13) * ((100vw - 320px) / (1920 - 320)));
-    color: $content-color;
+    color: $title-color;
   }
 }
 
@@ -220,7 +223,7 @@ input[type='number'] {
     left: 4px;
     top: 4px;
     z-index: 1;
-    border: 2px solid var(--theme-color);
+    border: 2px solid $white;
     border-top-style: none;
     border-right-style: none;
   }
@@ -230,8 +233,8 @@ input[type='number'] {
     @include pseudowh($width: 21px, $height: 21px);
     top: -2px;
     left: 0;
-    background-color: $white;
-    border: 2px solid $border-color;
+    background-color: $thirdBG;
+    border: 2px solid $thirdBG;
     cursor: pointer;
 
     html.dark & {
@@ -258,8 +261,8 @@ input[type='number'] {
     margin-top: 0;
 
     &:checked {
-      background-color: var(--theme-color);
-      border-color: var(--theme-color);
+      background-color: $primary;
+      border-color: $primary;
     }
 
     &:focus {
@@ -273,7 +276,7 @@ input[type='number'] {
   padding: calc(8px + (14 - 8) * ((100vw - 320px) / (1920 - 320))) calc(12px + (15 - 12) * ((100vw - 320px) / (1920 - 320)));
 
   &::placeholder {
-    color: rgba($content-color, 0.3215686275);
+    color: rgba($title-color, 0.3215686275);
   }
 
   &.subscribe-input {
@@ -333,6 +336,7 @@ input[type='number'] {
 }
 
 .form-select {
+  --bs-form-select-bg-img: url("../../images/light-down-arrow.svg");
   body[dir='rtl'] & {
     background-position: left 0.75rem center;
   }
@@ -353,12 +357,12 @@ select {
     position: absolute;
     z-index: 2;
     width: 100%;
-    background-color: $white;
+    background-color: $thirdBG;
     padding: calc(5px + (10 - 5) * ((100vw - 320px) / (1920 - 320)));
     top: 60px;
-    border: 1px solid $light-semi-gray;
+    // border: 1px solid $light-semi-gray;
     border-radius: 5px;
-    box-shadow: 0 0 8px #ededed;
+    // box-shadow: 0 0 8px #ededed;
     transform: translateY(-15px);
     transition: all 0.5s ease;
     opacity: 0;
@@ -371,6 +375,10 @@ select {
 
     input {
       padding: 7px 10px !important;
+      &:focus {
+        background-color: $thirdBG;
+        border: 1px solid $light-semi-gray;
+      }
     }
 
     &.open {
@@ -394,7 +402,7 @@ select {
 
         &:hover {
           p {
-            color: var(--theme-color);
+            color: $primary;
           }
         }
 
@@ -422,7 +430,7 @@ select {
         }
 
         .selected {
-          color: var(--theme-color);
+          color: $primary;
         }
       }
     }

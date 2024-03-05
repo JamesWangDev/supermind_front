@@ -4,18 +4,21 @@ const nextConfig = {
     return [
       {
         source: "/",
-        destination: "/en/theme/paris",
+        destination: "/en/home",
         permanent: true,
       },
     ];
   },
   env: {
     API_PROD_URL: "http://142.93.64.125:8000/api/",
+    // API_PROD_URL: "http://localhost:8000/api/",
     // API_PROD_URL: "https://laravel.pixelstrap.net/fastkart/api/",
     PAYMENT_RETURN_URL: "http://localhost:3000",
     PAYMENT_CANCEL_URL: "http://localhost:3000/",
   },
   images: {
+    loader: "custom",
+    loaderFile: "./src/Utils/ImageLoader/imageloader.js",
     remotePatterns: [
       {
         protocol: "https",
@@ -23,7 +26,8 @@ const nextConfig = {
       },
       {
         protocol: "http",
-        hostname: "142.93.64.125",
+        // hostname: "localhost",
+        hostname: "142.93.64.125:8000",
       },
       {
         protocol: "http",

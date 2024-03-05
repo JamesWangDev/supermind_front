@@ -19,7 +19,7 @@ const AboutUsText = () => {
             <h2>{themeOption?.about_us?.about?.title}</h2>
           </div>
           <div className='delivery-list'>
-            <p className='text-content'>{themeOption?.about_us?.about?.description}</p>
+            <p className='text-title'>{themeOption?.about_us?.about?.description}</p>
             <ul className='delivery-box'>
               {themeOption?.about_us?.about?.futures.map((data, index) => (
                 <li key={index}>

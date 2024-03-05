@@ -47,7 +47,7 @@ const ProductBox1 = ({ imgUrl, badge, productDetail, isClose, refetch, addAction
       <div className='product-detail'>
         <Link href={`/${i18Lang}/product/${productDetail?.slug}`}>
           <h6 className='name'>{productDetail.name}</h6>
-          <p dangerouslySetInnerHTML={{ __html: productDetail?.short_description }} />
+          <p className='text-title' dangerouslySetInnerHTML={{ __html: productDetail?.short_description }} />
         </Link>
         {productDetail?.unit && <h6 className='unit mt-1'>{productDetail?.unit}</h6>}
         <h5 className='sold text-content'>

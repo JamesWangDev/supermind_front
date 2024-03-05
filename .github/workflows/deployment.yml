@@ -1,7 +1,7 @@
 name: Build & Deploy
 on:
   push:
-    branches: [dev/2024/01/1-add-battle-area-page-in-front-end]
+    branches: [master]
 
 jobs:
   deploy:
@@ -21,7 +21,7 @@ jobs:
            cd ../var/www/supermind/supermind-frontend
            git pull
            echo 'pull successful'
-           git checkout dev/2024/01/1-add-battle-area-page-in-front-end
+           git checkout master
            npm install
            echo 'Installing dependencies successful'
            npm run build

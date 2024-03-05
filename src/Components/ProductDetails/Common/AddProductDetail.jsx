@@ -44,7 +44,7 @@ const AddProductDetail = ({ productState }) => {
           </div>
         ) : null
       ) : null}
-      {productState?.product?.size_chart_image ||
+      {/* {productState?.product?.size_chart_image ||
       (themeOption?.product?.shipping_and_return && productState?.product?.is_return) ||
       (themeOption?.product?.shipping_and_return && productState?.product?.is_return) ? (
         <div className='size-delivery-info'>
@@ -65,7 +65,7 @@ const AddProductDetail = ({ productState }) => {
             </a>
           ) : null}
         </div>
-      ) : null}
+      ) : null} */}
       {modal && activeModal[modal]}
     </>
   );

@@ -71,7 +71,7 @@ export const productSliderOption = {
   ],
 };
 export const productPageRelatedSliderOptions = {
-  infinite: true,
+  infinite: false,
   arrows: true,
   slidesToShow: 6,
   slidesToScroll: 1,

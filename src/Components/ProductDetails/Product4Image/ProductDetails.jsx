@@ -11,7 +11,7 @@ const ProductDetails = ({ productState }) => {
   const { convertCurrency } = useContext(SettingContext);
   return (
     <>
-      <CustomerOrderCount productState={productState} />
+      {/* <CustomerOrderCount productState={productState} /> */}
       <h2 className='name'>{productState?.selectedVariation?.name ?? productState?.product?.name}</h2>
       <div className='price-rating'>
         <h3 className='theme-color price'>

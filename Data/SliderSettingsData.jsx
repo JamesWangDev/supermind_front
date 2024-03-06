@@ -524,7 +524,7 @@ export const productDetailSlider = (length) => {
     asNavFor: '.product-main-1',
     dots: false,
     focusOnSelect: true,
-    infinite: true,
+    infinite: false,
     responsive: [
       {
         breakpoint: 1400,

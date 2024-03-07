@@ -94,7 +94,7 @@ export default function ChatBox({productData}) {
     setMessages([
       {
         role: "assistant",
-        content: `Hi there! I'm Chatbot UI, an AI assistant. I can help you with things like answering questions, providing information, and helping with tasks. How can I help you?`,
+        content: productData['greetings'] || 'Hello, How can I assist you today?',
       },
     ]);
   };
@@ -107,7 +107,7 @@ export default function ChatBox({productData}) {
     setMessages([
       {
         role: "assistant",
-        content: `Hi there! I'm Chatbot UI, an AI assistant. I can help you with things like answering questions, providing information, and helping with tasks. How can I help you?`,
+        content: productData['greetings'] || 'Hello, How can I assist you today?',
       },
     ]);
   }, []);

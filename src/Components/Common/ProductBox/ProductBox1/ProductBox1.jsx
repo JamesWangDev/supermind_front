@@ -39,13 +39,13 @@ const ProductBox1 = ({ imgUrl, badge, productDetail, isClose, refetch, addAction
         </div>
       )}
       <div className='product-image'>
-        <Link href={`/${i18Lang}/product/${productDetail?.slug}`}>
+        <Link href={`/${i18Lang}/${productDetail?.type === "superpower" ? 'superpower' : 'product'}/${productDetail?.slug}`}>
           <Avatar data={imgUrl} placeHolder={placeHolderImage} customeClass={'img-fluid'} name={productDetail.title} height={500} width={500} />
         </Link>
         <ProductBoxAction productObj={productDetail} listClass="product-option" />
       </div>
       <div className='product-detail'>
-        <Link href={`/${i18Lang}/product/${productDetail?.slug}`}>
+        <Link href={`/${i18Lang}/${productDetail?.type === "superpower" ? 'superpower' : 'product'}/${productDetail?.slug}`}>
           <h6 className='name'>{productDetail.name}</h6>
           <p className='text-title' dangerouslySetInnerHTML={{ __html: productDetail?.short_description }} />
         </Link>

@@ -4,7 +4,6 @@ import ProductDetailAction from '../ProductDetailAction';
 import Avatar from '@/Components/Common/Avatar';
 import { placeHolderImage } from '../../../../../Data/CommonPath';
 import SettingContext from '@/Helper/SettingContext';
-import ProductAttribute from '../ProductAttribute/ProductAttribute';
 
 const ShowProduct = ({ productState, setProductState }) => {
   const { convertCurrency } = useContext(SettingContext);
@@ -33,7 +32,7 @@ const ShowProduct = ({ productState, setProductState }) => {
                   </h6>
                 </div>
               </div>
-              <ProductAttribute productState={productState} setProductState={setProductState} stickyAddToCart={true} />
+              {/* <ProductAttribute productState={productState} setProductState={setProductState} stickyAddToCart={true} /> */}
               <ProductDetailAction productState={productState} setProductState={setProductState} extraOption={false} />
             </div>
           </Col>

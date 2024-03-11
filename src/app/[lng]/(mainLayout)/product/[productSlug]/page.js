@@ -13,7 +13,7 @@ export async function generateMetadata({ params }) {
 
 const ProductDetails = ({ params }) => {
     return (
-        <ProductDetailContent params={params?.productSlug} />
+        <ProductDetailContent type="product" params={params?.productSlug} />
     )
 }
 

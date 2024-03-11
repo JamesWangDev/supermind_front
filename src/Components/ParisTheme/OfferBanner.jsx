@@ -20,7 +20,7 @@ const OfferBanner = ({ classes = {}, imgUrl, ratioImage, customRatioClass = '', 
           </div>
         </Link>
       ) : elem?.redirect_link?.link_type === 'collection' ? (
-        <Link href={`/${i18Lang}/collections?category=${elem?.redirect_link?.link}` || '/'}>
+        <Link href={`/${i18Lang}/collections?category=${elem?.redirect_link?.link || ""}` || '/'}>
           <div className={`${classes?.customHoverClass ? classes?.customHoverClass : 'home-contain hover-effect'}`}>
             {ratioImage ? <RatioImage src={imgUrl} className={`bg-img ${customRatioClass}`} alt='banner' /> : <img src={imgUrl} className={`img-fluid ${customRatioClass}`} alt='banner' />}
           </div>

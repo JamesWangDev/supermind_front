@@ -3,10 +3,12 @@ import Avatar from '../Common/Avatar';
 import Link from 'next/link';
 import { placeHolderImage } from '../../../Data/CommonPath';
 import CategoryContext from '@/Helper/CategoryContext';
+import I18NextContext from '@/Helper/I18NextContext';
 
 const CategoryMenu = ({ dataAPI }) => {
   const { filterCategory } = useContext(CategoryContext);
   const categoryData = filterCategory('product');
+  const { i18Lang } = useContext(I18NextContext);
   return (
     <div className='category-menu'>
       <h3>{dataAPI?.main_content?.sidebar?.categories_icon_list?.title}</h3>
@@ -19,7 +21,7 @@ const CategoryMenu = ({ dataAPI }) => {
                 <div className='category-list'>
                   <Avatar data={elem?.category_icon} placeHolder={placeHolderImage} name={elem?.name} />
                   <h5>
-                    <Link href='/'>{elem?.name}</Link>
+                    <Link href={`/${i18Lang}/collections?category=${elem?.name}`}>{elem?.name}</Link>
                   </h5>
                 </div>
               </li>

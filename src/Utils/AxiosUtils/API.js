@@ -16,6 +16,9 @@ export const CategoryAPI = "/category"
 // Product API
 export const ProductAPI = "/product"
 
+//SuperPower API
+export const SuperpowerAPI = "/superpower"
+
 // Pages API
 export const PageAPI = "/page"
 

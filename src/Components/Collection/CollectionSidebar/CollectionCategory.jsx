@@ -6,7 +6,7 @@ import { useCustomSearchParams } from '@/Utils/Hooks/useCustomSearchParams';
 import NoDataFound from '@/Components/Common/NoDataFound';
 
 const CollectionCategory = ({ filter, setFilter }) => {
-  const [attribute, price, rating, sortBy, field, layout] = useCustomSearchParams(['attribute', 'price', 'rating', 'sortBy', 'field', 'layout']);
+  const [attribute, price, rating, sortBy, field, layout, type] = useCustomSearchParams(['attribute', 'price', 'rating', 'sortBy', 'field', 'layout', 'type']);
   const { filterCategory } = useContext(CategoryContext);
   const categoryData = filterCategory('product');
   const router = useRouter();
@@ -26,10 +26,10 @@ const CollectionCategory = ({ filter, setFilter }) => {
       };
     });
     if (temp.length > 0) {
-      const queryParams = new URLSearchParams({ ...attribute, ...price, ...sortBy, ...field, ...rating, ...layout, category: temp }).toString();
+      const queryParams = new URLSearchParams({ ...attribute, ...price, ...sortBy, ...field, ...rating, ...layout, ...type, category: temp }).toString();
       router.push(`${pathname}?${queryParams}`);
     } else {
-      const queryParams = new URLSearchParams({ ...attribute, ...price, ...sortBy, ...field, ...rating, ...layout }).toString();
+      const queryParams = new URLSearchParams({ ...attribute, ...price, ...sortBy, ...field, ...rating, ...layout, ...type }).toString();
       router.push(`${pathname}?${queryParams}`);
     }
   };

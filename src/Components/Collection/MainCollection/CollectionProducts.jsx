@@ -5,20 +5,22 @@ import NoDataFound from '@/Components/Common/NoDataFound';
 import Pagination from '@/Components/Common/Pagination';
 import ProductBox1 from '@/Components/Common/ProductBox/ProductBox1/ProductBox1';
 import request from '@/Utils/AxiosUtils';
-import { ProductAPI } from '@/Utils/AxiosUtils/API';
+import { ProductAPI, SuperpowerAPI } from '@/Utils/AxiosUtils/API';
 import { useQuery } from '@tanstack/react-query';
 import noProduct from '../../../../public/assets/svg/no-product.svg';
 import ProductSkeletonComponent from '@/Components/Common/SkeletonLoader/ProductSkeleton/ProductSkeletonComponent';
+import { useCustomSearchParams } from '@/Utils/Hooks/useCustomSearchParams';
 
 const CollectionProducts = ({ filter, grid }) => {
   const { slug } = useParams();
   const [page, setPage] = useState(1);
+  const [selectedType] = useCustomSearchParams(['type']);
 
   const { data, fetchStatus } = useQuery(
-    [page, filter],
+    [page, filter, selectedType],
     () =>
       request({
-        url: ProductAPI,
+        url: selectedType?.type == "superpower" ? SuperpowerAPI : ProductAPI,
         params: {
           page,
           status: 1,
@@ -39,6 +41,7 @@ const CollectionProducts = ({ filter, grid }) => {
       select: (data) => data.data,
     },
   );
+
   return (
     <>
       {fetchStatus == 'fetching' ? (

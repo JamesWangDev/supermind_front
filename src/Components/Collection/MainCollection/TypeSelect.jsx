@@ -26,7 +26,6 @@ const TypeSelect = () => {
   const pathname = usePathname();
   const [type, setType] = useState("supermind");
 
-  console.log(category, "ksdjfkljsdfjl")
   useEffect(() => {
     let queryParams = new URLSearchParams({ ...attribute, ...price, ...category, ...layout, type: type }).toString();
     router.push(`${pathname}?${queryParams}`);

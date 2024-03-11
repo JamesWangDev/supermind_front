@@ -82,7 +82,7 @@ const ProductDetailContent = ({ type, params }) => {
   };
   return (
     <>
-      <Breadcrumb title={params} subNavigation={[{ name: 'Product' }, { name: params }]} />
+      <Breadcrumb type={type} title={params} subNavigation={[{ name: 'Product' }, { name: params }]} />
       {showProductLayout[isProductLayout]}
       {productState?.product?.related_products?.length > 0 && <RelatedProduct productState={productState} />}
       {ProductData && <StickyCheckout ProductData={ProductData} isLoading={isLoading} />}

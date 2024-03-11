@@ -39,7 +39,7 @@ const TypeSelect = () => {
       <h5 className='text-title'>{t('Type')} :</h5>
       <Dropdown isOpen={dropdownOpen} toggle={toggle}>
         <DropdownToggle caret>
-          <span>{type || t('Sort')}</span>
+          <span>{typeOptions.find((elem) => elem.value == type)?.label || t('Sort')}</span>
         </DropdownToggle>
         <DropdownMenu>
           <div className="dropdown-box">

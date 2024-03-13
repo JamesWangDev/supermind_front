@@ -10,6 +10,7 @@ import AddToCompare from '@/Components/Common/ProductBox/AddToCompare';
 import AddToCartButton from './AddToCartButton';
 import CustomModal from '@/Components/Common/CustomModal';
 import ChatBox from '@/Components/Chat/ChatBox';
+import { SuperpowerChatBox } from '@/Components/Chat/SuperpowerChatBox';
 
 const ProductDetailAction = ({ productState, setProductState, extraOption }) => {
   const [openChat, setOpenChat] = useState(false);
@@ -53,6 +54,8 @@ const ProductDetailAction = ({ productState, setProductState, extraOption }) => 
     }
   };
 
+  console.log(productState, "skdflksdjkfjklsdfj")
+
   return (
     <>
       <div className='note-box product-package'>
@@ -77,7 +80,7 @@ const ProductDetailAction = ({ productState, setProductState, extraOption }) => 
       <AddToCartButton productState={productState} isLoading={isLoading} addToCart={addToCart} buyNow={buyNow} extraOption={extraOption} />
       <CustomModal modal={openChat} setModal={setOpenChat} classes={{modalBodyClass: "full-modal", modalClass: 'theme-modal modal-xl'}}>
           {/* <iframe style={{width: "100%", height: "100%"}} src="https://pointer.gpt-autopilot.com/" title="W3Schools Free Online Web Tutorials"></iframe> */}
-          <ChatBox productData={productState.product} />
+          {productState?.product?.type == "superpower" ? <SuperpowerChatBox productData={productState.product} /> : <ChatBox productData={productState.product} />}
       </CustomModal>
     </>
   );

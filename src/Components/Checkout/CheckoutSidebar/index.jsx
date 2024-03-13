@@ -21,7 +21,7 @@ const CheckoutSidebar = ({ values, setFieldValue }) => {
   const { data, mutate, isLoading } = useCreate(CheckoutAPI, false, false, true, false, false);
   // Submitting data on Checkout
   useEffect(() => {
-    if (values['billing_address_id'] && values['shipping_address_id'] && values['delivery_description'] && values['payment_method']) {
+    if (values['payment_method']) {
       values['variation_id'] = '';
       delete values['total'];
       values['products'] = cartProducts;
@@ -32,7 +32,7 @@ const CheckoutSidebar = ({ values, setFieldValue }) => {
         setStoreCoupon('');
       }
     }
-  }, [values['billing_address_id'], values['shipping_address_id'], values['payment_method'], values['delivery_description'], values['points_amount'], values['wallet_balance']]);
+  }, [values['payment_method'], values['points_amount'], values['wallet_balance'], cartProducts]);
 
   return (
     <Col xxl='4' xl='5'>

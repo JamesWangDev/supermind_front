@@ -3,6 +3,8 @@ import { useEffect, useRef, useState } from "react";
 import { OpenAIStream } from "@/Utils/OpenAIStream";
 import { ChatGPTAPI, AnyScaleAPI, SuperpowerAPI } from "@/Utils/AxiosUtils/API";
 import { GetKnowldege } from "@/Utils/GetKnowldege/GetKnowldege";
+import { useQuery } from "@tanstack/react-query";
+import request from "@/Utils/AxiosUtils";
 
 export default function ChatBox({productData}) {
   const [messages, setMessages] = useState([]);

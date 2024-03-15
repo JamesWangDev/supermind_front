@@ -54,8 +54,6 @@ const ProductDetailAction = ({ productState, setProductState, extraOption }) => 
     }
   };
 
-  console.log(productState, "skdflksdjkfjklsdfj")
-
   return (
     <>
       <div className='note-box product-package'>

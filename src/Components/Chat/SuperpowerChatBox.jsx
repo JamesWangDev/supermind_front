@@ -1,6 +1,6 @@
 import { Chat } from "../Chat/Chat";
 import { useEffect, useRef, useState } from "react";
-import axios from "axios";
+import { GetKnowldege } from "@/Utils/GetKnowldege/GetKnowldege";
 
 export const SuperpowerChatBox = ({productData}) => {
   const [messages, setMessages] = useState([]);
@@ -19,17 +19,13 @@ export const SuperpowerChatBox = ({productData}) => {
     setLoading(true);
 
     try {
-        axios.post("https://sea-turtle-app-qcwo5.ondigitalocean.app/chat", {
-            query: message.content,
-            partition_names: productData['always_knowledges'] ?  productData['always_knowledges'].split(',') : []
-        }, {headers: {
-            "Content-Type": "application/json"
-        }}).then(response => {
+        GetKnowldege(message.content, productData['always_knowledges'] ? productData['always_knowledges'].split(',') : [])
+        .then(response => {
             setMessages((messages) => [
                 ...messages,
                 {
                 role: "assistant",
-                content: response.data,
+                content: response,
                 },
             ]);
         
@@ -40,8 +36,8 @@ export const SuperpowerChatBox = ({productData}) => {
             setMessages((messages) => [
                 ...messages,
                 {
-                role: "assistant",
-                content: "Fetch Error...",
+                  role: "assistant",
+                  content: "Fetch Error...",
                 },
             ]);
         })

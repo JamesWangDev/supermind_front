@@ -1,7 +1,8 @@
 import { Chat } from "./Chat";
 import { useEffect, useRef, useState } from "react";
 import { OpenAIStream } from "@/Utils/OpenAIStream";
-import { ChatGPTAPI, AnyScaleAPI } from "@/Utils/AxiosUtils/API";
+import { ChatGPTAPI, AnyScaleAPI, SuperpowerAPI } from "@/Utils/AxiosUtils/API";
+import { GetKnowldege } from "@/Utils/GetKnowldege/GetKnowldege";
 
 export default function ChatBox({productData}) {
   const [messages, setMessages] = useState([]);
@@ -10,7 +11,7 @@ export default function ChatBox({productData}) {
 
   const messagesEndRef = useRef(null);
 
-  // const { data: promptData, isLoading: promptLoader } = useQuery(["prompts", values['prompts']], () => request({ url: PromptAPI }), { refetchOnWindowFocus: false, select: (res) => res?.data });
+  const { data: superpowers, isLoading: superpowerloading } = useQuery([SuperpowerAPI, productData['superpowers']], () => request({ url: SuperpowerAPI, method: 'get', params: {ids: productData['superpowers'].join()} }), { refetchOnWindowFocus: false, select: (res) => res?.data.data });
 
   useEffect(() => {
     if(productData.prompts) {
@@ -41,6 +42,12 @@ export default function ChatBox({productData}) {
     setMessages(updatedMessages);
     setLoading(true);
 
+    let knowledgeText = "";
+
+    if (productData['superpowers'] && productData['superpowers'].length > 0) {
+      knowledgeText = await handleGetKnowledges(message.content);
+    }
+
     try {
         const charLimit = 12000;
         let charCount = 0;
@@ -50,12 +57,14 @@ export default function ChatBox({productData}) {
             const message = updatedMessages[i];
             if (charCount + message.content.length > charLimit) {
                 messagesToSend.push(...promptTexts);
+                messagesToSend.push({role: 'user', content: `KNOWLEDGE DATA TO REFERENCE FOR YOU: ${knowledgeText}`});
                 messagesToSend.push(updatedMessages[updatedMessages.length - 1]);
                 break;
             }
             charCount += message.content.length;
             if(i === updatedMessages.length - 1) {
                 messagesToSend.push(...promptTexts);
+                messagesToSend.push({role: 'user', content: `KNOWLEDGE DATA TO REFERENCE FOR YOU: ${knowledgeText}`});
             }
             messagesToSend.push(message);
         }
@@ -112,6 +121,19 @@ export default function ChatBox({productData}) {
     ]);
   }, []);
 
+  const handleGetKnowledges = async (message) => {
+    return new Promise((resolve, reject) => {
+      const partition_names = superpowers?.map(item => (item.always_knowledges.split(','))).flat();
+      GetKnowldege(message, partition_names)
+        .then(response => {
+          resolve(response[0]);
+        })
+        .catch(error => {
+          reject(error);
+        })
+    })
+  }
+
   return (
     <>
       <div className="d-flex flex-column">
@@ -119,7 +141,7 @@ export default function ChatBox({productData}) {
           <div className="mx-auto mt-4 mt-sm-12">
             <Chat
               messages={messages}
-              loading={loading}
+              loading={loading || superpowerloading}
               onSend={handleSend}
               onReset={handleReset}
             />

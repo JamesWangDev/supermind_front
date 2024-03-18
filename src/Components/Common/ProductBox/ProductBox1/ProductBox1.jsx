@@ -50,14 +50,14 @@ const ProductBox1 = ({ imgUrl, badge, productDetail, isClose, refetch, addAction
           <p className='text-title' dangerouslySetInnerHTML={{ __html: productDetail?.short_description }} />
         </Link>
         {productDetail?.unit && <h6 className='unit mt-1'>{productDetail?.unit}</h6>}
-        <h5 className='sold text-content'>
+        {/* <h5 className='sold text-content'>
           <span className='theme-color price'>{convertCurrency(productDetail?.sale_price)}</span>
           <del>{convertCurrency(productDetail?.price)}</del>
-        </h5>
+        </h5> */}
 
         <div className='product-rating mt-sm-2 mt-1'>
           <ProductBox1Rating totalRating={productDetail?.rating_count || 0} />
-          <h6 className='theme-color'>{ModifyString(productDetail.stock_status, false, '_')}</h6>
+          {/* <h6 className='theme-color'>{ModifyString(productDetail.stock_status, false, '_')}</h6> */}
         </div>
         {addAction && <ProductBox1Cart productObj={productDetail} />}
       </div>

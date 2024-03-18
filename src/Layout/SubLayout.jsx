@@ -50,8 +50,8 @@ const SubLayout = ({ children }) => {
       {/* <TapTop /> */}
       <MainFooter />
       <CookiesComponent />
-      <StickyCompare />
-      <RecentPurchase />
+      {/* <StickyCompare /> */}
+      {/* <RecentPurchase /> */}
       {/* {!isNewsLetter && <NewsLetterModal />} */}
       <ExitModal />
     </>

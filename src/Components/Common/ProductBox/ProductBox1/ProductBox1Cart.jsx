@@ -75,7 +75,7 @@ const ProductBox1Cart = ({ productObj }) => {
         </div>
       </div>
       {/* <VariationModal setVariationModal={setVariationModal} variationModal={variationModal} productObj={productObj} /> */}
-      <CustomModal modal={openChat} setModal={setOpenChat} classes={{modalBodyClass: "full-modal", modalClass: 'theme-modal modal-xl'}}>
+      <CustomModal modal={openChat} setModal={setOpenChat} classes={{modalBodyClass: "full-modal", modalClass: 'theme-modal modal-xl', title: productObj?.name}}>
           {/* <iframe style={{width: "100%", height: "100%"}} src="https://pointer.gpt-autopilot.com/" title="W3Schools Free Online Web Tutorials"></iframe> */}
           {productObj?.type == "superpower" ? <SuperpowerChatBox productData={productObj} /> : <ChatBox productData={productObj} />}
       </CustomModal>

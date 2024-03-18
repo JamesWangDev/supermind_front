@@ -8,6 +8,12 @@ export const sidebarMenu = [
     path: '/account/dashboard',
   },
   {
+    title: 'MyOrders',
+    icon: <RiFileTextLine />,
+    id: 'order',
+    path: '/account/order',
+  },
+  {
     title: 'Notification',
     icon: <RiNotificationLine />,
     id: 'notification',
@@ -30,12 +36,6 @@ export const sidebarMenu = [
     icon: <RiCoinLine />,
     id: 'point',
     path: '/account/point',
-  },
-  {
-    title: 'MyOrders',
-    icon: <RiFileTextLine />,
-    id: 'order',
-    path: '/account/order',
   },
   {
     title: 'RefundHistory',

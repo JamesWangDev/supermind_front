@@ -131,3 +131,6 @@ export const AnyScaleAPI = "https://api.endpoints.anyscale.com/v1/chat/completio
 export const gptmodel = "gptmodel";
 export const gptmodelImportAPI = "gptmodel/csv/import";
 export const gptmodelExportAPI = "gptmodel/csv/export";
+
+// get my ordered products
+export const myproducts = '/myproducts'

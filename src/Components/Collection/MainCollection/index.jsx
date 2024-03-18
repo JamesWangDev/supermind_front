@@ -49,7 +49,7 @@ const MainCollection = ({ filter, setFilter, isBanner, isOffcanvas, classicStore
           <GridBox grid={grid} setGrid={setGrid} />
         </div>
       </div>
-      <CollectionProducts filter={filter} grid={grid} />
+      <CollectionProducts paginate={40} filter={filter} grid={grid} />
     </div>
   );
 };

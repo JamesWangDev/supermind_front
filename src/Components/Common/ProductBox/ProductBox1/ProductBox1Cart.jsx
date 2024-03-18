@@ -6,6 +6,9 @@ import I18NextContext from '@/Helper/I18NextContext';
 import CartContext from '@/Helper/CartContext';
 import VariationModal from './VariationModal';
 import { RiAddLine, RiSubtractLine } from 'react-icons/ri';
+import CustomModal from '@/Components/Common/CustomModal';
+import ChatBox from '@/Components/Chat/ChatBox';
+import { SuperpowerChatBox } from '@/Components/Chat/SuperpowerChatBox';
 
 const ProductBox1Cart = ({ productObj }) => {
   const { cartProducts, handleIncDec } = useContext(CartContext);
@@ -14,6 +17,7 @@ const ProductBox1Cart = ({ productObj }) => {
   const { t } = useTranslation(i18Lang, 'common');
   const [productQty, setProductQty] = useState(0);
   const [isOpen, setIsOpen] = useState(false);
+  const [openChat, setOpenChat] = useState(false);
   const getSelectedVariant = useMemo(() => {
     return cartProducts.find((elem) => elem.product_id === productObj.id);
   }, [cartProducts]);
@@ -38,10 +42,10 @@ const ProductBox1Cart = ({ productObj }) => {
       <div className='add-to-cart-box'>
         <Btn
           className='btn-add-cart addcart-button'
-          disabled={productObj?.stock_status !== 'in_stock' ? true : false}
-          onClick={() => {
+          // disabled={productObj?.stock_status !== 'in_stock' ? true : false}
+          onClick={productObj?.stock_status == 'in_stock' ? () => {
            productObj.external_url? window.open(productObj.external_url,"_blank"): productObj?.stock_status == 'in_stock' && productObj?.type === 'classified' ? setVariationModal(productObj?.id) : handleIncDec(1, productObj, productQty, setProductQty, setIsOpen);
-          }}>
+          } : () => setOpenChat(true)}>
           {productObj?.stock_status == 'in_stock' ? (
             <>
               {productObj?.external_url ? 
@@ -55,7 +59,7 @@ const ProductBox1Cart = ({ productObj }) => {
               }
             </>
           ) : (
-            t('SoldOut')
+            t('Chat')
           )}
         </Btn>
         <div className={`cart_qty qty-box ${isOpen && productQty >= 1 ? 'open' : ''}`}>
@@ -70,7 +74,11 @@ const ProductBox1Cart = ({ productObj }) => {
           </InputGroup>
         </div>
       </div>
-      <VariationModal setVariationModal={setVariationModal} variationModal={variationModal} productObj={productObj} />
+      {/* <VariationModal setVariationModal={setVariationModal} variationModal={variationModal} productObj={productObj} /> */}
+      <CustomModal modal={openChat} setModal={setOpenChat} classes={{modalBodyClass: "full-modal", modalClass: 'theme-modal modal-xl'}}>
+          {/* <iframe style={{width: "100%", height: "100%"}} src="https://pointer.gpt-autopilot.com/" title="W3Schools Free Online Web Tutorials"></iframe> */}
+          {productObj?.type == "superpower" ? <SuperpowerChatBox productData={productObj} /> : <ChatBox productData={productObj} />}
+      </CustomModal>
     </>
   );
 };

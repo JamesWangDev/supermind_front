@@ -11,7 +11,7 @@ import noProduct from '../../../../public/assets/svg/no-product.svg';
 import ProductSkeletonComponent from '@/Components/Common/SkeletonLoader/ProductSkeleton/ProductSkeletonComponent';
 import { useCustomSearchParams } from '@/Utils/Hooks/useCustomSearchParams';
 
-const CollectionProducts = ({ filter, grid }) => {
+const CollectionProducts = ({ filter, grid, paginate }) => {
   const { slug } = useParams();
   const [page, setPage] = useState(1);
   const [selectedType] = useCustomSearchParams(['type']);
@@ -24,7 +24,7 @@ const CollectionProducts = ({ filter, grid }) => {
         params: {
           page,
           status: 1,
-          paginate: 40,
+          paginate: paginate,
           field: filter?.field ?? '',
           price: filter?.price.join(',') ?? '',
           category: filter?.category.join(','),

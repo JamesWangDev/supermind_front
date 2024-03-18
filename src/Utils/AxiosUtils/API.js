@@ -126,3 +126,8 @@ export const ChatGPTAPI = "https://api.openai.com/v1/chat/completions"
 
 // AnyScale API endpoint
 export const AnyScaleAPI = "https://api.endpoints.anyscale.com/v1/chat/completions"
+
+// gptmodels api
+export const gptmodel = "gptmodel";
+export const gptmodelImportAPI = "gptmodel/csv/import";
+export const gptmodelExportAPI = "gptmodel/csv/export";

@@ -1,7 +1,7 @@
 import { Chat } from "./Chat";
 import { useEffect, useRef, useState } from "react";
 import { OpenAIStream } from "@/Utils/OpenAIStream";
-import { ChatGPTAPI, AnyScaleAPI, SuperpowerAPI } from "@/Utils/AxiosUtils/API";
+import { SuperpowerAPI, gptmodel } from "@/Utils/AxiosUtils/API";
 import { GetKnowldege } from "@/Utils/GetKnowldege/GetKnowldege";
 import { useQuery } from "@tanstack/react-query";
 import request from "@/Utils/AxiosUtils";
@@ -14,6 +14,8 @@ export default function ChatBox({productData}) {
   const messagesEndRef = useRef(null);
 
   const { data: superpowers, isLoading: superpowerloading } = useQuery([SuperpowerAPI, productData['superpowers']], () => request({ url: SuperpowerAPI, method: 'get', params: {ids: productData['superpowers'].join()} }), { refetchOnWindowFocus: false, select: (res) => res?.data.data });
+  const { data: customModelData, isLoading: modelLoader, refetch, fetchStatus } = useQuery([gptmodel, productData['gpt_model']], () => request({
+    url: `${gptmodel}/${productData['gpt_model']}`}), { refetchOnWindowFocus: false, select: (res) => res?.data });
 
   useEffect(() => {
     if(productData.prompts) {
@@ -29,17 +31,17 @@ export default function ChatBox({productData}) {
     const promptTexts = selectedPrompts.map(prom => ({role: "user", content: prom.prompt_text}))
     const updatedMessages = [...messages, message];
 
-    const getModelandAPI = (model) => {
-        if (model.includes("gpt")) {
-            return {model: model, api: ChatGPTAPI, api_key: process.env.OPENAI_API_KEY};
-        }
-        if (model.includes("anyscale")) {
-            return {model: model.replace("anyscale-", ""), api: AnyScaleAPI, api_key: process.env.ANYSCALE_API_KEY}
-        }
-        return {model: model, api: ChatGPTAPI, api_key: process.env.OPENAI_API_KEY};
-    }
+    // const getModelandAPI = (model) => {
+    //     if (model.includes("gpt")) {
+    //         return {model: model, api: ChatGPTAPI, api_key: process.env.OPENAI_API_KEY};
+    //     }
+    //     if (model.includes("anyscale")) {
+    //         return {model: model.replace("anyscale-", ""), api: AnyScaleAPI, api_key: process.env.ANYSCALE_API_KEY}
+    //     }
+    //     return {model: model, api: ChatGPTAPI, api_key: process.env.OPENAI_API_KEY};
+    // }
 
-    const {model, api, api_key} = getModelandAPI(productData.gpt_model || "")
+    // const {model, api, api_key} = getModelandAPI(productData.gpt_model || "")
 
     setMessages(updatedMessages);
     setLoading(true);
@@ -71,7 +73,7 @@ export default function ChatBox({productData}) {
             messagesToSend.push(message);
         }
 
-        OpenAIStream(messagesToSend, model, api, api_key)
+        OpenAIStream(messagesToSend, customModelData?.name, customModelData?.api_url, customModelData?.api_key)
             .then(response => {
                 setMessages((messages) => [
                     ...messages,
@@ -143,7 +145,7 @@ export default function ChatBox({productData}) {
           <div className="mx-auto mt-4 mt-sm-12">
             <Chat
               messages={messages}
-              loading={loading || superpowerloading}
+              loading={loading || superpowerloading || modelLoader}
               onSend={handleSend}
               onReset={handleReset}
             />

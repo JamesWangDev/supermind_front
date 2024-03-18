@@ -21,11 +21,11 @@ const TopBanner = ({ dataAPI }) => {
       <Col xl={4} className='ratio_65'>
         <Row className='g-4'>
           <SkeletonWrapper classes={{ colProps: { xl: 12, md: 6 }, colClass: 'skeleton-banner-sm', divClass: 'home-contain' }}>
-            <OfferBanner classes={{ customHoverClass: 'home-contain' }} imgUrl={dataAPI?.home_banner?.sub_banner_1?.image_url} ratioImage={true} elem={dataAPI?.home_banner?.sub_banner_1} custom redirectUrl={`/${i18Lang}/account/dashboard` || '/'} />
+            <OfferBanner classes={{ customHoverClass: 'home-contain' }} imgUrl={dataAPI?.home_banner?.sub_banner_1?.image_url} ratioImage={true} elem={dataAPI?.home_banner?.sub_banner_1} custom redirectUrl={`/${i18Lang}/account/order` || '/'} />
           </SkeletonWrapper>
 
           <SkeletonWrapper classes={{ colProps: { xl: 12, md: 6 }, colClass: 'skeleton-banner-sm', divClass: 'home-contain' }}>
-            <OfferBanner classes={{ customHoverClass: 'home-contain' }} imgUrl={dataAPI?.home_banner?.sub_banner_2?.image_url} ratioImage={true} elem={dataAPI?.home_banner?.sub_banner_2} custom redirectUrl={`admin/${i18Lang}/dashboard` || '/'} />
+            <OfferBanner classes={{ customHoverClass: 'home-contain' }} imgUrl={dataAPI?.home_banner?.sub_banner_2?.image_url} ratioImage={true} elem={dataAPI?.home_banner?.sub_banner_2} custom redirectUrl={`/${i18Lang}/seller/become-developer` || '/'} />
           </SkeletonWrapper>
         </Row>
       </Col>

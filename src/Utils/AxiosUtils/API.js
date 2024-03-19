@@ -142,3 +142,9 @@ export const createCheckoutSession = 'createCheckoutSession';
 
 // create buy points from stripe API endpoint
 export const createBuyPointsSession = 'createBuyPointsSession';
+
+// Send register code api
+export const sendRegisterCode = 'send-register-code';
+
+// Verify register code api
+export const verifyRegisterCode = 'verify-register-code';

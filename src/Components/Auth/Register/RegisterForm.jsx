@@ -10,11 +10,15 @@ import FormBtn from '@/Components/Common/FormBtn';
 import SimpleInputField from '@/Components/Common/InputFields/SimpleInputField';
 import { AllCountryCode } from '../../../../Data/AllCountryCode';
 import SearchableSelectInput from '@/Components/Common/InputFields/SearchableSelectInput';
+import useSendRegisterCode from '@/Utils/Hooks/Auth/useSendRegisterCode';
 
 const RegisterForm = () => {
   const { i18Lang } = useContext(I18NextContext);
   const { t } = useTranslation(i18Lang, 'common');
-  const { mutate, isLoading } = useCreate(RegisterAPI, false, `/${i18Lang}/auth/login`, 'Register Successfully');
+  const { mutate, isLoading } = useCreate(RegisterAPI, false, false, 'Register Successfully', (resData) => {
+    sendRegisterCode({email: resData.data.user_email});
+  });
+  const { mutate: sendRegisterCode, isLoading: isRegisterCodeLoading } = useSendRegisterCode()
   return (
     <Formik
       initialValues={{

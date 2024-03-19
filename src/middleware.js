@@ -51,6 +51,9 @@ export async function middleware(request) {
         if (path == `/${lng}/auth/otp-verification` && !request.cookies.has("ue")) {
             return NextResponse.redirect(new URL(`/${lng}/auth/login`, request.url));
         }
+        if (path == `/${lng}/auth/register-verification` && !request.cookies.has("ue")) {
+            return NextResponse.redirect(new URL(`/${lng}/auth/login`, request.url));
+        }
         if (path == `/${lng}/auth/update-password` && (!request.cookies.has("uo") || !request.cookies.has("ue"))) {
             return NextResponse.redirect(new URL(`/${lng}/auth/login`, request.url));
         }

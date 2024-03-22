@@ -14,15 +14,27 @@ const ProductDetails = ({ productState }) => {
       {/* <CustomerOrderCount productState={productState} /> */}
       <h2 className='name'>{productState?.selectedVariation?.name ?? productState?.product?.name}</h2>
       <div className='price-rating'>
-        <h3 className='theme-color price'>
-          {/* {productState?.selectedVariation?.sale_price ? convertCurrency(productState?.selectedVariation?.sale_price) : convertCurrency(productState?.product?.sale_price)}
-          <del className='text-content'>{productState?.selectedVariation ? convertCurrency(productState?.selectedVariation?.price) : convertCurrency(productState?.product?.price)}</del> */}
+          
+        <div style={{color: "gray"}}>
+          <div>
+            {productState?.product?.participate_type ? "Participate Type: " + productState?.product?.participate_type : ""}
+          </div>
+          <div>
+            {productState?.product?.monthly ? "Monthly Subscription Price: " + productState?.product?.monthly : ""}
+          </div>
+          <div>
+            {productState?.product?.max_downstream_cost ? "Max Downstream Cost: " + productState?.product?.max_downstream_cost : ""}
+          </div>
+          <div>
+            {productState?.product?.overage_profit_margin ? "Overage Profit Margin: " + productState?.product?.overage_profit_margin : ""}
+          </div>
+          {/* <del className='text-content'>{productState?.selectedVariation ? convertCurrency(productState?.selectedVariation?.price) : convertCurrency(productState?.product?.price)}</del> */}
           {/* {productState?.selectedVariation?.discount || productState?.product?.discount ? (
             <span className='offer-top'>
               {productState?.selectedVariation ? productState?.selectedVariation?.discount : productState?.product?.discount}% {t('Off')}
             </span>
           ) : null} */}
-        </h3>
+        </div>
         <div className='product-rating custom-rate'>
           <ProductBox1Rating totalRating={productState?.selectedVariation?.rating_count ?? productState?.product?.rating_count} />
           <span className='review'>

@@ -133,4 +133,7 @@ export const gptmodelImportAPI = "gptmodel/csv/import";
 export const gptmodelExportAPI = "gptmodel/csv/export";
 
 // get my ordered products
-export const myproducts = '/myproducts'
+export const myproducts = '/myproducts';
+
+// create subscription API endpoint
+export const createCheckoutSession = 'createCheckoutSession';

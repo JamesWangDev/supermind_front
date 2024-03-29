@@ -11,6 +11,7 @@ export default function ChatBox({productData}) {
   const [messages, setMessages] = useState([]);
   const [loading, setLoading] = useState(false);
   const [selectedPrompts, setSelectedPrompts] = useState([]);
+  const [tokenBalance, setTokenBalance] = useState(0);
 
   const messagesEndRef = useRef(null);
 
@@ -19,10 +20,16 @@ export default function ChatBox({productData}) {
     select: (res) => res?.data,
   });
   const { mutate: createPointDebit, isLoading: debitLoader } = useCreate(PointDebit, false, false, false, () => {
-    // refRefetch.current.call();
-  });
+    refecthPointsData();
+  }, true);
   const { data: customModelData, isLoading: modelLoader, refetch, fetchStatus } = useQuery([gptmodel, productData['gpt_model']], () => request({
     url: `${gptmodel}/${productData['gpt_model']}`}), { refetchOnWindowFocus: false, select: (res) => res?.data });
+
+  useEffect(() => {
+    if(pointsData && !pointsDataLoading) {
+      setTokenBalance(pointsData.balance)
+    }
+  }, [pointsData, pointsDataLoading])
 
   useEffect(() => {
     if(productData.prompts) {
@@ -83,7 +90,6 @@ export default function ChatBox({productData}) {
                     },
                 ]);
                 createPointDebit({balance: response.token});
-                refecthPointsData();
                 setLoading(false);
             })
             .catch(error => {
@@ -143,7 +149,7 @@ export default function ChatBox({productData}) {
     <>
       <div className="d-flex flex-column">
         <div className="flex-grow-1 overflow-auto px-2 px-sm-10 pb-4 pb-sm-10">
-          <div className="d-flex justify-content-end me-3" style={{color: "orange"}}>Points left: {pointsData?.balance}</div>
+          <div className="d-flex justify-content-end me-3" style={{color: "orange"}}>Points left: {tokenBalance}</div>
           <div className="mx-auto mt-4 mt-sm-12">
             <Chat
               messages={messages}

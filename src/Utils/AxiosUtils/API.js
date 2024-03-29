@@ -91,6 +91,8 @@ export const PaymentAccountAPI = "/paymentAccount"
 
 // Points API
 export const PointAPI = '/points/consumer'
+export const PointCredit = '/credit/points';
+export const PointDebit = '/debit/points';
 
 // Refund  API
 export const RefundAPI = "/refund"

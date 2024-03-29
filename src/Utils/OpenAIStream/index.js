@@ -19,7 +19,7 @@ export const OpenAIStream = async (messages, model, api, api_key) => {
                 Authorization: `Bearer ${api_key}`
             }
           }).then((response) => {
-                resolve(response.data.choices[0].message.content.trim());
+                resolve({text: response.data.choices[0].message.content.trim(), token: response.data.usage.total_tokens});
           }).catch((error) => {
                 reject(error);
           })

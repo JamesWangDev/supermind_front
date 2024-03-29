@@ -9,8 +9,7 @@ import {
 import { createCheckoutSession } from "@/Utils/AxiosUtils/API";
 import request from "@/Utils/AxiosUtils";
 
-
-const stripePromise = loadStripe('pk_test_51OxDKSCDWd9X1idI3QNCSTnGjgZHCt4eEi3ZUP8rahY85DjmdbYwfjKCNNIlkdyYqnGpergudtZ4YuUNim4Criae00q50z6rse');
+const stripePromise = loadStripe('pk_test_51OdHY7KW8hGDL1NPMQo0EdWgWQabti7SYRMp8uJvr5gmS0uNfWXYQY98iUPCAF9RuGJDmHna5YVZiiXcZqqNIbUA000m7uxswq');
 
 const SubScription = () => {
     const [loaded, setLoaded] = useState(false);

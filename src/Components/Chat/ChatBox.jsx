@@ -1,10 +1,11 @@
 import { Chat } from "./Chat";
 import { useEffect, useRef, useState } from "react";
 import { OpenAIStream } from "@/Utils/OpenAIStream";
-import { SuperpowerAPI, gptmodel } from "@/Utils/AxiosUtils/API";
+import { SuperpowerAPI, gptmodel, PointAPI, PointDebit } from "@/Utils/AxiosUtils/API";
 import { GetKnowldege } from "@/Utils/GetKnowldege/GetKnowldege";
 import { useQuery } from "@tanstack/react-query";
 import request from "@/Utils/AxiosUtils";
+import useCreate from "@/Utils/Hooks/useCreate";
 
 export default function ChatBox({productData}) {
   const [messages, setMessages] = useState([]);
@@ -14,6 +15,12 @@ export default function ChatBox({productData}) {
   const messagesEndRef = useRef(null);
 
   const { data: superpowers, isLoading: superpowerloading } = useQuery([SuperpowerAPI, productData['superpowers']], () => request({ url: SuperpowerAPI, method: 'get', params: {ids: productData['superpowers'].join()} }), { refetchOnWindowFocus: false, select: (res) => res?.data.data });
+  const { data: pointsData, isLoading: pointsDataLoading, refetch: refecthPointsData } = useQuery([PointAPI], () => request({ url: PointAPI, params: { paginate: 10 } }), {
+    select: (res) => res?.data,
+  });
+  const { mutate: createPointDebit, isLoading: debitLoader } = useCreate(PointDebit, false, false, false, () => {
+    // refRefetch.current.call();
+  });
   const { data: customModelData, isLoading: modelLoader, refetch, fetchStatus } = useQuery([gptmodel, productData['gpt_model']], () => request({
     url: `${gptmodel}/${productData['gpt_model']}`}), { refetchOnWindowFocus: false, select: (res) => res?.data });
 
@@ -28,20 +35,13 @@ export default function ChatBox({productData}) {
   };
 
   const handleSend = async (message) => {
+    if(pointsData?.balance <= 0) {
+      alert("You don't have enough Points balances...");
+      return;
+    }
+
     const promptTexts = selectedPrompts.map(prom => ({role: "user", content: prom.prompt_text}))
     const updatedMessages = [...messages, message];
-
-    // const getModelandAPI = (model) => {
-    //     if (model.includes("gpt")) {
-    //         return {model: model, api: ChatGPTAPI, api_key: process.env.OPENAI_API_KEY};
-    //     }
-    //     if (model.includes("anyscale")) {
-    //         return {model: model.replace("anyscale-", ""), api: AnyScaleAPI, api_key: process.env.ANYSCALE_API_KEY}
-    //     }
-    //     return {model: model, api: ChatGPTAPI, api_key: process.env.OPENAI_API_KEY};
-    // }
-
-    // const {model, api, api_key} = getModelandAPI(productData.gpt_model || "")
 
     setMessages(updatedMessages);
     setLoading(true);
@@ -79,10 +79,11 @@ export default function ChatBox({productData}) {
                     ...messages,
                     {
                     role: "assistant",
-                    content: response,
+                    content: response.text,
                     },
                 ]);
-            
+                createPointDebit({balance: response.token});
+                refecthPointsData();
                 setLoading(false);
             })
             .catch(error => {
@@ -142,6 +143,7 @@ export default function ChatBox({productData}) {
     <>
       <div className="d-flex flex-column">
         <div className="flex-grow-1 overflow-auto px-2 px-sm-10 pb-4 pb-sm-10">
+          <div className="d-flex justify-content-end me-3" style={{color: "orange"}}>Points left: {pointsData?.balance}</div>
           <div className="mx-auto mt-4 mt-sm-12">
             <Chat
               messages={messages}

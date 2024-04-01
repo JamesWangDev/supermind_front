@@ -1,11 +1,12 @@
 import { Chat } from "./Chat";
 import { useEffect, useRef, useState } from "react";
 import { OpenAIStream } from "@/Utils/OpenAIStream";
-import { SuperpowerAPI, gptmodel, PointAPI, PointDebit } from "@/Utils/AxiosUtils/API";
+import { SuperpowerAPI, gptmodel, PointAPI, PointDebit, PointCredit } from "@/Utils/AxiosUtils/API";
 import { GetKnowldege } from "@/Utils/GetKnowldege/GetKnowldege";
 import { useQuery } from "@tanstack/react-query";
 import request from "@/Utils/AxiosUtils";
 import useCreate from "@/Utils/Hooks/useCreate";
+import { calculateTokenPrice } from "@/Utils/TokenUtil/calculateTokenPrice";
 
 export default function ChatBox({productData}) {
   const [messages, setMessages] = useState([]);
@@ -20,6 +21,9 @@ export default function ChatBox({productData}) {
     select: (res) => res?.data,
   });
   const { mutate: createPointDebit, isLoading: debitLoader } = useCreate(PointDebit, false, false, false, () => {
+    refecthPointsData();
+  }, true);
+  const { mutate: createPointCredit, isLoading: creditLoader } = useCreate(PointCredit, false, false, false, () => {
     refecthPointsData();
   }, true);
   const { data: customModelData, isLoading: modelLoader, refetch, fetchStatus } = useQuery([gptmodel, productData['gpt_model']], () => request({
@@ -89,7 +93,11 @@ export default function ChatBox({productData}) {
                     content: response.text,
                     },
                 ]);
-                createPointDebit({balance: response.token});
+                const total_token_values = calculateTokenPrice(customModelData?.token_price, response.token);
+                const equity = getEquityValue();
+                createPointDebit({balance: total_token_values});
+                createPointCredit({balance: total_token_values * equity, consumer_id: productData?.created_by_id});
+                createPointCredit({balance: total_token_values * (1 - equity), consumer_id: 1});
                 setLoading(false);
             })
             .catch(error => {
@@ -109,6 +117,20 @@ export default function ChatBox({productData}) {
         return;
     }
   };
+
+  const getEquityValue = () => {
+    switch (productData?.participate_type) {
+      case "standard":
+        return 0.1;
+      case "premium":
+        return 0.5;
+      case "platinum":
+        return 1;    
+      default:
+        break;
+    }
+    return 0.5;
+  }
 
   const handleReset = () => {
     setMessages([

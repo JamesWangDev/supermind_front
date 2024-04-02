@@ -1,4 +1,4 @@
-const UNIT_TOKEN_PRICE = 0.00001 // 0.001 USD cent
+const UNIT_TOKEN_PRICE = 0.0001 // 0.001 USD cent
 
 export const calculateTokenPrice = (token_price, token_value) => {
     const token_price_USDC = token_price / 1000 * 100;

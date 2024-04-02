@@ -95,9 +95,9 @@ export default function ChatBox({productData}) {
                 ]);
                 const total_token_values = calculateTokenPrice(customModelData?.token_price, response.token);
                 const equity = getEquityValue();
-                createPointDebit({balance: total_token_values});
+                createPointDebit({balance: total_token_values * (1 + equity)});
                 createPointCredit({balance: total_token_values * equity, consumer_id: productData?.created_by_id});
-                createPointCredit({balance: total_token_values * (1 - equity), consumer_id: 1});
+                createPointCredit({balance: total_token_values, consumer_id: 1});
                 setLoading(false);
             })
             .catch(error => {

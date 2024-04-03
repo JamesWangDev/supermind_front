@@ -139,3 +139,6 @@ export const myproducts = '/myproducts';
 
 // create subscription API endpoint
 export const createCheckoutSession = 'createCheckoutSession';
+
+// create buy points from stripe API endpoint
+export const createBuyPointsSession = 'createBuyPointsSession';

@@ -1,5 +1,7 @@
 import { Chat } from "./Chat";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState, useContext } from "react";
+import { useRouter } from "next/navigation";
+import I18NextContext from "@/Helper/I18NextContext";
 import { OpenAIStream } from "@/Utils/OpenAIStream";
 import { SuperpowerAPI, gptmodel, PointAPI, PointDebit, PointCredit } from "@/Utils/AxiosUtils/API";
 import { GetKnowldege } from "@/Utils/GetKnowldege/GetKnowldege";
@@ -7,8 +9,11 @@ import { useQuery } from "@tanstack/react-query";
 import request from "@/Utils/AxiosUtils";
 import useCreate from "@/Utils/Hooks/useCreate";
 import { calculateTokenPrice } from "@/Utils/TokenUtil/calculateTokenPrice";
+import Btn from "@/Elements/Buttons/Btn";
 
 export default function ChatBox({productData}) {
+  const router = useRouter();
+  const { i18Lang } = useContext(I18NextContext);
   const [messages, setMessages] = useState([]);
   const [loading, setLoading] = useState(false);
   const [selectedPrompts, setSelectedPrompts] = useState([]);
@@ -171,7 +176,14 @@ export default function ChatBox({productData}) {
     <>
       <div className="d-flex flex-column">
         <div className="flex-grow-1 overflow-auto px-2 px-sm-10 pb-4 pb-sm-10">
-          <div className="d-flex justify-content-end me-3" style={{color: "orange"}}>Points left: {tokenBalance}</div>
+          <div className="d-flex justify-content-end me-3 align-items-center" style={{color: "orange"}}>
+            <div>Points left: {tokenBalance}</div>
+            <Btn
+              className="btn-sm rounded-3 ms-2"
+              title={"Buy Points"}
+              onClick={() => router.push(`/${i18Lang}/buypoints`)}
+            ></Btn>
+          </div>
           <div className="mx-auto mt-4 mt-sm-12">
             <Chat
               messages={messages}

@@ -23,7 +23,7 @@ const ProductDetailAction = ({ productState, setProductState, extraOption }) => 
   };
 
   useEffect(() => {
-    if(productState?.product?.prompts.length > 0) {
+    if(productState?.product?.prompts?.length > 0) {
       let prompt_text = "";
       productState?.product?.prompts.map(prompt => {
         prompt_text += prompt.prompt_text;

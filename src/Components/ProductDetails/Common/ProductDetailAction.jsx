@@ -89,7 +89,7 @@ const ProductDetailAction = ({ productState, setProductState, extraOption }) => 
       </div>
       <AddToCartButton productState={productState} isLoading={isLoading} addToCart={addToCart} buyNow={buyNow} extraOption={extraOption} />
       <CustomModal modal={openChat} setModal={setOpenChat} classes={{modalBodyClass: "full-modal", modalClass: 'theme-modal modal-xl', title: productState?.product?.name }} fullscreen>
-          <iframe style={{width: "100%", height: "100%"}} src={`https://n8n.gpt-autopilot.com/?session_id=XXX&user_id=YYY&smessage=${prompt}`} title="Supermind chat box"></iframe>
+          <iframe style={{width: "100%", height: "100%"}} src={`https://n8n.gpt-autopilot.com/index.php?smessage=${prompt || "normal"}`} title="Supermind chat box"></iframe>
           {/* {productState?.product?.type == "superpower" ? <SuperpowerChatBox productData={productState.product} /> : <ChatBox productData={productState.product} />} */}
       </CustomModal>
     </>

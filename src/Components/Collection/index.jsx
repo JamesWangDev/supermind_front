@@ -45,7 +45,7 @@ const CollectionContain = () => {
   };
   return (
     <>
-      <Breadcrumb title={'Collection'} subNavigation={[{ name: 'Collection' }]} />
+      <Breadcrumb title={'Welcome to the SuperMind Marketplace.'} subNavigation={[{ name: 'Collection' }]} />
       {isCollectionMatch[collectionLayout]}
     </>
   );

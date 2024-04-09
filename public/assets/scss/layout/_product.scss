@@ -2183,10 +2183,10 @@
 }
 
 .product-box-3 {
-  padding: calc(7px + (14 - 7) * ((100vw - 320px) / (1920 - 320)));
+  padding: calc(9px + (14 - 7) * ((100vw - 320px) / (1920 - 320)));
   position: relative;
   background-color: $secondBg;
-  border-radius: 5px;
+  border-radius: 10px;
   transition: all 0.4s ease-in-out;
   border: unset;
   height: 100%;

@@ -23,7 +23,7 @@ const FooterContactUs = () => {
 
       <div className='footer-contact'>
         <ul>
-          <FooterSupportNumber />
+          {/* <FooterSupportNumber /> */}
           <FooterSupportEmail />
           <FooterDownloadAppLink />
         </ul>

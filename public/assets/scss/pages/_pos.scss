@@ -248,7 +248,7 @@
   position: sticky;
   top: 110px;
   border: unset;
-  background-color: #f8f8f8;
+  background-color: $secondBg;
 
   .billing-top {
     display: flex;
@@ -269,7 +269,7 @@
   }
 
   .summary-total {
-    background-color: $white;
+    background-color: $thirdBG;
     padding: 20px;
     border-radius: 10px;
     margin-top: 10px;
@@ -290,7 +290,7 @@
       bottom: 49px;
       width: 30px;
       height: 30px;
-      background-color: #f9f9f6;
+      background-color: $thirdBG;
       border-radius: 100%;
     }
 
@@ -375,7 +375,7 @@
           }
 
           &:before {
-            left: 5px;
+            left: 5px;  
             top: 5px;
             width: 10px;
             height: 6px;
@@ -384,7 +384,7 @@
 
         label {
           font-size: 14px;
-          color: #777;
+          color: $title-color;
           padding-top: 2px;
         }
       }
@@ -597,7 +597,7 @@
           font-size: 16px;
           -webkit-box-orient: vertical;
           line-height: 1.4;
-          color: $content-color;
+          color: $title-color;
         }
 
         h5 {

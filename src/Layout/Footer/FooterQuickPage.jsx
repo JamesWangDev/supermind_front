@@ -11,7 +11,7 @@ const FooterQuickPage = ({ footerMenu, setFooterMenu }) => {
   const { t } = useTranslation(i18Lang, 'common');
   const { themeOption } = useContext(ThemeOptionContext);
   return (
-    <Col xl={2} sm={3}>
+    <Col xl={3} sm={6}>
       <div className={`footer-title ${footerMenu == 'pages' ? 'show' : ''}`} onClick={() => setFooterMenu((prev) => (prev !== 'pages' ? 'pages' : ''))}>
         <h4>{t('Help Center')}</h4>
       </div>

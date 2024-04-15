@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { Input, InputGroup } from 'reactstrap';
 import Btn from '@/Elements/Buttons/Btn';
 import CartContext from '@/Helper/CartContext';
@@ -9,15 +9,29 @@ import AddToWishlist from '@/Components/Common/ProductBox/AddToWishlist';
 import AddToCompare from '@/Components/Common/ProductBox/AddToCompare';
 import AddToCartButton from './AddToCartButton';
 import CustomModal from '@/Components/Common/CustomModal';
+import ChatBox from '@/Components/Chat/ChatBox';
+import { SuperpowerChatBox } from '@/Components/Chat/SuperpowerChatBox';
 
 const ProductDetailAction = ({ productState, setProductState, extraOption }) => {
   const [openChat, setOpenChat] = useState(false);
   const { i18Lang } = useContext(I18NextContext);
   const { handleIncDec, isLoading } = useContext(CartContext);
+  const [prompt, setPrompt] = useState("");
   const router = useRouter();
   const addToCart = () => {
     handleIncDec(productState?.productQty, productState?.product, false, false, false, productState);
   };
+
+  useEffect(() => {
+    if(productState?.product?.prompts?.length > 0) {
+      let prompt_text = "";
+      productState?.product?.prompts.map(prompt => {
+        prompt_text += prompt.prompt_text;
+      })
+      setPrompt(prompt_text);
+    }
+  }, [productState])
+
   const buyNow = () => {
     // handleIncDec(productState?.productQty, productState?.product, false, false, false, productState);
     // router.push(`/${i18Lang}/checkout`);
@@ -51,6 +65,7 @@ const ProductDetailAction = ({ productState, setProductState, extraOption }) => 
       });
     }
   };
+
   return (
     <>
       <div className='note-box product-package'>
@@ -73,8 +88,9 @@ const ProductDetailAction = ({ productState, setProductState, extraOption }) => 
         ) : null}
       </div>
       <AddToCartButton productState={productState} isLoading={isLoading} addToCart={addToCart} buyNow={buyNow} extraOption={extraOption} />
-      <CustomModal modal={openChat} setModal={setOpenChat} fullscreen classes={{modalBodyClass: "full-modal"}}>
-          <iframe style={{width: "100%", height: "100%"}} src="https://pointer.gpt-autopilot.com/" title="W3Schools Free Online Web Tutorials"></iframe>
+      <CustomModal modal={openChat} setModal={setOpenChat} fullscreen classes={{modalBodyClass: "full-modal", modalClass: 'theme-modal modal-xl', title: productState?.product?.name }}>
+          <iframe style={{width: "100%", height: "100%"}} src={`https://n8n.gpt-autopilot.com/index.php?smessage=${prompt || "normal"}`} title="Supermind chat box"></iframe>
+          {/* {productState?.product?.type == "superpower" ? <SuperpowerChatBox productData={productState.product} /> : <ChatBox productData={productState.product} />} */}
       </CustomModal>
     </>
   );

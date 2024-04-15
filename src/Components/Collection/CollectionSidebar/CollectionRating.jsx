@@ -9,7 +9,7 @@ import { AccordionBody, AccordionHeader, AccordionItem, Input } from 'reactstrap
 const CollectionRating = ({ filter, setFilter, attributeAPIData }) => {
   const RatingNumber = Array.from({ length: 5 }, (_, i) => i + 1).reverse();
   const router = useRouter();
-  const [category, attribute, price, sortBy, field, layout] = useCustomSearchParams(['category', 'attribute', 'price', 'sortBy', 'field', 'layout']);
+  const [category, attribute, price, sortBy, field, layout, type] = useCustomSearchParams(['category', 'attribute', 'price', 'sortBy', 'field', 'layout', 'type']);
   const { i18Lang } = useContext(I18NextContext);
   const { t } = useTranslation(i18Lang, 'common');
   const pathname = usePathname();
@@ -33,10 +33,10 @@ const CollectionRating = ({ filter, setFilter, attributeAPIData }) => {
       };
     });
     if (temp.length > 0) {
-      const queryParams = new URLSearchParams({ ...category, ...attribute, ...price, ...sortBy, ...field, ...layout, rating: temp }).toString();
+      const queryParams = new URLSearchParams({ ...category, ...attribute, ...price, ...sortBy, ...field, ...layout, ...type, rating: temp }).toString();
       router.push(`${pathname}?${queryParams}`);
     } else {
-      const queryParams = new URLSearchParams({ ...category, ...attribute, ...price, ...sortBy, ...field, ...layout }).toString();
+      const queryParams = new URLSearchParams({ ...category, ...attribute, ...price, ...sortBy, ...field, ...layout, ...type }).toString();
       router.push(`${pathname}?${queryParams}`);
     }
   };

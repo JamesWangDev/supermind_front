@@ -46,7 +46,7 @@ const ProductThumbnailSlider = ({ productState }) => {
             </div>
           </Col>
 
-          <Col xs={12}>
+          {/* <Col xs={12}>
             <div className='bottom-slider-image left-slider slick-top no-arrow'>
               <Slider
                 {...productDetailSlider(productState?.product?.product_galleries?.length < 3 ? productState?.product?.product_galleries?.length : 3)}
@@ -62,7 +62,7 @@ const ProductThumbnailSlider = ({ productState }) => {
                 ))}
               </Slider>
             </div>
-          </Col>
+          </Col> */}
         </Row>
       </div>
     </Col>

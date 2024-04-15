@@ -18,7 +18,7 @@ const RightSideHeader = ({ noContactUs, wishListIcon }) => {
     <div className='rightside-box'>
       <ResponsiveSearch />
       <ul className='right-side-menu'>
-        <li className='right-side'>
+        {/* <li className='right-side'>
           <div className='delivery-login-box'>
             <div className='delivery-icon'>
               <div className='search-box' onClick={() => router.push(`/${i18Lang}/search`)}>
@@ -26,9 +26,9 @@ const RightSideHeader = ({ noContactUs, wishListIcon }) => {
               </div>
             </div>
           </div>
-        </li>
-        {!noContactUs && <HeaderContactUs />}
-        <HeaderWishList wishListIcon={wishListIcon} />
+        </li> */}
+        {/* {!noContactUs && <HeaderContactUs />} */}
+        {/* <HeaderWishList wishListIcon={wishListIcon} /> */}
         <HeaderCart />
         <HeaderProfile />
       </ul>

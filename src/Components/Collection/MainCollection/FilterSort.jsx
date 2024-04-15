@@ -32,7 +32,7 @@ const FilterSort = ({ filter, setFilter }) => {
     router.push(`${pathname}?${queryParams}`);
   };
   return (
-    <div className='category-dropdown'>
+    <div className='category-dropdown ms-3'>
       <h5 className='text-title'>{t('SortBy')} :</h5>
       <Dropdown isOpen={dropdownOpen} toggle={toggle}>
         <DropdownToggle caret>

@@ -19,7 +19,7 @@ const Details = ({ params }) => {
   return (
     <>
       <DetailTitle params={params} data={data} />
-      <DetailStatus data={data} />
+      {/* <DetailStatus data={data} /> */}
       <DetailsTable data={data} />
       <DetailsConsumer data={data} />
     </>

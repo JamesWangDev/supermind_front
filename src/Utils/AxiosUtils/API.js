@@ -16,6 +16,9 @@ export const CategoryAPI = "/category"
 // Product API
 export const ProductAPI = "/product"
 
+//SuperPower API
+export const SuperpowerAPI = "/superpower"
+
 // Pages API
 export const PageAPI = "/page"
 
@@ -88,6 +91,8 @@ export const PaymentAccountAPI = "/paymentAccount"
 
 // Points API
 export const PointAPI = '/points/consumer'
+export const PointCredit = '/credit/points';
+export const PointDebit = '/debit/points';
 
 // Refund  API
 export const RefundAPI = "/refund"
@@ -114,3 +119,26 @@ export const ReplaceCartAPI = '/replace/cart'
 export const FaqAPI = '/faq'
 
 export const RePaymentAPI = "/rePayment"
+
+// prompts api
+export const PromptAPI = "/prompt"
+
+// ChatGPT API endpoint
+export const ChatGPTAPI = "https://api.openai.com/v1/chat/completions"
+
+// AnyScale API endpoint
+export const AnyScaleAPI = "https://api.endpoints.anyscale.com/v1/chat/completions"
+
+// gptmodels api
+export const gptmodel = "gptmodel";
+export const gptmodelImportAPI = "gptmodel/csv/import";
+export const gptmodelExportAPI = "gptmodel/csv/export";
+
+// get my ordered products
+export const myproducts = '/myproducts';
+
+// create subscription API endpoint
+export const createCheckoutSession = 'createCheckoutSession';
+
+// create buy points from stripe API endpoint
+export const createBuyPointsSession = 'createBuyPointsSession';

@@ -214,14 +214,14 @@
 						@include pseudowh($width: 50px, $height: 50px);
 						border-radius: 100%;
 						padding: 6px;
-						background-color: #f9f9f6;
+						background-color: $thirdBG;
 						@include flex_common;
 						color: $primary;
-						box-shadow: 0 0 8px #eee;
+						// box-shadow: 0 0 8px #eee;
 
 						svg {
 							font-size: 20px;
-							color: $content-color;
+							color: $title-color;
 						}
 
 						body[dir="rtl"] & {
@@ -236,9 +236,9 @@
 
 					.checkout-box {
 						padding: calc(14px + (29 - 14) * ((100vw - 320px) / (1920 - 320)));
-						background-color: #f8f8f8;
+						background-color: $secondBg;
 						border-radius: 8px;
-						box-shadow: 0 0 8px #eee;
+						// box-shadow: 0 0 8px #eee;
 						margin-left: 66px;
 						position: relative;
 
@@ -416,7 +416,7 @@
 
 							.delivery-option {
 								padding: calc(17px + (26 - 17) * ((100vw - 320px) / (1920 - 320)));
-								background-color: $white;
+								background-color: $secondBg;
 								border-radius: 5px;
 
 								.select-option {
@@ -595,7 +595,7 @@
 												}
 
 												a {
-													background-color: $white;
+													background-color: $thirdBG;
 													display: block;
 													text-align: center;
 													color: $title-color;
@@ -648,7 +648,7 @@
 								padding: calc(14px + (20 - 14) * ((100vw - 320px) / (1920 - 320)));
 								border-radius: 8px;
 								position: relative;
-								background-color: $white;
+								background-color: $thirdBG;
 								box-shadow: unset;
 
 								.form-check {
@@ -834,7 +834,7 @@
 
 						h4 {
 							font-weight: 400;
-							color: $content-color;
+							color: $title-color;
 							width: 80%;
 							-webkit-line-clamp: 1;
 							margin-bottom: 4px;

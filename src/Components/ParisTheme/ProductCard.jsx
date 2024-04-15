@@ -45,7 +45,7 @@ const ProductCard = ({ dataAPI }) => {
 
       {dataAPI?.main_content?.section5_coupons?.status && (
         <SingleBanner
-          classes={{ sectionClass: 'mt-3 sale-banner' }}
+          classes={{ sectionClass: 'sale-banner' }}
           image_url={dataAPI?.main_content?.section5_coupons?.image_url}
           height={138}
           width={1137}

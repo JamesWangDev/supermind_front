@@ -39,27 +39,27 @@ const ProductBox1 = ({ imgUrl, badge, productDetail, isClose, refetch, addAction
         </div>
       )}
       <div className='product-image'>
-        <Link href={`/${i18Lang}/product/${productDetail?.slug}`}>
+        <Link href={`/${i18Lang}/${productDetail?.type === "superpower" ? 'superpower' : 'product'}/${productDetail?.slug}`}>
           <Avatar data={imgUrl} placeHolder={placeHolderImage} customeClass={'img-fluid'} name={productDetail.title} height={500} width={500} />
         </Link>
-        <ProductBoxAction productObj={productDetail} listClass="product-option" />
+        {/* <ProductBoxAction productObj={productDetail} listClass="product-option" /> */}
       </div>
       <div className='product-detail'>
-        <Link href={`/${i18Lang}/product/${productDetail?.slug}`}>
+        <Link href={`/${i18Lang}/${productDetail?.type === "superpower" ? 'superpower' : 'product'}/${productDetail?.slug}`}>
           <h6 className='name'>{productDetail.name}</h6>
           <p className='text-title' dangerouslySetInnerHTML={{ __html: productDetail?.short_description }} />
         </Link>
-        {productDetail?.unit && <h6 className='unit mt-1'>{productDetail?.unit}</h6>}
-        <h5 className='sold text-content'>
+        {/* {productDetail?.unit && <h6 className='unit mt-1'>{productDetail?.unit}</h6>} */}
+        {/* <h5 className='sold text-content'>
           <span className='theme-color price'>{convertCurrency(productDetail?.sale_price)}</span>
           <del>{convertCurrency(productDetail?.price)}</del>
-        </h5>
+        </h5> */}
 
         <div className='product-rating mt-sm-2 mt-1'>
           <ProductBox1Rating totalRating={productDetail?.rating_count || 0} />
-          <h6 className='theme-color'>{ModifyString(productDetail.stock_status, false, '_')}</h6>
+          {/* <h6 className='theme-color'>{ModifyString(productDetail.stock_status, false, '_')}</h6> */}
         </div>
-        {addAction && <ProductBox1Cart productObj={productDetail} />}
+        {/* {addAction && <ProductBox1Cart productObj={productDetail} />} */}
       </div>
     </div>
   );

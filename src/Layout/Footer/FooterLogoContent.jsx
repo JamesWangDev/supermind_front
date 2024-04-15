@@ -46,7 +46,7 @@ const FooterLogoContent = () => {
     setLogo(tempLogo);
   }, [pathName, i18Lang, themeOption?.logo?.header_logo?.original_url, isImage, logoImage]);
   return (
-    <Col xl={3} sm={6}>
+    <Col xl={5} sm={6}>
       <div className='footer-logo'>
         <div className='theme-logo'>
           <Link href='/'>

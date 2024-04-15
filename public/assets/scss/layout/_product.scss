@@ -293,7 +293,7 @@
 
     ul {
       padding: calc(8px + (14 - 8) * ((100vw - 320px) / (1920 - 320)));
-      background-color: $light-gray;
+      background-color: $secondBg;
       border-radius: 8px;
       border: none;
 
@@ -644,7 +644,7 @@
   }
 
   &.product-box-bg {
-    background: $light-gray;
+    background: $secondBg;
     border-radius: 5px;
     padding: calc(10px + (14 - 10) * ((100vw - 320px) / (1920 - 320)));
     border: none;
@@ -2183,10 +2183,10 @@
 }
 
 .product-box-3 {
-  padding: calc(7px + (14 - 7) * ((100vw - 320px) / (1920 - 320)));
+  padding: calc(9px + (14 - 7) * ((100vw - 320px) / (1920 - 320)));
   position: relative;
   background-color: $secondBg;
-  border-radius: 5px;
+  border-radius: 10px;
   transition: all 0.4s ease-in-out;
   border: unset;
   height: 100%;
@@ -3335,7 +3335,7 @@
     }
 
     .qty-box .input-group {
-      background-color: $light-gray;
+      background-color: $secondBg;
       box-shadow: unset;
     }
   }
@@ -3350,7 +3350,7 @@
 
     .product-image {
       padding: 0;
-      background-color: $light-gray;
+      background-color: $secondBg;
 
       img {
         height: calc(180px + (250 - 180) * ((100vw - 320px) / (1920 - 320)));

@@ -71,7 +71,7 @@ export const productSliderOption = {
   ],
 };
 export const productPageRelatedSliderOptions = {
-  infinite: true,
+  infinite: false,
   arrows: true,
   slidesToShow: 6,
   slidesToScroll: 1,
@@ -524,7 +524,7 @@ export const productDetailSlider = (length) => {
     asNavFor: '.product-main-1',
     dots: false,
     focusOnSelect: true,
-    infinite: true,
+    infinite: false,
     responsive: [
       {
         breakpoint: 1400,

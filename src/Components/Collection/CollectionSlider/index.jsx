@@ -3,10 +3,10 @@ import WrapperComponent from '@/Components/Common/WrapperComponent';
 import CollectionSidebar from '../CollectionSidebar';
 import MainCollection from '../MainCollection';
 
-const MainCollectionSlider = ({ filter, setFilter }) => {
+const MainCollectionSlider = ({ filter, setFilter, type, setType }) => {
   return (
     <>
-      <CollectionSlider filter={filter} setFilter={setFilter} />
+      {/* <CollectionSlider filter={filter} setFilter={setFilter} /> */}
       <WrapperComponent classes={{ sectionClass: 'section-b-space section-t-space shop-section' }} customCol={true}>
         <CollectionSidebar filter={filter} setFilter={setFilter} />
         <MainCollection filter={filter} setFilter={setFilter} />

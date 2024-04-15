@@ -15,7 +15,7 @@ import { useRouter, useSearchParams } from 'next/navigation';
 import ProductIdsContext from '@/Helper/ProductIdsContext';
 import StickyCheckout from './Common/StickyCheckout';
 
-const ProductDetailContent = ({ params }) => {
+const ProductDetailContent = ({ type, params }) => {
   const router = useRouter();
   const { themeOption } = useContext(ThemeOptionContext);
   const { setGetProductIds, isLoading: productLoader } = useContext(ProductIdsContext);
@@ -33,7 +33,7 @@ const ProductDetailContent = ({ params }) => {
     data: ProductData,
     isLoading,
     refetch,
-  } = useQuery([params], () => request({ url: `${ProductAPI}/slug/${params}` }, router), { enabled: false, refetchOnWindowFocus: false, select: (res) => res?.data });
+  } = useQuery([params], () => request({ url: `/${type}/slug/${params}` }, router), { enabled: false, refetchOnWindowFocus: false, select: (res) => res?.data });
 
   // Calling Product API when params is there
   useEffect(() => {
@@ -82,7 +82,7 @@ const ProductDetailContent = ({ params }) => {
   };
   return (
     <>
-      <Breadcrumb title={params} subNavigation={[{ name: 'Product' }, { name: params }]} />
+      <Breadcrumb type={type} title={params} subNavigation={[{ name: 'Product' }, { name: params }]} />
       {showProductLayout[isProductLayout]}
       {productState?.product?.related_products?.length > 0 && <RelatedProduct productState={productState} />}
       {ProductData && <StickyCheckout ProductData={ProductData} isLoading={isLoading} />}

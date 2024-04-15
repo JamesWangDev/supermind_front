@@ -9,6 +9,7 @@ import I18NextContext from '@/Helper/I18NextContext';
 import { useTranslation } from '@/app/i18n/client';
 import { useCustomSearchParams } from '@/Utils/Hooks/useCustomSearchParams';
 import { RiFilterFill } from 'react-icons/ri';
+import TypeSelect from './TypeSelect';
 
 const MainCollection = ({ filter, setFilter, isBanner, isOffcanvas, classicStoreCard, initialGrid = 4, noSidebar, sellerClass }) => {
   const [grid, setGrid] = useState(initialGrid);
@@ -43,11 +44,12 @@ const MainCollection = ({ filter, setFilter, isBanner, isOffcanvas, classicStore
         </div>
         <div className={`top-filter-menu${isOffcanvas ? '-2' : ''}`}>
           <FilterBtn isOffcanvas={isOffcanvas} />
+          <TypeSelect />
           <FilterSort filter={filter} setFilter={setFilter} />
           <GridBox grid={grid} setGrid={setGrid} />
         </div>
       </div>
-      <CollectionProducts filter={filter} grid={grid} />
+      <CollectionProducts paginate={40} filter={filter} grid={grid} />
     </div>
   );
 };

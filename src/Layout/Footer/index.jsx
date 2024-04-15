@@ -28,8 +28,8 @@ const MainFooter = () => {
         <div className='main-footer section-b-space'>
           <Row className='g-md-4 g-3'>
             <FooterLogoContent />
-            <FooterCategory footerMenu={footerMenu} setFooterMenu={setFooterMenu} />
-            <FooterUseFul footerMenu={footerMenu} setFooterMenu={setFooterMenu} />
+            {/* <FooterCategory footerMenu={footerMenu} setFooterMenu={setFooterMenu} />
+            <FooterUseFul footerMenu={footerMenu} setFooterMenu={setFooterMenu} /> */}
             <FooterQuickPage footerMenu={footerMenu} setFooterMenu={setFooterMenu} />
             <FooterContactUs footerMenu={footerMenu} setFooterMenu={setFooterMenu} />
           </Row>

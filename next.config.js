@@ -15,6 +15,8 @@ const nextConfig = {
     // API_PROD_URL: "https://laravel.pixelstrap.net/fastkart/api/",
     PAYMENT_RETURN_URL: "http://localhost:3000",
     PAYMENT_CANCEL_URL: "http://localhost:3000/",
+    OPENAI_API_KEY: "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",
+    ANYSCALE_API_KEY: "esecret_4kqwivwxj38wwycqyuglg8ah9q"
   },
   images: {
     loader: "custom",

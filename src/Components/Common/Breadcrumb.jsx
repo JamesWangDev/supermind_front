@@ -11,9 +11,9 @@ const Breadcrumb = ({type, title, subNavigation }) => {
   const { t } = useTranslation(i18Lang, 'common');
   return (
     <WrapperComponent classes={{ sectionClass: 'breadscrumb-section pt-0' }} colProps={{ md: 12 }}>
-      <span style={{fontWeight: "bolder", fontSize: 32}}>{type ? (type == "product" ? "SuperMind detail" : "SuperPower detail") : ""}</span>
+      {/* <span style={{fontWeight: "bolder", fontSize: 32}}>{type ? (type == "product" ? "SuperMind detail" : "SuperPower detail") : ""}</span> */}
       <div className='breadscrumb-contain'>
-        <h2>{t(title)}</h2>
+        {/* <h2>{t(title)}</h2> */}
         <nav>
           <ol className='breadcrumb mb-0'>
             <li className='breadcrumb-item'>

@@ -5,6 +5,7 @@ import { Col, Row } from 'reactstrap';
 import { productDetailSlider } from '../../../../Data/SliderSettingsData';
 import I18NextContext from '@/Helper/I18NextContext';
 import { useTranslation } from '@/app/i18n/client';
+import defaultProductImg from '../../../../public/assets/images/default-product-image.png'
 
 const ProductThumbnailSlider = ({ productState }) => {
   const [state, setState] = useState({ nav1: null, nav2: null });
@@ -35,13 +36,13 @@ const ProductThumbnailSlider = ({ productState }) => {
                 </div>
               ) : null}
               <Slider asNavFor={nav2} ref={(slider) => (slider1.current = slider)}>
-                {productState?.product?.product_galleries?.map((elem, i) => (
+                {productState?.product?.product_galleries?.length > 0 ? productState?.product?.product_galleries?.map((elem, i) => (
                   <div key={i}>
                     <div className='slider-image'>
                       <img height={580} width={580} src={elem?.original_url} className='img-fluid' alt={elem?.name} />
                     </div>
                   </div>
-                ))}
+                )) : <div style={{width: "580px", height: "580px"}}><Image src={defaultProductImg} height={580} width={580} style={{objectFit: "cover"}} /></div>}
               </Slider>
             </div>
           </Col>

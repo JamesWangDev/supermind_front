@@ -69,7 +69,7 @@ const ProductDetailAction = ({ productState, setProductState, extraOption }) => 
   return (
     <>
       <div className='note-box product-package'>
-        <div className='cart_qty qty-box product-qty'>
+        {/* <div className='cart_qty qty-box product-qty'>
           <InputGroup>
             <Btn type='button' className='qty-right-plus' onClick={() => updateQty(-1)}>
               <RiSubtractLine />
@@ -79,13 +79,13 @@ const ProductDetailAction = ({ productState, setProductState, extraOption }) => 
               <RiAddLine />
             </Btn>
           </InputGroup>
-        </div>
-        {extraOption !== false ? (
+        </div> */}
+        {/* {extraOption !== false ? (
           <div className='wishlist-btn-group'>
             <AddToWishlist productObj={productState?.product} customClass={'wishlist-button btn'} />
             <AddToCompare productObj={productState?.product} customClass={'wishlist-button btn'} />
           </div>
-        ) : null}
+        ) : null} */}
       </div>
       <AddToCartButton productState={productState} isLoading={isLoading} addToCart={addToCart} buyNow={buyNow} extraOption={extraOption} />
       <CustomModal modal={openChat} setModal={setOpenChat} fullscreen classes={{modalBodyClass: "full-modal", modalClass: 'theme-modal modal-xl', title: productState?.product?.name }}>

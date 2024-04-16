@@ -38,6 +38,12 @@ export const sidebarMenu = [
   //   path: '/account/point',
   // },
   // {
+  //   title: 'MyOrders',
+  //   icon: <RiFileTextLine />,
+  //   id: 'order',
+  //   path: '/account/order',
+  // },
+  // {
   //   title: 'RefundHistory',
   //   icon: <RiMapPinLine />,
   //   id: 'refund',
@@ -49,4 +55,10 @@ export const sidebarMenu = [
   //   id: 'address',
   //   path: '/account/addresses',
   // },
+  {
+    title: 'Integrations',
+    icon: <RiMapPinLine />,
+    id: 'integrations',
+    path: '/account/integrations',
+  },
 ];

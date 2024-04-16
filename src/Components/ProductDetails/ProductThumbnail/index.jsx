@@ -10,11 +10,11 @@ const ProductThumbnail = ({ productState, setProductState, customTab }) => {
   return (
     <>
       <WrapperComponent classes={{ sectionClass: 'product-section section-b-space' }} customCol={true}>
-        <Col xxl={10} xl={12} lg={12}>
+        <Col xxl={9} xl={12} lg={12}>
           <Row className='g-4'>
             <ProductThumbnailSlider productState={productState} setProductState={setProductState} />
             <MainProductContent productState={productState} setProductState={setProductState} />
-            {customTab ? <ProductDetailAccordion productState={productState} /> : <ProductDetailsTab productState={productState} setProductState={setProductState} />}
+            {/* {customTab ? <ProductDetailAccordion productState={productState} /> : <ProductDetailsTab productState={productState} setProductState={setProductState} />} */}
           </Row>
         </Col>
         {/* <ProductDetailSidebar productState={productState} setProductState={setProductState} /> */}

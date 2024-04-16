@@ -31,12 +31,17 @@ export const sidebarMenu = [
     id: 'wallet',
     path: '/account/wallet',
   },
-<<<<<<< Updated upstream
   // {
   //   title: 'EarningPoints',
   //   icon: <RiCoinLine />,
   //   id: 'point',
   //   path: '/account/point',
+  // },
+  // {
+  //   title: 'MyOrders',
+  //   icon: <RiFileTextLine />,
+  //   id: 'order',
+  //   path: '/account/order',
   // },
   // {
   //   title: 'RefundHistory',
@@ -50,36 +55,10 @@ export const sidebarMenu = [
   //   id: 'address',
   //   path: '/account/addresses',
   // },
-=======
-  {
-    title: 'EarningPoints',
-    icon: <RiCoinLine />,
-    id: 'point',
-    path: '/account/point',
-  },
-  {
-    title: 'MyOrders',
-    icon: <RiFileTextLine />,
-    id: 'order',
-    path: '/account/order',
-  },
-  {
-    title: 'RefundHistory',
-    icon: <RiMapPinLine />,
-    id: 'refund',
-    path: '/account/refund',
-  },
-  {
-    title: 'SavedAddress',
-    icon: <RiMapPinLine />,
-    id: 'address',
-    path: '/account/addresses',
-  },
   {
     title: 'Integrations',
     icon: <RiMapPinLine />,
     id: 'integrations',
     path: '/account/integrations',
   },
->>>>>>> Stashed changes
 ];

@@ -4,14 +4,14 @@ import { useContext } from 'react';
 import { RiCloseLine } from 'react-icons/ri';
 import { Modal, ModalBody, ModalHeader } from 'reactstrap';
 
-const CustomModal = ({ classes = {},extraFunction, modal, setModal, fullscreen, ...props }) => {
+const CustomModal = ({ classes = {},extraFunction, modal, setModal, fullscreen, size, ...props }) => {
   const { i18Lang } = useContext(I18NextContext);
   const { t } = useTranslation(i18Lang, 'common');
   const toggle = () =>  extraFunction ?extraFunction() :setModal((prev) => prev !== prev);
   
 
   return (
-    <Modal className={classes?.modalClass || ''} isOpen={modal} toggle={toggle} centered fullscreen={fullscreen}>
+    <Modal className={classes?.modalClass || ''} isOpen={modal} toggle={toggle} centered fullscreen={fullscreen} size={size}>
       {classes?.customChildren ? (
         props.children
       ) : (

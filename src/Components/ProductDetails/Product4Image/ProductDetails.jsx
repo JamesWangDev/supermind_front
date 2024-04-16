@@ -82,7 +82,7 @@ const ProductTypeBadge = ({participate_type}) => {
 
   return (
     <>
-      <div style={{...getBadgeStyle(participate_type), borderRadius: 7, width: "130px", height: "40px", padding: "10px 18px", display: "flex", justifyContent: "center", marginTop: 14}}><Image style={{marginRight: 10}} src={getBadgeIcon(participate_type)} />{participate_type.charAt(0).toUpperCase() + participate_type.slice(1)}</div>
+      <div style={{...getBadgeStyle(participate_type), borderRadius: 7, width: "130px", height: "40px", padding: "10px 18px", display: "flex", justifyContent: "center", marginTop: 14}}><Image style={{marginRight: 10}} src={getBadgeIcon(participate_type)} />{participate_type ? participate_type.charAt(0).toUpperCase() + participate_type.slice(1) : ""}</div>
     </>
   )
 }

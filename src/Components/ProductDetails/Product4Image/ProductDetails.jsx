@@ -30,19 +30,19 @@ const ProductDetails = ({ productState, extraOption }) => {
         ) : null}
       </div>
       <div className='price-rating'>
-        <div style={{color: "gray"}}>
+        {/* <div style={{color: "gray"}}> */}
           {/* <div>
             {productState?.product?.participate_type ? "Participate Type: " + productState?.product?.participate_type : ""}
           </div> */}
-          <h3 className='theme-color price d-flex align-items-center'>
-            <Image className='me-2' src={SupermindSVG} />
+          {/* <h3 className='theme-color price d-flex align-items-center'> */}
+            {/* <Image className='me-2' src={SupermindSVG} />
             {productState?.selectedVariation?.sale_price ? convertCurrency(productState?.selectedVariation?.sale_price) : convertCurrency(productState?.product?.sale_price)}
-            <del className='text-content'>{productState?.selectedVariation ? convertCurrency(productState?.selectedVariation?.price) : convertCurrency(productState?.product?.price)}</del>
+            <del className='text-content'>{productState?.selectedVariation ? convertCurrency(productState?.selectedVariation?.price) : convertCurrency(productState?.product?.price)}</del> */}
             {/* {productState?.selectedVariation?.discount || productState?.product?.discount ? (
               <del className='text-content'>{productState?.selectedVariation ? convertCurrency(productState?.selectedVariation?.price) : convertCurrency(productState?.product?.price)}</del>
             ) : null} */}
-          </h3>
-        </div>
+          {/* </h3> */}
+        {/* </div> */}
         <div className='product-rating custom-rate'>
           <ProductBox1Rating totalRating={productState?.selectedVariation?.rating_count ?? productState?.product?.rating_count} />
           <span className='review'>

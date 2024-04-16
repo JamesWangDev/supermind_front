@@ -67,11 +67,11 @@ const CartProvider = (props) => {
   }, [getCartLoading]);
 
   // Adding data in localstorage when not Login
-  useEffect(() => {
-    if (!isCookie) {
-      storeInLocalStorage();
-    }
-  }, [cartProducts]);
+  // useEffect(() => {
+  //   if (!isCookie) {
+  //     storeInLocalStorage();
+  //   }
+  // }, [cartProducts]);
 
   // Getting total
   const total = useMemo(() => {
@@ -105,6 +105,9 @@ const CartProvider = (props) => {
   );
   // Common Handler for Increment and Decerement
   const handleIncDec = (qty, productObj, isProductQty, setIsProductQty, isOpenFun, cloneVariation) => {
+    if(!isCookie) {
+      ToastNotification('error', `You have not logged in yet, Please log in first.`);
+    }
     const cartUid = getValue(productObj);
     const updatedQty = isProductQty ? isProductQty : 0 + qty;
     const cart = [...cartProducts];
@@ -112,10 +115,10 @@ const CartProvider = (props) => {
     let tempProductId = productObj?.id;
     let tempVariantProductId = cloneVariation?.selectedVariation?.product_id;
 
-    // Checking conditions for Replace Cart
-    if (cart[index]?.variation && cloneVariation?.variation_id && tempProductId == tempVariantProductId && cloneVariation?.variation_id !== cart[index]?.variation_id) {
-      return replaceCart(updatedQty, productObj, cloneVariation);
-    }
+    // // Checking conditions for Replace Cart
+    // if (cart[index]?.variation && cloneVariation?.variation_id && tempProductId == tempVariantProductId && cloneVariation?.variation_id !== cart[index]?.variation_id) {
+    //   return replaceCart(updatedQty, productObj, cloneVariation);
+    // }
 
     // } else if (index === -1) {
     // Add data when not presence in Cart variable
@@ -129,32 +132,36 @@ const CartProvider = (props) => {
         quantity: cloneVariation?.selectedVariation?.productQty ? cloneVariation?.selectedVariation?.productQty : updatedQty,
         sub_total: cloneVariation?.selectedVariation?.sale_price ? updatedQty * cloneVariation?.selectedVariation?.sale_price : updatedQty * productObj?.sale_price,
       };
-      isCookie ? !isLoading && setCartProducts((prev) => [...prev, params]) : setCartProducts((prev) => [...prev, params]);
+      if(isCookie && !isLoading) {
+        setCartProducts((prev) => [...prev, params])
+      }
     } else {
       // Checking the Stock QTY of paricular product
-      const productStockQty = cart[index]?.variation?.quantity ? cart[index]?.variation?.quantity : cart[index]?.product?.quantity;
-      if (productStockQty < cart[index]?.quantity + qty) {
-        ToastNotification('error', `You can not add more items than available. In stock ${productStockQty} items.`);
-        return false;
-      }
+      // const productStockQty = cart[index]?.variation?.quantity ? cart[index]?.variation?.quantity : cart[index]?.product?.quantity;
+      // if (productStockQty < cart[index]?.quantity + qty) {
+      //   ToastNotification('error', `You have added this item to the cart already.`);
+      //   return false;
+      // }
 
-      if (cart[index]?.variation) {
-        cart[index].variation.selected_variation = cart[index]?.variation?.attribute_values?.map((values) => values.value).join('/');
-      }
+      ToastNotification('error', `You have added this item to the cart already.`);
 
-      const newQuantity = cart[index].quantity + qty;
-      if (newQuantity < 1) {
-        // Remove the item from the cart if the new quantity is less than 1
-        return removeCart(productObj?.id, cartUid ? cartUid : cart[index].id);
-      } else {
-        cart[index] = {
-          ...cart[index],
-          id: cartUid?.id ? cartUid?.id : cart[index].id ? cart[index].id : null,
-          quantity: newQuantity,
-          sub_total: newQuantity * (cart[index]?.variation ? cart[index]?.variation?.sale_price : cart[index]?.product?.sale_price),
-        };
-        isCookie ? !isLoading && setCartProducts([...cart]) : setCartProducts([...cart]);
-      }
+      // if (cart[index]?.variation) {
+      //   cart[index].variation.selected_variation = cart[index]?.variation?.attribute_values?.map((values) => values.value).join('/');
+      // }
+
+      // const newQuantity = cart[index].quantity + qty;
+      // if (newQuantity < 1) {
+      //   // Remove the item from the cart if the new quantity is less than 1
+      //   return removeCart(productObj?.id, cartUid ? cartUid : cart[index].id);
+      // } else {
+      //   cart[index] = {
+      //     ...cart[index],
+      //     id: cartUid?.id ? cartUid?.id : cart[index].id ? cart[index].id : null,
+      //     quantity: newQuantity,
+      //     sub_total: newQuantity * (cart[index]?.variation ? cart[index]?.variation?.sale_price : cart[index]?.product?.sale_price),
+      //   };
+      //   isCookie ? !isLoading && setCartProducts([...cart]) : setCartProducts([...cart]);
+      // }
     }
     // Update the productQty state immediately after updating the cartProducts state
     if (isCookie) {

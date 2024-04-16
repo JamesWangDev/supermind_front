@@ -1,4 +1,4 @@
-import { useContext } from 'react';
+import { useContext, useState } from 'react';
 import I18NextContext from '@/Helper/I18NextContext';
 import { useTranslation } from '@/app/i18n/client';
 import ProductBox1Rating from '@/Components/Common/ProductBox/ProductBox1/ProductBox1Rating';
@@ -10,12 +10,18 @@ import SupermindSVG from '../../../../public/assets/svg/product-supermind.svg';
 import IconProductStandard from '../../../../public/assets/svg/icon-product-standard.svg';
 import IconProductPremium from '../../../../public/assets/svg/icon-product-premium.svg';
 import IconProductPlatinum from '../../../../public/assets/svg/icon-product-premium.svg';
+import { Accordion, AccordionBody, AccordionHeader, AccordionItem } from 'reactstrap';
 import Image from 'next/image';
 
 const ProductDetails = ({ productState, extraOption }) => {
   const { i18Lang } = useContext(I18NextContext);
   const { t } = useTranslation(i18Lang, 'common');
   const { convertCurrency } = useContext(SettingContext);
+  const [showDesc, setShowDesc] = useState(false);
+
+  const handleClickDetail = () => {
+    setShowDesc(prev => !prev);
+  }
 
   return (
     <>
@@ -60,9 +66,21 @@ const ProductDetails = ({ productState, extraOption }) => {
         <div>
           {productState?.product?.overage_profit_margin ? "Overage Profit Margin: " + productState?.product?.overage_profit_margin : ""}
       </div>
-      <div className='product-contain'>
+      <div className='product-contain d-flex align-items-center justify-content-between'>
         <p>{productState?.selectedVariation?.short_description ?? productState?.product?.short_description}</p>
+        <span onClick={handleClickDetail}>More detail</span>
       </div>
+      {showDesc && <div className='mt-3'>
+        <p dangerouslySetInnerHTML={{__html: productState?.product?.description}}></p>
+      </div>}
+      {/* <Accordion open={open} toggle={toggle}>
+        <AccordionItem>
+          <AccordionHeader targetId="1">More Details</AccordionHeader>
+          <AccordionBody accordionId="1">
+            {productState?.product?.description}
+          </AccordionBody>
+        </AccordionItem>
+      </Accordion> */}
     </>
   );
 };

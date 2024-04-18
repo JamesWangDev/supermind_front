@@ -10,7 +10,7 @@ const nextConfig = {
     ];
   },
   env: {
-    API_PROD_URL: "https://supermind.bot/api/",
+    API_PROD_URL: "https://api.supermind.bot/api/",
     // API_PROD_URL: "http://localhost:8000/api/",
     // API_PROD_URL: "https://laravel.pixelstrap.net/fastkart/api/",
     PAYMENT_RETURN_URL: "http://localhost:3000",
@@ -29,7 +29,7 @@ const nextConfig = {
       {
         protocol: "https",
         // hostname: "localhost",
-        hostname: "supermind.bot",
+        hostname: "api.supermind.bot",
       },
       {
         protocol: "http",

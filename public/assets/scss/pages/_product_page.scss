@@ -306,6 +306,15 @@
         margin: calc(14px + (16 - 14) * ((100vw - 320px) / (1920 - 320))) 0 0;
         font-size: calc(14px + (16 - 14) * ((100vw - 320px) / (1920 - 320)));
       }
+
+      span {
+        color: #FE7A30;
+        line-height: 1.7;
+        margin: calc(18px + (16 - 14) * ((100vw - 320px) / (1920 - 320))) 0 0;
+        font-size: calc(11px + (16 - 14) * ((100vw - 320px) / (1920 - 320)));
+        text-decoration: underline;
+        cursor: pointer;
+      }
     }
 
     .product-package {

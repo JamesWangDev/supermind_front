@@ -192,7 +192,7 @@ const LLMTool = () => {
       outputData.map((data, index) => {
         if(data.label || data.text) {
           if(!isDataAdded) {
-            dataString +=  `BEGIN PDB(Previous Data Block//This is the data you produced on the last iteration of this prompt. Do not items duplicate in this response.\n`;
+            dataString +=  `BEGIN PDB(Previous Data Block//This is the data you produced on the last iteration of this prompt. Do not items duplicate in this response. check the data above for duplicates and replace any duplicated JSON packages with new ones with the same ID\n`;
             isDataAdded = true;
           }
           dataString += `ID: ${(index + 1)}: Label: ${data.label}\n`;
@@ -715,10 +715,10 @@ const LLMTool = () => {
               //   {outputData[0]}
               // </div>) :
               // (
-              outputData && outputData.length > 0 ? (outputData.map((data, index) => {
+              outputData && outputData.length > 0 ? (outputData.sort((a, b) => a?.id - b?.id).map((data, index) => {
                 return (
                   <div style={{height: '120px', backgroundColor: "#443F63"}} className={`${index < outputData.length - 1 && "mb-1"} w-100 p-2 d-flex flex-column rounded-3`}>
-                    <div className="fw-bold">{data.hasOwnProperty("label") ? data.label : ""}</div>
+                    <div className="fw-bold">ID: {data.hasOwnProperty("id") ? data.id : ""} - {data.hasOwnProperty("label") ? data.label : ""}</div>
                     <hr className="mt-2 mb-1"/>
                     <div className="text-wrap overflow-auto ps-1 pe-1" style={{fontSize: 15}}>
                       {data.hasOwnProperty("text") ? data.text : ""}

@@ -22,15 +22,15 @@ const RegisterForm = () => {
         email: '',
         password: '',
         password_confirmation: '',
-        country_code: '91',
-        phone: '',
+        // country_code: '91',
+        // phone: '',
       }}
       validationSchema={YupObject({
         name: nameSchema,
         email: emailSchema,
         password: passwordSchema,
         password_confirmation: passwordConfirmationSchema,
-        phone: phoneSchema,
+        // phone: phoneSchema,
       })}
       onSubmit={mutate}>
       {({ values, errors, touched, setFieldValue }) => (
@@ -43,7 +43,7 @@ const RegisterForm = () => {
               { name: 'password_confirmation', type: 'password', placeholder: t('ConfirmPassword'), title: 'ConfirmPassword', label: 'ConfirmPassword' },
             ]}
           />
-          <Col xs='12'>
+          {/* <Col xs='12'>
             <div className='country-input'>
               <SearchableSelectInput
                 nameList={[
@@ -73,7 +73,7 @@ const RegisterForm = () => {
                 ]}
               />
             </div>
-          </Col>
+          </Col> */}
 
           <Col xs={12}>
             <div className='forgot-box'>

@@ -11,7 +11,7 @@ const useRegisterVerification = () => {
     onSuccess: (responseData, requestData) => {
       if (responseData.status === 200) {
         Cookies.set('uo', requestData?.token)
-        router.push("/home");
+        router.push("/auth/login");
         ToastNotification("success", responseData.data.message);
       }
     },

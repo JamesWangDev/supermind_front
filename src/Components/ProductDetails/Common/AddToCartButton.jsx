@@ -45,14 +45,16 @@ const AddToCartButton = ({ productState, addToCart, isLoading, buyNow, extraOpti
           <Btn
             className='border-theme-color btn btn-md scroll-button'
             onClick={buyNow}
-            loading={Number(isLoading)}>
+            // loading={Number(isLoading)}
+            >
             {t('Open Chat')}
           </Btn>
         ) : (
           <Btn
             className='border-theme-color btn btn-md scroll-button'
             onClick={buyNow}
-            loading={Number(isLoading)}>
+            // loading={Number(isLoading)}
+            >
             {t('OpenChat')}
           </Btn>
         )

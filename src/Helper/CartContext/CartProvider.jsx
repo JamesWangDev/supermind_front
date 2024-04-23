@@ -35,6 +35,7 @@ const CartProvider = (props) => {
           } else return elem;
         }),
       );
+      ToastNotification('success', `Successfully added the supermind to mind panel.`);
     }
   });
   // Delete Cart API Data

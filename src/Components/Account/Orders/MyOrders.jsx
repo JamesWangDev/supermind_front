@@ -12,18 +12,22 @@ import { Col, Row } from 'reactstrap';
 import ProductBox1 from '@/Components/Common/ProductBox/ProductBox1/ProductBox1';
 import noProduct from '../../../../public/assets/svg/no-product.svg';
 import ProductSkeletonComponent from '@/Components/Common/SkeletonLoader/ProductSkeleton/ProductSkeletonComponent';
+import { AddToCartAPI } from '@/Utils/AxiosUtils/API';
+import CartContext from '@/Helper/CartContext';
 
 
 const MyOrders = () => {
   const [page, setPage] = useState(1);
   const { i18Lang } = useContext(I18NextContext);
   const { t } = useTranslation(i18Lang, 'common');
-  const { data, fetchStatus, isLoading, refetch } = useQuery([page], () => request({ url: myproducts, params: { page: page, paginate: 10 } }), {
+  const { data, fetchStatus, isLoading, refetch } = useQuery([page, AddToCartAPI], () => request({ url: AddToCartAPI, params: { page: page, paginate: 10 } }), {
     enabled: true,
     refetchOnWindowFocus: false,
-    refetchOnMount: false,
+    refetchOnMount: true,
     select: (res) => res?.data,
   });
+  const { cartProducts, removeCart } = useContext(CartContext);
+
   if (isLoading) return <Loader />;
   return (
     <>
@@ -32,11 +36,16 @@ const MyOrders = () => {
         <Row xxl={''} xl={3} lg={2} md={3} xs={2} className={`g-sm-4 g-3 product-list-section ${''}`}>
           <ProductSkeletonComponent item={40} />
         </Row>
-      ) : data?.data?.length > 0 ? (
+      ) : cartProducts.length > 0 ? (
         <Row xxl={''} xl={3} lg={2} md={3} xs={2} className={`g-sm-4 g-3 product-list-section ${''}`}>
-          {data?.data?.map((product, i) => (
-            <Col key={i}>
-              <ProductBox1 imgUrl={product?.product_thumbnail} productDetail={{ ...product }} classObj={{ productBoxClass: 'product-box-3' }} />
+          {cartProducts.map((product, i) => (
+            <Col key={i} style={{position: "relative"}}>
+              <ProductBox1 imgUrl={product?.product?.product_thumbnail} productDetail={{ ...product?.product }} classObj={{ productBoxClass: 'product-box product-box-3' }} />
+              <td className='save-remove' style={{position: "absolute", right: 28, top: 10}}>
+                <a className='remove' onClick={() => removeCart(product?.product_id, product?.id)}>
+                  {t('Remove')}
+                </a>
+              </td>
             </Col>
           ))}
         </Row>
@@ -53,7 +62,7 @@ const MyOrders = () => {
         />
       )}
 
-      {data?.data?.length > 0 && (
+      {cartProducts.length > 0 && (
         <nav className='custome-pagination'>
           <Pagination current_page={data?.current_page} total={data?.total} per_page={data?.per_page} setPage={setPage} />
         </nav>

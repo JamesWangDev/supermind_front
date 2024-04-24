@@ -45,7 +45,7 @@ const DashboardContent = () => {
               <Image src={coinSvg} className='img-1 ' alt='coinSvg' height={90} width={90} />
               <Image src={coinSvg} className='' alt='coinSvg' height={60} width={60} />
               <div className='total-detail'>
-                <h5>Total Coins</h5>
+                <h5>Total Points</h5>
                 <h3>{Number(accountData?.point ? accountData?.point?.balance : 0)?.toFixed(2)}</h3>
               </div>
               <span className='custom-anchor ms-2' onClick={() => router.push(`/${i18Lang}/buypoints`)} style={{position: "absolute", top: 12, right: 24, fontWeight: 600, fontSize: 16}}>

@@ -4,7 +4,7 @@ import { Col, Row, Table } from 'reactstrap';
 import { useQuery } from '@tanstack/react-query';
 import Loader from '@/Layout/Loader';
 import request from '@/Utils/AxiosUtils';
-import { WalletConsumerAPI } from '@/Utils/AxiosUtils/API';
+import { WalletConsumerAPI, PointAPI } from '@/Utils/AxiosUtils/API';
 import { dateFormate } from '@/Utils/CustomFunctions/DateFormate';
 import walletImage from '../../../../public/assets/images/svg/wallet.svg';
 import SettingContext from '@/Helper/SettingContext';
@@ -17,7 +17,7 @@ const WalletCard = () => {
   const [page, setPage] = useState(1);
   const { i18Lang } = useContext(I18NextContext);
   const { t } = useTranslation(i18Lang, 'common');
-  const { data, isLoading, refetch } = useQuery([WalletConsumerAPI], () => request({ url: WalletConsumerAPI, params: { page, paginate: 10 } }), {
+  const { data, isLoading, refetch } = useQuery([PointAPI], () => request({ url: PointAPI, params: { page, paginate: 10 } }), {
     enabled: false,
     refetchOnWindowFocus: false,
     select: (res) => res?.data,
@@ -33,12 +33,15 @@ const WalletCard = () => {
       <div className='total-box mt-0'>
         <Row>
           <Col xs={12}>
-            <div className='total-contain wallet-bg'>
+            <div className='total-contain'>
               <Image src={walletImage} alt='walletImage' height={60} width={60} />
               <div className='total-detail'>
                 <h5>{t("WalletBalance")}</h5>
-                <h3>{data ? convertCurrency(data?.balance) : 0}</h3>
+                <h3>{data ? data?.balance : 0}</h3>
               </div>
+              <span className='custom-anchor ms-2' onClick={() => router.push(`/${i18Lang}/buypoints`)} style={{position: "absolute", top: 12, right: 24, fontWeight: 600, fontSize: 16}}>
+                  Buy Points
+              </span>
             </div>
           </Col>
         </Row>
@@ -57,7 +60,7 @@ const WalletCard = () => {
                 <tr key={i}>
                   <td>{i + 1}</td>
                   <td>{dateFormate(transaction?.created_at)}</td>
-                  <td>{convertCurrency(transaction.amount)}</td>
+                  <td>{transaction.amount}</td>
                   <td>{transaction.detail}</td>
                   <td>
                     <div className={`status-${transaction.type}`}>

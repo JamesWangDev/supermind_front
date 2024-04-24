@@ -1,3 +1,4 @@
+import { useRouter } from 'next/navigation';
 import { useContext, useEffect, useState } from 'react';
 import Image from 'next/image';
 import { Col, Row, Table } from 'reactstrap';
@@ -14,6 +15,7 @@ import { useTranslation } from '@/app/i18n/client';
 import AccountHeading from '@/Components/Common/AccountHeading';
 
 const WalletCard = () => {
+  const router = useRouter();
   const [page, setPage] = useState(1);
   const { i18Lang } = useContext(I18NextContext);
   const { t } = useTranslation(i18Lang, 'common');

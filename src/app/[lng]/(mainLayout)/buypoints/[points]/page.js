@@ -16,7 +16,7 @@ import { UNIT_TOKEN_PRICE } from "@/Utils/TokenUtil/calculateTokenPrice";
 
 const stripePromise = loadStripe('pk_test_51OdHY7KW8hGDL1NPMQo0EdWgWQabti7SYRMp8uJvr5gmS0uNfWXYQY98iUPCAF9RuGJDmHna5YVZiiXcZqqNIbUA000m7uxswq');
 
-const BuyPoints = () => {
+const BuyPoints = ({params}) => {
     const router = useRouter();
     const [loaded, setLoaded] = useState(false);
     const [clientSecret, setClientSecret] = useState();
@@ -34,7 +34,7 @@ const BuyPoints = () => {
 
     const fetchClientSecret = async () => {
         setLoaded(false);
-        const response = await request({ url: createBuyPointsSession });
+        const response = await request({ url: createBuyPointsSession, params: { payamount: params.points * UNIT_TOKEN_PRICE } });
         setClientSecret(response.data.client_secret);
         setPayamount(response.data.amount_total || 0);
     }

@@ -1,7 +1,8 @@
-import React, { useContext, useEffect } from 'react';
-import { ModalBody, ModalHeader, Input, Label } from 'reactstrap';
+import React from 'react';
+import { Input, Label } from 'reactstrap';
 
 import Google from '../../../../public/assets/images/integrations/google.svg';
+import Asana from '../../../../public/assets/images/integrations/asana.svg';
 
 const ApiKeyFlow = ({ currentIntegration }) => {
   return (
@@ -13,7 +14,9 @@ const ApiKeyFlow = ({ currentIntegration }) => {
                 currentIntegration?.scopes?.map((scope, index) => (
                     <div className='integration-modal-form-scope-group'>
                         <Input type="checkbox" />
-                        <img src={Google.src} className='img-fluid' width="20px" height="20px" alt='Integration logo' />
+                        <img src={
+                            (currentIntegration?.providerName === 'asana') ? Asana.src : Google.src
+                        } className='img-fluid' width="20px" height="20px" alt='Integration logo' />
                         <Label check>
                             {scope?.name}
                         </Label>

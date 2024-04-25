@@ -14,8 +14,13 @@ const WalletContent = () => {
   const [integration, setIntegration] = useState(null);
   const [integrations, setIntegrations] = useState([]);
 
+  const account = localStorage.getItem('account');
+  const userId = JSON.parse(account).user_id;
+
+  console.log('got user id', userId);
+
   useEffect(() => {
-    axios.get('https://auth.supermind.bot/integration/1')
+    axios.get(`https://auth.supermind.bot/integration/${userId}`) //https://auth.supermind.bot/integration/${userId}
     .then(response => {
       setIntegrations(response.data);
     })
@@ -24,10 +29,10 @@ const WalletContent = () => {
     });
   }, []);
 
-  const deactivateIntegration = (provider) => {
+  const deactivateIntegration = (provider, userId) => {
     console.log('Deactivate integration', provider);
     if (confirm('Are you sure you want to deactivate this integration?')) {
-      axios.delete(`https://auth.supermind.bot/integration/${provider}/1`)
+      axios.delete(`https://auth.supermind.bot/integration/${provider}/${userId}`)
   
       // Update the connected state of the specified integration
       const updatedIntegrations = integrations.map(integration => {
@@ -39,6 +44,7 @@ const WalletContent = () => {
       });
   
       setIntegrations(updatedIntegrations);
+      window.location.reload();
     }
 }
 
@@ -78,7 +84,7 @@ const WalletContent = () => {
                 }
               </TabPane>
             </TabContent>
-            <IntegrationModal modal={modal} setModal={setModal} integration={integration} integrations={integrations} deactivateIntegration={deactivateIntegration} />
+            <IntegrationModal userId={userId} modal={modal} setModal={setModal} integration={integration} integrations={integrations} deactivateIntegration={deactivateIntegration} />
             
           </div>
         </Col>

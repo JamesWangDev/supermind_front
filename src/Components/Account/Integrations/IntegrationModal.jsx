@@ -9,11 +9,13 @@ import { Col, Row } from 'reactstrap';
 import { useState } from 'react';
 
 import Google from '../../../../public/assets/images/integrations/google.svg';
+import Asana from '../../../../public/assets/images/integrations/asana.svg';
+
 import ApiKeyFlow from './ApiKeyFlow';
 import OauthFlow from './OauthFlow';
 
 
-const IntegrationModal = ({ setModal, modal, integrations, integration, deactivateIntegration }) => {
+const IntegrationModal = ({ userId, setModal, modal, integrations, integration, deactivateIntegration }) => {
   const { i18Lang } = useContext(I18NextContext);
   const { t } = useTranslation(i18Lang, 'common');
 
@@ -34,9 +36,9 @@ const IntegrationModal = ({ setModal, modal, integrations, integration, deactiva
   }, [integration]);
 
 
-  const activateIntegration = (provider) => {
+  const activateIntegration = (provider, userId) => {
     console.log('Activate integration', provider);
-    window.open(`https://auth.supermind.bot/integration/${provider}/authentication/init`, "_blank", "height=600,width=800");
+    window.open(`https://auth.supermind.bot/integration/${provider}/${userId}/authentication/init`, "_blank", "height=600,width=800");
     setDataFetchModal(true);
   }
 
@@ -51,15 +53,17 @@ const IntegrationModal = ({ setModal, modal, integrations, integration, deactiva
       <ModalBody>
         <Row>
             <Col className='integration-modal-info'>
-                <img src={Google.src} className='img-fluid integration-logo' alt='Integration logo' />
+                <img src={
+                    (currentIntegration?.providerName === 'asana') ? Asana.src : Google.src
+                } className='img-fluid integration-logo' alt='Integration logo' />
                 {
                   dataFetchModal ?
                   <button className='btn btn-secondary button-color-transparent w-100' onClick={() => {dataFetch()}}>Finish</button>
                   :
                   currentIntegration?.connected === true ?
-                  <button className='btn btn-secondary button-color-transparent w-100' onClick={() => {deactivateIntegration(currentIntegration.provider)}}>Deactivate</button>
+                  <button className='btn btn-secondary button-color-transparent w-100' onClick={() => {deactivateIntegration(currentIntegration.provider, userId)}}>Deactivate</button>
                   :
-                  <button className='btn btn-secondary button-color-transparent w-100' onClick={() => {activateIntegration(currentIntegration.provider)}}>Activate</button>
+                  <button className='btn btn-secondary button-color-transparent w-100' onClick={() => {activateIntegration(currentIntegration.provider, userId)}}>Activate</button>
                 }
                 <p>{currentIntegration?.description}</p>
             </Col>

@@ -3,12 +3,15 @@ import { Col, Row } from 'reactstrap';
 import { RiDeleteBinLine } from 'react-icons/ri';
 
 import Google from '../../../../public/assets/images/integrations/google.svg';
+import Asana from '../../../../public/assets/images/integrations/asana.svg';
 
 const IntegrationCard = ({ integration, integrations, setModal, setIntegration, deactivateIntegration }) => {
     return (
         <div className='integration-card'>
             <Row>
-                <img src={Google.src} className='img-fluid integration-logo' alt='Integration logo' />
+                <img src={
+                    (integration.providerName === 'asana') ? Asana.src : Google.src
+                } className='img-fluid integration-logo' alt='Integration logo' />
             </Row>
             <Row>
                 <h3 className='mb-2'>{integration.name}</h3>

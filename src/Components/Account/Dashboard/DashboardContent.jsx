@@ -17,7 +17,8 @@ import {Input} from 'reactstrap';
 import { UNIT_TOKEN_PRICE } from '@/Utils/TokenUtil/calculateTokenPrice';
 import SettingContext from '@/Helper/SettingContext';
 import useUpdate from '@/Utils/Hooks/useUpdate';
-import { user } from '@/Utils/AxiosUtils/API'
+import { user, LogoutAPI } from '@/Utils/AxiosUtils/API'
+import useCreate from '@/Utils/Hooks/useCreate';
 
 const pointsList = [
   {
@@ -54,7 +55,7 @@ const DashboardContent = () => {
   const router = useRouter();
   const { i18Lang } = useContext(I18NextContext);
   const { t } = useTranslation(i18Lang, 'common');
-  const { accountData, refetch } = useContext(AccountContext);
+  const { accountData, refetch, setAccountData } = useContext(AccountContext);
   const { convertCurrency } = useContext(SettingContext);
   const [modal, setModal] = useState(false);
   const [devModal, setDevModal] = useState(false);
@@ -69,9 +70,24 @@ const DashboardContent = () => {
     false,
     "user updated successfully",
     () => {
-      location.href = "https://supermind.bot/admin/en/auth/login"
+      handleLogout()
     }
   );
+
+  const { mutate: logOut, isLoading: isLogoutloading } = useCreate(LogoutAPI, false, false, false, () => {
+    Cookies.remove('uat');
+    Cookies.remove('ue');
+    Cookies.remove('account');
+    Cookies.remove('CookieAccept');
+    localStorage.removeItem('account');
+    localStorage.removeItem('role');
+    setAccountData(null);
+  });
+
+  const handleLogout = () => {
+    logOut({});
+    location.href = "https://supermind.bot/admin/en/auth/login";
+  };
 
   useEffect(() => {
     refetch();
@@ -98,7 +114,7 @@ const DashboardContent = () => {
 
   const handleDevModal = () => {
     if(userRole == "vendor") {
-      alert("You are developer already!");
+      handleLogout();
       return;
     }
     setDevModal(true);

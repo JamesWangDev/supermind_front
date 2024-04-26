@@ -82,12 +82,16 @@ const DashboardContent = () => {
     localStorage.removeItem('account');
     localStorage.removeItem('role');
     setAccountData(null);
+    handleGoToAdmin();
   });
 
   const handleLogout = () => {
     logOut({});
-    location.href = "https://supermind.bot/admin/en/auth/login";
   };
+
+  const handleGoToAdmin = () => {
+    location.href = "https://supermind.bot/admin/en/auth/login";
+  }
 
   useEffect(() => {
     refetch();

@@ -69,7 +69,7 @@ const DashboardContent = () => {
     false,
     "user updated successfully",
     () => {
-      router.push('admin/en/auth/login');
+      location.href = "https://supermind.bot/admin/en/auth/login"
     }
   );
 

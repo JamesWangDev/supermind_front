@@ -66,8 +66,11 @@ const DashboardContent = () => {
   const { mutate, isLoading } = useUpdate(
     user,
     userId,
-    `admin/${i18Lang}/auth/login`,
-    "user updated successfully"
+    false,
+    "user updated successfully",
+    () => {
+      router.push('admin/en/auth/login');
+    }
   );
 
   useEffect(() => {

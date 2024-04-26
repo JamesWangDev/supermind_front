@@ -16,6 +16,8 @@ import CustomDropDown from '@/Components/Common/CustomDropDown/CustomDropDown';
 import {Input} from 'reactstrap';
 import { UNIT_TOKEN_PRICE } from '@/Utils/TokenUtil/calculateTokenPrice';
 import SettingContext from '@/Helper/SettingContext';
+import useUpdate from '@/Utils/Hooks/useUpdate';
+import { user } from '@/Utils/AxiosUtils/API'
 
 const pointsList = [
   {
@@ -55,8 +57,21 @@ const DashboardContent = () => {
   const { accountData, refetch } = useContext(AccountContext);
   const { convertCurrency } = useContext(SettingContext);
   const [modal, setModal] = useState(false);
+  const [devModal, setDevModal] = useState(false);
   const [point, setPoint] = useState(500000);
   const [customPoint, setCustomPoint] = useState(0);
+  const account = localStorage.getItem('account');
+  const userId = JSON.parse(account)?.user_id;
+  const userRole = JSON.parse(account)?.role;
+  const { mutate, isLoading } = useUpdate(
+    user,
+    userId,
+    false,
+    "user updated successfully",
+    () => {
+      location.href = "https://supermind.bot/admin/en/auth/login"
+    }
+  );
 
   useEffect(() => {
     refetch();
@@ -77,9 +92,25 @@ const DashboardContent = () => {
     router.push(`/${i18Lang}/buypoints/${pointsvalue}`);
   }
 
+  const handleUpdateUserRole = () => {
+    mutate({role_id: 3})
+  }
+
+  const handleDevModal = () => {
+    if(userRole == "vendor") {
+      alert("You are developer already!");
+      return;
+    }
+    setDevModal(true);
+  }
+
   return (
     <div className='dashboard-home'>
+      <div className='d-flex align-items-center justify-content-between'>
       <AccountHeading title="MyDashboard" /> 
+      <Btn title={'Become Developer'} className='btn btn-md btn-theme-primary fw-bold' onClick={handleDevModal}
+      />
+      </div>
       <div className='dashboard-user-name'>
         <h6 className='text-title'>
           {t('Hello')}, <b className='text-title'>{accountData?.name ?? t('User')}</b>
@@ -149,6 +180,16 @@ const DashboardContent = () => {
           }}
           />
           <Btn title='Confirm' className='theme-bg-color btn-md fw-bold text-light' onClick={handleGoToBuy} />
+        </div>
+      </CustomModal>
+      <CustomModal modal={devModal} setModal={setDevModal} classes={{ modalClass: 'theme-modal delete-modal', modalHeaderClass: 'p-3' }}>
+        <h5 className='modal-title mt-4'>{'Do you want to become developer of superminds?'}</h5>
+        <div className='button-box mt-4'>
+          <Btn title='Cancel' className='btn btn-md btn-theme-outline fw-bold' onClick={() => {
+            setModal('');
+          }}
+          />
+          <Btn title='Ok' className='theme-bg-color btn-md fw-bold text-light' onClick={handleUpdateUserRole} />
         </div>
       </CustomModal>
     </div>

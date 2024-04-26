@@ -148,3 +148,8 @@ export const sendRegisterCode = 'send-register-code';
 
 // Verify register code api
 export const verifyRegisterCode = 'verify-register-code';
+
+//users api
+export const user = "user";
+export const UserImportAPI = "user/csv/import";
+export const UserExportAPI = "user/csv/export";

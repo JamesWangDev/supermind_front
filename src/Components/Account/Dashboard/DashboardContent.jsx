@@ -129,7 +129,7 @@ const DashboardContent = () => {
     <div className='dashboard-home'>
       <div className='d-flex align-items-center justify-content-between'>
       <AccountHeading title="MyDashboard" /> 
-      <Btn title={'Become Developer'} className='btn btn-md btn-theme-primary fw-bold' onClick={handleDevModal}
+      <Btn title={userRole == "vendor" ? "Go to developer dashboard" : 'Become Developer'} className='btn btn-md btn-theme-primary fw-bold' onClick={handleDevModal}
       />
       </div>
       <div className='dashboard-user-name'>

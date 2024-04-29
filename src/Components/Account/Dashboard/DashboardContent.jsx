@@ -19,6 +19,7 @@ import SettingContext from '@/Helper/SettingContext';
 import useUpdate from '@/Utils/Hooks/useUpdate';
 import { user, LogoutAPI } from '@/Utils/AxiosUtils/API'
 import useCreate from '@/Utils/Hooks/useCreate';
+import Cookies from 'js-cookie';
 
 const pointsList = [
   {

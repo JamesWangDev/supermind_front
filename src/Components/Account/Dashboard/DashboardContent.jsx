@@ -163,9 +163,15 @@ const DashboardContent = () => {
               {/* <span className='custom-anchor ms-2' onClick={() => router.push(`/${i18Lang}/buypoints`)} style={{position: "absolute", top: 12, right: 24, fontWeight: 600, fontSize: 16}}>
                 Buy Points
               </span> */}
-              <span className='custom-anchor ms-2' onClick={() => setModal(true)} style={{position: "absolute", top: 12, right: 24, fontWeight: 600, fontSize: 16}}>
-                Buy Points
-              </span>
+              <div style={{position: "absolute", top: 12, right: 24, fontWeight: 600, fontSize: 16}}>
+                <span className='custom-anchor ms-2' onClick={() => {router.push(`/${i18Lang}/subscribe/`)}}>
+                  Subscribe
+                </span>
+                <span className='custom-anchor mx-2'>|</span>
+                <span className='custom-anchor' onClick={() => setModal(true)}>
+                  Buy Points
+                </span>
+              </div>
             </div>
           {/* </Col> */}
           {/* 

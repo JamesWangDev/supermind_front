@@ -17,7 +17,7 @@ const CustomModal = ({ classes = {},extraFunction, modal, setModal, fullscreen, 
       ) : (
         <>
           <ModalHeader className={classes?.modalHeaderClass || ''} toggle={toggle}>
-            {classes?.title && t(classes?.title)}
+            {classes?.title && classes?.title}
             <RiCloseLine className='modal-close-btn' />
           </ModalHeader>
           <ModalBody className={classes?.modalBodyClass || ''}>{props.children}</ModalBody>

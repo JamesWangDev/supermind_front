@@ -14,6 +14,7 @@ import { categorySliderOption, featureBlogSliderOption } from '../../../Data/Sli
 import { LeafSVG } from '../Common/CommonSVG';
 import ProductIdsContext from '@/Helper/ProductIdsContext';
 import NoDataFound from '../Common/NoDataFound';
+import NewsLetter from './NewsLetter';
 
 const ProductCard = ({ dataAPI }) => {
   const { filteredProduct } = useContext(ProductIdsContext);
@@ -43,7 +44,7 @@ const ProductCard = ({ dataAPI }) => {
         <ProductSection3 dataAPI={dataAPI?.main_content?.section4_products} ProductData={filteredProduct} svgUrl={<LeafSVG className='icon-width' />} />
       )}
 
-      {dataAPI?.main_content?.section5_coupons?.status && (
+      {/* {dataAPI?.main_content?.section5_coupons?.status && (
         <SingleBanner
           classes={{ sectionClass: 'sale-banner' }}
           image_url={dataAPI?.main_content?.section5_coupons?.image_url}
@@ -51,7 +52,7 @@ const ProductCard = ({ dataAPI }) => {
           width={1137}
           dataAPI={dataAPI?.main_content?.section5_coupons}
         />
-      )}
+      )} */}
       {dataAPI?.main_content?.section6_two_column_banners?.status && <TwoBanners dataAPI={dataAPI} />}
       {dataAPI?.main_content?.section7_products?.status && (
         <ProductSection4 dataAPI={dataAPI?.main_content?.section7_products} ProductData={filteredProduct} svgUrl={<LeafSVG className='icon-width' />} noCustomClass={true} />
@@ -76,6 +77,7 @@ const ProductCard = ({ dataAPI }) => {
           )}
         </>
       )}
+      {dataAPI?.news_letter?.status && <NewsLetter dataAPI={dataAPI?.news_letter} />}
     </Col>
   );
 };

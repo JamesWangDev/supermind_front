@@ -43,7 +43,7 @@ const ParisTheme = () => {
 
       <ProductSection dataAPI={data?.content} />
 
-      {data?.content?.news_letter?.status && <NewsLetter dataAPI={data?.content?.news_letter} />}
+      {/* {data?.content?.news_letter?.status && <NewsLetter dataAPI={data?.content?.news_letter} />} */}
       {themeOption?.general?.sticky_cart_enable && themeOption?.general?.cart_style !== 'cart_sidebar' && <StickyCart />}
     </>
   );

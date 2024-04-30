@@ -10,32 +10,34 @@ const NewsLetter = ({ dataAPI }) => {
   const { i18Lang } = useContext(I18NextContext);
   const { t } = useTranslation(i18Lang, 'common');
   return (
-    <WrapperComponent classes={{ sectionClass: 'newsletter-section' }} noRowCol={true}>
-      <div className='newsletter-box newsletter-box-2' style={{ backgroundImage: `url(${dataAPI?.image_url})` }}>
-        <div className='newsletter-contain py-5'>
-          <Container fluid={true}>
-            <Row>
-              <Col lg={5} md={7} sm={9} xxl={4} className='offset-xxl-2 offset-md-1'>
-                <div className='newsletter-detail'>
-                  <h2>{dataAPI?.title}</h2>
-                  <h5>{dataAPI?.sub_title}</h5>
-                  <div className='input-box'>
-                    <Input type='email' placeholder='Enter Your Email' />
-                    {/* <div className="mail-icon">
-                      <RiMailLine />
-                    </div> */}
-                    <Btn className='sub-btn'>
-                      <span className='d-sm-block d-none'>{t('Subscribe')}</span>
-                      <RiArrowRightLine />
-                    </Btn>
+    // <WrapperComponent classes={{ sectionClass: 'newsletter-section' }} noRowCol={true}>
+      <section className='newsletter-section'>
+        <div className='newsletter-box newsletter-box-2' style={{ backgroundImage: `url(${dataAPI?.image_url})` }}>
+          <div className='newsletter-contain py-5'>
+            <Container fluid={true}>
+              <Row>
+                <Col lg={5} md={7} sm={9} xxl={6} className='offset-xxl-1 offset-md-1'>
+                  <div className='newsletter-detail'>
+                    <h2>{dataAPI?.title}</h2>
+                    <h5>{dataAPI?.sub_title}</h5>
+                    <div className='input-box'>
+                      <Input type='email' placeholder='Enter Your Email' />
+                      {/* <div className="mail-icon">
+                        <RiMailLine />
+                      </div> */}
+                      <Btn className='sub-btn'>
+                        <span className='d-sm-block d-none'>{t('Subscribe')}</span>
+                        <RiArrowRightLine />
+                      </Btn>
+                    </div>
                   </div>
-                </div>
-              </Col>
-            </Row>
-          </Container>
+                </Col>
+              </Row>
+            </Container>
+          </div>
         </div>
-      </div>
-    </WrapperComponent>
+      </section>
+    // </WrapperComponent>
   );
 };
 

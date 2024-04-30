@@ -13,7 +13,7 @@ const TwoBanners = ({ dataAPI }) => {
     return 'product/' + product?.slug;
   };
   return (
-    <div className='mt-3'>
+    <div>
       <Row className='g-md-3 g-3'>
         <Col xxl={8} xl={12} md={7}>
           {dataAPI?.main_content?.section6_two_column_banners?.banner_1?.redirect_link?.link_type === 'external_url' ? (

@@ -20,48 +20,15 @@ import useUpdate from '@/Utils/Hooks/useUpdate';
 import { user, LogoutAPI } from '@/Utils/AxiosUtils/API'
 import useCreate from '@/Utils/Hooks/useCreate';
 import Cookies from 'js-cookie';
-
-const pointsList = [
-  {
-    name: "500000",
-    value: 500000
-  },
-  {
-    name: "1,000,000",
-    value: 1000000
-  },
-  {
-    name: "5,000,000",
-    value: 5000000
-  },
-  {
-    name: "10,000,000",
-    value: 10000000
-  },
-  {
-    name: "50,000,000",
-    value: 50000000
-  },
-  {
-    name: "100,000,000",
-    value: 100000000
-  },
-  {
-    name: "custom",
-    value: "custom"
-  }
-]
+import BuyPointsModal from '@/Components/BuyPointsModal';
 
 const DashboardContent = () => {
   const router = useRouter();
   const { i18Lang } = useContext(I18NextContext);
   const { t } = useTranslation(i18Lang, 'common');
   const { accountData, refetch, setAccountData } = useContext(AccountContext);
-  const { convertCurrency } = useContext(SettingContext);
   const [modal, setModal] = useState(false);
   const [devModal, setDevModal] = useState(false);
-  const [point, setPoint] = useState(500000);
-  const [customPoint, setCustomPoint] = useState(0);
   const account = localStorage.getItem('account');
   const userId = JSON.parse(account)?.user_id;
   const userRole = JSON.parse(account)?.role;
@@ -97,21 +64,6 @@ const DashboardContent = () => {
   useEffect(() => {
     refetch();
   }, [])
-
-  const handleGoToBuy  = () => {
-    const pointsvalue = point === "custom" ? customPoint : point;
-    if(pointsvalue == 0) {
-      alert("Please set the points amount to buy...");
-      return;
-    }
-
-    if(pointsvalue < 500000) {
-      alert("Points amount should be greater than 10000 points...");
-      return;
-    }
-
-    router.push(`/${i18Lang}/buypoints/${pointsvalue}`);
-  }
 
   const handleUpdateUserRole = () => {
     mutate({role_id: 3})
@@ -188,27 +140,7 @@ const DashboardContent = () => {
           <ProfileInformation />
         </Row>
       </div>
-      <CustomModal modal={modal} setModal={setModal} classes={{ modalClass: 'theme-modal delete-modal', modalHeaderClass: 'p-2' }}>
-        {/* <RiDeleteBinLine className='icon-box' /> */}
-        <h5 className='modal-title'>{'Do you want to buy additional points?'}</h5>
-        <p>{"Please set the points amount you want to buy for now."} </p>
-        <div className='w-100 d-flex justify-content-between align-items-center p-3'>
-          <div className='w-50'>
-            <CustomDropDown items={pointsList} value={point} handleSelectChange={setPoint} placeholder={"Select Points amout..."} toggleStyle={{height: "40px"}} toggleClassName={"w-100 rounded-2"} />
-            {point === "custom" && <Input min={10000} type='number' value={customPoint} onChange={(e) => setCustomPoint(e.target.value)} style={{height: "40px", border: "none"}} className="rounded-2 text-center mt-2" />}
-          </div>
-          <div className='w-50 d-flex justify-content-center' style={{fontWeight: 600, fontSize: 20}}>
-            {convertCurrency(UNIT_TOKEN_PRICE * (point == "custom" ? customPoint : point) / 100)}
-          </div>
-        </div>
-        <div className='button-box mt-4'>
-          <Btn title='Cancel' className='btn btn-md btn-theme-outline fw-bold' onClick={() => {
-            setModal('');
-          }}
-          />
-          <Btn title='Confirm' className='theme-bg-color btn-md fw-bold text-light' onClick={handleGoToBuy} />
-        </div>
-      </CustomModal>
+      <BuyPointsModal modal={modal} setModal={setModal} />
       <CustomModal modal={devModal} setModal={setDevModal} classes={{ modalClass: 'theme-modal delete-modal', modalHeaderClass: 'p-3' }}>
         <h5 className='modal-title mt-4'>{'Do you want to become developer of superminds?'}</h5>
         <div className='button-box mt-4'>

@@ -116,7 +116,7 @@ const ChatModalHeader = ({productState, pointData}) => {
         <div className='d-flex align-items-center'>
           <span className='me-2'>
             {productState?.product?.product_galleries?.length > 0 ? 
-              <img height={580} width={580} src={productState?.product?.product_galleries[0]?.original_url} className='img-fluid' alt={elem?.name} /> : 
+              <img height={40} width={40} src={productState?.product?.product_galleries[0]?.original_url} className='img-fluid' alt={productState?.product?.name} /> : 
               <div style={{width: "40px", height: "40px"}}><Image src={defaultProductImg} height={40} width={40} style={{objectFit: "cover"}} /></div>  
             }
           </span>

@@ -26,6 +26,7 @@ const ProductDetailAction = ({ productState, setProductState, extraOption }) => 
   const router = useRouter();
   const account = localStorage.getItem('account');
   const userId = JSON.parse(account)?.user_id;
+  const access_token = JSON.parse(account)?.access_token;
   const addToCart = () => {
     handleIncDec(productState?.productQty, productState?.product, false, false, false, productState);
   };
@@ -46,6 +47,16 @@ const ProductDetailAction = ({ productState, setProductState, extraOption }) => 
   const buyNow = () => {
     // handleIncDec(productState?.productQty, productState?.product, false, false, false, productState);
     // router.push(`/${i18Lang}/checkout`);
+    const data = {
+      type: "init",
+      params: {
+        session_id: "<the session id>",
+        user_id: userId,
+        supermind_id: productState?.product?.id,
+        auth_key: access_token
+      }
+    };
+    window.postMessage(data, 'https://supermind-chat.gpt-autopilot.com')
     setOpenChat(true);
   };
   const updateQty = (qty) => {

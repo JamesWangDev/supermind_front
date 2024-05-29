@@ -27,6 +27,18 @@ const ProductDetailAction = ({ productState, setProductState, extraOption }) => 
   const account = localStorage.getItem('account');
   const userId = JSON.parse(account)?.user_id;
   const access_token = JSON.parse(account)?.access_token;
+  const [timerSpin, setTimerSpin] = useState(1);
+
+  useEffect(() => {
+    const timer = setInterval(() => {
+        setTimerSpin(prev => -prev)
+    }, 3000);
+
+    return () => {
+      clearInterval(timer)
+    }
+  }, [])
+
   const iframeRef = useCallback((iframe) => {
    if(iframe){
     const data = {
@@ -47,7 +59,7 @@ const ProductDetailAction = ({ productState, setProductState, extraOption }) => 
   const addToCart = () => {
     handleIncDec(productState?.productQty, productState?.product, false, false, false, productState);
   };
-  const { data: pointsData, isLoading: pointsDataLoading, refetch: refecthPointsData } = useQuery([PointAPI], () => request({ url: PointAPI, params: { paginate: 10 } }), {
+  const { data: pointsData, isLoading: pointsDataLoading, refetch: refecthPointsData } = useQuery([PointAPI, timerSpin], () => request({ url: PointAPI, params: { paginate: 10 } }), {
     select: (res) => res?.data,
   });
 

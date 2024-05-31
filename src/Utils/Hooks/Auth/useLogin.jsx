@@ -25,7 +25,7 @@ const LoginHandle = (responseData, router, i18Lang, refetch,compareRefetch) => {
     }
     refetch();
     compareRefetch()
-    window.location.replace(`/${i18Lang}/account/dashboard`);
+    window.location.replace(`/${i18Lang}/home`);
   }
 };
 

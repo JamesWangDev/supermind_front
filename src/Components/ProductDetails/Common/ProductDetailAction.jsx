@@ -131,7 +131,7 @@ const ProductDetailAction = ({ productState, setProductState, extraOption }) => 
       </div>
       <AddToCartButton productState={productState} isLoading={isLoading} buyNow={buyNow} addToCart={addToCart} extraOption={extraOption} />
       <CustomModal modal={openChat} setModal={setOpenChat} fullscreen classes={{modalBodyClass: "full-modal", modalClass: 'theme-modal modal-xl', title: <ChatModalHeader productState={productState} pointData={pointsData} />}}>
-          <iframe ref={iframeRef} style={{width: "100%", height: "100%"}} src={`https://supermind-chat.gpt-autopilot.com/index.php?supermind_id=${productState?.product?.id}&user_id=${userId}`} title="Supermind chat box"></iframe>
+          <iframe ref={iframeRef} style={{width: "100%", height: "100%"}} src={`https://supermind-chat.gpt-autopilot.com/index.php?supermind_id=${productState?.product?.id}&user_id=${userId}`} allow='clipboard-write; picture-in-picture; microphone; fullscreen' title="Supermind chat box"></iframe>
           {/* {productState?.product?.type == "superpower" ? <SuperpowerChatBox productData={productState.product} /> : <ChatBox productData={productState.product} />} */}
       </CustomModal>
     </>

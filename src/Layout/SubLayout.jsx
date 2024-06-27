@@ -17,7 +17,7 @@ const SubLayout = ({ children }) => {
   const isNewsLetter = Cookies.get('newsLetterModal');
   const { themeOption } = useContext(ThemeOptionContext);
   useEffect(() => {
-    const message = ['⚡ Come Back !!!', "🔥 Don't forget this....."];
+    const message = ["Supermind"];
     let timer;
 
     const updateTitle = (index) => {
